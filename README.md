@@ -633,10 +633,10 @@ python3 src/vader.py ejemplos/para_ninos/mi_primer_programa.vdr --target python
 ## 📞 Contacto
 
 ### 👨‍💻 **Creador**
-- **Nombre**: [Tu Nombre]
-- **Email**: [tu-email@ejemplo.com]
-- **GitHub**: [@tu-usuario](https://github.com/tu-usuario)
-- **LinkedIn**: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- **Nombre**: Adriano Giaquinto
+- **Email**: lenguajevader@gmail.com
+- **GitHub**: [@tu-usuario](https://github.com/LangVader)
+- **LinkedIn**: [Tu Perfil](https://www.linkedin.com/in/adriano-giaquinto/)
 
 ### 🌐 **Enlaces Oficiales**
 - 🏠 **Sitio Web**: [https://vader-lang.org](https://vader-lang.org)
