@@ -1,0 +1,106 @@
+# 📱 Mi Primera App Java con Vader
+# Ejemplo que demuestra cómo crear aplicaciones Java usando Vader
+
+clase MiPrimeraApp
+    # Constructor de la aplicación
+    metodo __init__(self, nombre_app)
+        self.nombre = nombre_app
+        self.usuarios = []
+        mostrar "✅ Aplicación " + self.nombre + " iniciada"
+    fin metodo
+    
+    # Método para agregar usuarios
+    metodo agregar_usuario(self, nombre, edad)
+        diccionario usuario = {
+            "nombre": nombre,
+            "edad": edad,
+            "activo": True
+        }
+        self.usuarios.append(usuario)
+        mostrar "👤 Usuario " + nombre + " agregado exitosamente"
+    fin metodo
+    
+    # Método para mostrar todos los usuarios
+    metodo mostrar_usuarios(self)
+        si len(self.usuarios) == 0
+            mostrar "📭 No hay usuarios registrados"
+        sino
+            mostrar "👥 Lista de usuarios:"
+            repetir usuario en self.usuarios
+                mostrar "  • " + usuario["nombre"] + " (" + str(usuario["edad"]) + " años)"
+            fin repetir
+        fin si
+    fin metodo
+    
+    # Método para buscar usuario por nombre
+    metodo buscar_usuario(self, nombre_buscar)
+        repetir usuario en self.usuarios
+            si usuario["nombre"] == nombre_buscar
+                mostrar "🎯 Usuario encontrado: " + usuario["nombre"]
+                retornar usuario
+            fin si
+        fin repetir
+        mostrar "❌ Usuario no encontrado: " + nombre_buscar
+        retornar None
+    fin metodo
+    
+    # Método principal de la aplicación
+    metodo ejecutar(self)
+        mostrar "🚀 Bienvenido a " + self.nombre
+        mostrar "Esta aplicación demuestra las capacidades de Vader con Java"
+        
+        repetir mientras True
+            mostrar "\n=== MENÚ PRINCIPAL ==="
+            mostrar "1. Agregar usuario"
+            mostrar "2. Ver usuarios"
+            mostrar "3. Buscar usuario"
+            mostrar "4. Salir"
+            mostrar "Elige una opción (1-4):"
+            
+            leer opcion
+            
+            si opcion == "1"
+                mostrar "Nombre del usuario:"
+                leer nombre
+                mostrar "Edad del usuario:"
+                leer edad_str
+                edad = int(edad_str)
+                llamar self.agregar_usuario(nombre, edad)
+                
+            sino si opcion == "2"
+                llamar self.mostrar_usuarios()
+                
+            sino si opcion == "3"
+                mostrar "Nombre a buscar:"
+                leer nombre_buscar
+                llamar self.buscar_usuario(nombre_buscar)
+                
+            sino si opcion == "4"
+                mostrar "👋 ¡Gracias por usar " + self.nombre + "!"
+                romper
+                
+            sino
+                mostrar "❌ Opción no válida. Intenta de nuevo."
+            fin si
+        fin repetir
+    fin metodo
+fin clase
+
+# Función principal - punto de entrada de la aplicación
+funcion main()
+    mostrar "🎉 ¡Bienvenido a tu primera aplicación Java con Vader!"
+    
+    # Crear instancia de la aplicación
+    crear app como MiPrimeraApp("Gestor de Usuarios")
+    
+    # Agregar algunos usuarios de ejemplo
+    llamar app.agregar_usuario("Ana García", 25)
+    llamar app.agregar_usuario("Carlos López", 30)
+    llamar app.agregar_usuario("María Rodríguez", 22)
+    
+    # Ejecutar la aplicación
+    llamar app.ejecutar()
+fin funcion
+
+# Ejecutar el programa
+llamar main()

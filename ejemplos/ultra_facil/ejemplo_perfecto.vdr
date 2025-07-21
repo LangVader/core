@@ -1,0 +1,42 @@
+# 🌟 Ejemplo Perfecto - Sintaxis Súper Natural
+# Esto es tan fácil que cualquier persona puede entenderlo
+
+# Saludar
+decir "¡Hola! Soy tu computadora amiga"
+
+# Preguntar nombre
+preguntar "¿Cómo te llamas?"
+guardar la respuesta en mi_nombre
+
+# Saludar por nombre
+decir "¡Hola " + mi_nombre + "! Mucho gusto"
+
+# Preguntar edad
+preguntar "¿Cuántos años tienes?"
+guardar la respuesta en mi_edad
+convertir mi_edad a número
+
+# Decidir según la edad
+si mi_edad es menor que 18
+    decir "¡Eres joven! Tienes toda la vida por delante"
+si no
+    decir "¡Qué experiencia debes tener!"
+terminar
+
+# Hacer una lista de cosas favoritas
+mis_cosas_favoritas = ["pizza", "helado", "videojuegos"]
+
+decir "Estas son mis cosas favoritas:"
+repetir con cada cosa en mis_cosas_favoritas
+    decir "- Me gusta " + cosa
+terminar
+
+# Contar hasta 5
+decir "Ahora voy a contar hasta 5:"
+repetir 5 veces
+    decir "¡Número!"
+terminar
+
+# Despedirse
+decir "¡Gracias por hablar conmigo, " + mi_nombre + "!"
+decir "¡Ahora ya sabes programar en Vader!"

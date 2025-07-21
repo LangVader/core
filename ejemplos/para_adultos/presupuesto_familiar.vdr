@@ -1,0 +1,201 @@
+# 💰 Administrador de Presupuesto Familiar
+# Una herramienta práctica para manejar las finanzas del hogar
+
+mostrar "💰 ¡Bienvenido a tu Administrador de Presupuesto Familiar!"
+mostrar "Te ayudo a controlar tus ingresos y gastos de forma simple"
+
+# Diccionarios para organizar la información
+diccionario ingresos = {}
+diccionario gastos = {}
+diccionario categorias_gastos = {
+    "casa": "🏠 Casa (renta, servicios)",
+    "comida": "🍽️ Comida y supermercado", 
+    "transporte": "🚗 Transporte",
+    "salud": "🏥 Salud y medicina",
+    "educacion": "📚 Educación",
+    "entretenimiento": "🎬 Entretenimiento",
+    "otros": "📦 Otros gastos"
+}
+
+# Función para mostrar el menú principal
+funcion mostrar_menu_principal()
+    mostrar "\n=== ADMINISTRADOR DE PRESUPUESTO ==="
+    mostrar "1. Registrar ingreso"
+    mostrar "2. Registrar gasto"
+    mostrar "3. Ver resumen del mes"
+    mostrar "4. Ver gastos por categoría"
+    mostrar "5. Calcular ahorros posibles"
+    mostrar "6. Salir"
+    mostrar "¿Qué quieres hacer? (1-6):"
+fin funcion
+
+# Función para registrar ingresos
+funcion registrar_ingreso()
+    mostrar "\n💵 REGISTRAR INGRESO"
+    mostrar "¿De dónde viene este dinero? (ej: salario, freelance, venta):"
+    leer fuente
+    mostrar "¿Cuánto dinero es?:"
+    leer cantidad
+    cantidad = float(cantidad)
+    
+    si fuente en ingresos
+        ingresos[fuente] = ingresos[fuente] + cantidad
+    sino
+        ingresos[fuente] = cantidad
+    fin si
+    
+    mostrar "✅ Ingreso registrado: $" + str(cantidad) + " de " + fuente
+fin funcion
+
+# Función para registrar gastos
+funcion registrar_gasto()
+    mostrar "\n💸 REGISTRAR GASTO"
+    mostrar "Categorías disponibles:"
+    repetir codigo, descripcion en categorias_gastos.items()
+        mostrar codigo + " - " + descripcion
+    fin repetir
+    
+    mostrar "¿En qué categoría fue el gasto?:"
+    leer categoria
+    
+    si categoria no en categorias_gastos
+        mostrar "❌ Categoría no válida. Usando 'otros'"
+        categoria = "otros"
+    fin si
+    
+    mostrar "¿Cuánto gastaste?:"
+    leer cantidad
+    cantidad = float(cantidad)
+    
+    mostrar "Descripción del gasto (opcional):"
+    leer descripcion
+    
+    si categoria no en gastos
+        gastos[categoria] = []
+    fin si
+    
+    gastos[categoria].append({
+        "cantidad": cantidad,
+        "descripcion": descripcion
+    })
+    
+    mostrar "✅ Gasto registrado: $" + str(cantidad) + " en " + categorias_gastos[categoria]
+fin funcion
+
+# Función para calcular totales
+funcion calcular_total_ingresos()
+    total = 0
+    repetir fuente, cantidad en ingresos.items()
+        total = total + cantidad
+    fin repetir
+    retornar total
+fin funcion
+
+funcion calcular_total_gastos()
+    total = 0
+    repetir categoria, lista_gastos en gastos.items()
+        repetir gasto en lista_gastos
+            total = total + gasto["cantidad"]
+        fin repetir
+    fin repetir
+    retornar total
+fin funcion
+
+# Función para mostrar resumen
+funcion mostrar_resumen()
+    mostrar "\n📊 RESUMEN DEL MES"
+    
+    total_ingresos = llamar calcular_total_ingresos()
+    total_gastos = llamar calcular_total_gastos()
+    balance = total_ingresos - total_gastos
+    
+    mostrar "💰 Total de ingresos: $" + str(total_ingresos)
+    mostrar "💸 Total de gastos: $" + str(total_gastos)
+    mostrar "📈 Balance: $" + str(balance)
+    
+    si balance > 0
+        mostrar "🎉 ¡Excelente! Tienes un balance positivo"
+        porcentaje_ahorro = (balance / total_ingresos) * 100
+        mostrar "💪 Estás ahorrando el " + str(round(porcentaje_ahorro, 1)) + "% de tus ingresos"
+    sino si balance == 0
+        mostrar "⚖️ Estás gastando exactamente lo que ganas"
+        mostrar "💡 Tip: Trata de reducir algunos gastos para ahorrar"
+    sino
+        mostrar "⚠️ Cuidado: Estás gastando más de lo que ganas"
+        mostrar "🚨 Necesitas reducir gastos urgentemente"
+    fin si
+fin funcion
+
+# Función para mostrar gastos por categoría
+funcion mostrar_gastos_por_categoria()
+    mostrar "\n📋 GASTOS POR CATEGORÍA"
+    
+    si len(gastos) == 0
+        mostrar "📭 No has registrado gastos aún"
+        retornar
+    fin si
+    
+    repetir categoria, lista_gastos en gastos.items()
+        total_categoria = 0
+        repetir gasto en lista_gastos
+            total_categoria = total_categoria + gasto["cantidad"]
+        fin repetir
+        
+        mostrar "\n" + categorias_gastos[categoria] + ": $" + str(total_categoria)
+        repetir gasto en lista_gastos
+            si gasto["descripcion"] != ""
+                mostrar "  • $" + str(gasto["cantidad"]) + " - " + gasto["descripcion"]
+            sino
+                mostrar "  • $" + str(gasto["cantidad"])
+            fin si
+        fin repetir
+    fin repetir
+fin funcion
+
+# Función para sugerir ahorros
+funcion calcular_ahorros_posibles()
+    mostrar "\n💡 SUGERENCIAS DE AHORRO"
+    
+    total_ingresos = llamar calcular_total_ingresos()
+    
+    si total_ingresos == 0
+        mostrar "❌ Primero registra tus ingresos"
+        retornar
+    fin si
+    
+    # Sugerencias basadas en porcentajes recomendados
+    mostrar "📊 Distribución recomendada de tu presupuesto:"
+    mostrar "🏠 Casa (máximo 30%): $" + str(total_ingresos * 0.3)
+    mostrar "🍽️ Comida (máximo 15%): $" + str(total_ingresos * 0.15)
+    mostrar "🚗 Transporte (máximo 15%): $" + str(total_ingresos * 0.15)
+    mostrar "💰 Ahorros (mínimo 20%): $" + str(total_ingresos * 0.2)
+    mostrar "🎬 Entretenimiento (máximo 10%): $" + str(total_ingresos * 0.1)
+    mostrar "📦 Otros (máximo 10%): $" + str(total_ingresos * 0.1)
+fin funcion
+
+# Programa principal
+repetir mientras True
+    llamar mostrar_menu_principal()
+    leer opcion
+    
+    si opcion == "1"
+        llamar registrar_ingreso()
+    sino si opcion == "2"
+        llamar registrar_gasto()
+    sino si opcion == "3"
+        llamar mostrar_resumen()
+    sino si opcion == "4"
+        llamar mostrar_gastos_por_categoria()
+    sino si opcion == "5"
+        llamar calcular_ahorros_posibles()
+    sino si opcion == "6"
+        mostrar "💰 ¡Gracias por usar tu Administrador de Presupuesto!"
+        mostrar "💡 Recuerda: El control de gastos es la clave del éxito financiero"
+        romper
+    sino
+        mostrar "❌ Opción no válida. Intenta de nuevo"
+    fin si
+    
+    mostrar "\nPresiona Enter para continuar..."
+    leer pausa
+fin repetir

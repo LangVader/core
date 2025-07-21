@@ -1,0 +1,156 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Vader",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#classes"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.vader",
+          "match": "\\b(si|si no|sino|terminar|repetir|mientras|para|en|hacer|devolver|retornar|romper|continuar|pasar)\\b"
+        },
+        {
+          "name": "keyword.declaration.vader",
+          "match": "\\b(tipo de cosa llamada|clase|funcion|metodo|atributo|guardar)\\b"
+        },
+        {
+          "name": "keyword.operator.vader",
+          "match": "\\b(es igual a|es mayor que|es menor que|y también|o también|no es|contiene)\\b"
+        },
+        {
+          "name": "keyword.other.vader",
+          "match": "\\b(decir|mostrar|preguntar|guardar la respuesta en|convertir a número|convertir a texto|llamar|crear|como|importar|desde|intentar|capturar|finalmente|lanzar|afirmar|global|no_local)\\b"
+        },
+        {
+          "name": "keyword.control.flow.vader",
+          "match": "\\b(repetir|veces|con cada|siempre|salir del repetir)\\b"
+        },
+        {
+          "name": "constant.language.vader",
+          "match": "\\b(True|False|None|Verdadero|Falso|Nada|sí|no)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.vader",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.vader",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.vader",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.vader",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.vader",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.vader",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arithmetic.vader",
+          "match": "\\+|\\-|\\*|\\/|\\%|\\*\\*"
+        },
+        {
+          "name": "keyword.operator.comparison.vader",
+          "match": "==|!=|<|>|<=|>="
+        },
+        {
+          "name": "keyword.operator.logical.vader",
+          "match": "\\band\\b|\\bor\\b|\\bnot\\b|\\by\\b|\\bo\\b"
+        },
+        {
+          "name": "keyword.operator.assignment.vader",
+          "match": "="
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.vader",
+          "match": "\\b(hacer)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.declaration.function.vader"
+            },
+            "2": {
+              "name": "entity.name.function.vader"
+            }
+          }
+        },
+        {
+          "name": "support.function.builtin.vader",
+          "match": "\\b(decir|mostrar|preguntar|len|str|int|float|list|dict|range|open|print|input)\\b"
+        }
+      ]
+    },
+    "classes": {
+      "patterns": [
+        {
+          "name": "entity.name.class.vader",
+          "match": "\\b(tipo de cosa llamada|clase)\\s+([A-Z][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.declaration.class.vader"
+            },
+            "2": {
+              "name": "entity.name.class.vader"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "scopeName": "source.vader"
+}

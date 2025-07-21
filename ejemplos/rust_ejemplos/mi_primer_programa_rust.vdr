@@ -1,0 +1,46 @@
+# 🦀 Mi Primer Programa en Rust con Vader
+# ¡Rust nunca fue tan fácil! Programación de sistemas en español natural
+
+decir "🦀 ¡Hola desde Rust con Vader!"
+decir "Bienvenido al lenguaje más seguro del mundo"
+
+# Preguntar información al usuario
+preguntar "¿Cómo te llamas?" guardar la respuesta en nombre
+decir "¡Hola " + nombre + "! Vamos a explorar Rust juntos"
+
+# Variables y números
+mi_edad = 25
+mi_lenguaje_favorito = "Rust"
+
+decir "Tengo " + mi_edad + " años"
+decir "Mi lenguaje favorito es " + mi_lenguaje_favorito
+
+# Lista de datos (Vec en Rust)
+mis_hobbies = ["programar", "leer", "viajar", "cocinar"]
+
+decir "Mis hobbies son:"
+repetir con cada hobby en mis_hobbies
+    decir "- " + hobby
+terminar
+
+# Condicionales naturales
+si mi_edad es mayor que 18
+    decir "Soy mayor de edad y puedo programar en Rust"
+si no
+    decir "Soy menor de edad pero igual puedo aprender Rust"
+terminar
+
+# Función simple
+hacer saludar_rust
+    decir "🦀 Rust es increíble para:"
+    decir "- Sistemas operativos"
+    decir "- Blockchain y criptomonedas"
+    decir "- Aplicaciones web ultra-rápidas"
+    decir "- Internet de las cosas (IoT)"
+    decir "- Juegos de alto rendimiento"
+terminar
+
+llamar saludar_rust
+
+decir "¡Gracias por probar Rust con Vader!"
+decir "Ahora puedes crear sistemas seguros y rápidos en español natural"

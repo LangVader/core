@@ -1,0 +1,48 @@
+# 👤 Ejemplo Súper Fácil - Crear una Persona
+# Esto es tan natural como hablar con un amigo
+
+# Crear un tipo de cosa llamada Persona
+tipo de cosa llamada Persona
+    guardar nombre
+    guardar edad
+    guardar color_favorito
+    
+    hacer presentacion
+        decir "¡Hola! Mi nombre es " + self.nombre
+        decir "Tengo " + self.edad + " años"
+        decir "Mi color favorito es " + self.color_favorito
+    terminar
+    
+    hacer cumplir_anos
+        self.edad = self.edad + 1
+        decir "¡Feliz cumpleaños! Ahora tengo " + self.edad + " años"
+    terminar
+terminar
+
+# Hacer una función para crear personas fácilmente
+hacer crear_persona con nombre y edad y color
+    nueva_persona = Persona()
+    nueva_persona.nombre = nombre
+    nueva_persona.edad = edad
+    nueva_persona.color_favorito = color
+    devolver nueva_persona
+terminar
+
+# Usar nuestro programa
+decir "🎉 ¡Vamos a crear personas!"
+
+# Crear la primera persona
+persona1 = crear_persona("Ana", 25, "azul")
+llamar persona1.presentacion()
+
+# Crear la segunda persona
+persona2 = crear_persona("Luis", 30, "verde")
+llamar persona2.presentacion()
+
+# Hacer que cumplan años
+decir "\n🎂 ¡Es hora de los cumpleaños!"
+llamar persona1.cumplir_anos()
+llamar persona2.cumplir_anos()
+
+decir "\n✨ ¡Listo! Acabas de programar con clases y funciones"
+decir "¡Y todo en español súper fácil!"

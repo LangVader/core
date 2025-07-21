@@ -1,0 +1,53 @@
+# 🎯 Juego de Adivinanzas Súper Divertido
+# ¡Tan fácil que toda la familia puede jugar!
+
+decir "🎯 ¡Hola! ¿Quieres jugar conmigo?"
+decir "Voy a pensar en un número del 1 al 10"
+decir "¡Tú tienes que adivinarlo!"
+
+# Mi número secreto
+mi_número_secreto = 7
+cuántos_intentos = 0
+
+# El juego
+repetir siempre
+    preguntar "¿Cuál crees que es mi número?"
+    guardar la respuesta en tu_número
+    convertir tu_número a número
+    
+    cuántos_intentos = cuántos_intentos + 1
+    
+    si tu_número es igual a mi_número_secreto
+        decir "🎉 ¡GANASTE! ¡Adivinaste!"
+        decir "Mi número era " + mi_número_secreto
+        decir "Lo lograste en " + cuántos_intentos + " intentos"
+        
+        si cuántos_intentos es igual a 1
+            decir "¡Increíble! ¡Lo adivinaste al primer intento!"
+        si cuántos_intentos es menor que 4
+            decir "¡Eres muy bueno adivinando!"
+        si no
+            decir "¡Bien hecho! La práctica hace al maestro"
+        terminar
+        
+        salir del repetir
+    si no
+        si tu_número es menor que mi_número_secreto
+            decir "📈 Mi número es más GRANDE"
+        si no
+            decir "📉 Mi número es más PEQUEÑO"
+        terminar
+        
+        decir "¡Inténtalo otra vez! Tú puedes"
+        
+        # Dar ánimos
+        si cuántos_intentos es igual a 3
+            decir "💪 ¡Vas muy bien! No te rindas"
+        si cuántos_intentos es igual a 5
+            decir "🤔 Pista: está entre 5 y 9"
+        terminar
+    terminar
+terminar
+
+decir "¡Gracias por jugar conmigo!"
+decir "¡Eres genial! ¿Jugamos otra vez pronto?"

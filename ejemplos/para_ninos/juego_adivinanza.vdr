@@ -1,0 +1,53 @@
+# 🎮 ¡Juego de Adivinanza Súper Divertido!
+# La computadora piensa un número y tú lo adivinas
+
+importar random
+
+mostrar "🎯 ¡Bienvenido al Juego de Adivinanza! 🎯"
+mostrar "Voy a pensar en un número del 1 al 10"
+mostrar "¡Tú tienes que adivinarlo!"
+
+# La computadora "piensa" un número
+numero_secreto = random.randint(1, 10)
+intentos = 0
+
+mostrar "✨ Ya pensé en mi número secreto..."
+mostrar "¿Cuál crees que es?"
+
+# El juego principal
+repetir mientras True
+    leer tu_numero
+    tu_numero = int(tu_numero)
+    intentos = intentos + 1
+    
+    si tu_numero == numero_secreto
+        mostrar "🎉 ¡FELICIDADES! ¡Adivinaste!"
+        mostrar "Mi número secreto era " + str(numero_secreto)
+        mostrar "Lo lograste en " + str(intentos) + " intentos"
+        
+        si intentos == 1
+            mostrar "¡Increíble! ¡Lo adivinaste al primer intento!"
+        sino si intentos <= 3
+            mostrar "¡Excelente! Eres muy bueno adivinando"
+        sino
+            mostrar "¡Bien hecho! La práctica hace al maestro"
+        fin si
+        
+        romper
+        
+    sino si tu_numero < numero_secreto
+        mostrar "📈 Mi número es MÁS GRANDE. ¡Intenta otra vez!"
+        
+    sino
+        mostrar "📉 Mi número es MÁS PEQUEÑO. ¡Intenta otra vez!"
+    fin si
+    
+    # Dar ánimos
+    si intentos == 3
+        mostrar "💪 ¡Vas muy bien! No te rindas"
+    sino si intentos == 5
+        mostrar "🤔 Pista: está entre " + str(max(1, numero_secreto-2)) + " y " + str(min(10, numero_secreto+2))
+    fin si
+fin repetir
+
+mostrar "🌟 ¡Gracias por jugar! ¿Quieres jugar otra vez?"

@@ -1,0 +1,39 @@
+{
+  "iconDefinitions": {
+    "vader-file": {
+      "iconPath": "../../assets/logo.png"
+    },
+    "vader-folder": {
+      "iconPath": "../../assets/logo.png"
+    }
+  },
+  "fileExtensions": {
+    "vdr": "vader-file"
+  },
+  "fileNames": {
+    "vader.py": "vader-file",
+    "vader.js": "vader-file",
+    "vader.java": "vader-file",
+    "vader.cs": "vader-file",
+    "vader.go": "vader-file",
+    "vader.rs": "vader-file"
+  },
+  "folderNames": {
+    "vader": "vader-folder",
+    "ejemplos": "vader-folder",
+    "transpilers": "vader-folder"
+  },
+  "languageIds": {
+    "vader": "vader-file"
+  },
+  "light": {
+    "fileExtensions": {
+      "vdr": "vader-file"
+    }
+  },
+  "highContrast": {
+    "fileExtensions": {
+      "vdr": "vader-file"
+    }
+  }
+}

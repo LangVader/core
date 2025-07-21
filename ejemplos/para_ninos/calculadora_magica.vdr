@@ -1,0 +1,44 @@
+# 🧮 ¡La Calculadora Mágica de Vader!
+# Un programa súper fácil que hace matemáticas por ti
+
+mostrar "✨ ¡Bienvenido a la Calculadora Mágica! ✨"
+mostrar "Yo haré las matemáticas por ti, ¡como magia!"
+
+# Pedimos los números
+mostrar "Dime el primer número:"
+leer numero1
+numero1 = int(numero1)
+
+mostrar "Ahora dime el segundo número:"
+leer numero2
+numero2 = int(numero2)
+
+# Hacemos todas las operaciones
+suma = numero1 + numero2
+resta = numero1 - numero2
+multiplicacion = numero1 * numero2
+
+# Si el segundo número no es cero, hacemos división
+si numero2 != 0
+    division = numero1 / numero2
+sino
+    division = "No se puede dividir por cero"
+fin si
+
+# Mostramos los resultados de forma divertida
+mostrar "🎩 ¡Abracadabra! Aquí están tus resultados mágicos:"
+mostrar "➕ " + str(numero1) + " + " + str(numero2) + " = " + str(suma)
+mostrar "➖ " + str(numero1) + " - " + str(numero2) + " = " + str(resta)
+mostrar "✖️ " + str(numero1) + " × " + str(numero2) + " = " + str(multiplicacion)
+mostrar "➗ " + str(numero1) + " ÷ " + str(numero2) + " = " + str(division)
+
+# Un toque especial
+si suma > 100
+    mostrar "¡Wow! Tu suma es súper grande"
+sino si suma < 0
+    mostrar "¡Interesante! Tu suma es negativa"
+sino
+    mostrar "¡Perfecto! Números muy buenos"
+fin si
+
+mostrar "✨ ¡Gracias por usar la Calculadora Mágica! ✨"

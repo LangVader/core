@@ -1,0 +1,50 @@
+# 🐹 Mi Primera App en Go con Vader
+# Creando microservicios y APIs súper fácil
+
+decir "🚀 ¡Hola! Soy tu primera app en Go"
+decir "Go es perfecto para APIs rápidas y microservicios"
+
+# Preguntar información del usuario
+preguntar "¿Cómo te llamas? "
+guardar la respuesta en nombre
+
+preguntar "¿Qué tipo de API quieres crear? "
+guardar la respuesta en tipo_api
+
+# Saludar personalmente
+decir "¡Hola " + nombre + "!"
+decir "Vamos a crear una " + tipo_api + " súper rápida"
+
+# Crear una lista de características de Go
+caracteristicas_go = ["Súper rápido", "Concurrente", "Simple", "Compilado", "Para cloud"]
+
+decir "🌟 ¿Por qué Go es genial?"
+repetir con cada caracteristica en caracteristicas_go
+    decir "✅ " + caracteristica
+terminar
+
+# Simular creación de API
+decir "🔧 Creando tu API..."
+repetir 3 veces
+    decir "⚡ Compilando módulos..."
+terminar
+
+decir "🎉 ¡API creada exitosamente!"
+decir "Tu " + tipo_api + " está lista para producción"
+
+# Mostrar estadísticas simuladas
+usuarios_conectados = 1000
+requests_por_segundo = 5000
+
+decir "📊 Estadísticas de tu API:"
+decir "👥 Usuarios conectados: " + usuarios_conectados
+decir "⚡ Requests/segundo: " + requests_por_segundo
+
+si requests_por_segundo es mayor que 1000
+    decir "🚀 ¡Tu API es súper rápida!"
+si no
+    decir "📈 Tu API está creciendo"
+terminar
+
+decir "✨ ¡Felicidades " + nombre + "!"
+decir "Acabas de crear tu primera app en Go con Vader"

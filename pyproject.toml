@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vaderlang"
+version = "0.1"
+description = "Lenguaje de programación VADER"
+authors = [{name = "Adriano"}]
+requires-python = ">=3.6"
+dependencies = []
+
+[project.scripts]
+vader = "src.vader:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]

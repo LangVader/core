@@ -1,0 +1,235 @@
+# 🛍️ App de Tienda Premium para iOS con Vader
+# ¡Crear apps de e-commerce nunca fue tan fácil!
+
+decir "🛍️ Creando app de tienda premium para iOS"
+decir "E-commerce de alta calidad en español natural"
+
+# Configuración de la tienda
+nombre_tienda = "Tienda Vader Premium"
+moneda = "USD"
+comision_appstore = 0.30
+precio_app = 2.99
+
+decir "🏪 Configurando " + nombre_tienda
+decir "💰 Precio de la app: $" + precio_app
+decir "📱 Plataforma: iOS (iPhone y iPad)"
+
+# Definir producto de la tienda
+tipo de cosa llamada Producto
+    guardar id
+    guardar nombre
+    guardar precio
+    guardar categoria
+    guardar descripcion
+    guardar imagen
+    guardar stock
+    guardar calificacion
+terminar
+
+# Definir usuario de la app
+tipo de cosa llamada Usuario
+    guardar id
+    guardar nombre
+    guardar email
+    guardar carrito
+    guardar historial_compras
+    guardar metodo_pago
+terminar
+
+# Definir pedido
+tipo de cosa llamada Pedido
+    guardar id
+    guardar usuario_id
+    guardar productos
+    guardar total
+    guardar estado
+    guardar fecha
+terminar
+
+# Función para crear producto
+hacer crear_producto con id y nombre y precio y categoria
+    nuevo_producto = Producto()
+    nuevo_producto.id = id
+    nuevo_producto.nombre = nombre
+    nuevo_producto.precio = precio
+    nuevo_producto.categoria = categoria
+    nuevo_producto.descripcion = "Producto premium de alta calidad"
+    nuevo_producto.imagen = "imagen_" + id + ".jpg"
+    nuevo_producto.stock = 100
+    nuevo_producto.calificacion = 4.8
+    
+    decir "📦 Producto creado:"
+    decir "  Nombre: " + nombre
+    decir "  Precio: $" + precio
+    decir "  Categoría: " + categoria
+    decir "  Stock: " + nuevo_producto.stock
+    
+    devolver nuevo_producto
+terminar
+
+# Función para crear usuario
+hacer crear_usuario con nombre y email
+    nuevo_usuario = Usuario()
+    nuevo_usuario.id = "USER_" + nombre
+    nuevo_usuario.nombre = nombre
+    nuevo_usuario.email = email
+    nuevo_usuario.carrito = []
+    nuevo_usuario.historial_compras = []
+    nuevo_usuario.metodo_pago = "Apple Pay"
+    
+    decir "👤 Usuario registrado:"
+    decir "  Nombre: " + nombre
+    decir "  Email: " + email
+    decir "  Método de pago: " + nuevo_usuario.metodo_pago
+    
+    devolver nuevo_usuario
+terminar
+
+# Función para agregar al carrito
+hacer agregar_al_carrito con usuario y producto
+    usuario.carrito.append(producto)
+    decir "🛒 Producto agregado al carrito:"
+    decir "  " + producto.nombre + " - $" + producto.precio
+    decir "  Items en carrito: " + usuario.carrito.length
+terminar
+
+# Función para procesar pago
+hacer procesar_pago con usuario y total
+    decir "💳 Procesando pago con " + usuario.metodo_pago
+    decir "💰 Total a pagar: $" + total
+    
+    # Simular procesamiento de pago
+    decir "⏳ Conectando con Apple Pay..."
+    decir "✅ Pago procesado exitosamente"
+    decir "📧 Recibo enviado a " + usuario.email
+    
+    # Calcular comisión de App Store
+    comision = total * comision_appstore
+    ganancia_neta = total - comision
+    
+    decir ""
+    decir "📊 Desglose financiero:"
+    decir "  Venta bruta: $" + total
+    decir "  Comisión App Store (30%): $" + comision
+    decir "  Ganancia neta: $" + ganancia_neta
+terminar
+
+# Función para mostrar estadísticas de la tienda
+hacer mostrar_estadisticas_tienda con productos y usuarios
+    decir ""
+    decir "📈 Estadísticas de la tienda:"
+    decir "  📦 Productos disponibles: " + productos.length
+    decir "  👥 Usuarios registrados: " + usuarios.length
+    decir "  💰 Precio de la app: $" + precio_app
+    decir "  📱 Plataforma: iOS Premium"
+    
+    # Calcular ingresos potenciales
+    ingresos_app = usuarios.length * precio_app
+    ingresos_productos = productos.length * 50  # Promedio estimado
+    ingresos_totales = ingresos_app + ingresos_productos
+    
+    decir ""
+    decir "💵 Proyección de ingresos:"
+    decir "  Por venta de app: $" + ingresos_app
+    decir "  Por productos: $" + ingresos_productos
+    decir "  Total estimado: $" + ingresos_totales
+terminar
+
+# Función para mostrar funcionalidades iOS premium
+hacer mostrar_funcionalidades_premium
+    decir ""
+    decir "✨ Funcionalidades premium de iOS:"
+    decir "  💳 Apple Pay integrado"
+    decir "  🔐 Touch ID / Face ID para seguridad"
+    decir "  📱 Interfaz nativa con SwiftUI"
+    decir "  🔔 Notificaciones push personalizadas"
+    decir "  📊 Analytics con App Store Connect"
+    decir "  ☁️ Sincronización con iCloud"
+    decir "  🎨 Modo oscuro automático"
+    decir "  📍 Localización para envíos"
+    decir "  📷 Cámara para escanear códigos"
+    decir "  🔄 Actualizaciones automáticas"
+terminar
+
+# Función principal de la tienda
+hacer inicializar_tienda_premium
+    decir "🚀 Inicializando tienda premium iOS"
+    decir ""
+    
+    # Crear productos de ejemplo
+    producto1 = crear_producto("P001", "iPhone Case Premium", "29.99", "Accesorios")
+    producto2 = crear_producto("P002", "AirPods Pro Case", "19.99", "Accesorios")
+    producto3 = crear_producto("P003", "Cargador Inalámbrico", "39.99", "Electrónicos")
+    producto4 = crear_producto("P004", "Soporte para iPad", "24.99", "Accesorios")
+    
+    productos = [producto1, producto2, producto3, producto4]
+    decir ""
+    
+    # Crear usuarios de ejemplo
+    usuario1 = crear_usuario("María García", "maria@email.com")
+    usuario2 = crear_usuario("Carlos López", "carlos@email.com")
+    usuario3 = crear_usuario("Ana Martínez", "ana@email.com")
+    
+    usuarios = [usuario1, usuario2, usuario3]
+    decir ""
+    
+    # Simular compras
+    decir "🛒 Simulando experiencia de compra:"
+    agregar_al_carrito(usuario1, producto1)
+    agregar_al_carrito(usuario1, producto3)
+    
+    total_compra = 29.99 + 39.99
+    procesar_pago(usuario1, total_compra)
+    
+    # Mostrar estadísticas
+    mostrar_estadisticas_tienda(productos, usuarios)
+    mostrar_funcionalidades_premium()
+    
+    devolver [productos, usuarios]
+terminar
+
+# Función para mostrar el potencial del mercado iOS
+hacer mostrar_potencial_mercado_ios
+    decir ""
+    decir "🎯 Potencial del mercado iOS:"
+    decir "  📱 1.8 mil millones de dispositivos Apple activos"
+    decir "  💰 $86 mil millones en ventas anuales App Store"
+    decir "  📈 Apps iOS generan 2x más que Android"
+    decir "  🌍 Usuarios premium en 175 países"
+    decir "  💳 95% de usuarios tienen método de pago"
+    decir ""
+    decir "🚀 Oportunidades de negocio:"
+    decir "  • E-commerce premium"
+    decir "  • Suscripciones mensuales"
+    decir "  • In-App Purchases"
+    decir "  • Apps de productividad"
+    decir "  • Servicios digitales"
+terminar
+
+# Ejecutar la tienda completa
+decir "🛍️ Tienda Premium iOS - Vader + Swift"
+decir "====================================="
+decir ""
+
+resultado_tienda = inicializar_tienda_premium()
+mostrar_potencial_mercado_ios()
+
+decir ""
+decir "🎉 ¡Tienda premium iOS creada exitosamente!"
+decir "🌟 Con Vader + Swift puedes crear:"
+decir "  • Tiendas online premium"
+decir "  • Apps de marketplace"
+decir "  • Plataformas de servicios"
+decir "  • Apps de suscripción"
+decir "  • E-commerce especializado"
+
+decir ""
+decir "💡 Ventajas competitivas:"
+decir "  ✅ Sin necesidad de Mac ($2000+ ahorrados)"
+decir "  ✅ Sin Xcode complejo"
+decir "  ✅ Desarrollo en español natural"
+decir "  ✅ Acceso al mercado más rentable"
+decir "  ✅ Monetización desde el día 1"
+
+decir ""
+decir "🚀 ¡La democratización del desarrollo iOS premium!"

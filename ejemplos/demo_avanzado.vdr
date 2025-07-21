@@ -1,0 +1,152 @@
+# 🌟 Demo Avanzado de Vader - Sintaxis Natural
+# Ejemplo completo mostrando todas las capacidades de Vader
+
+decir "🚀 Iniciando demo avanzado de Vader"
+decir "Mostrando sintaxis natural y capacidades completas"
+
+# Definir un tipo de cosa (clase)
+tipo de cosa llamada Animal
+    guardar nombre
+    guardar edad
+    
+    hacer hacer_sonido
+        decir "El animal hace un sonido"
+    terminar
+terminar
+
+tipo de cosa llamada Perro hereda Animal
+    guardar raza
+    
+    hacer hacer_sonido
+        decir "¡Guau! Soy " + self.nombre
+    terminar
+    
+    hacer info_especie
+        decir "Los perros son mamíferos domésticos"
+    terminar
+terminar
+
+# Función asíncrona
+asincrona funcion obtener_datos(url)
+    intentar
+        resultado = esperar fetch(url)
+        datos = esperar resultado.json()
+        retornar datos
+    capturar error tipo NetworkError
+        mostrar "Error de red: " + str(error)
+        retornar None
+    finalmente
+        mostrar "Operación completada"
+    fin intentar
+fin funcion
+
+# Función con parámetros (sintaxis natural)
+hacer saludar con nombre y idioma
+    si idioma es igual a "es"
+        decir "¡Hola, " + nombre + "!"
+    si no
+        decir "Hello, " + nombre + "!"
+    terminar
+terminar
+
+# Listas y datos (sintaxis natural)
+mis_nombres = ["Ana", "Carlos", "María", "Luis"]
+mis_numeros = [1, 2, 3, 4, 5]
+mi_configuracion = {"activo": "sí", "version": "1.0"}
+
+# Operaciones con diccionarios
+agregar "puerto":8080 en configuracion
+agregar "host":"localhost" en configuracion
+
+# Operaciones con conjuntos
+agregar 6 en numeros_unicos
+agregar 7 en numeros_unicos
+
+# Comprensión de lista
+comprension lista cuadrados = x*x para x en range(1, 6) si x % 2 == 0
+
+# Context manager para archivos
+con open("datos.txt", "w") como archivo
+    archivo.write("Datos de prueba")
+fin con
+
+# Bucles avanzados
+repetir i desde 0 hasta 5
+    mostrar "Número: " + str(i)
+fin repetir
+
+repetir nombre en nombres
+    si nombre.startswith("A")
+        mostrar "Nombre que empieza con A: " + nombre
+    fin si
+fin repetir
+
+# Bucle while
+contador = 0
+repetir mientras contador < 3
+    mostrar "Contador: " + str(contador)
+    contador = contador + 1
+fin mientras
+
+# Generador
+funcion numeros_fibonacci()
+    a, b = 0, 1
+    repetir mientras True
+        generar a
+        a, b = b, a + b
+    fin mientras
+fin funcion
+
+# Lambda
+cuadrado = lambda x: x * x
+suma = lambda a, b: a + b
+
+# Manejo avanzado de errores
+intentar
+    resultado = 10 / 0
+capturar error tipo ZeroDivisionError
+    mostrar "No se puede dividir por cero"
+capturar error
+    mostrar "Error inesperado: " + str(error)
+finalmente
+    mostrar "Limpieza completada"
+fin intentar
+
+# Aserciones
+afirmar len(nombres) > 0 mensaje "La lista no puede estar vacía"
+
+# Variables globales
+global contador_global
+contador_global = 100
+
+# Función principal
+funcion main()
+    # Crear instancias
+    crear mi_perro como Perro
+    mi_perro.nombre = "Rex"
+    mi_perro.edad = 3
+    mi_perro.raza = "Labrador"
+    
+    # Llamar métodos
+    llamar mi_perro.hacer_sonido
+    llamar Perro.info_especie
+    
+    # Usar funciones
+    llamar saludar("María", "es")
+    llamar saludar()
+    
+    # Mostrar estructuras de datos
+    mostrar "Configuración: " + str(configuracion)
+    mostrar "Coordenadas: " + str(coordenadas)
+    mostrar "Números únicos: " + str(numeros_unicos)
+    mostrar "Cuadrados pares: " + str(cuadrados)
+    
+    # Usar lambdas
+    mostrar "Cuadrado de 5: " + str(cuadrado(5))
+    mostrar "Suma de 3 y 7: " + str(suma(3, 7))
+    
+    mostrar "Demo completado exitosamente"
+fin funcion
+
+# Ejecutar programa principal
+llamar main()

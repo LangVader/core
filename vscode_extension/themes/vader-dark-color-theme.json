@@ -1,0 +1,105 @@
+{
+  "name": "Vader Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1a1a1a",
+    "editor.foreground": "#e0e0e0",
+    "activityBar.background": "#2d2d2d",
+    "sideBar.background": "#252526",
+    "statusBar.background": "#007acc",
+    "statusBar.foreground": "#ffffff"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#6A9955"
+      }
+    },
+    {
+      "name": "Vader Keywords",
+      "scope": [
+        "keyword.control.vader",
+        "keyword.declaration.vader",
+        "keyword.other.vader"
+      ],
+      "settings": {
+        "foreground": "#C586C0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Vader Natural Operators",
+      "scope": [
+        "keyword.operator.vader"
+      ],
+      "settings": {
+        "foreground": "#4FC1FF",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "String",
+      "scope": [
+        "string.quoted.double.vader",
+        "string.quoted.single.vader"
+      ],
+      "settings": {
+        "foreground": "#CE9178"
+      }
+    },
+    {
+      "name": "Number",
+      "scope": [
+        "constant.numeric.vader"
+      ],
+      "settings": {
+        "foreground": "#B5CEA8"
+      }
+    },
+    {
+      "name": "Function Name",
+      "scope": [
+        "entity.name.function.vader"
+      ],
+      "settings": {
+        "foreground": "#DCDCAA",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Class Name",
+      "scope": [
+        "entity.name.class.vader"
+      ],
+      "settings": {
+        "foreground": "#4EC9B0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Built-in Functions",
+      "scope": [
+        "support.function.builtin.vader"
+      ],
+      "settings": {
+        "foreground": "#569CD6"
+      }
+    },
+    {
+      "name": "Constants",
+      "scope": [
+        "constant.language.vader"
+      ],
+      "settings": {
+        "foreground": "#569CD6",
+        "fontStyle": "bold"
+      }
+    }
+  ]
+}

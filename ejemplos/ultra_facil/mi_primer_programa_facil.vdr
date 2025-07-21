@@ -1,0 +1,28 @@
+# 🌟 Mi Primer Programa Súper Fácil
+# Esto es tan simple que cualquier persona puede entenderlo
+
+# 1. Que la computadora me salude
+decir "¡Hola! Soy tu computadora amiga"
+decir "Me llamo Vader y hablo español como tú"
+
+# 2. Preguntarle su nombre
+preguntar "¿Cómo te llamas?"
+guardar la respuesta en tu_nombre
+
+# 3. Saludarlo por su nombre
+decir "¡Qué bonito nombre, " + tu_nombre + "!"
+decir "Es un placer conocerte"
+
+# 4. Jugar un poco
+decir "¿Quieres que juguemos?"
+decir "Piensa en tu color favorito y presiona Enter"
+preguntar ""
+guardar la respuesta en cualquier_cosa
+
+decir "¡Apuesto a que pensaste en azul!"
+decir "¿Adiviné? No importa, ¡los dos colores son bonitos!"
+
+# 5. Despedirse
+decir "Gracias por hablar conmigo, " + tu_nombre
+decir "¡Ahora ya sabes programar!"
+decir "¡Eres increíble!"

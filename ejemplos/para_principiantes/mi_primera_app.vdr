@@ -1,0 +1,83 @@
+# 📱 Mi Primera App - Lista de Tareas
+# Un programa útil que cualquier principiante puede hacer y usar
+
+mostrar "📝 ¡Bienvenido a tu Lista de Tareas Personal!"
+mostrar "Aquí puedes organizar todo lo que tienes que hacer"
+
+# Creamos una lista vacía para las tareas
+lista mis_tareas = []
+
+# Función para mostrar el menú
+funcion mostrar_menu()
+    mostrar "\n=== ¿QUÉ QUIERES HACER? ==="
+    mostrar "1. Ver mis tareas"
+    mostrar "2. Agregar una tarea nueva"
+    mostrar "3. Marcar tarea como completada"
+    mostrar "4. Salir"
+    mostrar "Escribe el número de tu opción:"
+fin funcion
+
+# Función para mostrar todas las tareas
+funcion mostrar_tareas()
+    si len(mis_tareas) == 0
+        mostrar "📭 No tienes tareas pendientes. ¡Qué bien!"
+    sino
+        mostrar "\n📋 TUS TAREAS:"
+        repetir i desde 0 hasta len(mis_tareas)
+            mostrar str(i+1) + ". " + mis_tareas[i]
+        fin repetir
+    fin si
+fin funcion
+
+# Función para agregar una tarea
+funcion agregar_tarea()
+    mostrar "✏️ Escribe tu nueva tarea:"
+    leer nueva_tarea
+    mis_tareas.append(nueva_tarea)
+    mostrar "✅ ¡Tarea agregada! Ahora tienes " + str(len(mis_tareas)) + " tareas"
+fin funcion
+
+# Función para completar una tarea
+funcion completar_tarea()
+    si len(mis_tareas) == 0
+        mostrar "❌ No tienes tareas para completar"
+        retornar
+    fin si
+    
+    llamar mostrar_tareas()
+    mostrar "¿Cuál tarea completaste? (escribe el número):"
+    leer numero_tarea
+    numero_tarea = int(numero_tarea) - 1
+    
+    si numero_tarea >= 0 y numero_tarea < len(mis_tareas)
+        tarea_completada = mis_tareas[numero_tarea]
+        del mis_tareas[numero_tarea]
+        mostrar "🎉 ¡Felicidades! Completaste: " + tarea_completada
+    sino
+        mostrar "❌ Número de tarea no válido"
+    fin si
+fin funcion
+
+# Programa principal
+mostrar "¡Vamos a organizar tu día!"
+
+repetir mientras True
+    llamar mostrar_menu()
+    leer opcion
+    
+    si opcion == "1"
+        llamar mostrar_tareas()
+    sino si opcion == "2"
+        llamar agregar_tarea()
+    sino si opcion == "3"
+        llamar completar_tarea()
+    sino si opcion == "4"
+        mostrar "👋 ¡Hasta luego! Que tengas un día productivo"
+        romper
+    sino
+        mostrar "❌ Opción no válida. Intenta de nuevo"
+    fin si
+    
+    mostrar "\nPresiona Enter para continuar..."
+    leer pausa
+fin repetir

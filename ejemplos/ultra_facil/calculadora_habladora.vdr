@@ -1,0 +1,35 @@
+# 🧮 Calculadora que Habla Contigo
+# Tan fácil que hasta un niño de 6 años puede usarla
+
+decir "¡Hola! Soy tu calculadora personal"
+decir "Te voy a ayudar a hacer cuentas súper fácil"
+
+# Pedirle los números
+preguntar "Dime el primer número:"
+guardar la respuesta en primer_número
+convertir primer_número a número
+
+preguntar "Ahora dime el segundo número:"
+guardar la respuesta en segundo_número
+convertir segundo_número a número
+
+# Hacer las cuentas
+la_suma = primer_número + segundo_número
+la_resta = primer_número - segundo_número
+la_multiplicación = primer_número * segundo_número
+
+# Decirle los resultados
+decir "¡Listo! Aquí están tus resultados:"
+decir "✨ " + primer_número + " + " + segundo_número + " = " + la_suma
+decir "✨ " + primer_número + " - " + segundo_número + " = " + la_resta
+decir "✨ " + primer_número + " × " + segundo_número + " = " + la_multiplicación
+
+# Ser amigable
+si la_suma es mayor que 100
+    decir "¡Wow! Tu suma es súper grande"
+si no
+    decir "¡Qué números tan bonitos!"
+terminar
+
+decir "¡Espero haberte ayudado!"
+decir "¡Vuelve cuando quieras hacer más cuentas!"

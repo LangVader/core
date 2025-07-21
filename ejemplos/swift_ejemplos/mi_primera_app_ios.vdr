@@ -1,0 +1,108 @@
+# 📱 Mi Primera App iOS con Vader
+# ¡Crear apps para iPhone nunca fue tan fácil!
+
+decir "📱 ¡Hola desde mi primera app iOS!"
+decir "Bienvenido al desarrollo iOS democratizado"
+
+# Preguntar información al usuario
+preguntar "¿Cómo te llamas?" guardar la respuesta en nombre_usuario
+decir "¡Hola " + nombre_usuario + "! Vamos a crear tu app iOS"
+
+# Variables para la app
+titulo_app = "Mi App Increíble"
+version_app = "1.0.0"
+categoria_app = "Productividad"
+
+decir "📋 Información de tu app:"
+decir "  Título: " + titulo_app
+decir "  Versión: " + version_app
+decir "  Categoría: " + categoria_app
+
+# Lista de características de la app
+caracteristicas = ["Interfaz intuitiva", "Modo oscuro", "Sincronización iCloud", "Notificaciones push"]
+
+decir ""
+decir "✨ Características de tu app:"
+repetir con cada caracteristica en caracteristicas
+    decir "  • " + caracteristica
+terminar
+
+# Definir la estructura principal de la app
+tipo de cosa llamada MiApp
+    guardar nombre
+    guardar usuario_actual
+    guardar configuracion
+terminar
+
+# Función para inicializar la app
+hacer inicializar_app con nombre_app
+    nueva_app = MiApp()
+    nueva_app.nombre = nombre_app
+    nueva_app.usuario_actual = nombre_usuario
+    nueva_app.configuracion = "predeterminada"
+    
+    decir "🚀 App inicializada:"
+    decir "  Nombre: " + nueva_app.nombre
+    decir "  Usuario: " + nueva_app.usuario_actual
+    
+    devolver nueva_app
+terminar
+
+# Función para simular funcionalidades iOS
+hacer mostrar_funcionalidades_ios
+    decir ""
+    decir "📱 Funcionalidades iOS disponibles:"
+    decir "  🎨 Interfaz nativa con SwiftUI"
+    decir "  📊 Core Data para almacenamiento"
+    decir "  📍 Core Location para GPS"
+    decir "  📷 Cámara y galería de fotos"
+    decir "  🔔 Notificaciones locales y push"
+    decir "  ☁️ Integración con iCloud"
+    decir "  💳 In-App Purchases"
+    decir "  🔐 Touch ID / Face ID"
+terminar
+
+# Función para mostrar el potencial económico
+hacer mostrar_potencial_economico
+    decir ""
+    decir "💰 Potencial económico de tu app iOS:"
+    decir "  📈 App Store: $86 mil millones anuales"
+    decir "  💵 Apps iOS: 2x más ingresos que Android"
+    decir "  🎯 Usuarios premium dispuestos a pagar"
+    decir "  🌍 Mercado global de 1.8 mil millones de dispositivos"
+    decir ""
+    decir "💡 Modelos de monetización:"
+    decir "  • App de pago ($0.99 - $9.99)"
+    decir "  • Freemium con compras in-app"
+    decir "  • Suscripciones mensuales/anuales"
+    decir "  • Publicidad integrada"
+terminar
+
+# Función principal
+hacer main
+    decir "🍎 Desarrollo iOS Democratizado con Vader"
+    decir "========================================"
+    decir ""
+    
+    # Inicializar la app
+    mi_app = inicializar_app(titulo_app)
+    
+    # Mostrar funcionalidades
+    mostrar_funcionalidades_ios()
+    mostrar_potencial_economico()
+    
+    decir ""
+    decir "🎉 ¡Tu primera app iOS está lista para desarrollar!"
+    decir "🌟 Con Vader + Swift puedes crear:"
+    decir "  • Apps de productividad"
+    decir "  • Juegos casuales"
+    decir "  • Apps de salud y fitness"
+    decir "  • Herramientas de negocio"
+    decir "  • Apps educativas"
+    decir "  • Redes sociales"
+    
+    decir ""
+    decir "🚀 ¡El futuro del desarrollo iOS es en español natural!"
+terminar
+
+llamar main

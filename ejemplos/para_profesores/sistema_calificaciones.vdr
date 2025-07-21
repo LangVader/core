@@ -1,0 +1,356 @@
+# 🎓 Sistema de Calificaciones para Profesores
+# Herramienta simple para manejar notas y promedios de estudiantes
+
+mostrar "🎓 ¡Bienvenido al Sistema de Calificaciones!"
+mostrar "Administra las notas de tus estudiantes de forma fácil y eficiente"
+
+# Base de datos de estudiantes
+diccionario estudiantes = {}
+
+# Función para mostrar menú
+funcion mostrar_menu()
+    mostrar "\n=== SISTEMA DE CALIFICACIONES ==="
+    mostrar "1. 👤 Agregar estudiante nuevo"
+    mostrar "2. 📝 Registrar calificación"
+    mostrar "3. 📊 Ver notas de un estudiante"
+    mostrar "4. 📋 Ver todos los estudiantes"
+    mostrar "5. 📈 Calcular promedios del curso"
+    mostrar "6. 🏆 Mejores estudiantes"
+    mostrar "7. ⚠️ Estudiantes en riesgo"
+    mostrar "8. 📊 Estadísticas del curso"
+    mostrar "9. 🚪 Salir"
+    mostrar "¿Qué quieres hacer? (1-9):"
+fin funcion
+
+# Función para agregar estudiante
+funcion agregar_estudiante()
+    mostrar "\n👤 AGREGAR ESTUDIANTE NUEVO"
+    mostrar "Nombre completo del estudiante:"
+    leer nombre
+    
+    si nombre en estudiantes
+        mostrar "⚠️ Este estudiante ya está registrado"
+        retornar
+    fin si
+    
+    mostrar "Número de identificación (opcional):"
+    leer id_estudiante
+    
+    estudiantes[nombre] = {
+        "id": id_estudiante,
+        "calificaciones": [],
+        "materias": {}
+    }
+    
+    mostrar "✅ Estudiante " + nombre + " agregado exitosamente"
+fin funcion
+
+# Función para registrar calificación
+funcion registrar_calificacion()
+    mostrar "\n📝 REGISTRAR CALIFICACIÓN"
+    
+    si len(estudiantes) == 0
+        mostrar "❌ No hay estudiantes registrados"
+        retornar
+    fin si
+    
+    mostrar "Estudiantes disponibles:"
+    repetir nombre en estudiantes.keys()
+        mostrar "  • " + nombre
+    fin repetir
+    
+    mostrar "¿A qué estudiante le quieres poner nota?"
+    leer nombre_estudiante
+    
+    si nombre_estudiante no en estudiantes
+        mostrar "❌ Estudiante no encontrado"
+        retornar
+    fin si
+    
+    mostrar "¿Qué materia o examen es?"
+    leer materia
+    
+    mostrar "¿Qué calificación obtuvo? (0-100)"
+    leer calificacion
+    calificacion = float(calificacion)
+    
+    si calificacion < 0 o calificacion > 100
+        mostrar "❌ La calificación debe estar entre 0 y 100"
+        retornar
+    fin si
+    
+    # Registrar calificación
+    estudiantes[nombre_estudiante]["calificaciones"].append(calificacion)
+    
+    si materia no en estudiantes[nombre_estudiante]["materias"]
+        estudiantes[nombre_estudiante]["materias"][materia] = []
+    fin si
+    
+    estudiantes[nombre_estudiante]["materias"][materia].append(calificacion)
+    
+    # Determinar el nivel de la calificación
+    si calificacion >= 90
+        nivel = "🏆 Excelente"
+    sino si calificacion >= 80
+        nivel = "😊 Muy Bueno"
+    sino si calificacion >= 70
+        nivel = "👍 Bueno"
+    sino si calificacion >= 60
+        nivel = "😐 Regular"
+    sino
+        nivel = "😟 Necesita Mejorar"
+    fin si
+    
+    mostrar "✅ Calificación registrada: " + str(calificacion) + " - " + nivel
+fin funcion
+
+# Función para calcular promedio de un estudiante
+funcion calcular_promedio_estudiante(nombre)
+    calificaciones = estudiantes[nombre]["calificaciones"]
+    si len(calificaciones) == 0
+        retornar 0
+    fin si
+    
+    suma = 0
+    repetir nota en calificaciones
+        suma += nota
+    fin repetir
+    
+    retornar suma / len(calificaciones)
+fin funcion
+
+# Función para ver notas de un estudiante
+funcion ver_notas_estudiante()
+    mostrar "\n📊 VER NOTAS DE ESTUDIANTE"
+    
+    si len(estudiantes) == 0
+        mostrar "❌ No hay estudiantes registrados"
+        retornar
+    fin si
+    
+    mostrar "¿De qué estudiante quieres ver las notas?"
+    leer nombre
+    
+    si nombre no en estudiantes
+        mostrar "❌ Estudiante no encontrado"
+        retornar
+    fin si
+    
+    datos = estudiantes[nombre]
+    mostrar "\n📋 REPORTE DE: " + nombre
+    
+    si datos["id"] != ""
+        mostrar "🆔 ID: " + datos["id"]
+    fin si
+    
+    si len(datos["calificaciones"]) == 0
+        mostrar "📭 No tiene calificaciones registradas"
+        retornar
+    fin si
+    
+    promedio = llamar calcular_promedio_estudiante(nombre)
+    mostrar "📊 Promedio general: " + str(round(promedio, 2))
+    
+    # Mostrar por materias
+    mostrar "\n📚 CALIFICACIONES POR MATERIA:"
+    repetir materia, notas en datos["materias"].items()
+        suma_materia = 0
+        repetir nota en notas
+            suma_materia += nota
+        fin repetir
+        promedio_materia = suma_materia / len(notas)
+        
+        mostrar "  📖 " + materia + ": " + str(round(promedio_materia, 2))
+        mostrar "    Notas: " + str(notas)
+    fin repetir
+    
+    # Evaluación general
+    si promedio >= 85
+        mostrar "🏆 ¡Estudiante destacado!"
+    sino si promedio >= 70
+        mostrar "👍 Buen rendimiento"
+    sino si promedio >= 60
+        mostrar "😐 Rendimiento regular"
+    sino
+        mostrar "⚠️ Necesita apoyo adicional"
+    fin si
+fin funcion
+
+# Función para ver todos los estudiantes
+funcion ver_todos_estudiantes()
+    mostrar "\n📋 TODOS LOS ESTUDIANTES"
+    
+    si len(estudiantes) == 0
+        mostrar "📭 No hay estudiantes registrados"
+        retornar
+    fin si
+    
+    mostrar "=" * 60
+    repetir nombre, datos en estudiantes.items()
+        promedio = llamar calcular_promedio_estudiante(nombre)
+        total_notas = len(datos["calificaciones"])
+        
+        mostrar "👤 " + nombre
+        si datos["id"] != ""
+            mostrar "   🆔 ID: " + datos["id"]
+        fin si
+        mostrar "   📊 Promedio: " + str(round(promedio, 2))
+        mostrar "   📝 Total de notas: " + str(total_notas)
+        
+        si promedio >= 85
+            mostrar "   🏆 Destacado"
+        sino si promedio < 60 y total_notas > 0
+            mostrar "   ⚠️ En riesgo"
+        fin si
+        
+        mostrar "   " + "-" * 30
+    fin repetir
+fin funcion
+
+# Función para mejores estudiantes
+funcion mejores_estudiantes()
+    mostrar "\n🏆 MEJORES ESTUDIANTES"
+    
+    si len(estudiantes) == 0
+        mostrar "❌ No hay estudiantes registrados"
+        retornar
+    fin si
+    
+    # Crear lista de estudiantes con promedios
+    lista ranking = []
+    repetir nombre en estudiantes.keys()
+        promedio = llamar calcular_promedio_estudiante(nombre)
+        si promedio > 0  # Solo incluir estudiantes con notas
+            ranking.append([promedio, nombre])
+        fin si
+    fin repetir
+    
+    si len(ranking) == 0
+        mostrar "📭 No hay estudiantes con calificaciones"
+        retornar
+    fin si
+    
+    # Ordenar por promedio (simulación de sort)
+    # Para simplicidad, mostramos todos y destacamos los mejores
+    mejor_promedio = 0
+    mejor_estudiante = ""
+    
+    repetir promedio, nombre en ranking
+        si promedio > mejor_promedio
+            mejor_promedio = promedio
+            mejor_estudiante = nombre
+        fin si
+    fin repetir
+    
+    mostrar "🥇 MEJOR ESTUDIANTE: " + mejor_estudiante
+    mostrar "   📊 Promedio: " + str(round(mejor_promedio, 2))
+    
+    mostrar "\n🌟 TODOS LOS PROMEDIOS:"
+    repetir promedio, nombre en ranking
+        si promedio >= 90
+            emoji = "🥇"
+        sino si promedio >= 85
+            emoji = "🥈"
+        sino si promedio >= 80
+            emoji = "🥉"
+        sino
+            emoji = "📊"
+        fin si
+        
+        mostrar emoji + " " + nombre + ": " + str(round(promedio, 2))
+    fin repetir
+fin funcion
+
+# Función para estudiantes en riesgo
+funcion estudiantes_en_riesgo()
+    mostrar "\n⚠️ ESTUDIANTES EN RIESGO"
+    
+    encontrados = False
+    repetir nombre en estudiantes.keys()
+        promedio = llamar calcular_promedio_estudiante(nombre)
+        si promedio > 0 y promedio < 60
+            si no encontrados
+                mostrar "🚨 Estos estudiantes necesitan apoyo:"
+                encontrados = True
+            fin si
+            mostrar "   📉 " + nombre + ": " + str(round(promedio, 2))
+        fin si
+    fin repetir
+    
+    si no encontrados
+        mostrar "✅ No hay estudiantes en riesgo académico"
+    fin si
+fin funcion
+
+# Función para estadísticas del curso
+funcion estadisticas_curso()
+    mostrar "\n📊 ESTADÍSTICAS DEL CURSO"
+    
+    si len(estudiantes) == 0
+        mostrar "❌ No hay estudiantes registrados"
+        retornar
+    fin si
+    
+    total_estudiantes = len(estudiantes)
+    estudiantes_con_notas = 0
+    suma_promedios = 0
+    
+    repetir nombre en estudiantes.keys()
+        promedio = llamar calcular_promedio_estudiante(nombre)
+        si promedio > 0
+            estudiantes_con_notas += 1
+            suma_promedios += promedio
+        fin si
+    fin repetir
+    
+    mostrar "👥 Total de estudiantes: " + str(total_estudiantes)
+    mostrar "📝 Estudiantes con notas: " + str(estudiantes_con_notas)
+    
+    si estudiantes_con_notas > 0
+        promedio_curso = suma_promedios / estudiantes_con_notas
+        mostrar "📊 Promedio del curso: " + str(round(promedio_curso, 2))
+        
+        si promedio_curso >= 85
+            mostrar "🏆 ¡Excelente rendimiento del curso!"
+        sino si promedio_curso >= 75
+            mostrar "👍 Buen rendimiento general"
+        sino si promedio_curso >= 65
+            mostrar "😐 Rendimiento regular"
+        sino
+            mostrar "⚠️ El curso necesita refuerzo"
+        fin si
+    fin si
+fin funcion
+
+# Programa principal
+repetir mientras True
+    llamar mostrar_menu()
+    leer opcion
+    
+    si opcion == "1"
+        llamar agregar_estudiante()
+    sino si opcion == "2"
+        llamar registrar_calificacion()
+    sino si opcion == "3"
+        llamar ver_notas_estudiante()
+    sino si opcion == "4"
+        llamar ver_todos_estudiantes()
+    sino si opcion == "5"
+        llamar estadisticas_curso()
+    sino si opcion == "6"
+        llamar mejores_estudiantes()
+    sino si opcion == "7"
+        llamar estudiantes_en_riesgo()
+    sino si opcion == "8"
+        llamar estadisticas_curso()
+    sino si opcion == "9"
+        mostrar "🎓 ¡Gracias por usar el Sistema de Calificaciones!"
+        mostrar "📚 ¡Que tengas éxito en tu labor educativa!"
+        romper
+    sino
+        mostrar "❌ Opción no válida. Intenta de nuevo"
+    fin si
+    
+    mostrar "\nPresiona Enter para continuar..."
+    leer pausa
+fin repetir

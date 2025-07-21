@@ -1,0 +1,27 @@
+# 🐹 Ejemplo Simple en Go
+# Probando la sintaxis súper natural
+
+decir "¡Hola desde Go!"
+
+preguntar "¿Cómo te llamas? "
+guardar la respuesta en nombre
+
+decir "¡Hola " + nombre + "!"
+
+edad = 25
+decir "Tengo " + edad + " años"
+
+mis_lenguajes = ["Python", "JavaScript", "Java", "C#", "Go"]
+
+decir "Lenguajes que soporta Vader:"
+repetir con cada lenguaje en mis_lenguajes
+    decir "- " + lenguaje
+terminar
+
+si edad es mayor que 18
+    decir "Soy adulto"
+si no
+    decir "Soy joven"
+terminar
+
+decir "¡Go es increíble para APIs y microservicios!"

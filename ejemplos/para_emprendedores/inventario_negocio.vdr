@@ -1,0 +1,264 @@
+# 📦 Sistema de Inventario para Tu Negocio
+# Perfecto para pequeños emprendedores que quieren controlar su stock
+
+mostrar "📦 ¡Bienvenido al Sistema de Inventario de tu Negocio!"
+mostrar "Controla tus productos, ventas y ganancias de forma simple"
+
+# Base de datos del inventario
+diccionario inventario = {}
+lista historial_ventas = []
+
+# Función para mostrar el menú principal
+funcion mostrar_menu()
+    mostrar "\n=== SISTEMA DE INVENTARIO ==="
+    mostrar "1. 📦 Agregar producto nuevo"
+    mostrar "2. 📋 Ver inventario completo"
+    mostrar "3. 🛒 Registrar venta"
+    mostrar "4. 📊 Ver reporte de ventas"
+    mostrar "5. ⚠️ Productos con poco stock"
+    mostrar "6. 💰 Calcular ganancias"
+    mostrar "7. 🔍 Buscar producto"
+    mostrar "8. ✏️ Actualizar producto"
+    mostrar "9. 🚪 Salir"
+    mostrar "¿Qué quieres hacer? (1-9):"
+fin funcion
+
+# Función para agregar productos
+funcion agregar_producto()
+    mostrar "\n📦 AGREGAR PRODUCTO NUEVO"
+    mostrar "Nombre del producto:"
+    leer nombre
+    
+    si nombre en inventario
+        mostrar "⚠️ Este producto ya existe. Usa 'Actualizar producto' para modificarlo"
+        retornar
+    fin si
+    
+    mostrar "Precio de compra (lo que te costó):"
+    leer precio_compra
+    precio_compra = float(precio_compra)
+    
+    mostrar "Precio de venta (lo que cobras):"
+    leer precio_venta
+    precio_venta = float(precio_venta)
+    
+    mostrar "Cantidad inicial en stock:"
+    leer cantidad
+    cantidad = int(cantidad)
+    
+    mostrar "Descripción (opcional):"
+    leer descripcion
+    
+    inventario[nombre] = {
+        "precio_compra": precio_compra,
+        "precio_venta": precio_venta,
+        "stock": cantidad,
+        "descripcion": descripcion,
+        "vendidos": 0
+    }
+    
+    ganancia_unitaria = precio_venta - precio_compra
+    mostrar "✅ Producto agregado exitosamente"
+    mostrar "💰 Ganancia por unidad: $" + str(ganancia_unitaria)
+fin funcion
+
+# Función para mostrar inventario
+funcion mostrar_inventario()
+    mostrar "\n📋 INVENTARIO COMPLETO"
+    
+    si len(inventario) == 0
+        mostrar "📭 No tienes productos en inventario"
+        retornar
+    fin si
+    
+    mostrar "=" * 80
+    repetir nombre, datos en inventario.items()
+        ganancia = datos["precio_venta"] - datos["precio_compra"]
+        mostrar "🏷️ " + nombre
+        mostrar "   💰 Precio venta: $" + str(datos["precio_venta"])
+        mostrar "   📦 Stock: " + str(datos["stock"]) + " unidades"
+        mostrar "   📈 Ganancia por unidad: $" + str(ganancia)
+        mostrar "   🛒 Vendidos: " + str(datos["vendidos"])
+        
+        si datos["descripcion"] != ""
+            mostrar "   📝 " + datos["descripcion"]
+        fin si
+        
+        si datos["stock"] <= 5
+            mostrar "   ⚠️ STOCK BAJO - ¡Considera reabastecer!"
+        fin si
+        
+        mostrar "   " + "-" * 40
+    fin repetir
+fin funcion
+
+# Función para registrar ventas
+funcion registrar_venta()
+    mostrar "\n🛒 REGISTRAR VENTA"
+    
+    si len(inventario) == 0
+        mostrar "❌ No tienes productos para vender"
+        retornar
+    fin si
+    
+    mostrar "¿Qué producto vendiste?"
+    leer producto
+    
+    si producto no en inventario
+        mostrar "❌ Producto no encontrado en inventario"
+        retornar
+    fin si
+    
+    si inventario[producto]["stock"] == 0
+        mostrar "❌ No hay stock de este producto"
+        retornar
+    fin si
+    
+    mostrar "Stock disponible: " + str(inventario[producto]["stock"])
+    mostrar "¿Cuántas unidades vendiste?"
+    leer cantidad
+    cantidad = int(cantidad)
+    
+    si cantidad > inventario[producto]["stock"]
+        mostrar "❌ No tienes suficiente stock"
+        retornar
+    fin si
+    
+    # Actualizar inventario
+    inventario[producto]["stock"] -= cantidad
+    inventario[producto]["vendidos"] += cantidad
+    
+    # Calcular venta
+    precio_unitario = inventario[producto]["precio_venta"]
+    total_venta = precio_unitario * cantidad
+    ganancia_unitaria = inventario[producto]["precio_venta"] - inventario[producto]["precio_compra"]
+    ganancia_total = ganancia_unitaria * cantidad
+    
+    # Registrar en historial
+    venta = {
+        "producto": producto,
+        "cantidad": cantidad,
+        "precio_unitario": precio_unitario,
+        "total": total_venta,
+        "ganancia": ganancia_total
+    }
+    historial_ventas.append(venta)
+    
+    mostrar "✅ Venta registrada exitosamente"
+    mostrar "💰 Total de la venta: $" + str(total_venta)
+    mostrar "📈 Ganancia obtenida: $" + str(ganancia_total)
+    mostrar "📦 Stock restante: " + str(inventario[producto]["stock"])
+fin funcion
+
+# Función para reporte de ventas
+funcion reporte_ventas()
+    mostrar "\n📊 REPORTE DE VENTAS"
+    
+    si len(historial_ventas) == 0
+        mostrar "📭 No has registrado ventas aún"
+        retornar
+    fin si
+    
+    total_vendido = 0
+    total_ganancia = 0
+    
+    mostrar "=" * 60
+    repetir venta en historial_ventas
+        mostrar "🛒 " + venta["producto"] + " x" + str(venta["cantidad"])
+        mostrar "   💰 Total: $" + str(venta["total"])
+        mostrar "   📈 Ganancia: $" + str(venta["ganancia"])
+        mostrar "   " + "-" * 30
+        
+        total_vendido += venta["total"]
+        total_ganancia += venta["ganancia"]
+    fin repetir
+    
+    mostrar "=" * 60
+    mostrar "💰 TOTAL VENDIDO: $" + str(total_vendido)
+    mostrar "📈 GANANCIA TOTAL: $" + str(total_ganancia)
+    
+    si total_vendido > 0
+        porcentaje_ganancia = (total_ganancia / total_vendido) * 100
+        mostrar "📊 Margen de ganancia: " + str(round(porcentaje_ganancia, 1)) + "%"
+    fin si
+fin funcion
+
+# Función para productos con poco stock
+funcion productos_stock_bajo()
+    mostrar "\n⚠️ PRODUCTOS CON POCO STOCK"
+    
+    productos_bajos = []
+    repetir nombre, datos en inventario.items()
+        si datos["stock"] <= 5
+            productos_bajos.append(nombre)
+        fin si
+    fin repetir
+    
+    si len(productos_bajos) == 0
+        mostrar "✅ Todos los productos tienen stock suficiente"
+    sino
+        mostrar "🚨 Estos productos necesitan reabastecimiento:"
+        repetir producto en productos_bajos
+            stock = inventario[producto]["stock"]
+            mostrar "   📦 " + producto + ": " + str(stock) + " unidades"
+        fin repetir
+    fin si
+fin funcion
+
+# Función para buscar productos
+funcion buscar_producto()
+    mostrar "\n🔍 BUSCAR PRODUCTO"
+    mostrar "Escribe el nombre (o parte del nombre):"
+    leer termino
+    termino = termino.lower()
+    
+    encontrados = []
+    repetir nombre, datos en inventario.items()
+        si termino en nombre.lower()
+            encontrados.append(nombre)
+        fin si
+    fin repetir
+    
+    si len(encontrados) == 0
+        mostrar "❌ No se encontraron productos"
+    sino
+        mostrar "🎯 Productos encontrados:"
+        repetir producto en encontrados
+            datos = inventario[producto]
+            mostrar "   🏷️ " + producto + " - Stock: " + str(datos["stock"]) + " - Precio: $" + str(datos["precio_venta"])
+        fin repetir
+    fin si
+fin funcion
+
+# Programa principal
+repetir mientras True
+    llamar mostrar_menu()
+    leer opcion
+    
+    si opcion == "1"
+        llamar agregar_producto()
+    sino si opcion == "2"
+        llamar mostrar_inventario()
+    sino si opcion == "3"
+        llamar registrar_venta()
+    sino si opcion == "4"
+        llamar reporte_ventas()
+    sino si opcion == "5"
+        llamar productos_stock_bajo()
+    sino si opcion == "6"
+        llamar reporte_ventas()  # Las ganancias se muestran en el reporte
+    sino si opcion == "7"
+        llamar buscar_producto()
+    sino si opcion == "8"
+        mostrar "💡 Función 'Actualizar producto' disponible en próxima versión"
+    sino si opcion == "9"
+        mostrar "📦 ¡Gracias por usar tu Sistema de Inventario!"
+        mostrar "💼 ¡Que tengas muchas ventas exitosas!"
+        romper
+    sino
+        mostrar "❌ Opción no válida. Intenta de nuevo"
+    fin si
+    
+    mostrar "\nPresiona Enter para continuar..."
+    leer pausa
+fin repetir

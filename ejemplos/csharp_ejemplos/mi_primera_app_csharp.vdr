@@ -1,0 +1,190 @@
+# 🖥️ Mi Primera Aplicación de Escritorio con C# y Vader
+# Ejemplo que demuestra cómo crear aplicaciones Windows usando Vader
+
+clase GestorTareas
+    # Constructor de la aplicación
+    metodo __init__(self, nombre_app)
+        self.nombre = nombre_app
+        self.tareas = []
+        self.completadas = []
+        mostrar "✅ Aplicación " + self.nombre + " iniciada"
+        mostrar "🖥️ Aplicación de escritorio C# generada desde Vader"
+    fin metodo
+    
+    # Método para agregar tareas
+    metodo agregar_tarea(self, descripcion, prioridad)
+        diccionario tarea = {
+            "id": len(self.tareas) + 1,
+            "descripcion": descripcion,
+            "prioridad": prioridad,
+            "fecha_creacion": "Hoy",
+            "completada": False
+        }
+        self.tareas.append(tarea)
+        mostrar "📝 Tarea agregada: " + descripcion + " (Prioridad: " + prioridad + ")"
+    fin metodo
+    
+    # Método para mostrar todas las tareas
+    metodo mostrar_tareas(self)
+        si len(self.tareas) == 0
+            mostrar "📭 No hay tareas pendientes"
+        sino
+            mostrar "📋 Lista de tareas pendientes:"
+            repetir tarea en self.tareas
+                si no tarea["completada"]
+                    estado = "⏳ Pendiente"
+                    si tarea["prioridad"] == "Alta"
+                        estado = "🔴 URGENTE"
+                    sino si tarea["prioridad"] == "Media"
+                        estado = "🟡 Normal"
+                    sino
+                        estado = "🟢 Baja"
+                    fin si
+                    mostrar "  " + str(tarea["id"]) + ". " + tarea["descripcion"] + " - " + estado
+                fin si
+            fin repetir
+        fin si
+    fin metodo
+    
+    # Método para completar tarea
+    metodo completar_tarea(self, id_tarea)
+        repetir tarea en self.tareas
+            si tarea["id"] == id_tarea y no tarea["completada"]
+                tarea["completada"] = True
+                self.completadas.append(tarea)
+                mostrar "✅ Tarea completada: " + tarea["descripcion"]
+                retornar True
+            fin si
+        fin repetir
+        mostrar "❌ Tarea no encontrada o ya completada"
+        retornar False
+    fin metodo
+    
+    # Método para mostrar estadísticas
+    metodo mostrar_estadisticas(self)
+        total = len(self.tareas)
+        completadas = len(self.completadas)
+        pendientes = total - completadas
+        
+        mostrar "📊 ESTADÍSTICAS DE PRODUCTIVIDAD"
+        mostrar "  📝 Total de tareas: " + str(total)
+        mostrar "  ✅ Completadas: " + str(completadas)
+        mostrar "  ⏳ Pendientes: " + str(pendientes)
+        
+        si total > 0
+            porcentaje = (completadas * 100) / total
+            mostrar "  📈 Progreso: " + str(int(porcentaje)) + "%"
+            
+            si porcentaje >= 80
+                mostrar "  🏆 ¡Excelente productividad!"
+            sino si porcentaje >= 50
+                mostrar "  👍 Buen progreso"
+            sino
+                mostrar "  💪 ¡Sigue adelante!"
+            fin si
+        fin si
+    fin metodo
+    
+    # Método para filtrar tareas por prioridad
+    metodo filtrar_por_prioridad(self, prioridad)
+        mostrar "🔍 Tareas con prioridad " + prioridad + ":"
+        encontradas = 0
+        
+        repetir tarea en self.tareas
+            si tarea["prioridad"] == prioridad y no tarea["completada"]
+                mostrar "  • " + tarea["descripcion"]
+                encontradas = encontradas + 1
+            fin si
+        fin repetir
+        
+        si encontradas == 0
+            mostrar "  📭 No hay tareas con esa prioridad"
+        fin si
+    fin metodo
+    
+    # Método principal de la aplicación
+    metodo ejecutar(self)
+        mostrar "🚀 Bienvenido a " + self.nombre
+        mostrar "Esta aplicación demuestra C# generado desde Vader"
+        mostrar "Perfecta para aplicaciones de escritorio Windows"
+        
+        repetir mientras True
+            mostrar "\n=== GESTOR DE TAREAS C# ==="
+            mostrar "1. 📝 Agregar tarea"
+            mostrar "2. 📋 Ver tareas pendientes"
+            mostrar "3. ✅ Completar tarea"
+            mostrar "4. 📊 Ver estadísticas"
+            mostrar "5. 🔍 Filtrar por prioridad"
+            mostrar "6. 🏆 Ver tareas completadas"
+            mostrar "7. 🚪 Salir"
+            mostrar "Elige una opción (1-7):"
+            
+            leer opcion
+            
+            si opcion == "1"
+                mostrar "Descripción de la tarea:"
+                leer descripcion
+                mostrar "Prioridad (Alta/Media/Baja):"
+                leer prioridad
+                llamar self.agregar_tarea(descripcion, prioridad)
+                
+            sino si opcion == "2"
+                llamar self.mostrar_tareas()
+                
+            sino si opcion == "3"
+                llamar self.mostrar_tareas()
+                mostrar "ID de la tarea a completar:"
+                leer id_str
+                id_tarea = int(id_str)
+                llamar self.completar_tarea(id_tarea)
+                
+            sino si opcion == "4"
+                llamar self.mostrar_estadisticas()
+                
+            sino si opcion == "5"
+                mostrar "Prioridad a filtrar (Alta/Media/Baja):"
+                leer prioridad_filtro
+                llamar self.filtrar_por_prioridad(prioridad_filtro)
+                
+            sino si opcion == "6"
+                si len(self.completadas) == 0
+                    mostrar "📭 No hay tareas completadas aún"
+                sino
+                    mostrar "🏆 Tareas completadas:"
+                    repetir tarea en self.completadas
+                        mostrar "  ✅ " + tarea["descripcion"]
+                    fin repetir
+                fin si
+                
+            sino si opcion == "7"
+                mostrar "🖥️ ¡Gracias por usar " + self.nombre + "!"
+                mostrar "💻 Aplicación C# generada con Vader"
+                romper
+                
+            sino
+                mostrar "❌ Opción no válida. Intenta de nuevo."
+            fin si
+        fin repetir
+    fin metodo
+fin clase
+
+# Función principal - punto de entrada de la aplicación C#
+funcion Main()
+    mostrar "🎉 ¡Bienvenido a tu primera aplicación C# con Vader!"
+    mostrar "🖥️ Esta aplicación se ejecuta nativamente en Windows"
+    
+    # Crear instancia de la aplicación
+    crear app como GestorTareas("Gestor de Tareas Pro")
+    
+    # Agregar algunas tareas de ejemplo
+    llamar app.agregar_tarea("Revisar emails", "Alta")
+    llamar app.agregar_tarea("Preparar presentación", "Alta")
+    llamar app.agregar_tarea("Llamar al cliente", "Media")
+    llamar app.agregar_tarea("Organizar escritorio", "Baja")
+    
+    # Ejecutar la aplicación
+    llamar app.ejecutar()
+fin funcion
+
+# Ejecutar el programa
+llamar Main()

@@ -1,0 +1,88 @@
+# 🔗 Blockchain Simple en Rust con Vader
+# ¡Crear criptomonedas nunca fue tan fácil!
+
+decir "🔗 Creando mi primera blockchain en Rust"
+decir "Programación de sistemas avanzados en español natural"
+
+# Definir un bloque de blockchain
+tipo de cosa llamada Bloque
+    guardar indice
+    guardar datos
+    guardar hash_anterior
+    guardar timestamp
+terminar
+
+# Función para crear un nuevo bloque
+hacer crear_bloque con indice y datos y hash_anterior
+    nuevo_bloque = Bloque::new()
+    nuevo_bloque.indice = indice
+    nuevo_bloque.datos = datos
+    nuevo_bloque.hash_anterior = hash_anterior
+    nuevo_bloque.timestamp = "2024-01-01"
+    
+    decir "✅ Bloque creado:"
+    decir "  Índice: " + indice
+    decir "  Datos: " + datos
+    decir "  Hash anterior: " + hash_anterior
+    
+    devolver nuevo_bloque
+terminar
+
+# Función para validar la blockchain
+hacer validar_blockchain
+    decir "🔍 Validando integridad de la blockchain..."
+    
+    repetir 3 veces
+        decir "  ✓ Verificando bloque..."
+    terminar
+    
+    decir "✅ Blockchain válida y segura"
+terminar
+
+# Función principal de la blockchain
+hacer iniciar_blockchain
+    decir "🚀 Iniciando blockchain personal"
+    
+    # Crear bloque génesis
+    bloque_genesis = crear_bloque("0", "Bloque Génesis", "0")
+    
+    # Crear más bloques
+    bloque_1 = crear_bloque("1", "Primera transacción", "hash_genesis")
+    bloque_2 = crear_bloque("2", "Segunda transacción", "hash_1")
+    
+    decir ""
+    decir "📊 Estado de la blockchain:"
+    decir "  Total de bloques: 3"
+    decir "  Estado: Activa y segura"
+    
+    # Validar toda la cadena
+    llamar validar_blockchain
+terminar
+
+# Función para mostrar estadísticas
+hacer mostrar_estadisticas
+    decir ""
+    decir "📈 Estadísticas de la blockchain:"
+    decir "  🔗 Bloques minados: 3"
+    decir "  ⚡ Velocidad: Ultra-rápida (Rust)"
+    decir "  🛡️ Seguridad: Máxima (Rust)"
+    decir "  🌍 Lenguaje: Español natural (Vader)"
+terminar
+
+# Ejecutar la blockchain
+decir "🦀 Blockchain en Rust con Vader - ¡Revolución tecnológica!"
+decir ""
+
+llamar iniciar_blockchain
+llamar mostrar_estadisticas
+
+decir ""
+decir "🎉 ¡Felicidades! Has creado tu primera blockchain"
+decir "🌟 Con Vader + Rust puedes crear:"
+decir "  • Criptomonedas personales"
+decir "  • Contratos inteligentes"
+decir "  • Sistemas de votación seguros"
+decir "  • Aplicaciones descentralizadas"
+
+decir ""
+decir "🚀 ¡El futuro de la programación es en español natural!"

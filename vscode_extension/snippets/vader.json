@@ -1,0 +1,139 @@
+{
+  "Función básica": {
+    "prefix": "hacer",
+    "body": [
+      "hacer ${1:nombre_funcion}",
+      "    ${2:# código aquí}",
+      "terminar"
+    ],
+    "description": "Crear una función básica en Vader"
+  },
+  "Función con parámetros": {
+    "prefix": "hacer_con",
+    "body": [
+      "hacer ${1:nombre_funcion} con ${2:parametro}",
+      "    ${3:# código aquí}",
+      "terminar"
+    ],
+    "description": "Crear una función con parámetros en Vader"
+  },
+  "Clase básica": {
+    "prefix": "tipo",
+    "body": [
+      "tipo de cosa llamada ${1:NombreClase}",
+      "    guardar ${2:atributo}",
+      "    ",
+      "    hacer ${3:metodo}",
+      "        ${4:# código aquí}",
+      "    terminar",
+      "terminar"
+    ],
+    "description": "Crear una clase básica en Vader"
+  },
+  "Condicional": {
+    "prefix": "si",
+    "body": [
+      "si ${1:condicion}",
+      "    ${2:# código aquí}",
+      "terminar"
+    ],
+    "description": "Crear una estructura condicional"
+  },
+  "Condicional completa": {
+    "prefix": "si_completo",
+    "body": [
+      "si ${1:condicion}",
+      "    ${2:# código si verdadero}",
+      "si no",
+      "    ${3:# código si falso}",
+      "terminar"
+    ],
+    "description": "Crear una estructura condicional completa"
+  },
+  "Bucle repetir": {
+    "prefix": "repetir",
+    "body": [
+      "repetir ${1:numero} veces",
+      "    ${2:# código aquí}",
+      "terminar"
+    ],
+    "description": "Crear un bucle que repite un número específico de veces"
+  },
+  "Bucle para cada": {
+    "prefix": "repetir_cada",
+    "body": [
+      "repetir con cada ${1:elemento} en ${2:lista}",
+      "    ${3:# código aquí}",
+      "terminar"
+    ],
+    "description": "Crear un bucle para cada elemento"
+  },
+  "Mostrar mensaje": {
+    "prefix": "decir",
+    "body": [
+      "decir \"${1:mensaje}\""
+    ],
+    "description": "Mostrar un mensaje en pantalla"
+  },
+  "Preguntar al usuario": {
+    "prefix": "preguntar",
+    "body": [
+      "preguntar \"${1:pregunta}\" guardar la respuesta en ${2:variable}"
+    ],
+    "description": "Preguntar algo al usuario y guardar la respuesta"
+  },
+  "Programa básico": {
+    "prefix": "programa",
+    "body": [
+      "# ${1:Nombre del programa}",
+      "# ${2:Descripción del programa}",
+      "",
+      "decir \"¡Hola desde Vader!\"",
+      "",
+      "hacer main",
+      "    ${3:# código principal aquí}",
+      "terminar",
+      "",
+      "llamar main"
+    ],
+    "description": "Plantilla para un programa básico en Vader"
+  },
+  "Servidor web": {
+    "prefix": "servidor",
+    "body": [
+      "# Servidor web en ${1:lenguaje}",
+      "",
+      "hacer procesar_peticion con ruta",
+      "    si ruta es igual a \"/\"",
+      "        devolver \"¡Hola desde el servidor!\"",
+      "    si no",
+      "        devolver \"Página no encontrada\"",
+      "    terminar",
+      "terminar",
+      "",
+      "decir \"🚀 Servidor iniciado en puerto ${2:8080}\""
+    ],
+    "description": "Plantilla para un servidor web básico"
+  },
+  "Blockchain simple": {
+    "prefix": "blockchain",
+    "body": [
+      "# Blockchain simple en Vader",
+      "",
+      "tipo de cosa llamada Bloque",
+      "    guardar indice",
+      "    guardar datos",
+      "    guardar hash_anterior",
+      "terminar",
+      "",
+      "hacer crear_bloque con indice y datos",
+      "    nuevo_bloque = Bloque::new()",
+      "    nuevo_bloque.indice = indice",
+      "    nuevo_bloque.datos = datos",
+      "    decir \"✅ Bloque creado: \" + datos",
+      "    devolver nuevo_bloque",
+      "terminar"
+    ],
+    "description": "Plantilla para una blockchain simple"
+  }
+}

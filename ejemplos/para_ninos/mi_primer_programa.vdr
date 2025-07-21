@@ -1,0 +1,26 @@
+# 🎉 ¡Mi Primer Programa en Vader!
+# Este programa es tan fácil que hasta un niño de 8 años puede entenderlo
+
+# 1. Saluda al mundo
+mostrar "¡Hola mundo! Soy tu nueva computadora amiga"
+mostrar "Me llamo Vader y hablo español como tú"
+
+# 2. Pregunta tu nombre
+mostrar "¿Cómo te llamas?"
+leer mi_nombre
+
+# 3. Te saluda personalmente
+mostrar "¡Hola " + mi_nombre + "! Es un placer conocerte"
+mostrar "¿Sabías que acabas de programar? ¡Felicidades!"
+
+# 4. Un pequeño juego
+mostrar "Vamos a jugar. Piensa en un número del 1 al 10"
+mostrar "¿Ya lo pensaste? Presiona Enter"
+leer respuesta
+
+mostrar "¡Creo que pensaste en el número 7!"
+mostrar "¿Adiviné? (No importa si no, ¡estoy aprendiendo como tú!)"
+
+# 5. Despedida
+mostrar "Gracias por programar conmigo, " + mi_nombre
+mostrar "¡Eres increíble! Sigue practicando y serás un gran programador"
