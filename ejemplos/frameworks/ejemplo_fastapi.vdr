@@ -1,0 +1,235 @@
+# Ejemplo completo de FastAPI con Vader
+# API moderna para gestión de usuarios y productos
+
+api fastapi TiendaAPI
+    cors
+    documentacion "API moderna para tienda online con autenticación JWT"
+
+    # Modelo de usuario
+    modelo Usuario
+        atributo nombre: string
+        atributo email: string
+        atributo edad: numero
+        atributo activo: booleano
+
+    # Modelo de producto
+    modelo Producto
+        atributo nombre: string
+        atributo precio: decimal
+        atributo categoria: string
+        atributo stock: numero
+
+    # Autenticación JWT
+    jwt auth
+
+    # Ruta de bienvenida
+    ruta GET /
+        respuesta json {
+            mensaje: "¡Bienvenido a la API de Tienda con Vader!",
+            version: "2.0.0",
+            documentacion: "/docs",
+            endpoints: ["/usuarios", "/productos", "/auth/login"]
+        }
+    fin ruta
+
+    # Autenticación
+    ruta POST /auth/login
+        cuerpo peticion datos
+        validar email
+        validar password
+        
+        si datos.email == "admin@tienda.com" y datos.password == "123456"
+            token = "Bearer jwt-token-secreto"
+            respuesta json {
+                mensaje: "Login exitoso",
+                token: token,
+                usuario: {
+                    id: 1,
+                    email: datos.email,
+                    nombre: "Administrador"
+                }
+            }
+        sino
+            respuesta error 401 "Credenciales inválidas"
+        fin si
+    fin ruta
+
+    # Gestión de usuarios (requiere autenticación)
+    middleware auth
+        ruta GET /usuarios
+            usuarios = [
+                {id: 1, nombre: "Juan Pérez", email: "juan@ejemplo.com", edad: 30, activo: true},
+                {id: 2, nombre: "María García", email: "maria@ejemplo.com", edad: 25, activo: true},
+                {id: 3, nombre: "Carlos López", email: "carlos@ejemplo.com", edad: 35, activo: false}
+            ]
+            respuesta json {
+                usuarios: usuarios,
+                total: usuarios.length,
+                activos: usuarios.filter(u => u.activo).length
+            }
+        fin ruta
+
+        ruta GET /usuarios/:id
+            parametro id
+            validar id
+            
+            si id < 1 o id > 100
+                respuesta error 404 "Usuario no encontrado"
+            fin si
+            
+            usuario = {
+                id: id,
+                nombre: `Usuario ${id}`,
+                email: `usuario${id}@ejemplo.com`,
+                edad: 20 + (id % 50),
+                activo: true
+            }
+            respuesta json usuario
+        fin ruta
+
+        ruta POST /usuarios
+            cuerpo peticion Usuario
+            validar nombre
+            validar email
+            
+            nuevoUsuario = {
+                id: Date.now(),
+                nombre: datos.nombre,
+                email: datos.email,
+                edad: datos.edad || 18,
+                activo: true,
+                fechaCreacion: new Date().toISOString()
+            }
+            respuesta json nuevoUsuario status=201
+        fin ruta
+
+        ruta PUT /usuarios/:id
+            parametro id
+            cuerpo peticion datos
+            
+            usuarioActualizado = {
+                id: parseInt(id),
+                nombre: datos.nombre || `Usuario ${id}`,
+                email: datos.email || `usuario${id}@ejemplo.com`,
+                edad: datos.edad || 25,
+                activo: datos.activo !== undefined ? datos.activo : true,
+                fechaActualizacion: new Date().toISOString()
+            }
+            respuesta json usuarioActualizado
+        fin ruta
+
+        ruta DELETE /usuarios/:id
+            parametro id
+            respuesta json {
+                mensaje: `Usuario ${id} eliminado exitosamente`,
+                id: parseInt(id),
+                fecha: new Date().toISOString()
+            }
+        fin ruta
+    fin middleware
+
+    # Gestión de productos (público)
+    ruta GET /productos
+        categoria = query.categoria
+        limite = parseInt(query.limite) || 10
+        
+        productos = [
+            {id: 1, nombre: "Laptop Gaming", precio: 1200.99, categoria: "tecnologia", stock: 5},
+            {id: 2, nombre: "Mouse Inalámbrico", precio: 29.99, categoria: "tecnologia", stock: 50},
+            {id: 3, nombre: "Teclado Mecánico", precio: 89.99, categoria: "tecnologia", stock: 20},
+            {id: 4, nombre: "Monitor 4K", precio: 399.99, categoria: "tecnologia", stock: 8},
+            {id: 5, nombre: "Libro de Programación", precio: 45.00, categoria: "educacion", stock: 30}
+        ]
+        
+        resultado = productos
+        si categoria
+            resultado = productos.filter(p => p.categoria === categoria)
+        fin si
+        
+        resultado = resultado.slice(0, limite)
+        
+        respuesta json {
+            productos: resultado,
+            total: resultado.length,
+            filtros: {categoria, limite},
+            categorias: ["tecnologia", "educacion", "hogar", "deportes"]
+        }
+    fin ruta
+
+    ruta GET /productos/:id
+        parametro id
+        producto = productos.find(p => p.id === parseInt(id))
+        
+        si no producto
+            respuesta error 404 "Producto no encontrado"
+        fin si
+        
+        respuesta json {
+            producto: producto,
+            relacionados: productos.filter(p => p.categoria === producto.categoria && p.id !== producto.id).slice(0, 3)
+        }
+    fin ruta
+
+    ruta POST /productos
+        cuerpo peticion Producto
+        validar nombre
+        validar precio
+        validar categoria
+        
+        si datos.precio <= 0
+            respuesta error 400 "El precio debe ser mayor a 0"
+        fin si
+        
+        nuevoProducto = {
+            id: productos.length + 1,
+            nombre: datos.nombre,
+            precio: parseFloat(datos.precio),
+            categoria: datos.categoria,
+            stock: datos.stock || 0,
+            fechaCreacion: new Date().toISOString(),
+            activo: true
+        }
+        
+        respuesta json nuevoProducto status=201
+    fin ruta
+
+    # Estadísticas y reportes
+    ruta GET /estadisticas
+        respuesta json {
+            usuarios: {
+                total: 150,
+                activos: 120,
+                nuevos_hoy: 5
+            },
+            productos: {
+                total: 45,
+                en_stock: 38,
+                sin_stock: 7,
+                valor_inventario: 15750.50
+            },
+            ventas: {
+                hoy: 1250.00,
+                mes: 35600.00,
+                año: 425000.00
+            },
+            servidor: {
+                uptime: process.uptime(),
+                memoria: process.memoryUsage(),
+                timestamp: new Date().toISOString()
+            }
+        }
+    fin ruta
+
+    # Health check
+    ruta GET /salud
+        respuesta json {
+            estado: "ok",
+            servicio: "TiendaAPI",
+            version: "2.0.0",
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            base_datos: "conectada",
+            cache: "activo"
+        }
+    fin ruta
+fin api

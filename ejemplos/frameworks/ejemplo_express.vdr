@@ -1,0 +1,252 @@
+# Ejemplo de Express.js con Vader
+# Este archivo demuestra cómo crear una API REST usando sintaxis natural en español
+
+servidor express MiAPI
+    # Configuración del servidor
+    puerto 3000
+    usar cors
+    usar json
+    usar urlencoded
+    
+    # Middleware personalizado
+    middleware logger
+        consola log `${peticion.method} ${peticion.url} - ${new Date().toISOString()}`
+        siguiente
+    fin middleware
+    
+    # Middleware de autenticación
+    middleware auth
+        const token = peticion.headers.authorization
+        si no token
+            respuesta error 401 "Token requerido"
+        fin si
+        
+        # Verificar token (simulado)
+        si token !== "Bearer mi-token-secreto"
+            respuesta error 403 "Token inválido"
+        fin si
+        
+        siguiente
+    fin middleware
+    
+    # Rutas públicas
+    ruta GET /
+        respuesta json {
+            mensaje: "¡Bienvenido a mi API creada con Vader!",
+            version: "1.0.0",
+            endpoints: ["/usuarios", "/productos", "/auth"]
+        }
+    fin ruta
+    
+    ruta GET /salud
+        respuesta json {
+            estado: "ok",
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        }
+    fin ruta
+    
+    # Rutas de autenticación
+    ruta POST /auth/login
+        const {email, password} = cuerpo peticion
+        
+        # Validar datos
+        si no email o no password
+            respuesta error 400 "Email y contraseña requeridos"
+        fin si
+        
+        # Simular validación de usuario
+        si email === "admin@ejemplo.com" y password === "123456"
+            const token = "Bearer mi-token-secreto"
+            respuesta json {
+                mensaje: "Login exitoso",
+                token: token,
+                usuario: {
+                    id: 1,
+                    email: email,
+                    nombre: "Administrador"
+                }
+            }
+        sino
+            respuesta error 401 "Credenciales inválidas"
+        fin si
+    fin ruta
+    
+    # Rutas protegidas de usuarios
+    grupo rutas /usuarios con middleware auth
+        # Obtener todos los usuarios
+        ruta GET /
+            const usuarios = [
+                {id: 1, nombre: "Juan", email: "juan@ejemplo.com"},
+                {id: 2, nombre: "María", email: "maria@ejemplo.com"},
+                {id: 3, nombre: "Pedro", email: "pedro@ejemplo.com"}
+            ]
+            respuesta json usuarios
+        fin ruta
+        
+        # Obtener usuario por ID
+        ruta GET /:id
+            const id = parseInt(parametros peticion.id)
+            const usuario = {id: id, nombre: `Usuario ${id}`, email: `usuario${id}@ejemplo.com`}
+            
+            si id < 1 o id > 100
+                respuesta error 404 "Usuario no encontrado"
+            fin si
+            
+            respuesta json usuario
+        fin ruta
+        
+        # Crear nuevo usuario
+        ruta POST /
+            const {nombre, email} = cuerpo peticion
+            
+            # Validar datos
+            si no nombre o no email
+                respuesta error 400 "Nombre y email requeridos"
+            fin si
+            
+            # Simular creación
+            const nuevoUsuario = {
+                id: Date.now(),
+                nombre: nombre,
+                email: email,
+                fechaCreacion: new Date().toISOString()
+            }
+            
+            respuesta json nuevoUsuario status=201
+        fin ruta
+        
+        # Actualizar usuario
+        ruta PUT /:id
+            const id = parseInt(parametros peticion.id)
+            const {nombre, email} = cuerpo peticion
+            
+            const usuarioActualizado = {
+                id: id,
+                nombre: nombre || `Usuario ${id}`,
+                email: email || `usuario${id}@ejemplo.com`,
+                fechaActualizacion: new Date().toISOString()
+            }
+            
+            respuesta json usuarioActualizado
+        fin ruta
+        
+        # Eliminar usuario
+        ruta DELETE /:id
+            const id = parseInt(parametros peticion.id)
+            
+            respuesta json {
+                mensaje: `Usuario ${id} eliminado exitosamente`,
+                id: id
+            }
+        fin ruta
+    fin grupo
+    
+    # Rutas de productos
+    grupo rutas /productos
+        # Base de datos simulada
+        variable productos = [
+            {id: 1, nombre: "Laptop", precio: 1000, categoria: "tecnologia"},
+            {id: 2, nombre: "Mouse", precio: 25, categoria: "tecnologia"},
+            {id: 3, nombre: "Libro", precio: 15, categoria: "educacion"}
+        ]
+        
+        ruta GET /
+            const categoria = query peticion.categoria
+            const limite = parseInt(query peticion.limite) || 10
+            
+            variable resultado = productos
+            
+            si categoria
+                resultado = productos.filter(p => p.categoria === categoria)
+            fin si
+            
+            resultado = resultado.slice(0, limite)
+            
+            respuesta json {
+                productos: resultado,
+                total: resultado.length,
+                filtros: {categoria, limite}
+            }
+        fin ruta
+        
+        ruta GET /:id
+            const id = parseInt(parametros peticion.id)
+            const producto = productos.find(p => p.id === id)
+            
+            si no producto
+                respuesta error 404 "Producto no encontrado"
+            fin si
+            
+            respuesta json producto
+        fin ruta
+        
+        ruta POST / con middleware auth
+            const {nombre, precio, categoria} = cuerpo peticion
+            
+            # Validaciones
+            si no nombre o no precio o no categoria
+                respuesta error 400 "Nombre, precio y categoría requeridos"
+            fin si
+            
+            si precio <= 0
+                respuesta error 400 "El precio debe ser mayor a 0"
+            fin si
+            
+            const nuevoProducto = {
+                id: productos.length + 1,
+                nombre,
+                precio: parseFloat(precio),
+                categoria,
+                fechaCreacion: new Date().toISOString()
+            }
+            
+            productos.push(nuevoProducto)
+            respuesta json nuevoProducto status=201
+        fin ruta
+    fin grupo
+    
+    # Manejo de archivos
+    ruta POST /upload con middleware auth
+        si no archivos peticion.archivo
+            respuesta error 400 "No se proporcionó archivo"
+        fin si
+        
+        const archivo = archivos peticion.archivo
+        const rutaDestino = `./uploads/${archivo.name}`
+        
+        mover archivo a rutaDestino
+        
+        respuesta json {
+            mensaje: "Archivo subido exitosamente",
+            archivo: {
+                nombre: archivo.name,
+                tamaño: archivo.size,
+                tipo: archivo.mimetype,
+                ruta: rutaDestino
+            }
+        }
+    fin ruta
+    
+    # Manejo de errores global
+    manejar error
+        consola error error.stack
+        
+        si error.status
+            respuesta error error.status error.message
+        sino
+            respuesta error 500 "Error interno del servidor"
+        fin si
+    fin manejar
+    
+    # Iniciar servidor
+    iniciar servidor
+        consola log `🚀 Servidor iniciado en http://localhost:${puerto}`
+        consola log "📚 Endpoints disponibles:"
+        consola log "  GET  / - Información de la API"
+        consola log "  POST /auth/login - Iniciar sesión"
+        consola log "  GET  /usuarios - Listar usuarios (requiere auth)"
+        consola log "  GET  /productos - Listar productos"
+        consola log "  POST /upload - Subir archivo (requiere auth)"
+    fin iniciar
+fin servidor

@@ -1,0 +1,67 @@
+# Componente: Botón Moderno Reutilizable
+# Variables: {texto}, {color}, {tamaño}, {accion}
+
+boton clase="boton-moderno boton-{color} boton-{tamaño}" onClick="{accion}"
+    {texto}
+fin boton
+
+# Estilos del componente
+estilos
+    .boton-moderno
+        relleno "0.75rem 1.5rem"
+        borde "none"
+        border_radius "8px"
+        cursor "pointer"
+        fuente_peso "bold"
+        transicion "all 0.3s ease"
+        sombra "0 2px 4px rgba(0,0,0,0.1)"
+        
+        al_pasar_mouse
+            transformar "translateY(-2px)"
+            sombra "0 4px 8px rgba(0,0,0,0.2)"
+        fin al_pasar_mouse
+        
+        al_hacer_click
+            transformar "translateY(0)"
+        fin al_hacer_click
+    fin .boton-moderno
+    
+    # Variantes de color
+    .boton-azul
+        fondo_color "azul"
+        color "blanco"
+        
+        al_pasar_mouse
+            fondo_color "azul_oscuro"
+        fin al_pasar_mouse
+    fin .boton-azul
+    
+    .boton-verde
+        fondo_color "verde"
+        color "blanco"
+        
+        al_pasar_mouse
+            fondo_color "verde_oscuro"
+        fin al_pasar_mouse
+    fin .boton-verde
+    
+    .boton-rojo
+        fondo_color "rojo"
+        color "blanco"
+        
+        al_pasar_mouse
+            fondo_color "rojo_oscuro"
+        fin al_pasar_mouse
+    fin .boton-rojo
+    
+    # Variantes de tamaño
+    .boton-pequeño
+        relleno "0.5rem 1rem"
+        tamaño_fuente "0.875rem"
+    fin .boton-pequeño
+    
+    .boton-grande
+        relleno "1rem 2rem"
+        tamaño_fuente "1.125rem"
+    fin .boton-grande
+fin estilos

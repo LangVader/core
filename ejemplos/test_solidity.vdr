@@ -1,0 +1,64 @@
+# Ejemplo de Vader transpilado a Solidity (Smart Contract)
+contrato TokenSimple
+    # Variables de estado
+    atributo nombre tipo texto = "MiToken"
+    atributo simbolo tipo texto = "MTK"
+    atributo total_supply tipo numero = 1000000
+    
+    # Mapeo de balances
+    mapeo balances = direccion => numero
+    
+    # Evento para transferencias
+    evento Transferencia(desde: direccion indexado, hacia: direccion indexado, cantidad: numero)
+    
+    constructor(supply_inicial: numero)
+        total_supply = supply_inicial
+        balances[msg_sender] = supply_inicial
+    fin constructor
+    
+    funcion obtener_balance(cuenta: direccion) -> numero vista publica
+        retornar balances[cuenta]
+    fin funcion
+    
+    funcion transferir(hacia: direccion, cantidad: numero) -> booleano publica
+        requerir balances[msg_sender] >= cantidad mensaje "Saldo insuficiente"
+        requerir hacia != msg_sender mensaje "No puedes transferir a ti mismo"
+        
+        balances[msg_sender] = balances[msg_sender] - cantidad
+        balances[hacia] = balances[hacia] + cantidad
+        
+        emitir Transferencia(msg_sender, hacia, cantidad)
+        retornar true
+    fin funcion
+    
+    funcion mint(hacia: direccion, cantidad: numero) publica
+        requerir msg_sender == owner mensaje "Solo el owner puede crear tokens"
+        
+        total_supply = total_supply + cantidad
+        balances[hacia] = balances[hacia] + cantidad
+        
+        emitir Transferencia(address(0), hacia, cantidad)
+    fin funcion
+    
+    # Modificador para verificar ownership
+    modificador solo_owner
+        requerir msg_sender == owner mensaje "Solo el owner puede ejecutar esto"
+    fin modificador
+    
+    atributo owner tipo direccion privado
+    
+    funcion cambiar_owner(nuevo_owner: direccion) solo_owner publica
+        owner = nuevo_owner
+    fin funcion
+    
+    # Función payable para recibir Ether
+    funcion depositar() pagable publica
+        # Lógica para manejar depósitos
+        si msg_value > 0 ether
+            # Hacer algo con el Ether recibido
+            emitir Deposito(msg_sender, msg_value)
+        fin si
+    fin funcion
+    
+    evento Deposito(usuario: direccion indexado, cantidad: numero)
+fin contrato

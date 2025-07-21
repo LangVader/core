@@ -1,0 +1,405 @@
+# Ejemplo de Svelte con Vader
+# Este archivo demuestra cómo crear una aplicación Svelte usando sintaxis natural en español
+
+componente svelte TodoApp
+    script
+        # Variables reactivas
+        variable tareas = []
+        variable nuevaTarea = ""
+        variable filtro = "todas"
+        variable editando = null
+        variable textoEdicion = ""
+        
+        # Store para persistir datos
+        store tareasStore = []
+        
+        # Reactive statements
+        reactivo tareasCompletadas = tareas.filter(t => t.completada).length
+        reactivo tareasPendientes = tareas.filter(t => !t.completada).length
+        reactivo tareasFiltradas = {
+            if (filtro === "completadas") {
+                return tareas.filter(t => t.completada)
+            } else if (filtro === "pendientes") {
+                return tareas.filter(t => !t.completada)
+            }
+            return tareas
+        }
+        
+        # Lifecycle hooks
+        al montar
+            # Cargar tareas desde localStorage
+            const tareasGuardadas = localStorage.getItem('tareas')
+            si tareasGuardadas
+                tareas = JSON.parse(tareasGuardadas)
+            fin si
+        fin lifecycle
+        
+        # Watcher para guardar cambios
+        reactivo si tareas
+            localStorage.setItem('tareas', JSON.stringify(tareas))
+            tareasStore.set(tareas)
+        fin reactivo
+        
+        # Funciones
+        funcion agregarTarea()
+            si nuevaTarea.trim()
+                const tarea = {
+                    id: Date.now(),
+                    texto: nuevaTarea.trim(),
+                    completada: false,
+                    fechaCreacion: new Date()
+                }
+                tareas = [...tareas, tarea]
+                nuevaTarea = ""
+                
+                # Dispatch evento personalizado
+                despachar tareaAgregada tarea
+            fin si
+        fin funcion
+        
+        funcion eliminarTarea(id)
+            tareas = tareas.filter(t => t.id !== id)
+            despachar tareaEliminada id
+        fin funcion
+        
+        funcion toggleTarea(id)
+            tareas = tareas.map(t => 
+                t.id === id ? {...t, completada: !t.completada} : t
+            )
+        fin funcion
+        
+        funcion iniciarEdicion(tarea)
+            editando = tarea.id
+            textoEdicion = tarea.texto
+        fin funcion
+        
+        funcion guardarEdicion()
+            tareas = tareas.map(t => 
+                t.id === editando ? {...t, texto: textoEdicion} : t
+            )
+            editando = null
+            textoEdicion = ""
+        fin funcion
+        
+        funcion cancelarEdicion()
+            editando = null
+            textoEdicion = ""
+        fin funcion
+        
+        funcion limpiarCompletadas()
+            tareas = tareas.filter(t => !t.completada)
+        fin funcion
+        
+        funcion marcarTodasCompletadas()
+            const todasCompletadas = tareas.every(t => t.completada)
+            tareas = tareas.map(t => ({...t, completada: !todasCompletadas}))
+        fin funcion
+        
+        # Manejo de teclado
+        funcion manejarTecla(event)
+            si event.key === 'Enter'
+                agregarTarea()
+            fin si
+        fin funcion
+        
+        funcion manejarTeclaEdicion(event)
+            si event.key === 'Enter'
+                guardarEdicion()
+            sino si event.key === 'Escape'
+                cancelarEdicion()
+            fin si
+        fin funcion
+    fin script
+    
+    # Template
+    div clase="todo-app"
+        header clase="header"
+            titulo1 "Lista de Tareas Svelte"
+            div clase="input-container"
+                input 
+                    bind:value={nuevaTarea}
+                    on:keydown={manejarTecla}
+                    placeholder="¿Qué necesitas hacer?"
+                    clase="nueva-tarea"
+                boton on:click={agregarTarea} clase="btn-agregar"
+                    "Agregar"
+                fin boton
+            fin div
+        fin header
+        
+        main clase="main"
+            si tareas.length > 0
+                div clase="controles"
+                    div clase="filtros"
+                        boton 
+                            clase={filtro === 'todas' ? 'activo' : ''}
+                            on:click={() => filtro = 'todas'}
+                            "Todas ({tareas.length})"
+                        fin boton
+                        
+                        boton 
+                            clase={filtro === 'pendientes' ? 'activo' : ''}
+                            on:click={() => filtro = 'pendientes'}
+                            "Pendientes ({tareasPendientes})"
+                        fin boton
+                        
+                        boton 
+                            clase={filtro === 'completadas' ? 'activo' : ''}
+                            on:click={() => filtro = 'completadas'}
+                            "Completadas ({tareasCompletadas})"
+                        fin boton
+                    fin div
+                    
+                    div clase="acciones"
+                        si tareas.length > 0
+                            boton on:click={marcarTodasCompletadas} clase="btn-toggle-all"
+                                si tareas.every(t => t.completada)
+                                    "Desmarcar todas"
+                                sino
+                                    "Marcar todas"
+                                fin si
+                            fin boton
+                        fin si
+                        
+                        si tareasCompletadas > 0
+                            boton on:click={limpiarCompletadas} clase="btn-limpiar"
+                                "Limpiar completadas"
+                            fin boton
+                        fin si
+                    fin div
+                fin div
+                
+                ul clase="lista-tareas"
+                    para cada tarea en tareasFiltradas
+                        li 
+                            clase={tarea.completada ? 'completada' : ''}
+                            clave={tarea.id}
+                            
+                            div clase="tarea-item"
+                                input 
+                                    tipo="checkbox"
+                                    bind:checked={tarea.completada}
+                                    on:change={() => toggleTarea(tarea.id)}
+                                
+                                si editando === tarea.id
+                                    input 
+                                        bind:value={textoEdicion}
+                                        on:keydown={manejarTeclaEdicion}
+                                        on:blur={guardarEdicion}
+                                        clase="input-edicion"
+                                        autofocus
+                                sino
+                                    span 
+                                        clase="texto-tarea"
+                                        on:dblclick={() => iniciarEdicion(tarea)}
+                                        {tarea.texto}
+                                    fin span
+                                fin si
+                                
+                                div clase="acciones-tarea"
+                                    si editando !== tarea.id
+                                        boton 
+                                            on:click={() => iniciarEdicion(tarea)}
+                                            clase="btn-editar"
+                                            "✏️"
+                                        fin boton
+                                    fin si
+                                    
+                                    boton 
+                                        on:click={() => eliminarTarea(tarea.id)}
+                                        clase="btn-eliminar"
+                                        "🗑️"
+                                    fin boton
+                                fin div
+                            fin div
+                        fin li
+                    fin para cada
+                fin ul
+            sino
+                div clase="vacio"
+                    texto "No hay tareas. ¡Agrega una para comenzar!"
+                fin div
+            fin si
+        fin main
+        
+        footer clase="footer"
+            si tareas.length > 0
+                texto "Total: {tareas.length} tareas"
+                texto " • "
+                texto "Pendientes: {tareasPendientes}"
+                texto " • "
+                texto "Completadas: {tareasCompletadas}"
+            fin si
+        fin footer
+    fin div
+    
+    # Estilos
+    estilos
+        .todo-app {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .nueva-tarea {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .nueva-tarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .btn-agregar {
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-agregar:hover {
+            background: #2980b9;
+        }
+        
+        .controles {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .filtros {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filtros button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .filtros button.activo {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .acciones {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lista-tareas {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .lista-tareas li {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            padding: 15px;
+            transition: all 0.2s;
+        }
+        
+        .lista-tareas li:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .lista-tareas li.completada {
+            opacity: 0.6;
+            background: #f8f9fa;
+        }
+        
+        .tarea-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .texto-tarea {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .completada .texto-tarea {
+            text-decoration: line-through;
+        }
+        
+        .input-edicion {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .acciones-tarea {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-editar, .btn-eliminar {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-editar {
+            background: #f39c12;
+        }
+        
+        .btn-eliminar {
+            background: #e74c3c;
+        }
+        
+        .vacio {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            color: #7f8c8d;
+        }
+    fin estilos
+fin componente

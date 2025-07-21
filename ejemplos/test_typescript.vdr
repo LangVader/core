@@ -1,0 +1,28 @@
+# Ejemplo de Vader transpilado a TypeScript
+funcion saludar(nombre: texto) -> texto
+    variable mensaje tipo texto = "Hola, " + nombre + "!"
+    retornar mensaje
+fin funcion
+
+clase Persona
+    atributo nombre tipo texto
+    atributo edad tipo numero
+    
+    constructor(n: texto, e: numero)
+        nombre = n
+        edad = e
+    fin constructor
+    
+    metodo presentarse() -> texto
+        retornar "Soy " + nombre + " y tengo " + edad + " años"
+    fin metodo
+fin clase
+
+# Crear una instancia
+crear persona de Persona
+persona.nombre = "Juan"
+persona.edad = 25
+
+# Mostrar resultado
+mostrar persona.presentarse()
+mostrar saludar("TypeScript")

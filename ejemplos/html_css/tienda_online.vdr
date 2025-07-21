@@ -1,0 +1,189 @@
+# Ejemplo de tienda online completa usando Vader
+# Demuestra formularios, tablas, y estructura e-commerce
+
+pagina "Tienda Online - TechStore"
+    encabezado
+        navegacion
+            enlace "logo" "/"
+                imagen "logo.png" "TechStore Logo"
+            fin enlace
+            
+            lista "menu"
+                elemento
+                    enlace "inicio" "/"
+                fin elemento
+                elemento
+                    enlace "productos" "/productos"
+                fin elemento
+                elemento
+                    enlace "ofertas" "/ofertas"
+                fin elemento
+                elemento
+                    enlace "contacto" "/contacto"
+                fin elemento
+                elemento
+                    enlace "carrito" "/carrito"
+                        icono "carrito"
+                        contador "3"
+                    fin enlace
+                fin elemento
+            fin lista
+        fin navegacion
+    fin encabezado
+    
+    contenido
+        seccion "banner_principal"
+            titulo1 "Las Mejores Ofertas en Tecnología"
+            parrafo "Encuentra los productos más innovadores al mejor precio"
+            boton "Ver Ofertas" "/ofertas"
+        fin seccion
+        
+        seccion "productos_destacados"
+            titulo2 "Productos Destacados"
+            
+            contenedor "grid_productos"
+                tarjeta "producto1"
+                    imagen "laptop.jpg" "Laptop Gaming"
+                    titulo3 "Laptop Gaming Pro"
+                    parrafo "Intel i7, 16GB RAM, RTX 3070"
+                    precio "$1,299.99"
+                    precio_anterior "$1,499.99"
+                    boton "Agregar al Carrito" "agregar_carrito"
+                fin tarjeta
+                
+                tarjeta "producto2"
+                    imagen "smartphone.jpg" "Smartphone"
+                    titulo3 "Smartphone Ultra"
+                    parrafo "128GB, Cámara 108MP, 5G"
+                    precio "$699.99"
+                    boton "Agregar al Carrito" "agregar_carrito"
+                fin tarjeta
+                
+                tarjeta "producto3"
+                    imagen "audifonos.jpg" "Audífonos"
+                    titulo3 "Audífonos Inalámbricos"
+                    parrafo "Cancelación de ruido, 30h batería"
+                    precio "$199.99"
+                    etiqueta "¡Nuevo!"
+                    boton "Agregar al Carrito" "agregar_carrito"
+                fin tarjeta
+            fin contenedor
+        fin seccion
+        
+        seccion "categorias"
+            titulo2 "Categorías Populares"
+            
+            lista "categorias_grid"
+                elemento
+                    enlace "laptops" "/categoria/laptops"
+                        imagen "cat_laptops.jpg" "Laptops"
+                        titulo4 "Laptops"
+                    fin enlace
+                fin elemento
+                elemento
+                    enlace "smartphones" "/categoria/smartphones"
+                        imagen "cat_phones.jpg" "Smartphones"
+                        titulo4 "Smartphones"
+                    fin enlace
+                fin elemento
+                elemento
+                    enlace "accesorios" "/categoria/accesorios"
+                        imagen "cat_accesorios.jpg" "Accesorios"
+                        titulo4 "Accesorios"
+                    fin enlace
+                fin elemento
+            fin lista
+        fin seccion
+        
+        seccion "newsletter"
+            titulo2 "Suscríbete a Nuestro Newsletter"
+            parrafo "Recibe las mejores ofertas y novedades directamente en tu email"
+            
+            formulario "suscripcion"
+                campo "email" "email" "Tu email"
+                campo "nombre" "texto" "Tu nombre"
+                
+                checkbox "ofertas" "Quiero recibir ofertas especiales"
+                checkbox "novedades" "Quiero recibir información de nuevos productos"
+                
+                boton "Suscribirse" "submit"
+            fin formulario
+        fin seccion
+        
+        seccion "testimonios"
+            titulo2 "Lo Que Dicen Nuestros Clientes"
+            
+            contenedor "testimonios_grid"
+                tarjeta "testimonio1"
+                    imagen "cliente1.jpg" "María González"
+                    parrafo "Excelente servicio y productos de calidad. Mi laptop llegó súper rápido."
+                    nombre "María González"
+                    estrellas "5"
+                fin tarjeta
+                
+                tarjeta "testimonio2"
+                    imagen "cliente2.jpg" "Carlos Ruiz"
+                    parrafo "Precios increíbles y atención al cliente excepcional. Muy recomendado."
+                    nombre "Carlos Ruiz"
+                    estrellas "5"
+                fin tarjeta
+            fin contenedor
+        fin seccion
+    fin contenido
+    
+    pie_pagina
+        contenedor "footer_content"
+            seccion "info_empresa"
+                titulo3 "TechStore"
+                parrafo "Tu tienda de confianza para tecnología desde 2020"
+                
+                lista "redes_sociales"
+                    elemento
+                        enlace "facebook" "https://facebook.com/techstore"
+                            icono "facebook"
+                        fin enlace
+                    fin elemento
+                    elemento
+                        enlace "twitter" "https://twitter.com/techstore"
+                            icono "twitter"
+                        fin enlace
+                    fin elemento
+                    elemento
+                        enlace "instagram" "https://instagram.com/techstore"
+                            icono "instagram"
+                        fin enlace
+                    fin elemento
+                fin lista
+            fin seccion
+            
+            seccion "enlaces_utiles"
+                titulo4 "Enlaces Útiles"
+                lista
+                    elemento
+                        enlace "politica_privacidad" "/privacidad"
+                    fin elemento
+                    elemento
+                        enlace "terminos_servicio" "/terminos"
+                    fin elemento
+                    elemento
+                        enlace "devoluciones" "/devoluciones"
+                    fin elemento
+                    elemento
+                        enlace "envios" "/envios"
+                    fin elemento
+                fin lista
+            fin seccion
+            
+            seccion "contacto_footer"
+                titulo4 "Contacto"
+                parrafo "Email: info@techstore.com"
+                parrafo "Teléfono: +1 (555) 123-4567"
+                parrafo "Dirección: 123 Tech Street, Ciudad"
+            fin seccion
+        fin contenedor
+        
+        separador
+        
+        parrafo "© 2024 TechStore. Todos los derechos reservados."
+    fin pie_pagina
+fin pagina

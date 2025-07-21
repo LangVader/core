@@ -1,0 +1,17 @@
+# Código generado automáticamente por Vader AI
+# Basado en: "quiero crear una calculadora simple"
+
+# Programa principal
+funcion principal
+    mostrar "¡Hola! Este programa fue generado por Vader AI"
+    mostrar "Descripción: quiero crear una calculadora simple"
+    
+    # Aquí puedes agregar tu lógica específica
+    # La IA de Vader ha preparado la estructura básica
+    
+    preguntar "¿Cómo te llamas?" guardar la respuesta en nombre
+    mostrar "¡Hola " + nombre + "! Tu programa está listo."
+fin funcion
+
+# Ejecutar programa
+principal()

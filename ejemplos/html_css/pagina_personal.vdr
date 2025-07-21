@@ -1,0 +1,68 @@
+# Ejemplo de página web personal usando Vader
+# Este código genera HTML completo para una página personal moderna
+
+pagina "Mi Página Personal"
+    encabezado
+        titulo1 "Juan Pérez"
+        parrafo "Desarrollador Web Full Stack"
+    fin encabezado
+    
+    navegacion
+        enlace "inicio" "#inicio"
+        enlace "sobre_mi" "#sobre"
+        enlace "proyectos" "#proyectos"
+        enlace "contacto" "#contacto"
+    fin navegacion
+    
+    contenido
+        seccion "inicio"
+            titulo2 "¡Hola! Soy Juan"
+            parrafo "Bienvenido a mi página personal. Soy un desarrollador apasionado por crear experiencias web increíbles."
+            boton "Ver mis proyectos" "#proyectos"
+        fin seccion
+        
+        seccion "sobre"
+            titulo2 "Sobre Mí"
+            parrafo "Tengo 5 años de experiencia en desarrollo web, especializado en JavaScript, Python y tecnologías modernas."
+            
+            lista "habilidades"
+                elemento "JavaScript & TypeScript"
+                elemento "React & Vue.js"
+                elemento "Node.js & Express"
+                elemento "Python & Django"
+                elemento "Bases de datos SQL y NoSQL"
+            fin lista
+        fin seccion
+        
+        seccion "proyectos"
+            titulo2 "Mis Proyectos"
+            
+            tarjeta "proyecto1"
+                titulo3 "E-commerce Moderno"
+                parrafo "Tienda online completa con React y Node.js"
+                enlace "Ver proyecto" "https://github.com/juan/ecommerce"
+            fin tarjeta
+            
+            tarjeta "proyecto2"
+                titulo3 "App de Gestión"
+                parrafo "Sistema de gestión empresarial con Vue.js"
+                enlace "Ver proyecto" "https://github.com/juan/gestion-app"
+            fin tarjeta
+        fin seccion
+        
+        seccion "contacto"
+            titulo2 "Contacto"
+            
+            formulario "contacto"
+                campo "nombre" "texto" "Tu nombre"
+                campo "email" "email" "Tu email"
+                campo "mensaje" "textarea" "Tu mensaje"
+                boton "Enviar mensaje" "submit"
+            fin formulario
+        fin seccion
+    fin contenido
+    
+    pie_pagina
+        parrafo "© 2024 Juan Pérez. Todos los derechos reservados."
+    fin pie_pagina
+fin pagina

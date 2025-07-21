@@ -1,0 +1,17 @@
+# Ejemplo simple de Express para probar
+servidor express MiAPI
+    puerto 3000
+    
+    ruta GET /
+        respuesta json {mensaje: "Hola desde Vader!"}
+    fin ruta
+    
+    ruta GET /saludo/:nombre
+        const nombre = parametros peticion.nombre
+        respuesta json {saludo: `Hola ${nombre}!`}
+    fin ruta
+    
+    iniciar servidor
+        consola log "Servidor iniciado en puerto 3000"
+    fin iniciar
+fin servidor

@@ -1,0 +1,40 @@
+# Ejemplo de Vader transpilado a Dart (Flutter)
+importar flutter
+
+widget MiApp
+    mostrar "Aplicación Flutter desde Vader"
+fin widget
+
+funcion principal()
+    lista numeros = [1, 2, 3, 4, 5]
+    
+    repetir con cada numero en numeros
+        mostrar "Número: " + numero
+    fin repetir
+    
+    si numeros.length > 3
+        mostrar "La lista tiene más de 3 elementos"
+    fin si
+fin funcion
+
+clase Calculadora
+    atributo resultado tipo numero
+    
+    constructor()
+        resultado = 0
+    fin constructor
+    
+    metodo sumar(a: numero, b: numero) -> numero
+        resultado = a + b
+        retornar resultado
+    fin metodo
+    
+    metodo obtener_resultado() -> numero
+        retornar resultado
+    fin metodo
+fin clase
+
+# Usar la calculadora
+crear calc de Calculadora
+calc.sumar(10, 5)
+mostrar "Resultado: " + calc.obtener_resultado()

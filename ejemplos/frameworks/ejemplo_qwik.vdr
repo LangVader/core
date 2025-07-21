@@ -1,0 +1,320 @@
+# Ejemplo completo de Qwik con Vader
+# Tienda online con carga instantánea
+
+componente qwik TiendaOnline
+    # Señales reactivas
+    señal productos = []
+    señal carrito = []
+    señal busqueda = ""
+    señal categoriaActual = "todas"
+    señal cargando = false
+
+    # Store para el estado global
+    store estadoTienda = {
+        usuario: null,
+        configuracion: {
+            moneda: "USD",
+            idioma: "es",
+            tema: "claro"
+        },
+        filtros: {
+            precioMin: 0,
+            precioMax: 1000,
+            disponible: true
+        }
+    }
+
+    # Tarea para cargar productos iniciales
+    tarea
+        track(() => categoriaActual.value)
+        
+        establecer cargando = true
+        
+        # Simular carga de productos
+        const productosData = [
+            {id: 1, nombre: "Laptop Gaming", precio: 1299, categoria: "tecnologia", imagen: "/laptop.jpg", stock: 5},
+            {id: 2, nombre: "Smartphone Pro", precio: 899, categoria: "tecnologia", imagen: "/phone.jpg", stock: 12},
+            {id: 3, nombre: "Auriculares Bluetooth", precio: 199, categoria: "audio", imagen: "/headphones.jpg", stock: 25},
+            {id: 4, nombre: "Tablet 10 pulgadas", precio: 449, categoria: "tecnologia", imagen: "/tablet.jpg", stock: 8},
+            {id: 5, nombre: "Cámara Digital", precio: 699, categoria: "fotografia", imagen: "/camera.jpg", stock: 3}
+        ]
+        
+        # Filtrar por categoría
+        const filtrados = categoriaActual.value === "todas" 
+            ? productosData 
+            : productosData.filter(p => p.categoria === categoriaActual.value)
+        
+        establecer productos = filtrados
+        establecer cargando = false
+    fin tarea
+
+    # Funciones con optimización $
+    funcion agregarAlCarrito(producto)
+        const existe = carrito.value.find(item => item.id === producto.id)
+        
+        si existe
+            establecer carrito = carrito.value.map(item => 
+                item.id === producto.id 
+                    ? {...item, cantidad: item.cantidad + 1}
+                    : item
+            )
+        sino
+            establecer carrito = [...carrito.value, {...producto, cantidad: 1}]
+        fin si
+        
+        # Notificación optimista
+        mostrarNotificacion(`${producto.nombre} agregado al carrito`)
+    fin funcion
+
+    funcion eliminarDelCarrito(productoId)
+        establecer carrito = carrito.value.filter(item => item.id !== productoId)
+        mostrarNotificacion("Producto eliminado del carrito")
+    fin funcion
+
+    funcion actualizarCantidad(productoId, nuevaCantidad)
+        si nuevaCantidad <= 0
+            eliminarDelCarrito(productoId)
+        sino
+            establecer carrito = carrito.value.map(item => 
+                item.id === productoId 
+                    ? {...item, cantidad: nuevaCantidad}
+                    : item
+            )
+        fin si
+    fin funcion
+
+    funcion calcularTotal()
+        return carrito.value.reduce((total, item) => 
+            total + (item.precio * item.cantidad), 0
+        ).toFixed(2)
+    fin funcion
+
+    funcion mostrarNotificacion(mensaje)
+        # Implementación de notificación toast
+        const toast = document.createElement('div')
+        toast.className = 'toast-notification'
+        toast.textContent = mensaje
+        document.body.appendChild(toast)
+        
+        setTimeout(() => {
+            toast.remove()
+        }, 3000)
+    fin funcion
+
+    # Componente lazy para el checkout
+    componente lazy CheckoutModal
+
+    renderizar
+        div clase="tienda-container"
+            # Header con navegación
+            header clase="header"
+                div clase="nav-container"
+                    titulo1 "🛒 Tienda Qwik"
+                    
+                    # Buscador
+                    div clase="search-container"
+                        input 
+                            tipo="text"
+                            valor={busqueda.value}
+                            onInput$={(e) => establecer busqueda = e.target.value}
+                            placeholder="Buscar productos..."
+                            clase="search-input"
+                    fin div
+                    
+                    # Carrito
+                    div clase="cart-summary"
+                        boton clase="cart-button"
+                            span "🛒 Carrito"
+                            span clase="cart-count" {carrito.value.length}
+                        fin boton
+                        
+                        mostrar si carrito.value.length > 0
+                            div clase="cart-total"
+                                span "Total: ${calcularTotal()}"
+                            fin div
+                        fin mostrar
+                    fin div
+                fin div
+            fin header
+
+            # Filtros de categoría
+            nav clase="category-nav"
+                boton 
+                    clase={categoriaActual.value === "todas" ? "active" : ""}
+                    onClick$={() => establecer categoriaActual = "todas"}
+                    "Todas"
+                
+                boton 
+                    clase={categoriaActual.value === "tecnologia" ? "active" : ""}
+                    onClick$={() => establecer categoriaActual = "tecnologia"}
+                    "Tecnología"
+                
+                boton 
+                    clase={categoriaActual.value === "audio" ? "active" : ""}
+                    onClick$={() => establecer categoriaActual = "audio"}
+                    "Audio"
+                
+                boton 
+                    clase={categoriaActual.value === "fotografia" ? "active" : ""}
+                    onClick$={() => establecer categoriaActual = "fotografia"}
+                    "Fotografía"
+            fin nav
+
+            # Contenido principal
+            main clase="main-content"
+                # Loading state
+                mostrar si cargando.value
+                    div clase="loading"
+                        titulo2 "Cargando productos..."
+                        div clase="spinner"
+                        fin div
+                    fin div
+                fin mostrar
+
+                # Grid de productos
+                mostrar si no cargando.value y productos.value.length > 0
+                    div clase="productos-grid"
+                        para cada producto en productos.value
+                            div clase="producto-card"
+                                div clase="producto-imagen"
+                                    imagen 
+                                        src={producto.imagen}
+                                        alt={producto.nombre}
+                                        loading="lazy"
+                                fin div
+                                
+                                div clase="producto-info"
+                                    titulo3 {producto.nombre}
+                                    parrafo clase="precio" "${producto.precio}"
+                                    parrafo clase="stock" "Stock: {producto.stock}"
+                                    
+                                    si producto.stock > 0
+                                        boton 
+                                            clase="btn-agregar"
+                                            onClick$={() => agregarAlCarrito(producto)}
+                                            "Agregar al Carrito"
+                                    sino
+                                        boton clase="btn-agotado" disabled
+                                            "Agotado"
+                                    fin si
+                                fin div
+                            fin div
+                        fin para cada
+                    fin div
+                fin mostrar
+
+                # Estado vacío
+                mostrar si no cargando.value y productos.value.length === 0
+                    div clase="empty-state"
+                        titulo2 "No se encontraron productos"
+                        parrafo "Intenta cambiar la categoría o el término de búsqueda"
+                    fin div
+                fin mostrar
+            fin main
+
+            # Sidebar del carrito
+            aside clase="cart-sidebar"
+                titulo2 "Carrito de Compras"
+                
+                mostrar si carrito.value.length === 0
+                    parrafo "Tu carrito está vacío"
+                sino
+                    div clase="cart-items"
+                        para cada item en carrito.value
+                            div clase="cart-item"
+                                div clase="item-info"
+                                    titulo4 {item.nombre}
+                                    parrafo "${item.precio}"
+                                fin div
+                                
+                                div clase="item-controls"
+                                    boton 
+                                        onClick$={() => actualizarCantidad(item.id, item.cantidad - 1)}
+                                        "-"
+                                    
+                                    span {item.cantidad}
+                                    
+                                    boton 
+                                        onClick$={() => actualizarCantidad(item.id, item.cantidad + 1)}
+                                        "+"
+                                    
+                                    boton 
+                                        clase="btn-eliminar"
+                                        onClick$={() => eliminarDelCarrito(item.id)}
+                                        "🗑️"
+                                fin div
+                                
+                                div clase="item-total"
+                                    span "${(item.precio * item.cantidad).toFixed(2)}"
+                                fin div
+                            fin div
+                        fin para cada
+                    fin div
+                    
+                    div clase="cart-summary"
+                        div clase="total-amount"
+                            titulo3 "Total: ${calcularTotal()}"
+                        fin div
+                        
+                        boton 
+                            clase="btn-checkout"
+                            onClick$={() => {
+                                # Lazy load del componente checkout
+                                import('./CheckoutModal').then(module => {
+                                    // Abrir modal de checkout
+                                })
+                            }}
+                            "Proceder al Pago"
+                    fin div
+                fin mostrar
+            fin aside
+
+            # Footer
+            footer clase="footer"
+                parrafo "Tienda creada con Vader + Qwik - Carga instantánea garantizada"
+                div clase="footer-links"
+                    enlace "/ayuda" "Ayuda"
+                    enlace "/contacto" "Contacto"
+                    enlace "/terminos" "Términos"
+                fin div
+            fin footer
+        fin div
+    fin renderizar
+fin componente
+
+# Recurso para datos del servidor
+recurso productosServidor
+    # Fetch de productos desde API
+    const response = await fetch('/api/productos')
+    const data = await response.json()
+    return data
+fin recurso
+
+# Head para SEO
+head
+    titulo "Tienda Online - Los mejores productos tecnológicos"
+    descripcion "Descubre nuestra amplia selección de productos tecnológicos con los mejores precios y envío gratis."
+fin head
+
+# Acción del servidor para procesar compras
+accion servidor procesarCompra
+    const { productos, total, datosUsuario } = data
+    
+    # Validar datos
+    si no productos o productos.length === 0
+        return { error: "Carrito vacío" }
+    fin si
+    
+    # Procesar pago (simulado)
+    const ordenId = `ORDER-${Date.now()}`
+    
+    # Simular procesamiento
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    return {
+        success: true,
+        ordenId: ordenId,
+        total: total,
+        mensaje: "Compra procesada exitosamente"
+    }
+fin accion

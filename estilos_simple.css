@@ -1,0 +1,160 @@
+/* Estilos generados por Vader */
+# Estilos globales {
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: gris muy claro;
+    color: gris oscuro;
+}
+
+# Encabezado {
+}
+
+header {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    color: #ffffff;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+# Contenido principal {
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+# Secciones {
+}
+
+section {
+    background-color: #ffffff;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #3498db;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+# Listas {
+}
+
+ul {
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+# Botones {
+}
+
+button {
+    background: linear-gradient(135deg, #2ecc71, #3498db);
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.al_pasar_mouse {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+# Formularios {
+}
+
+form {
+    background-color: gris claro;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid gris;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.al_enfocar {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+# Pie de página {
+}
+
+footer {
+    background-color: gris oscuro;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+# Responsive {
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    main {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+}

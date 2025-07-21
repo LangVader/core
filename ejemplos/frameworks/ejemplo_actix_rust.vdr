@@ -1,0 +1,91 @@
+# Ejemplo de API REST con Actix-web (Rust) usando sintaxis natural de Vader
+# Demuestra cómo crear una API de alto rendimiento en Rust con Actix
+
+servidor actix
+puerto 8080
+
+# Estado compartido de la aplicación
+estado "usuarios" = []
+
+# Middleware
+middleware "logger"
+middleware "cors"
+
+# Ruta principal de salud
+ruta get "/"
+    json {
+        "mensaje": "¡API Actix-web funcionando!",
+        "version": "1.0.0",
+        "framework": "Actix-web + Rust",
+        "rendimiento": "Ultra alto"
+    }
+fin ruta
+
+# Obtener todos los usuarios
+ruta get "/usuarios"
+    # Los usuarios se obtienen del estado compartido
+    json "usuarios del estado"
+fin ruta
+
+# Crear nuevo usuario
+ruta post "/usuarios"
+    # Validación automática del JSON
+    validar
+    json {
+        "mensaje": "Usuario creado exitosamente",
+        "status": "created",
+        "info": "Guardado en estado compartido thread-safe"
+    }
+fin ruta
+
+# Obtener usuario específico
+ruta get "/usuarios/:id"
+    json {
+        "mensaje": "Usuario encontrado",
+        "id": ":id",
+        "usuario": {
+            "nombre": "Usuario Ejemplo",
+            "email": "usuario@example.com"
+        }
+    }
+fin ruta
+
+# Actualizar usuario
+ruta put "/usuarios/:id"
+    validar
+    json {
+        "mensaje": "Usuario actualizado con Rust",
+        "id": ":id",
+        "rendimiento": "Máximo"
+    }
+fin ruta
+
+# Eliminar usuario
+ruta delete "/usuarios/:id"
+    json {
+        "mensaje": "Usuario eliminado",
+        "id": ":id",
+        "memoria_liberada": true
+    }
+fin ruta
+
+# Endpoint de métricas de rendimiento
+ruta get "/metricas"
+    json {
+        "memoria_usada": "Mínima",
+        "velocidad": "Ultra rápida",
+        "concurrencia": "Miles de conexiones",
+        "seguridad": "Memory-safe",
+        "lenguaje": "Rust"
+    }
+fin ruta
+
+# Endpoint asíncrono
+ruta get "/async-data"
+    async
+    json {
+        "mensaje": "Datos procesados asincrónicamente",
+        "tiempo_respuesta": "Microsegundos",
+        "threads": "Optimizados automáticamente"
+    }
+fin ruta

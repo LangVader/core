@@ -1,0 +1,63 @@
+# Ejemplo de programación funcional con Scala usando Vader
+# Demuestra programación funcional, inmutabilidad y big data
+
+objeto scala "AnalisisDatos"
+    lista inmutable "numeros"
+    lista inmutable "palabras"
+    mapa "estadisticas"
+    
+    # Operaciones funcionales
+    filtrar numeros donde "x > 10"
+    mapear numeros con "x * 2"
+    reducir numeros con "_ + _"
+    fold numeros con "_ + _"
+    
+    # Programación asíncrona
+    future "procesarDatos()"
+    
+    # Manejo de errores
+    try "operacionRiesgosa()"
+    
+    # Pattern matching
+    pattern matching "valor"
+    
+    # For comprehension
+    for comprehension "x" en "lista"
+    
+    # Evaluación perezosa
+    lazy val "resultadoCostoso = calcularComplejo()"
+    
+    # Sistema de actores
+    actor "ProcesadorDatos"
+    
+    # Apache Spark para big data
+    spark "procesamiento distribuido"
+    
+    funcion pura "calcularPromedio"
+        # Función sin efectos secundarios
+        mostrar "Calculando promedio..."
+    fin funcion
+    
+    funcion "procesarArchivo"
+        # Función con efectos
+        mostrar "Procesando archivo..."
+    fin funcion
+fin objeto
+
+clase scala "Usuario"
+    campo "nombre" "texto"
+    campo "edad" "numero"
+    campo "email" "texto"
+    
+    funcion "saludar"
+        mostrar "Hola desde Scala!"
+    fin funcion
+fin clase
+
+trait "Procesable"
+    # Definir interfaz común
+fin trait
+
+case class "Producto"
+    # Clase inmutable para datos
+fin case class

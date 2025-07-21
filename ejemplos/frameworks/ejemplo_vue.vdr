@@ -1,0 +1,107 @@
+# Ejemplo de Vue.js con Vader
+# Este archivo demuestra cómo crear un componente Vue usando sintaxis natural en español
+
+componente vue MiTienda
+    script
+        # Variables reactivas
+        reactivo productos = []
+        reactivo carrito = []
+        reactivo total = 0
+        
+        # Computed property para calcular total
+        computado totalCarrito = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0)
+        
+        # Watcher para observar cambios en el carrito
+        observar carrito
+            total = totalCarrito
+        fin observar
+        
+        # Métodos
+        metodo agregarAlCarrito(producto)
+            const existe = carrito.find(item => item.id === producto.id)
+            si existe
+                existe.cantidad += 1
+            sino
+                carrito.push({...producto, cantidad: 1})
+            fin si
+        fin metodo
+        
+        metodo eliminarDelCarrito(productoId)
+            const indice = carrito.findIndex(item => item.id === productoId)
+            si indice > -1
+                carrito.splice(indice, 1)
+            fin si
+        fin metodo
+        
+        # Lifecycle hook
+        al montar
+            productos = [
+                {id: 1, nombre: "Laptop", precio: 1000},
+                {id: 2, nombre: "Mouse", precio: 25},
+                {id: 3, nombre: "Teclado", precio: 75}
+            ]
+        fin lifecycle
+    fin script
+    
+    template
+        div clase="tienda"
+            titulo1 "Mi Tienda Vue"
+            
+            div clase="productos"
+                titulo2 "Productos Disponibles"
+                div v-for="producto in productos" :key="producto.id" clase="producto"
+                    titulo3 "{{producto.nombre}}"
+                    texto "Precio: ${{producto.precio}}"
+                    boton @click="agregarAlCarrito(producto)" "Agregar al Carrito"
+                fin div
+            fin div
+            
+            div clase="carrito"
+                titulo2 "Carrito de Compras"
+                div v-if="carrito.length === 0"
+                    texto "El carrito está vacío"
+                fin div
+                
+                div v-else
+                    div v-for="item in carrito" :key="item.id" clase="item-carrito"
+                        texto "{{item.nombre}} - Cantidad: {{item.cantidad}} - ${{item.precio * item.cantidad}}"
+                        boton @click="eliminarDelCarrito(item.id)" "Eliminar"
+                    fin div
+                    
+                    div clase="total"
+                        titulo3 "Total: ${{total}}"
+                    fin div
+                fin div
+            fin div
+        fin div
+    fin template
+    
+    estilos
+        .tienda {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .productos, .carrito {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .producto, .item-carrito {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .total {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+            margin-top: 15px;
+        }
+    fin estilos
+fin componente

@@ -1,0 +1,169 @@
+# Ejemplo completo: Sistema de Tienda con MySQL
+# Demuestra todas las operaciones CRUD con sintaxis natural en español
+
+# Conexión a base de datos MySQL
+conectar base_datos mysql "localhost" usuario="admin" password="123456" base="tienda_online"
+
+# Crear tabla de usuarios
+crear tabla usuarios
+    columna id numero primary_key auto_increment
+    columna nombre texto required
+    columna email texto unique required
+    columna password texto required
+    columna edad numero default=18
+    columna activo booleano default=true
+    columna fecha_registro tiempo default=CURRENT_TIMESTAMP
+fin tabla
+
+# Crear tabla de productos
+crear tabla productos
+    columna id numero primary_key auto_increment
+    columna nombre texto required
+    columna descripcion texto
+    columna precio decimal required
+    columna stock numero default=0
+    columna categoria texto required
+    columna activo booleano default=true
+    columna fecha_creacion tiempo default=CURRENT_TIMESTAMP
+fin tabla
+
+# Crear tabla de pedidos
+crear tabla pedidos
+    columna id numero primary_key auto_increment
+    columna usuario_id numero required
+    columna total decimal required
+    columna estado texto default="pendiente"
+    columna fecha_pedido tiempo default=CURRENT_TIMESTAMP
+fin tabla
+
+# Insertar usuarios de ejemplo
+insertar en usuarios
+    nombre: "Juan Pérez"
+    email: "juan@ejemplo.com"
+    password: "password123"
+    edad: 30
+fin insertar
+
+insertar en usuarios
+    nombre: "María García"
+    email: "maria@ejemplo.com"
+    password: "password456"
+    edad: 25
+fin insertar
+
+insertar en usuarios
+    nombre: "Carlos López"
+    email: "carlos@ejemplo.com"
+    password: "password789"
+    edad: 35
+    activo: false
+fin insertar
+
+# Insertar productos de ejemplo
+insertar en productos
+    nombre: "Laptop Gaming"
+    descripcion: "Laptop para juegos de alta gama"
+    precio: 1299.99
+    stock: 10
+    categoria: "tecnologia"
+fin insertar
+
+insertar en productos
+    nombre: "Mouse Inalámbrico"
+    descripcion: "Mouse ergonómico inalámbrico"
+    precio: 29.99
+    stock: 50
+    categoria: "accesorios"
+fin insertar
+
+insertar en productos
+    nombre: "Teclado Mecánico"
+    descripcion: "Teclado mecánico RGB"
+    precio: 89.99
+    stock: 25
+    categoria: "accesorios"
+fin insertar
+
+# Consultas básicas
+decir "=== CONSULTAS BÁSICAS ==="
+
+# Buscar todos los usuarios
+buscar todos en usuarios
+
+# Buscar usuarios activos
+buscar en usuarios donde activo = true
+
+# Buscar productos por categoría
+buscar en productos donde categoria = "tecnologia"
+
+# Buscar productos con stock bajo
+buscar en productos donde stock < 20
+
+# Consultas avanzadas
+decir "=== CONSULTAS AVANZADAS ==="
+
+# Buscar usuarios con edad específica
+buscar nombre, email en usuarios donde edad > 25 y activo = true
+
+# Buscar productos ordenados por precio
+buscar nombre, precio en productos donde activo = true ordenar por precio
+
+# Contar productos por categoría
+buscar categoria, COUNT(*) desde productos agrupar por categoria
+
+# Operaciones de actualización
+decir "=== ACTUALIZACIONES ==="
+
+# Actualizar precio de un producto
+actualizar productos donde id = 1 establecer precio = 1199.99
+
+# Actualizar stock después de una venta
+actualizar productos donde nombre = "Mouse Inalámbrico" establecer stock = stock - 5
+
+# Activar usuario
+actualizar usuarios donde email = "carlos@ejemplo.com" establecer activo = true
+
+# Crear un pedido
+insertar en pedidos
+    usuario_id: 1
+    total: 1329.98
+    estado: "procesando"
+fin insertar
+
+# Consulta con JOIN (relación entre tablas)
+decir "=== CONSULTAS CON RELACIONES ==="
+
+# Buscar pedidos con información del usuario
+buscar usuarios.nombre, pedidos.total, pedidos.estado, pedidos.fecha_pedido
+desde usuarios unir pedidos
+donde usuarios.id = pedidos.usuario_id
+ordenar por pedidos.fecha_pedido
+
+# Operaciones de mantenimiento
+decir "=== MANTENIMIENTO ==="
+
+# Eliminar productos sin stock
+eliminar de productos donde stock = 0 y activo = false
+
+# Eliminar usuarios inactivos antiguos
+eliminar de usuarios donde activo = false y fecha_registro < "2023-01-01"
+
+# Estadísticas de la tienda
+decir "=== ESTADÍSTICAS ==="
+
+# Total de usuarios activos
+buscar COUNT(*) desde usuarios donde activo = true
+
+# Valor total del inventario
+buscar SUM(precio * stock) desde productos donde activo = true
+
+# Producto más caro
+buscar nombre, precio desde productos donde precio = (buscar MAX(precio) desde productos)
+
+# Promedio de edad de usuarios
+buscar AVG(edad) desde usuarios donde activo = true
+
+# Cerrar conexión
+cerrar conexion base_datos
+
+decir "✅ Sistema de tienda completado exitosamente"

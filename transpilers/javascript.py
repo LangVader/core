@@ -1,4 +1,23 @@
-def transpile_to_javascript(code):
+def transpile_to_javascript(code, framework=None):
+    """Transpila código Vader a JavaScript, con soporte opcional para frameworks"""
+    
+    # Detectar framework automáticamente si no se especifica
+    if not framework:
+        try:
+            from .frameworks import detect_framework
+            framework = detect_framework(code)
+        except ImportError:
+            framework = None
+    
+    # Si se detecta un framework específico, usar su transpilador
+    if framework:
+        try:
+            from .frameworks import transpile_with_framework
+            return transpile_with_framework(code, framework)
+        except (ImportError, ValueError):
+            # Si falla, continuar con transpilación JavaScript estándar
+            pass
+    
     lines = code.strip().split('\n')
     output = []
     indent = 0

@@ -1,0 +1,118 @@
+# Componente: Tarjeta de Producto Reutilizable
+# Variables: {nombre}, {precio}, {imagen}, {descripcion}, {disponible}
+
+tarjeta clase="tarjeta-producto"
+    imagen src="{imagen}" alt="{nombre}" clase="producto-imagen"
+    
+    div clase="producto-info"
+        titulo3 clase="producto-nombre" {nombre}
+        parrafo clase="producto-descripcion" {descripcion}
+        
+        div clase="producto-precio-container"
+            span clase="producto-precio" "${precio}"
+            si {disponible} === "true"
+                span clase="disponible" "✓ Disponible"
+            sino
+                span clase="no-disponible" "✗ Agotado"
+            fin si
+        fin div
+        
+        div clase="producto-acciones"
+            usar componente "boton_moderno" con texto="Agregar al Carrito", color="azul", tamaño="normal", accion="agregarCarrito('{nombre}')"
+            boton clase="boton-secundario" onClick="verDetalles('{nombre}')" "Ver Detalles"
+        fin div
+    fin div
+fin tarjeta
+
+# Estilos del componente
+estilos
+    .tarjeta-producto
+        borde "1px solid gris_claro"
+        border_radius "12px"
+        sombra "0 4px 6px rgba(0,0,0,0.1)"
+        overflow "hidden"
+        transicion "all 0.3s ease"
+        fondo_color "blanco"
+        
+        al_pasar_mouse
+            sombra "0 8px 16px rgba(0,0,0,0.15)"
+            transformar "translateY(-4px)"
+        fin al_pasar_mouse
+    fin .tarjeta-producto
+    
+    .producto-imagen
+        ancho "100%"
+        altura "200px"
+        object_fit "cover"
+    fin .producto-imagen
+    
+    .producto-info
+        relleno "1.5rem"
+    fin .producto-info
+    
+    .producto-nombre
+        margen_inferior "0.5rem"
+        color "gris_oscuro"
+    fin .producto-nombre
+    
+    .producto-descripcion
+        color "gris_medio"
+        margen_inferior "1rem"
+        tamaño_fuente "0.9rem"
+        linea_altura "1.4"
+    fin .producto-descripcion
+    
+    .producto-precio-container
+        display "flex"
+        justify_content "space-between"
+        align_items "center"
+        margen_inferior "1rem"
+    fin .producto-precio-container
+    
+    .producto-precio
+        tamaño_fuente "1.5rem"
+        fuente_peso "bold"
+        color "verde_oscuro"
+    fin .producto-precio
+    
+    .disponible
+        color "verde"
+        tamaño_fuente "0.875rem"
+        fuente_peso "500"
+    fin .disponible
+    
+    .no-disponible
+        color "rojo"
+        tamaño_fuente "0.875rem"
+        fuente_peso "500"
+    fin .no-disponible
+    
+    .producto-acciones
+        display "flex"
+        gap "0.5rem"
+        flex_direction "column"
+    fin .producto-acciones
+    
+    .boton-secundario
+        fondo_color "transparente"
+        color "azul"
+        borde "1px solid azul"
+        relleno "0.5rem 1rem"
+        border_radius "6px"
+        cursor "pointer"
+        transicion "all 0.3s ease"
+        
+        al_pasar_mouse
+            fondo_color "azul"
+            color "blanco"
+        fin al_pasar_mouse
+    fin .boton-secundario
+    
+    # Responsive
+    en_movil
+        .producto-acciones
+            flex_direction "column"
+            gap "0.75rem"
+        fin .producto-acciones
+    fin en_movil
+fin estilos

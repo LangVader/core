@@ -1,0 +1,42 @@
+# Ejemplo de análisis estadístico con R usando Vader
+# Demuestra análisis de datos, gráficos y estadísticas
+
+cargar datos "ventas.csv" como "ventas"
+cargar datos "clientes.xlsx" como "clientes"
+
+mostrar resumen ventas
+estadisticas descriptivas ventas
+
+# Análisis exploratorio
+histograma "precio"
+boxplot "cantidad"
+grafico barras "categoria" por "ventas_totales"
+grafico lineas "fecha" por "ingresos"
+
+# Análisis de correlación
+correlacion "precio, cantidad, descuento"
+
+# Filtrado y agrupación
+filtrar "precio > 100"
+agrupar por "categoria"
+agrupar por "mes"
+
+# Análisis estadístico avanzado
+regresion lineal "ventas" por "precio"
+regresion lineal "ingresos" por "publicidad"
+
+test t "satisfaccion" por "tipo_cliente"
+anova "ventas" por "region"
+
+# Visualizaciones avanzadas
+grafico barras "region" por "ventas_promedio"
+grafico lineas "mes" por "crecimiento"
+
+# Exportar resultados
+guardar grafico "analisis_ventas.png"
+exportar datos "resultados_procesados.csv"
+
+# Análisis de series temporales
+cargar datos "series_tiempo.csv" como "series"
+grafico lineas "fecha" por "valor"
+mostrar resumen series

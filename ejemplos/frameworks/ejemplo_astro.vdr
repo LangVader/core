@@ -1,0 +1,501 @@
+# Ejemplo completo de Astro con Vader
+# Sitio web estático ultra rápido para portafolio personal
+
+pagina astro MiPortafolio
+    servidor
+        # Imports del servidor
+        importar Layout desde './layouts/Layout.astro'
+        importar Card desde './components/Card.astro'
+        importar ContactForm desde './components/ContactForm.jsx'
+        
+        # Datos del servidor (se ejecuta en build time)
+        titulo "Mi Portafolio Personal - Desarrollador Full Stack"
+        descripcion "Portafolio de desarrollador creado con Vader y Astro. Sitio web ultra rápido y moderno."
+        
+        # Obtener datos de proyectos
+        obtener datos "https://api.github.com/users/miusuario/repos"
+        proyectos = data.slice(0, 6).map(repo => ({
+            nombre: repo.name,
+            descripcion: repo.description,
+            url: repo.html_url,
+            lenguaje: repo.language,
+            estrellas: repo.stargazers_count
+        }))
+        
+        # Datos de habilidades
+        variable habilidades = [
+            {nombre: "JavaScript", nivel: 95, icono: "js"},
+            {nombre: "Python", nivel: 90, icono: "python"},
+            {nombre: "React", nivel: 85, icono: "react"},
+            {nombre: "Node.js", nivel: 80, icono: "node"},
+            {nombre: "Vue.js", nivel: 75, icono: "vue"},
+            {nombre: "Astro", nivel: 70, icono: "astro"}
+        ]
+        
+        # Datos de experiencia
+        variable experiencia = [
+            {
+                empresa: "Tech Solutions",
+                puesto: "Senior Full Stack Developer",
+                periodo: "2022 - Presente",
+                descripcion: "Desarrollo de aplicaciones web modernas con React, Node.js y Python"
+            },
+            {
+                empresa: "StartupXYZ",
+                puesto: "Frontend Developer",
+                periodo: "2020 - 2022",
+                descripcion: "Creación de interfaces de usuario responsivas y accesibles"
+            },
+            {
+                empresa: "Freelance",
+                puesto: "Desarrollador Web",
+                periodo: "2018 - 2020",
+                descripcion: "Proyectos diversos para clientes locales e internacionales"
+            }
+        ]
+    fin servidor
+
+    # Layout principal
+    layout "./layouts/Layout.astro"
+
+    # Hero Section
+    seccion clase="hero"
+        div clase="hero-content"
+            titulo1 "¡Hola! Soy Juan Desarrollador"
+            titulo2 "Full Stack Developer & Creador de Soluciones Digitales"
+            parrafo "Transformo ideas en aplicaciones web modernas y eficientes. Especializado en JavaScript, Python y tecnologías de vanguardia."
+            
+            div clase="hero-buttons"
+                enlace "/proyectos" "Ver Mis Proyectos"
+                enlace "/contacto" "Contactarme"
+            fin div
+        fin div
+        
+        div clase="hero-image"
+            imagen "https://via.placeholder.com/400x400" "Foto de perfil"
+        fin div
+    fin seccion
+
+    # Sección de Sobre Mí
+    seccion clase="about"
+        div clase="container"
+            titulo2 "Sobre Mí"
+            div clase="about-grid"
+                div clase="about-text"
+                    parrafo "Soy un desarrollador apasionado con más de 5 años de experiencia creando soluciones web innovadoras. Me especializo en tecnologías modernas y siempre busco aprender nuevas herramientas."
+                    parrafo "Mi enfoque se centra en escribir código limpio, crear experiencias de usuario excepcionales y resolver problemas complejos de manera elegante."
+                    
+                    div clase="stats"
+                        div clase="stat"
+                            titulo3 "50+"
+                            parrafo "Proyectos Completados"
+                        fin div
+                        div clase="stat"
+                            titulo3 "5+"
+                            parrafo "Años de Experiencia"
+                        fin div
+                        div clase="stat"
+                            titulo3 "20+"
+                            parrafo "Clientes Satisfechos"
+                        fin div
+                    fin div
+                fin div
+                
+                div clase="skills"
+                    titulo3 "Habilidades Técnicas"
+                    para cada habilidad en habilidades
+                        div clase="skill"
+                            div clase="skill-info"
+                                span "{habilidad.nombre}"
+                                span "{habilidad.nivel}%"
+                            fin div
+                            div clase="skill-bar"
+                                div clase="skill-progress" style="width: {habilidad.nivel}%"
+                                fin div
+                            fin div
+                        fin div
+                    fin para cada
+                fin div
+            fin div
+        fin div
+    fin seccion
+
+    # Sección de Proyectos
+    seccion clase="projects"
+        div clase="container"
+            titulo2 "Mis Proyectos"
+            parrafo "Algunos de mis trabajos más recientes y destacados"
+            
+            div clase="projects-grid"
+                para cada proyecto en proyectos
+                    div clase="project-card"
+                        titulo3 "{proyecto.nombre}"
+                        parrafo "{proyecto.descripcion}"
+                        
+                        div clase="project-meta"
+                            span clase="language" "{proyecto.lenguaje}"
+                            span clase="stars" "⭐ {proyecto.estrellas}"
+                        fin div
+                        
+                        div clase="project-links"
+                            enlace "{proyecto.url}" "Ver Código"
+                            enlace "#" "Ver Demo"
+                        fin div
+                    fin div
+                fin para cada
+            fin div
+            
+            div clase="projects-cta"
+                enlace "https://github.com/miusuario" "Ver Todos los Proyectos en GitHub"
+            fin div
+        fin div
+    fin seccion
+
+    # Sección de Experiencia
+    seccion clase="experience"
+        div clase="container"
+            titulo2 "Experiencia Profesional"
+            
+            div clase="timeline"
+                para cada trabajo en experiencia
+                    div clase="timeline-item"
+                        div clase="timeline-marker"
+                        fin div
+                        div clase="timeline-content"
+                            titulo3 "{trabajo.puesto}"
+                            titulo4 "{trabajo.empresa}"
+                            span clase="period" "{trabajo.periodo}"
+                            parrafo "{trabajo.descripcion}"
+                        fin div
+                    fin div
+                fin para cada
+            fin div
+        fin div
+    fin seccion
+
+    # Sección de Contacto con componente interactivo
+    seccion clase="contact"
+        div clase="container"
+            titulo2 "¿Trabajamos Juntos?"
+            parrafo "Estoy siempre abierto a nuevas oportunidades y proyectos interesantes"
+            
+            div clase="contact-grid"
+                div clase="contact-info"
+                    div clase="contact-item"
+                        titulo4 "📧 Email"
+                        enlace "mailto:juan@ejemplo.com" "juan@ejemplo.com"
+                    fin div
+                    
+                    div clase="contact-item"
+                        titulo4 "📱 Teléfono"
+                        enlace "tel:+1234567890" "+1 (234) 567-890"
+                    fin div
+                    
+                    div clase="contact-item"
+                        titulo4 "🌐 Redes Sociales"
+                        div clase="social-links"
+                            enlace "https://linkedin.com/in/juan" "LinkedIn"
+                            enlace "https://twitter.com/juan" "Twitter"
+                            enlace "https://github.com/juan" "GitHub"
+                        fin div
+                    fin div
+                fin div
+                
+                # Componente React interactivo para el formulario
+                componente hidratado visible ContactForm
+            fin div
+        fin div
+    fin seccion
+
+    # Estilos CSS
+    estilos
+        /* Variables CSS */
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+        }
+
+        /* Reset y base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .hero-buttons a {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        /* Secciones */
+        section {
+            padding: 5rem 0;
+        }
+
+        .about {
+            background: var(--gray-100);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Skills */
+        .skill {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--gray-100);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 2rem;
+            }
+            
+            .timeline-marker {
+                left: 2rem;
+            }
+        }
+    fin estilos
+
+    # Script del cliente para interactividad
+    script cliente
+        // Animación de las barras de habilidades
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.querySelector('.skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto parallax suave en el hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    fin script
+fin pagina

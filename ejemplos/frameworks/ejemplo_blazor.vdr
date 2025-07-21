@@ -1,0 +1,39 @@
+# Ejemplo de aplicación Blazor usando Vader
+# Demuestra componentes, estado y eventos en Blazor C#
+
+componente blazor "Contador Interactivo"
+    estado "contador"
+    estado "mensaje"
+    
+    mostrar "¡Bienvenido a mi aplicación Blazor!"
+    mostrar estado.contador
+    mostrar estado.mensaje
+    
+    boton "Incrementar Contador"
+    boton "Resetear"
+    
+    campo "nombre" "text" "Ingresa tu nombre"
+    campo "email" "email" "Tu email"
+    
+    lista
+        elemento "Característica 1: Componentes reactivos"
+        elemento "Característica 2: Estado compartido"
+        elemento "Característica 3: Eventos de usuario"
+    fin lista
+    
+    al hacer_click
+        contador = contador + 1
+        mensaje = "¡Contador actualizado!"
+    fin evento
+    
+    servicio "HttpClient"
+    servicio "NavigationManager"
+    
+    formulario
+        campo "comentario" "textarea" "Deja tu comentario"
+        boton "Enviar Comentario"
+        validacion
+    fin formulario
+    
+    navegar_a "/otra-pagina"
+fin componente

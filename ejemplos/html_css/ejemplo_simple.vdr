@@ -1,0 +1,46 @@
+# Ejemplo simple de HTML usando Vader
+# Demuestra la sintaxis básica para crear páginas web
+
+pagina "Mi Primera Página"
+    encabezado
+        titulo1 "¡Hola Mundo!"
+        parrafo "Esta es mi primera página web creada con Vader"
+    fin encabezado
+    
+    contenido
+        seccion "introduccion"
+            titulo2 "Bienvenido a Vader"
+            parrafo "Vader te permite crear páginas web escribiendo en español natural."
+            parrafo "No necesitas aprender HTML, CSS o JavaScript."
+            
+            boton "Empezar ahora"
+        fin seccion
+        
+        seccion "caracteristicas"
+            titulo2 "Características"
+            
+            lista "ventajas"
+                elemento "Sintaxis en español natural"
+                elemento "Genera HTML5 semántico"
+                elemento "Compatible con CSS moderno"
+                elemento "Fácil de aprender y usar"
+            fin lista
+        fin seccion
+        
+        seccion "contacto"
+            titulo2 "Contacto"
+            parrafo "¿Tienes preguntas? Contáctanos:"
+            
+            formulario "contacto"
+                campo "nombre" "text" "Tu nombre"
+                campo "email" "email" "Tu email"
+                campo "mensaje" "textarea" "Tu mensaje"
+                boton "Enviar"
+            fin formulario
+        fin seccion
+    fin contenido
+    
+    pie_pagina
+        parrafo "© 2024 Vader Language. Hecho con ❤️"
+    fin pie_pagina
+fin pagina

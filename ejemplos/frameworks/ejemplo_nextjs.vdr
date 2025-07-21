@@ -1,0 +1,174 @@
+# Ejemplo de Next.js con Vader
+# Este archivo demuestra cómo crear una aplicación Next.js usando sintaxis natural en español
+
+pagina nextjs Blog
+    # Función para obtener datos del servidor
+    obtener datos estaticos
+        const posts = [
+            {id: 1, titulo: "Mi primer post", contenido: "Este es mi primer post en el blog"},
+            {id: 2, titulo: "Aprendiendo Next.js", contenido: "Next.js es increíble para React"},
+            {id: 3, titulo: "Vader y frameworks", contenido: "Programar en español es el futuro"}
+        ]
+        
+        retornar {
+            props: { posts }
+        }
+    fin obtener datos
+    
+    # Componente de la página
+    componente BlogPage({posts})
+        # Estado para filtrar posts
+        estado filtro = ""
+        
+        # Computed para posts filtrados
+        const postsFiltrados = posts.filter(post => 
+            post.titulo.toLowerCase().includes(filtro.toLowerCase())
+        )
+        
+        # Metadata de la página
+        head
+            titulo "Mi Blog - Next.js con Vader"
+            meta descripcion="Blog creado con Next.js y Vader"
+        fin head
+        
+        renderizar
+            div clase="blog"
+                header
+                    titulo1 "Mi Blog Personal"
+                    input 
+                        tipo="text"
+                        placeholder="Buscar posts..."
+                        valor={filtro}
+                        onChange={(e) => establecer filtro = e.target.value}
+                fin header
+                
+                main
+                    si postsFiltrados.length === 0
+                        texto "No se encontraron posts"
+                    sino
+                        para cada post en postsFiltrados
+                            article clave={post.id} clase="post"
+                                titulo2 {post.titulo}
+                                texto {post.contenido}
+                                enlace href={`/post/${post.id}`}
+                                    "Leer más"
+                                fin enlace
+                            fin article
+                        fin para cada
+                    fin si
+                fin main
+            fin div
+        fin renderizar
+    fin componente
+fin pagina
+
+# API Route para obtener posts
+api ruta /api/posts
+    metodo GET
+        const posts = [
+            {id: 1, titulo: "Post desde API", contenido: "Este post viene de la API"},
+            {id: 2, titulo: "Datos dinámicos", contenido: "Los datos se actualizan en tiempo real"}
+        ]
+        
+        respuesta json posts
+    fin metodo
+    
+    metodo POST
+        const {titulo, contenido} = cuerpo peticion
+        
+        # Validar datos
+        si no titulo o no contenido
+            respuesta error 400 "Título y contenido son requeridos"
+        fin si
+        
+        # Simular guardar en base de datos
+        const nuevoPost = {
+            id: Date.now(),
+            titulo,
+            contenido,
+            fecha: new Date().toISOString()
+        }
+        
+        respuesta json nuevoPost status=201
+    fin metodo
+fin api
+
+# Layout personalizado
+layout nextjs BlogLayout
+    componente Layout({children})
+        renderizar
+            div clase="layout"
+                nav clase="navegacion"
+                    enlace href="/" "Inicio"
+                    enlace href="/blog" "Blog"
+                    enlace href="/contacto" "Contacto"
+                fin nav
+                
+                main clase="contenido"
+                    {children}
+                fin main
+                
+                footer clase="pie"
+                    texto "© 2024 Mi Blog - Creado con Vader y Next.js"
+                fin footer
+            fin div
+        fin renderizar
+    fin componente
+fin layout
+
+# Middleware para autenticación
+middleware nextjs auth
+    funcion middleware(request)
+        const token = request.cookies.get('auth-token')
+        
+        # Rutas protegidas
+        si request.nextUrl.pathname.startsWith('/admin')
+            si no token
+                redirigir a '/login'
+            fin si
+        fin si
+        
+        continuar
+    fin funcion
+    
+    configuracion
+        matcher: ['/admin/:path*']
+    fin configuracion
+fin middleware
+
+# Componente servidor
+componente servidor UserProfile
+    async funcion obtenerUsuario(id)
+        const response = await fetch(`https://api.ejemplo.com/users/${id}`)
+        retornar await response.json()
+    fin funcion
+    
+    renderizar async
+        const usuario = await obtenerUsuario(props.userId)
+        
+        div clase="perfil-usuario"
+            titulo2 {usuario.nombre}
+            texto "Email: {usuario.email}"
+            imagen src={usuario.avatar} alt="Avatar"
+        fin div
+    fin renderizar
+fin componente
+
+# Hook personalizado
+hook useLocalStorage(clave, valorInicial)
+    estado valor = valorInicial
+    
+    efecto al montar
+        const item = localStorage.getItem(clave)
+        si item
+            establecer valor = JSON.parse(item)
+        fin si
+    fin efecto
+    
+    funcion establecerValor(nuevoValor)
+        establecer valor = nuevoValor
+        localStorage.setItem(clave, JSON.stringify(nuevoValor))
+    fin funcion
+    
+    retornar [valor, establecerValor]
+fin hook

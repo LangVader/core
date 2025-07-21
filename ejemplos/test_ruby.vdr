@@ -1,0 +1,72 @@
+# Ejemplo de Vader transpilado a Ruby
+clase Libro
+    atributo titulo
+    atributo autor
+    atributo paginas
+    
+    constructor(t, a, p)
+        titulo = t
+        autor = a
+        paginas = p
+    fin constructor
+    
+    metodo descripcion
+        retornar "#{titulo} por #{autor} - #{paginas} páginas"
+    fin metodo
+    
+    metodo es_largo
+        si paginas > 300
+            retornar true
+        sino
+            retornar false
+        fin si
+    fin metodo
+fin clase
+
+# Crear libros
+lista libros = []
+crear libro1 de Libro
+libro1.titulo = "El Quijote"
+libro1.autor = "Cervantes"
+libro1.paginas = 500
+
+agregar a libros libro1
+
+crear libro2 de Libro
+libro2.titulo = "Cien años de soledad"
+libro2.autor = "García Márquez"
+libro2.paginas = 400
+
+agregar a libros libro2
+
+# Procesar libros
+repetir con cada libro en libros
+    mostrar libro.descripcion
+    
+    si libro.es_largo
+        mostrar "Este es un libro largo"
+    sino
+        mostrar "Este es un libro corto"
+    fin si
+fin repetir
+
+# Usar bloques y métodos de Ruby
+funcion procesar_numeros
+    lista numeros = [1, 2, 3, 4, 5]
+    
+    # Mapear números
+    numeros_dobles = mapear numeros
+    bloque(n)
+        retornar n * 2
+    fin bloque
+    
+    # Filtrar números pares
+    numeros_pares = filtrar numeros_dobles
+    bloque(n)
+        retornar n % 2 == 0
+    fin bloque
+    
+    mostrar "Números pares dobles: #{numeros_pares}"
+fin funcion
+
+llamar procesar_numeros

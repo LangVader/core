@@ -1,0 +1,80 @@
+# Ejemplo de React con Vader
+# Este archivo demuestra cómo crear un componente React usando sintaxis natural en español
+
+componente react MiContador
+    # Estado del componente
+    estado contador = 0
+    
+    # Función para incrementar
+    funcion incrementar()
+        establecer contador = contador + 1
+    fin funcion
+    
+    # Función para decrementar
+    funcion decrementar()
+        establecer contador = contador - 1
+    fin funcion
+    
+    # Efecto que se ejecuta al montar
+    efecto al montar
+        consola log "Componente montado"
+    fin efecto
+    
+    # Renderizado del componente
+    renderizar
+        div clase="contador"
+            titulo1 "Mi Contador React"
+            texto "Valor actual: {contador}"
+            
+            div clase="botones"
+                boton onclick={decrementar} "-"
+                boton onclick={incrementar} "+"
+            fin div
+            
+            si contador > 10
+                texto clase="alerta" "¡Contador muy alto!"
+            fin si
+        fin div
+    fin renderizar
+fin componente
+
+# Componente de lista
+componente react ListaTareas
+    estado tareas = []
+    estado nuevaTarea = ""
+    
+    funcion agregarTarea()
+        si nuevaTarea != ""
+            establecer tareas = [...tareas, nuevaTarea]
+            establecer nuevaTarea = ""
+        fin si
+    fin funcion
+    
+    funcion eliminarTarea(indice)
+        establecer tareas = tareas.filter((_, i) => i !== indice)
+    fin funcion
+    
+    renderizar
+        div clase="lista-tareas"
+            titulo2 "Lista de Tareas"
+            
+            div clase="agregar-tarea"
+                input 
+                    tipo="text" 
+                    valor={nuevaTarea}
+                    onChange={(e) => establecer nuevaTarea = e.target.value}
+                    placeholder="Nueva tarea..."
+                boton onclick={agregarTarea} "Agregar"
+            fin div
+            
+            ul
+                para cada tarea en tareas con indice
+                    li clave={indice}
+                        texto {tarea}
+                        boton onclick={() => eliminarTarea(indice)} "Eliminar"
+                    fin li
+                fin para cada
+            ul
+        fin div
+    fin renderizar
+fin componente

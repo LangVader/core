@@ -1,0 +1,48 @@
+# Ejemplo de Vader transpilado a PHP
+funcion conectar_base_datos()
+    mostrar "Conectando a la base de datos..."
+    retornar "conexion_exitosa"
+fin funcion
+
+clase Usuario
+    atributo nombre
+    atributo email
+    
+    constructor(n, e)
+        nombre = n
+        email = e
+    fin constructor
+    
+    metodo obtener_info()
+        retornar "Usuario: " + nombre + " - Email: " + email
+    fin metodo
+    
+    metodo guardar_en_sesion()
+        iniciar sesion
+        guardar en sesion usuario_nombre = nombre
+        guardar en sesion usuario_email = email
+    fin metodo
+fin clase
+
+# Crear usuario
+crear usuario de Usuario
+usuario.nombre = "María"
+usuario.email = "maria@ejemplo.com"
+
+# Mostrar información
+mostrar usuario.obtener_info()
+
+# Trabajar con arrays
+lista frutas = ["manzana", "banana", "naranja"]
+agregar a frutas "uva"
+
+repetir con cada fruta en frutas
+    mostrar "Fruta: " + fruta
+fin repetir
+
+# Condicionales
+si longitud de frutas > 3
+    mostrar "Tenemos muchas frutas"
+sino
+    mostrar "Pocas frutas"
+fin si

@@ -1,0 +1,53 @@
+# Ejemplo de API REST con Spring Boot usando Vader
+# Demuestra controladores, servicios, entidades y repositorios
+
+controlador spring "ProductoController"
+    inyectar "ProductoService"
+    
+    ruta get "/productos"
+    ruta post "/productos"
+    ruta put "/productos"
+    ruta delete "/productos"
+fin controlador
+
+servicio spring "ProductoService"
+    inyectar "ProductoRepository"
+    
+    metodo "obtenerTodosLosProductos"
+        # Lógica para obtener productos
+    fin metodo
+    
+    metodo "crearProducto"
+        # Lógica para crear producto
+    fin metodo
+    
+    metodo "actualizarProducto"
+        # Lógica para actualizar producto
+    fin metodo
+    
+    metodo "eliminarProducto"
+        # Lógica para eliminar producto
+    fin metodo
+fin servicio
+
+entidad spring "Producto"
+    campo "nombre" "texto"
+    campo "precio" "decimal"
+    campo "descripcion" "texto"
+    campo "categoria" "texto"
+    campo "stock" "numero"
+    campo "activo" "booleano"
+    campo "fechaCreacion" "fecha"
+fin entidad
+
+repositorio "Producto"
+    buscar por "nombre"
+    buscar por "categoria"
+    buscar por "activo"
+fin repositorio
+
+configuracion
+    bean "RestTemplate"
+    bean "PasswordEncoder"
+    bean "JwtTokenProvider"
+fin configuracion

@@ -1,0 +1,314 @@
+# Ejemplo completo de SolidJS con Vader
+# Aplicación de gestión de tareas con rendimiento ultra rápido
+
+componente solid TaskManager
+    # Señales reactivas (estado)
+    señal tareas = []
+    señal nuevaTarea = ""
+    señal filtro = "todas"
+    señal editando = null
+
+    # Computados (memos)
+    memo tareasFiltradas = () => {
+        const lista = tareas()
+        switch (filtro()) {
+            case "completadas":
+                return lista.filter(t => t.completada)
+            case "pendientes":
+                return lista.filter(t => !t.completada)
+            default:
+                return lista
+        }
+    }
+
+    memo estadisticas = () => {
+        const lista = tareas()
+        return {
+            total: lista.length,
+            completadas: lista.filter(t => t.completada).length,
+            pendientes: lista.filter(t => !t.completada).length
+        }
+    }
+
+    # Store para configuración
+    store configuracion = {
+        tema: "claro",
+        ordenamiento: "fecha",
+        mostrarCompletadas: true,
+        autoguardado: true
+    }
+
+    # Funciones
+    funcion agregarTarea()
+        const texto = nuevaTarea().trim()
+        si texto
+            const nueva = {
+                id: Date.now(),
+                texto: texto,
+                completada: false,
+                fecha: new Date().toISOString(),
+                prioridad: "media"
+            }
+            establecer tareas = [...tareas(), nueva]
+            establecer nuevaTarea = ""
+            
+            # Autoguardado
+            si configuracion.autoguardado
+                guardarEnLocalStorage()
+            fin si
+        fin si
+    fin funcion
+
+    funcion eliminarTarea(id)
+        establecer tareas = tareas().filter(t => t.id !== id)
+        si configuracion.autoguardado
+            guardarEnLocalStorage()
+        fin si
+    fin funcion
+
+    funcion alternarCompletada(id)
+        establecer tareas = tareas().map(t => 
+            t.id === id ? {...t, completada: !t.completada} : t
+        )
+        si configuracion.autoguardado
+            guardarEnLocalStorage()
+        fin si
+    fin funcion
+
+    funcion iniciarEdicion(id)
+        establecer editando = id
+    fin funcion
+
+    funcion guardarEdicion(id, nuevoTexto)
+        establecer tareas = tareas().map(t => 
+            t.id === id ? {...t, texto: nuevoTexto} : t
+        )
+        establecer editando = null
+        si configuracion.autoguardado
+            guardarEdicion()
+        fin si
+    fin funcion
+
+    funcion cambiarPrioridad(id, prioridad)
+        establecer tareas = tareas().map(t => 
+            t.id === id ? {...t, prioridad} : t
+        )
+    fin funcion
+
+    funcion limpiarCompletadas()
+        establecer tareas = tareas().filter(t => !t.completada)
+        si configuracion.autoguardado
+            guardarEnLocalStorage()
+        fin si
+    fin funcion
+
+    funcion guardarEnLocalStorage()
+        localStorage.setItem('vader-tasks', JSON.stringify(tareas()))
+    fin funcion
+
+    funcion cargarDeLocalStorage()
+        const guardadas = localStorage.getItem('vader-tasks')
+        si guardadas
+            establecer tareas = JSON.parse(guardadas)
+        fin si
+    fin funcion
+
+    # Efecto para cargar datos al montar
+    efecto
+        cargarDeLocalStorage()
+        consola log "TaskManager montado - Tareas cargadas"
+    fin efecto
+
+    # Efecto para sincronizar con localStorage
+    efecto
+        # Track tareas para reactividad
+        const lista = tareas()
+        si lista.length > 0
+            consola log `Tareas actualizadas: ${lista.length} total`
+        fin si
+    fin efecto
+
+    renderizar
+        div clase="task-manager"
+            # Header con estadísticas
+            div clase="header"
+                titulo1 "Gestor de Tareas SolidJS"
+                div clase="stats"
+                    div clase="stat-item"
+                        span "Total: "
+                        span clase="stat-number" {estadisticas().total}
+                    fin div
+                    div clase="stat-item"
+                        span "Completadas: "
+                        span clase="stat-number completadas" {estadisticas().completadas}
+                    fin div
+                    div clase="stat-item"
+                        span "Pendientes: "
+                        span clase="stat-number pendientes" {estadisticas().pendientes}
+                    fin div
+                fin div
+            fin div
+
+            # Formulario para nueva tarea
+            div clase="add-task-form"
+                input 
+                    tipo="text"
+                    valor={nuevaTarea()}
+                    onInput={(e) => establecer nuevaTarea = e.target.value}
+                    placeholder="Escribe una nueva tarea..."
+                    onKeyPress={(e) => e.key === 'Enter' && agregarTarea()}
+                
+                boton onclick={agregarTarea} "Agregar Tarea"
+            fin div
+
+            # Filtros
+            div clase="filters"
+                boton 
+                    clase={filtro() === 'todas' ? 'active' : ''}
+                    onclick={() => establecer filtro = 'todas'}
+                    "Todas"
+                
+                boton 
+                    clase={filtro() === 'pendientes' ? 'active' : ''}
+                    onclick={() => establecer filtro = 'pendientes'}
+                    "Pendientes"
+                
+                boton 
+                    clase={filtro() === 'completadas' ? 'active' : ''}
+                    onclick={() => establecer filtro = 'completadas'}
+                    "Completadas"
+            fin div
+
+            # Lista de tareas
+            div clase="task-list"
+                mostrar si tareasFiltradas().length > 0
+                    para cada tarea en tareasFiltradas()
+                        div clase={`task-item ${tarea.completada ? 'completed' : ''} priority-${tarea.prioridad}`}
+                            div clase="task-content"
+                                input 
+                                    tipo="checkbox"
+                                    checked={tarea.completada}
+                                    onChange={() => alternarCompletada(tarea.id)}
+                                
+                                mostrar si editando() === tarea.id
+                                    input 
+                                        tipo="text"
+                                        valor={tarea.texto}
+                                        onBlur={(e) => guardarEdicion(tarea.id, e.target.value)}
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter') {
+                                                guardarEdicion(tarea.id, e.target.value)
+                                            }
+                                        }}
+                                        autoFocus
+                                sino
+                                    span 
+                                        clase="task-text"
+                                        ondblclick={() => iniciarEdicion(tarea.id)}
+                                        {tarea.texto}
+                                fin mostrar
+                            fin div
+
+                            div clase="task-actions"
+                                # Selector de prioridad
+                                select 
+                                    valor={tarea.prioridad}
+                                    onChange={(e) => cambiarPrioridad(tarea.id, e.target.value)}
+                                    option valor="baja" "Baja"
+                                    option valor="media" "Media"
+                                    option valor="alta" "Alta"
+                                fin select
+
+                                boton 
+                                    clase="edit-btn"
+                                    onclick={() => iniciarEdicion(tarea.id)}
+                                    "Editar"
+                                
+                                boton 
+                                    clase="delete-btn"
+                                    onclick={() => eliminarTarea(tarea.id)}
+                                    "Eliminar"
+                            fin div
+
+                            div clase="task-meta"
+                                small "Creada: {new Date(tarea.fecha).toLocaleDateString()}"
+                            fin div
+                        fin div
+                    fin para cada
+                sino
+                    div clase="empty-state"
+                        titulo2 "No hay tareas"
+                        parrafo "¡Agrega tu primera tarea para comenzar!"
+                    fin div
+                fin mostrar
+            fin div
+
+            # Acciones masivas
+            mostrar si tareas().length > 0
+                div clase="bulk-actions"
+                    boton 
+                        onclick={() => establecer tareas = tareas().map(t => ({...t, completada: true}))}
+                        "Marcar Todas Completadas"
+                    
+                    boton 
+                        onclick={() => establecer tareas = tareas().map(t => ({...t, completada: false}))}
+                        "Marcar Todas Pendientes"
+                    
+                    boton 
+                        clase="danger"
+                        onclick={limpiarCompletadas}
+                        "Limpiar Completadas"
+                    
+                    boton 
+                        clase="danger"
+                        onclick={() => {
+                            if (confirm('¿Estás seguro de eliminar todas las tareas?')) {
+                                establecer tareas = []
+                                guardarEnLocalStorage()
+                            }
+                        }}
+                        "Eliminar Todas"
+                fin div
+            fin mostrar
+
+            # Configuración
+            div clase="settings"
+                titulo3 "Configuración"
+                div clase="setting-group"
+                    label
+                        input 
+                            tipo="checkbox"
+                            checked={configuracion.autoguardado}
+                            onChange={(e) => configuracion.autoguardado = e.target.checked}
+                        span "Autoguardado"
+                    fin label
+                    
+                    label
+                        input 
+                            tipo="checkbox"
+                            checked={configuracion.mostrarCompletadas}
+                            onChange={(e) => configuracion.mostrarCompletadas = e.target.checked}
+                        span "Mostrar completadas"
+                    fin label
+                fin div
+
+                div clase="setting-group"
+                    label "Tema:"
+                    select 
+                        valor={configuracion.tema}
+                        onChange={(e) => configuracion.tema = e.target.value}
+                        option valor="claro" "Claro"
+                        option valor="oscuro" "Oscuro"
+                        option valor="auto" "Automático"
+                    fin select
+                fin div
+            fin div
+
+            # Footer
+            div clase="footer"
+                parrafo "Creado con Vader + SolidJS - Ultra rápido y reactivo"
+                small "Datos guardados localmente en tu navegador"
+            fin div
+        fin div
+    fin renderizar
+fin componente

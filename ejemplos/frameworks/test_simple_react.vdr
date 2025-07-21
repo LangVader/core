@@ -1,0 +1,15 @@
+# Ejemplo simple de React para probar
+componente react Saludo
+    estado nombre = "Mundo"
+    
+    funcion cambiarNombre
+        establecer nombre = "Vader"
+    fin funcion
+    
+    renderizar
+        div
+            titulo1 "Hola {nombre}!"
+            boton onclick={cambiarNombre} "Cambiar nombre"
+        fin div
+    fin renderizar
+fin componente

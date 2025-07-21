@@ -1,0 +1,222 @@
+# Ejemplo completo: Red Social con MongoDB
+# Demuestra operaciones NoSQL con sintaxis natural en español
+
+# Conexión a MongoDB
+conectar base_datos mongodb "mongodb://localhost:27017" base="red_social"
+
+# En MongoDB no necesitamos crear tablas, pero podemos definir la estructura de documentos
+
+# Insertar usuarios (documentos JSON)
+insertar en usuarios
+    nombre: "Juan Pérez"
+    email: "juan@social.com"
+    edad: 28
+    ubicacion: "Madrid, España"
+    intereses: ["programación", "tecnología", "música"]
+    seguidores: 0
+    siguiendo: 0
+    activo: true
+    fecha_registro: "2024-01-15T10:00:00Z"
+    perfil:
+        bio: "Desarrollador Full Stack apasionado por la tecnología"
+        avatar: "https://ejemplo.com/avatar1.jpg"
+        verificado: false
+fin insertar
+
+insertar en usuarios
+    nombre: "María García"
+    email: "maria@social.com"
+    edad: 25
+    ubicacion: "Barcelona, España"
+    intereses: ["diseño", "arte", "fotografía"]
+    seguidores: 150
+    siguiendo: 89
+    activo: true
+    fecha_registro: "2024-01-10T14:30:00Z"
+    perfil:
+        bio: "Diseñadora UX/UI creativa"
+        avatar: "https://ejemplo.com/avatar2.jpg"
+        verificado: true
+fin insertar
+
+insertar en usuarios
+    nombre: "Carlos López"
+    email: "carlos@social.com"
+    edad: 32
+    ubicacion: "México DF, México"
+    intereses: ["emprendimiento", "startups", "tecnología"]
+    seguidores: 500
+    siguiendo: 200
+    activo: true
+    fecha_registro: "2024-01-05T09:15:00Z"
+    perfil:
+        bio: "CEO de TechStartup | Emprendedor serial"
+        avatar: "https://ejemplo.com/avatar3.jpg"
+        verificado: true
+fin insertar
+
+# Insertar publicaciones
+insertar en publicaciones
+    autor_id: "juan@social.com"
+    contenido: "¡Acabo de descubrir Vader! Un lenguaje de programación en español increíble 🚀"
+    tipo: "texto"
+    likes: 25
+    comentarios: 5
+    compartidos: 3
+    fecha_publicacion: "2024-01-20T16:45:00Z"
+    hashtags: ["#Vader", "#programación", "#español"]
+    menciones: []
+    publico: true
+fin insertar
+
+insertar en publicaciones
+    autor_id: "maria@social.com"
+    contenido: "Nuevo diseño para una app móvil. ¿Qué opinan?"
+    tipo: "imagen"
+    imagen_url: "https://ejemplo.com/diseno1.jpg"
+    likes: 89
+    comentarios: 12
+    compartidos: 7
+    fecha_publicacion: "2024-01-19T11:20:00Z"
+    hashtags: ["#diseño", "#UX", "#móvil"]
+    menciones: ["@juan@social.com"]
+    publico: true
+fin insertar
+
+insertar en publicaciones
+    autor_id: "carlos@social.com"
+    contenido: "5 consejos para emprendedores tech que me hubiera gustado saber antes"
+    tipo: "texto"
+    likes: 156
+    comentarios: 23
+    compartidos: 45
+    fecha_publicacion: "2024-01-18T08:30:00Z"
+    hashtags: ["#emprendimiento", "#startup", "#consejos"]
+    menciones: []
+    publico: true
+fin insertar
+
+# Insertar comentarios
+insertar en comentarios
+    publicacion_id: "publicacion_1"
+    autor_id: "maria@social.com"
+    contenido: "¡Me parece genial! ¿Dónde puedo aprender más sobre Vader?"
+    likes: 5
+    fecha_comentario: "2024-01-20T17:00:00Z"
+    respuestas: []
+fin insertar
+
+insertar en comentarios
+    publicacion_id: "publicacion_2"
+    autor_id: "carlos@social.com"
+    contenido: "Excelente trabajo María! El diseño se ve muy profesional"
+    likes: 8
+    fecha_comentario: "2024-01-19T12:15:00Z"
+    respuestas: []
+fin insertar
+
+# Consultas en MongoDB (sintaxis adaptada para NoSQL)
+decir "=== USUARIOS ACTIVOS ==="
+
+# Buscar todos los usuarios activos
+buscar en usuarios donde activo = true
+
+# Buscar usuarios por ubicación
+buscar en usuarios donde ubicacion contiene "España"
+
+# Buscar usuarios con más seguidores
+buscar nombre, seguidores en usuarios 
+donde seguidores > 100 
+ordenar por seguidores descendente
+
+decir "=== PUBLICACIONES POPULARES ==="
+
+# Publicaciones con más likes
+buscar contenido, likes, autor_id en publicaciones
+donde likes > 50
+ordenar por likes descendente
+
+# Publicaciones por hashtag
+buscar contenido, hashtags, fecha_publicacion en publicaciones
+donde hashtags contiene "#tecnología"
+
+# Publicaciones recientes
+buscar autor_id, contenido, fecha_publicacion en publicaciones
+donde fecha_publicacion > "2024-01-18T00:00:00Z"
+ordenar por fecha_publicacion descendente
+
+decir "=== INTERACCIONES ==="
+
+# Comentarios por publicación
+buscar publicacion_id, COUNT(*) desde comentarios
+agrupar por publicacion_id
+
+# Usuarios más activos (por publicaciones)
+buscar autor_id, COUNT(*) desde publicaciones
+agrupar por autor_id
+ordenar por COUNT(*) descendente
+
+# Hashtags más populares
+buscar hashtags, COUNT(*) desde publicaciones
+donde hashtags existe
+agrupar por hashtags
+ordenar por COUNT(*) descendente
+
+# Actualizar perfil de usuario
+actualizar usuarios 
+donde email = "juan@social.com" 
+establecer 
+    perfil.bio = "Desarrollador Full Stack | Creador de contenido sobre Vader"
+    perfil.verificado = true
+
+# Incrementar likes en una publicación
+actualizar publicaciones 
+donde autor_id = "maria@social.com" y tipo = "imagen"
+establecer likes = likes + 1
+
+# Agregar seguidor
+actualizar usuarios 
+donde email = "juan@social.com"
+establecer seguidores = seguidores + 1
+
+# Buscar usuarios por intereses
+decir "=== BÚSQUEDA POR INTERESES ==="
+buscar nombre, intereses en usuarios
+donde intereses contiene "programación"
+
+# Buscar publicaciones con menciones
+buscar contenido, menciones en publicaciones
+donde menciones contiene "@juan@social.com"
+
+# Estadísticas de la red social
+decir "=== ESTADÍSTICAS ==="
+
+# Total de usuarios registrados
+buscar COUNT(*) desde usuarios
+
+# Total de publicaciones
+buscar COUNT(*) desde publicaciones
+
+# Promedio de likes por publicación
+buscar AVG(likes) desde publicaciones
+
+# Usuario con más seguidores
+buscar nombre, seguidores desde usuarios
+donde seguidores = (buscar MAX(seguidores) desde usuarios)
+
+# Publicaciones por tipo
+buscar tipo, COUNT(*) desde publicaciones
+agrupar por tipo
+
+# Eliminar publicaciones antiguas sin interacción
+eliminar de publicaciones
+donde fecha_publicacion < "2024-01-01T00:00:00Z" 
+y likes = 0 
+y comentarios = 0
+
+# Eliminar comentarios spam (sin likes y muy antiguos)
+eliminar de comentarios
+donde likes = 0 
+y fecha_comentario < "2024-01-15T00:00:00Z"
+
+decir "✅ Red social con MongoDB completada exitosamente"

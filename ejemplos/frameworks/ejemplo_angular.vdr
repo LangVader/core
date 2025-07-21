@@ -1,0 +1,250 @@
+# Ejemplo de Angular con Vader
+# Este archivo demuestra cómo crear una aplicación Angular usando sintaxis natural en español
+
+componente angular TaskManager
+    # Propiedades del componente
+    propiedad tareas: Task[] = []
+    propiedad nuevaTarea: string = ""
+    propiedad filtro: string = "todas"
+    
+    # Inyección de dependencias
+    inyectar taskService TaskService
+    inyectar router Router
+    
+    # Propiedades de entrada
+    entrada usuario: User
+    entrada configuracion: Config = {}
+    
+    # Eventos de salida
+    salida tareaCreada = new EventEmitter<Task>()
+    salida tareaEliminada = new EventEmitter<number>()
+    
+    # Lifecycle hooks
+    al inicializar
+        this.cargarTareas()
+    fin ciclo
+    
+    al destruir
+        # Limpiar suscripciones
+        this.subscription?.unsubscribe()
+    fin ciclo
+    
+    # Métodos del componente
+    metodo cargarTareas(): void
+        this.taskService.obtenerTareas().subscribe({
+            next: (tareas) => {
+                this.tareas = tareas
+            },
+            error: (error) => {
+                console.error('Error al cargar tareas:', error)
+            }
+        })
+    fin metodo
+    
+    metodo agregarTarea(): void
+        si this.nuevaTarea.trim()
+            const tarea: Task = {
+                id: Date.now(),
+                titulo: this.nuevaTarea,
+                completada: false,
+                fecha: new Date()
+            }
+            
+            this.taskService.crearTarea(tarea).subscribe({
+                next: (tareaCreada) => {
+                    this.tareas.push(tareaCreada)
+                    this.nuevaTarea = ""
+                    emitir tareaCreada tareaCreada
+                }
+            })
+        fin si
+    fin metodo
+    
+    metodo eliminarTarea(id: number): void
+        this.taskService.eliminarTarea(id).subscribe({
+            next: () => {
+                this.tareas = this.tareas.filter(t => t.id !== id)
+                emitir tareaEliminada id
+            }
+        })
+    fin metodo
+    
+    metodo toggleTarea(tarea: Task): void
+        tarea.completada = !tarea.completada
+        this.taskService.actualizarTarea(tarea).subscribe()
+    fin metodo
+    
+    metodo get tareasFiltradas(): Task[]
+        switch (this.filtro) {
+            case 'completadas':
+                return this.tareas.filter(t => t.completada)
+            case 'pendientes':
+                return this.tareas.filter(t => !t.completada)
+            default:
+                return this.tareas
+        }
+    fin metodo
+    
+    metodo navegar(ruta: string): void
+        navegar a ruta
+    fin metodo
+fin componente
+
+# Servicio para manejar tareas
+servicio TaskService
+    # Inyección de HttpClient
+    inyectar http HttpClient
+    
+    propiedad apiUrl = 'http://localhost:3000/api/tasks'
+    
+    metodo obtenerTareas(): Observable<Task[]>
+        http get `${this.apiUrl}`
+    fin metodo
+    
+    metodo crearTarea(tarea: Task): Observable<Task>
+        http post `${this.apiUrl}` tarea
+    fin metodo
+    
+    metodo actualizarTarea(tarea: Task): Observable<Task>
+        http put `${this.apiUrl}/${tarea.id}` tarea
+    fin metodo
+    
+    metodo eliminarTarea(id: number): Observable<void>
+        http delete `${this.apiUrl}/${id}`
+    fin metodo
+fin servicio
+
+# Módulo principal
+modulo AppModule
+    declaraciones: [
+        TaskManagerComponent,
+        TaskItemComponent,
+        TaskFilterPipe
+    ]
+    
+    importaciones: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes)
+    ]
+    
+    proveedores: [
+        TaskService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    ]
+    
+    bootstrap: [AppComponent]
+fin modulo
+
+# Pipe personalizado para filtrar
+pipe TaskFilter
+    metodo transform(tareas: Task[], filtro: string): Task[]
+        si no tareas o no filtro
+            retornar tareas
+        fin si
+        
+        switch (filtro) {
+            case 'completadas':
+                retornar tareas.filter(t => t.completada)
+            case 'pendientes':
+                retornar tareas.filter(t => !t.completada)
+            default:
+                retornar tareas
+        }
+    fin metodo
+fin pipe
+
+# Directiva personalizada
+directiva HighlightDirective
+    inyectar el ElementRef
+    inyectar renderer Renderer2
+    
+    entrada color: string = 'yellow'
+    
+    al inicializar
+        this.highlight(this.color)
+    fin ciclo
+    
+    metodo highlight(color: string): void
+        this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color)
+    fin metodo
+    
+    @HostListener('mouseenter')
+    metodo onMouseEnter(): void
+        this.highlight(this.color)
+    fin metodo
+    
+    @HostListener('mouseleave')
+    metodo onMouseLeave(): void
+        this.highlight('')
+    fin metodo
+fin directiva
+
+# Guard para proteger rutas
+guard AuthGuard
+    inyectar authService AuthService
+    inyectar router Router
+    
+    metodo canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
+        si this.authService.isAuthenticated()
+            retornar true
+        sino
+            navegar a '/login'
+            retornar false
+        fin si
+    fin metodo
+fin guard
+
+# Interceptor para agregar token de autenticación
+interceptor AuthInterceptor
+    inyectar authService AuthService
+    
+    metodo intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
+        const token = this.authService.getToken()
+        
+        si token
+            const authReq = req.clone({
+                headers: req.headers.set('Authorization', `Bearer ${token}`)
+            })
+            retornar next.handle(authReq)
+        fin si
+        
+        retornar next.handle(req)
+    fin metodo
+fin interceptor
+
+# Formulario reactivo
+componente angular TaskForm
+    propiedad taskForm: FormGroup
+    
+    inyectar fb FormBuilder
+    inyectar taskService TaskService
+    
+    al inicializar
+        crear formulario taskForm
+            campo titulo = "" requerido
+            campo descripcion = ""
+            campo prioridad = "media"
+            campo fechaLimite = null
+        fin formulario
+    fin ciclo
+    
+    metodo onSubmit(): void
+        si this.taskForm.valid
+            const tarea = this.taskForm.value
+            this.taskService.crearTarea(tarea).subscribe({
+                next: () => {
+                    this.taskForm.reset()
+                    # Mostrar mensaje de éxito
+                }
+            })
+        fin si
+    fin metodo
+    
+    # Getters para validación
+    validar titulo
+    validar descripcion
+    validar fechaLimite
+fin componente

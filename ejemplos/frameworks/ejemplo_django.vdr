@@ -1,0 +1,281 @@
+# Ejemplo completo de Django con Vader
+# Sistema de gestión de biblioteca
+
+app django Biblioteca
+
+    # Modelo de Libro
+    modelo Libro
+        campo titulo: string
+        campo autor: string
+        campo isbn: string
+        campo fecha_publicacion: fecha
+        campo disponible: booleano
+        campo categoria: string
+        campo descripcion: texto
+        
+        relacion uno_a_muchos Prestamo prestamos
+
+    # Modelo de Usuario (extendiendo User)
+    modelo PerfilUsuario
+        relacion uno_a_uno User usuario
+        campo telefono: string
+        campo direccion: texto
+        campo fecha_registro: fecha_hora
+        campo activo: booleano
+
+    # Modelo de Préstamo
+    modelo Prestamo
+        relacion pertenece_a Libro libro
+        relacion pertenece_a User usuario
+        campo fecha_prestamo: fecha_hora
+        campo fecha_devolucion: fecha
+        campo devuelto: booleano
+        campo notas: texto
+
+    # Vista principal - lista de libros
+    vista lista_libros
+        obtener todos Libro
+        paginar 10
+        
+        si metodo GET
+            categoria = request.GET.get('categoria')
+            si categoria
+                filtrar Libro por categoria=categoria
+            fin si
+            
+            respuesta plantilla "libros/lista.html" con {
+                libros: objects,
+                categorias: ["ficcion", "ciencia", "historia", "tecnologia"],
+                categoria_actual: categoria
+            }
+        fin si
+    fin vista
+
+    # Vista de detalle de libro
+    vista detalle_libro
+        obtener por id Libro request.GET.get('id')
+        
+        # Verificar disponibilidad
+        prestamos_activos = Prestamo.objects.filter(libro=obj, devuelto=False)
+        disponible = prestamos_activos.count() == 0
+        
+        respuesta plantilla "libros/detalle.html" con {
+            libro: obj,
+            disponible: disponible,
+            prestamos: prestamos_activos
+        }
+    fin vista
+
+    # Vista para crear nuevo libro
+    vista crear_libro
+        requiere login
+        
+        si metodo POST
+            validar titulo: required
+            validar autor: required
+            validar isbn: required|unique
+            
+            crear Libro
+            mensaje exito "Libro creado exitosamente"
+            redirigir a "/libros/"
+        sino
+            respuesta plantilla "libros/crear.html"
+        fin si
+    fin vista
+
+    # Vista para préstamo de libro
+    vista prestar_libro
+        requiere login
+        obtener por id Libro request.POST.get('libro_id')
+        
+        si metodo POST
+            # Verificar si el libro está disponible
+            prestamos_activos = Prestamo.objects.filter(libro=obj, devuelto=False)
+            si prestamos_activos.exists()
+                mensaje error "El libro no está disponible"
+                redirigir a f"/libros/{obj.id}/"
+            fin si
+            
+            # Crear préstamo
+            prestamo = Prestamo.objects.create(
+                libro=obj,
+                usuario=request.user,
+                fecha_prestamo=timezone.now(),
+                fecha_devolucion=timezone.now() + timedelta(days=14),
+                devuelto=False
+            )
+            
+            mensaje exito f"Libro '{obj.titulo}' prestado exitosamente"
+            redirigir a "/mis-prestamos/"
+        fin si
+    fin vista
+
+    # Vista para devolver libro
+    vista devolver_libro
+        requiere login
+        obtener por id Prestamo request.POST.get('prestamo_id')
+        
+        si obj.usuario != request.user
+            mensaje error "No tienes permiso para devolver este libro"
+            redirigir a "/mis-prestamos/"
+        fin si
+        
+        si metodo POST
+            obj.devuelto = True
+            obj.fecha_devolucion_real = timezone.now()
+            actualizar obj
+            
+            mensaje exito f"Libro '{obj.libro.titulo}' devuelto exitosamente"
+            redirigir a "/mis-prestamos/"
+        fin si
+    fin vista
+
+    # Vista de préstamos del usuario
+    vista mis_prestamos
+        requiere login
+        
+        prestamos_activos = Prestamo.objects.filter(usuario=request.user, devuelto=False)
+        historial = Prestamo.objects.filter(usuario=request.user, devuelto=True).order_by('-fecha_devolucion_real')[:10]
+        
+        respuesta plantilla "prestamos/mis_prestamos.html" con {
+            prestamos_activos: prestamos_activos,
+            historial: historial,
+            total_activos: prestamos_activos.count()
+        }
+    fin vista
+
+    # Vista clase para búsqueda
+    vista clase BuscarLibros lista
+        modelo = Libro
+        template_name = "libros/buscar.html"
+        context_object_name = "libros"
+        paginate_by = 20
+        
+        metodo get_queryset
+            query = self.request.GET.get('q')
+            si query
+                return Libro.objects.filter(
+                    Q(titulo__icontains=query) | 
+                    Q(autor__icontains=query) |
+                    Q(descripcion__icontains=query)
+                )
+            sino
+                return Libro.objects.none()
+            fin si
+        fin metodo
+    fin vista
+
+    # Vista de estadísticas (solo admin)
+    vista estadisticas
+        requiere login
+        
+        si no request.user.is_staff
+            mensaje error "No tienes permisos para ver estadísticas"
+            redirigir a "/"
+        fin si
+        
+        total_libros = Libro.objects.count()
+        libros_disponibles = Libro.objects.filter(disponible=True).count()
+        prestamos_activos = Prestamo.objects.filter(devuelto=False).count()
+        usuarios_activos = User.objects.filter(is_active=True).count()
+        
+        # Libros más prestados
+        from django.db.models import Count
+        libros_populares = Libro.objects.annotate(
+            num_prestamos=Count('prestamos')
+        ).order_by('-num_prestamos')[:10]
+        
+        respuesta plantilla "admin/estadisticas.html" con {
+            total_libros: total_libros,
+            libros_disponibles: libros_disponibles,
+            prestamos_activos: prestamos_activos,
+            usuarios_activos: usuarios_activos,
+            libros_populares: libros_populares
+        }
+    fin vista
+
+    # Formulario personalizado para libro
+    formulario LibroForm Libro
+        class Meta:
+            fields = ['titulo', 'autor', 'isbn', 'fecha_publicacion', 'categoria', 'descripcion']
+            widgets = {
+                'descripcion': forms.Textarea(attrs={'rows': 4}),
+                'fecha_publicacion': forms.DateInput(attrs={'type': 'date'})
+            }
+    fin formulario
+
+    # API REST simple
+    vista api_libros
+        sin csrf
+        
+        si metodo GET
+            libros = Libro.objects.all()[:50]
+            data = []
+            para cada libro en libros
+                data.append({
+                    'id': libro.id,
+                    'titulo': libro.titulo,
+                    'autor': libro.autor,
+                    'disponible': libro.disponible,
+                    'categoria': libro.categoria
+                })
+            fin para cada
+            
+            respuesta json {
+                'libros': data,
+                'total': len(data)
+            }
+        fin si
+        
+        si metodo POST
+            import json
+            data = json.loads(request.body)
+            
+            validar data.get('titulo'): required
+            validar data.get('autor'): required
+            
+            libro = Libro.objects.create(
+                titulo=data['titulo'],
+                autor=data['autor'],
+                isbn=data.get('isbn', ''),
+                categoria=data.get('categoria', 'general'),
+                disponible=True
+            )
+            
+            respuesta json {
+                'id': libro.id,
+                'titulo': libro.titulo,
+                'mensaje': 'Libro creado exitosamente'
+            } status=201
+        fin si
+    fin vista
+
+    # Middleware personalizado
+    antes peticion
+        # Log de todas las peticiones
+        import logging
+        logger = logging.getLogger('biblioteca')
+        logger.info(f"{request.method} {request.path} - Usuario: {request.user}")
+        
+        # Verificar mantenimiento
+        si settings.MAINTENANCE_MODE y no request.user.is_staff
+            return HttpResponse("Sitio en mantenimiento", status=503)
+        fin si
+    fin antes
+
+    # Señales de Django
+    from django.db.models.signals import post_save
+    from django.dispatch import receiver
+    
+    @receiver(post_save, sender=Prestamo)
+    def notificar_prestamo(sender, instance, created, **kwargs):
+        si created
+            # Enviar email de confirmación
+            send_mail(
+                'Préstamo confirmado',
+                f'Has prestado el libro: {instance.libro.titulo}',
+                'biblioteca@ejemplo.com',
+                [instance.usuario.email]
+            )
+        fin si
+fin app

@@ -1,0 +1,17 @@
+# Ejemplo simple de Vue para probar
+componente vue Contador
+    script
+        reactivo numero = 0
+        
+        metodo incrementar()
+            numero += 1
+        fin metodo
+    fin script
+    
+    template
+        div
+            titulo1 "Contador: {{numero}}"
+            boton @click="incrementar()" "Incrementar"
+        fin div
+    fin template
+fin componente

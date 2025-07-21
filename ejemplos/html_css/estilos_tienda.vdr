@@ -1,0 +1,510 @@
+# Estilos CSS para la tienda online usando Vader
+# Diseño moderno, responsive y profesional para e-commerce
+
+estilos
+    # Variables globales y reset
+    cuerpo
+        fuente = "helvetica"
+        tamaño_fuente = "16px"
+        altura_linea = "1.6"
+        margen = "0"
+        relleno = "0"
+        fondo_color = "gris muy claro"
+        color = "gris oscuro"
+    fin cuerpo
+    
+    # Encabezado y navegación
+    encabezado
+        fondo_color = "blanco"
+        sombra = "0 2px 10px rgba(0,0,0,0.1)"
+        posicion = "fija"
+        arriba = "0"
+        ancho = "100%"
+        z_index = "1000"
+        
+        navegacion
+            mostrar = "flex"
+            justificar_contenido = "space-between"
+            alinear_elementos = "center"
+            relleno = "1rem 2rem"
+            ancho_maximo = "1200px"
+            margen = "0 auto"
+            
+            .logo
+                tamaño_fuente = "1.5rem"
+                peso_fuente = "negrita"
+                color = "azul"
+            fin .logo
+            
+            .menu
+                mostrar = "flex"
+                sin_viñetas
+                margen = "0"
+                relleno = "0"
+                
+                elemento
+                    margen = "0 1rem"
+                    
+                    enlace
+                        sin_decoracion
+                        color = "gris oscuro"
+                        peso_fuente = "medio"
+                        transicion = "color 0.3s ease"
+                        
+                        al_pasar_mouse
+                            color = "azul"
+                        fin hover
+                    fin enlace
+                fin elemento
+            fin .menu
+            
+            .carrito
+                posicion = "relativa"
+                
+                .contador
+                    posicion = "absoluta"
+                    arriba = "-8px"
+                    derecha = "-8px"
+                    fondo_color = "rojo"
+                    color = "blanco"
+                    borde_radio = "50%"
+                    ancho = "20px"
+                    alto = "20px"
+                    mostrar = "flex"
+                    alinear_elementos = "center"
+                    justificar_contenido = "center"
+                    tamaño_fuente = "12px"
+                    peso_fuente = "negrita"
+                fin .contador
+            fin .carrito
+        fin navegacion
+    fin encabezado
+    
+    # Contenido principal
+    contenido
+        margen_arriba = "80px"
+        ancho_maximo = "1200px"
+        margen_izquierda = "auto"
+        margen_derecha = "auto"
+        relleno = "2rem"
+    fin contenido
+    
+    # Banner principal
+    .banner_principal
+        fondo_gradiente = "azul a morado"
+        color = "blanco"
+        alineacion_texto = "centro"
+        relleno = "4rem 2rem"
+        borde_radio = "15px"
+        margen_abajo = "3rem"
+        
+        titulo1
+            tamaño_fuente = "3rem"
+            margen_abajo = "1rem"
+            peso_fuente = "negrita"
+        fin titulo1
+        
+        parrafo
+            tamaño_fuente = "1.2rem"
+            margen_abajo = "2rem"
+            opacidad = "0.9"
+        fin parrafo
+        
+        boton
+            fondo_color = "blanco"
+            color = "azul"
+            relleno = "1rem 2rem"
+            borde_radio = "25px"
+            sin_borde
+            tamaño_fuente = "1.1rem"
+            peso_fuente = "negrita"
+            cursor = "pointer"
+            transicion = "all 0.3s ease"
+            
+            al_pasar_mouse
+                transformar = "translateY(-2px)"
+                sombra = "0 5px 15px rgba(0,0,0,0.2)"
+            fin hover
+        fin boton
+    fin .banner_principal
+    
+    # Grid de productos
+    .grid_productos
+        mostrar = "grid"
+        columnas_grid = "repeat(auto-fit, minmax(300px, 1fr))"
+        espacio_grid = "2rem"
+        margen_abajo = "3rem"
+    fin .grid_productos
+    
+    # Tarjetas de productos
+    tarjeta
+        fondo_color = "blanco"
+        borde_radio = "15px"
+        sombra = "0 5px 20px rgba(0,0,0,0.1)"
+        desbordamiento = "oculto"
+        transicion = "all 0.3s ease"
+        
+        al_pasar_mouse
+            transformar = "translateY(-10px)"
+            sombra = "0 15px 40px rgba(0,0,0,0.2)"
+        fin hover
+        
+        imagen
+            ancho = "100%"
+            alto = "200px"
+            objeto_ajuste = "cover"
+        fin imagen
+        
+        .contenido_tarjeta
+            relleno = "1.5rem"
+            
+            titulo3
+                margen_abajo = "0.5rem"
+                color = "gris oscuro"
+                tamaño_fuente = "1.2rem"
+            fin titulo3
+            
+            parrafo
+                color = "gris"
+                margen_abajo = "1rem"
+                tamaño_fuente = "0.9rem"
+            fin parrafo
+            
+            .precio
+                tamaño_fuente = "1.5rem"
+                peso_fuente = "negrita"
+                color = "verde"
+                margen_abajo = "1rem"
+            fin .precio
+            
+            .precio_anterior
+                tamaño_fuente = "1rem"
+                color = "gris"
+                decoracion_texto = "tachado"
+                margen_izquierda = "0.5rem"
+            fin .precio_anterior
+            
+            .etiqueta
+                fondo_color = "naranja"
+                color = "blanco"
+                relleno = "0.25rem 0.5rem"
+                borde_radio = "15px"
+                tamaño_fuente = "0.8rem"
+                peso_fuente = "negrita"
+                posicion = "absoluta"
+                arriba = "10px"
+                derecha = "10px"
+            fin .etiqueta
+            
+            boton
+                ancho = "100%"
+                fondo_color = "azul"
+                color = "blanco"
+                sin_borde
+                relleno = "0.75rem"
+                borde_radio = "8px"
+                cursor = "pointer"
+                transicion = "background-color 0.3s ease"
+                
+                al_pasar_mouse
+                    fondo_color = "azul oscuro"
+                fin hover
+            fin boton
+        fin .contenido_tarjeta
+    fin tarjeta
+    
+    # Categorías
+    .categorias_grid
+        mostrar = "grid"
+        columnas_grid = "repeat(auto-fit, minmax(200px, 1fr))"
+        espacio_grid = "1.5rem"
+        sin_viñetas
+        relleno = "0"
+        margen_abajo = "3rem"
+        
+        elemento
+            enlace
+                mostrar = "bloque"
+                sin_decoracion
+                color = "heredar"
+                transicion = "all 0.3s ease"
+                
+                al_pasar_mouse
+                    transformar = "scale(1.05)"
+                fin hover
+                
+                imagen
+                    ancho = "100%"
+                    alto = "150px"
+                    objeto_ajuste = "cover"
+                    borde_radio = "10px"
+                fin imagen
+                
+                titulo4
+                    alineacion_texto = "centro"
+                    margen_arriba = "1rem"
+                    color = "gris oscuro"
+                fin titulo4
+            fin enlace
+        fin elemento
+    fin .categorias_grid
+    
+    # Newsletter
+    .newsletter
+        fondo_gradiente = "verde claro a azul claro"
+        color = "blanco"
+        relleno = "3rem 2rem"
+        borde_radio = "15px"
+        alineacion_texto = "centro"
+        margen_abajo = "3rem"
+        
+        titulo2
+            margen_abajo = "1rem"
+        fin titulo2
+        
+        parrafo
+            margen_abajo = "2rem"
+            opacidad = "0.9"
+        fin parrafo
+        
+        formulario
+            ancho_maximo = "500px"
+            margen = "0 auto"
+            
+            campo
+                ancho = "100%"
+                relleno = "1rem"
+                margen_abajo = "1rem"
+                borde = "ninguno"
+                borde_radio = "8px"
+                tamaño_fuente = "1rem"
+            fin campo
+            
+            .checkbox_grupo
+                mostrar = "flex"
+                justificar_contenido = "flex-start"
+                alinear_elementos = "center"
+                margen_abajo = "1rem"
+                alineacion_texto = "izquierda"
+                
+                checkbox
+                    margen_derecha = "0.5rem"
+                fin checkbox
+                
+                etiqueta
+                    tamaño_fuente = "0.9rem"
+                fin etiqueta
+            fin .checkbox_grupo
+            
+            boton
+                fondo_color = "blanco"
+                color = "azul"
+                relleno = "1rem 2rem"
+                sin_borde
+                borde_radio = "25px"
+                cursor = "pointer"
+                peso_fuente = "negrita"
+                transicion = "all 0.3s ease"
+                
+                al_pasar_mouse
+                    transformar = "translateY(-2px)"
+                    sombra = "0 5px 15px rgba(0,0,0,0.2)"
+                fin hover
+            fin boton
+        fin formulario
+    fin .newsletter
+    
+    # Testimonios
+    .testimonios_grid
+        mostrar = "grid"
+        columnas_grid = "repeat(auto-fit, minmax(300px, 1fr))"
+        espacio_grid = "2rem"
+        margen_abajo = "3rem"
+        
+        .testimonio
+            fondo_color = "blanco"
+            relleno = "2rem"
+            borde_radio = "15px"
+            sombra = "0 5px 20px rgba(0,0,0,0.1)"
+            alineacion_texto = "centro"
+            
+            imagen
+                ancho = "80px"
+                alto = "80px"
+                borde_radio = "50%"
+                margen_abajo = "1rem"
+            fin imagen
+            
+            parrafo
+                estilo_fuente = "cursiva"
+                margen_abajo = "1rem"
+                color = "gris"
+            fin parrafo
+            
+            .nombre
+                peso_fuente = "negrita"
+                color = "gris oscuro"
+                margen_abajo = "0.5rem"
+            fin .nombre
+            
+            .estrellas
+                color = "amarillo"
+                tamaño_fuente = "1.2rem"
+            fin .estrellas
+        fin .testimonio
+    fin .testimonios_grid
+    
+    # Pie de página
+    pie_pagina
+        fondo_color = "gris oscuro"
+        color = "blanco"
+        relleno = "3rem 2rem 1rem"
+        margen_arriba = "3rem"
+        
+        .footer_content
+            ancho_maximo = "1200px"
+            margen = "0 auto"
+            mostrar = "grid"
+            columnas_grid = "repeat(auto-fit, minmax(250px, 1fr))"
+            espacio_grid = "2rem"
+            margen_abajo = "2rem"
+            
+            titulo3, titulo4
+                margen_abajo = "1rem"
+                color = "blanco"
+            fin titulo3, titulo4
+            
+            parrafo
+                color = "gris claro"
+                margen_abajo = "0.5rem"
+            fin parrafo
+            
+            lista
+                sin_viñetas
+                relleno = "0"
+                
+                elemento
+                    margen_abajo = "0.5rem"
+                    
+                    enlace
+                        color = "gris claro"
+                        sin_decoracion
+                        transicion = "color 0.3s ease"
+                        
+                        al_pasar_mouse
+                            color = "blanco"
+                        fin hover
+                    fin enlace
+                fin elemento
+            fin lista
+            
+            .redes_sociales
+                mostrar = "flex"
+                
+                elemento
+                    margen_derecha = "1rem"
+                    
+                    enlace
+                        mostrar = "bloque"
+                        ancho = "40px"
+                        alto = "40px"
+                        fondo_color = "azul"
+                        color = "blanco"
+                        borde_radio = "50%"
+                        mostrar = "flex"
+                        alinear_elementos = "center"
+                        justificar_contenido = "center"
+                        transicion = "all 0.3s ease"
+                        
+                        al_pasar_mouse
+                            transformar = "translateY(-2px)"
+                            fondo_color = "azul claro"
+                        fin hover
+                    fin enlace
+                fin elemento
+            fin .redes_sociales
+        fin .footer_content
+        
+        separador
+            alto = "1px"
+            fondo_color = "gris"
+            margen = "2rem 0 1rem"
+        fin separador
+        
+        .copyright
+            alineacion_texto = "centro"
+            color = "gris claro"
+            tamaño_fuente = "0.9rem"
+        fin .copyright
+    fin pie_pagina
+    
+    # Diseño responsive
+    responsive
+        en_movil
+            encabezado navegacion
+                direccion_flex = "column"
+                relleno = "1rem"
+                
+                .menu
+                    margen_arriba = "1rem"
+                    direccion_flex = "column"
+                    
+                    elemento
+                        margen = "0.5rem 0"
+                    fin elemento
+                fin .menu
+            fin encabezado navegacion
+            
+            contenido
+                relleno = "1rem"
+                margen_arriba = "120px"
+            fin contenido
+            
+            .banner_principal
+                relleno = "2rem 1rem"
+                
+                titulo1
+                    tamaño_fuente = "2rem"
+                fin titulo1
+            fin .banner_principal
+            
+            .grid_productos
+                columnas_grid = "1fr"
+                espacio_grid = "1rem"
+            fin .grid_productos
+            
+            .categorias_grid
+                columnas_grid = "repeat(2, 1fr)"
+            fin .categorias_grid
+            
+            .testimonios_grid
+                columnas_grid = "1fr"
+            fin .testimonios_grid
+            
+            pie_pagina .footer_content
+                columnas_grid = "1fr"
+                alineacion_texto = "centro"
+            fin pie_pagina .footer_content
+        fin movil
+        
+        en_tablet
+            .grid_productos
+                columnas_grid = "repeat(2, 1fr)"
+            fin .grid_productos
+            
+            .categorias_grid
+                columnas_grid = "repeat(3, 1fr)"
+            fin .categorias_grid
+        fin tablet
+        
+        en_escritorio
+            .grid_productos
+                columnas_grid = "repeat(3, 1fr)"
+            fin .grid_productos
+            
+            .categorias_grid
+                columnas_grid = "repeat(4, 1fr)"
+            fin .categorias_grid
+        fin escritorio
+    fin responsive
+fin estilos

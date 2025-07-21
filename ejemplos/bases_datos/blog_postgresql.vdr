@@ -1,0 +1,180 @@
+# Ejemplo completo: Blog Personal con PostgreSQL
+# Demuestra operaciones avanzadas con PostgreSQL
+
+# Conexión a PostgreSQL
+conectar base_datos postgresql "localhost" usuario="postgres" password="admin123" base="mi_blog"
+
+# Crear tabla de categorías
+crear tabla categorias
+    columna id numero primary_key auto_increment
+    columna nombre texto unique required
+    columna descripcion texto
+    columna color texto default="#3498db"
+    columna activa booleano default=true
+fin tabla
+
+# Crear tabla de posts
+crear tabla posts
+    columna id numero primary_key auto_increment
+    columna titulo texto required
+    columna contenido texto required
+    columna resumen texto
+    columna categoria_id numero required
+    columna autor texto required
+    columna publicado booleano default=false
+    columna fecha_creacion tiempo default=CURRENT_TIMESTAMP
+    columna fecha_publicacion tiempo
+    columna visitas numero default=0
+fin tabla
+
+# Crear tabla de comentarios
+crear tabla comentarios
+    columna id numero primary_key auto_increment
+    columna post_id numero required
+    columna autor texto required
+    columna email texto required
+    columna contenido texto required
+    columna aprobado booleano default=false
+    columna fecha_comentario tiempo default=CURRENT_TIMESTAMP
+fin tabla
+
+# Insertar categorías
+insertar en categorias
+    nombre: "Tecnología"
+    descripcion: "Posts sobre programación y tecnología"
+    color: "#e74c3c"
+fin insertar
+
+insertar en categorias
+    nombre: "Vida Personal"
+    descripcion: "Reflexiones y experiencias personales"
+    color: "#2ecc71"
+fin insertar
+
+insertar en categorias
+    nombre: "Tutoriales"
+    descripcion: "Guías paso a paso"
+    color: "#f39c12"
+fin insertar
+
+# Insertar posts de ejemplo
+insertar en posts
+    titulo: "Mi primer post con Vader"
+    contenido: "Este es mi primer post creado usando el lenguaje Vader. Es increíble poder programar en español de forma tan natural."
+    resumen: "Introducción al lenguaje de programación Vader"
+    categoria_id: 1
+    autor: "Juan Desarrollador"
+    publicado: true
+    fecha_publicacion: "2024-01-15 10:00:00"
+fin insertar
+
+insertar en posts
+    titulo: "Cómo crear una base de datos con Vader"
+    contenido: "En este tutorial aprenderás a crear y manejar bases de datos usando sintaxis natural en español con Vader."
+    resumen: "Tutorial completo de bases de datos en Vader"
+    categoria_id: 3
+    autor: "Juan Desarrollador"
+    publicado: true
+    fecha_publicacion: "2024-01-20 14:30:00"
+fin insertar
+
+insertar en posts
+    titulo: "Reflexiones sobre programar en español"
+    contenido: "Programar en nuestro idioma nativo abre muchas posibilidades y democratiza el desarrollo de software."
+    resumen: "La importancia de programar en español"
+    categoria_id: 2
+    autor: "Juan Desarrollador"
+    publicado: false
+fin insertar
+
+# Insertar comentarios
+insertar en comentarios
+    post_id: 1
+    autor: "María Lectora"
+    email: "maria@ejemplo.com"
+    contenido: "¡Excelente post! Me encanta la idea de Vader"
+    aprobado: true
+fin insertar
+
+insertar en comentarios
+    post_id: 1
+    autor: "Carlos Programador"
+    email: "carlos@ejemplo.com"
+    contenido: "¿Dónde puedo descargar Vader para probarlo?"
+    aprobado: true
+fin insertar
+
+insertar en comentarios
+    post_id: 2
+    autor: "Ana Estudiante"
+    email: "ana@ejemplo.com"
+    contenido: "Muy útil el tutorial, gracias por compartir"
+    aprobado: false
+fin insertar
+
+# Consultas del blog
+decir "=== POSTS PUBLICADOS ==="
+
+# Mostrar todos los posts publicados con su categoría
+buscar posts.titulo, posts.resumen, posts.autor, categorias.nombre, posts.fecha_publicacion
+desde posts unir categorias
+donde posts.categoria_id = categorias.id y posts.publicado = true
+ordenar por posts.fecha_publicacion
+
+# Posts más visitados
+decir "=== POSTS POPULARES ==="
+buscar titulo, visitas desde posts 
+donde publicado = true 
+ordenar por visitas 
+limitar 5
+
+# Comentarios pendientes de aprobación
+decir "=== COMENTARIOS PENDIENTES ==="
+buscar comentarios.autor, comentarios.contenido, posts.titulo
+desde comentarios unir posts
+donde comentarios.post_id = posts.id y comentarios.aprobado = false
+ordenar por comentarios.fecha_comentario
+
+# Estadísticas del blog
+decir "=== ESTADÍSTICAS ==="
+
+# Total de posts por categoría
+buscar categorias.nombre, COUNT(posts.id)
+desde categorias unir posts
+donde categorias.id = posts.categoria_id
+agrupar por categorias.nombre
+
+# Posts publicados por mes
+buscar EXTRACT(YEAR FROM fecha_publicacion), EXTRACT(MONTH FROM fecha_publicacion), COUNT(*)
+desde posts
+donde publicado = true
+agrupar por EXTRACT(YEAR FROM fecha_publicacion), EXTRACT(MONTH FROM fecha_publicacion)
+ordenar por EXTRACT(YEAR FROM fecha_publicacion), EXTRACT(MONTH FROM fecha_publicacion)
+
+# Actualizar visitas de un post
+actualizar posts donde id = 1 establecer visitas = visitas + 1
+
+# Aprobar comentario
+actualizar comentarios donde id = 3 establecer aprobado = true
+
+# Publicar post borrador
+actualizar posts donde id = 3 establecer publicado = true, fecha_publicacion = CURRENT_TIMESTAMP
+
+# Buscar posts por palabra clave
+decir "=== BÚSQUEDA ==="
+buscar titulo, resumen desde posts 
+donde (titulo ILIKE "%Vader%" o contenido ILIKE "%Vader%") y publicado = true
+
+# Comentarios por post
+decir "=== COMENTARIOS POR POST ==="
+buscar posts.titulo, COUNT(comentarios.id)
+desde posts unir comentarios
+donde posts.id = comentarios.post_id y comentarios.aprobado = true
+agrupar por posts.titulo
+ordenar por COUNT(comentarios.id)
+
+# Limpiar comentarios spam (ejemplo)
+eliminar de comentarios 
+donde aprobado = false y fecha_comentario < CURRENT_TIMESTAMP - INTERVAL '30 days'
+
+decir "✅ Blog con PostgreSQL completado exitosamente"

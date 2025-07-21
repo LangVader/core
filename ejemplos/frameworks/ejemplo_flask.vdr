@@ -1,0 +1,175 @@
+# Ejemplo completo de Flask con Vader
+# Aplicación web para blog personal
+
+app flask MiBlog
+    configuracion SECRET_KEY = "mi-clave-secreta-desarrollo"
+    configuracion DEBUG = True
+
+    # Página principal
+    ruta GET /
+        posts = [
+            {id: 1, titulo: "Mi primer post", contenido: "Bienvenidos a mi blog", fecha: "2024-01-15"},
+            {id: 2, titulo: "Aprendiendo Vader", contenido: "Vader hace la programación muy fácil", fecha: "2024-01-20"},
+            {id: 3, titulo: "Flask con Vader", contenido: "Creando aplicaciones web en español", fecha: "2024-01-25"}
+        ]
+        respuesta plantilla "index.html" con {posts: posts, titulo: "Mi Blog Personal"}
+    fin ruta
+
+    # Ver post individual
+    ruta GET /post/<id>
+        post = {
+            id: id,
+            titulo: `Post ${id}`,
+            contenido: `Este es el contenido del post número ${id}. Creado con Vader y Flask.`,
+            fecha: new Date().toLocaleDateString(),
+            autor: "Usuario Vader"
+        }
+        respuesta plantilla "post.html" con {post: post}
+    fin ruta
+
+    # Formulario para nuevo post
+    ruta GET /nuevo
+        respuesta plantilla "nuevo_post.html"
+    fin ruta
+
+    # Crear nuevo post
+    ruta POST /nuevo
+        datos formulario
+        validar titulo
+        validar contenido
+        
+        nuevo_post = {
+            id: Date.now(),
+            titulo: datos.titulo,
+            contenido: datos.contenido,
+            fecha: new Date().toLocaleDateString(),
+            autor: obtener sesion "usuario" || "Anónimo"
+        }
+        
+        # Simular guardado en base de datos
+        consola log `Nuevo post creado: ${nuevo_post.titulo}`
+        
+        redirigir a "/"
+    fin ruta
+
+    # Login
+    ruta GET /login
+        respuesta plantilla "login.html"
+    fin ruta
+
+    ruta POST /login
+        datos formulario
+        validar email
+        validar password
+        
+        si datos.email == "admin@blog.com" y datos.password == "123456"
+            guardar sesion usuario = datos.email
+            guardar sesion nombre = "Administrador"
+            redirigir a "/"
+        sino
+            respuesta plantilla "login.html" con {error: "Credenciales inválidas"}
+        fin si
+    fin ruta
+
+    # Logout
+    ruta GET /logout
+        limpiar sesion
+        redirigir a "/"
+    fin ruta
+
+    # API JSON para posts
+    ruta GET /api/posts
+        posts = [
+            {id: 1, titulo: "Post 1", resumen: "Resumen del post 1"},
+            {id: 2, titulo: "Post 2", resumen: "Resumen del post 2"},
+            {id: 3, titulo: "Post 3", resumen: "Resumen del post 3"}
+        ]
+        respuesta json {posts: posts, total: posts.length}
+    fin ruta
+
+    # Subir archivo
+    ruta POST /upload
+        archivo subido imagen
+        si no imagen
+            respuesta error 400 "No se proporcionó imagen"
+        fin si
+        
+        # Simular guardado de archivo
+        nombre_archivo = `${Date.now()}_${imagen.filename}`
+        consola log `Archivo subido: ${nombre_archivo}`
+        
+        respuesta json {
+            mensaje: "Archivo subido exitosamente",
+            archivo: nombre_archivo,
+            tamaño: imagen.size
+        }
+    fin ruta
+
+    # Búsqueda
+    ruta GET /buscar
+        termino = query.q
+        si no termino
+            respuesta plantilla "buscar.html" con {resultados: [], termino: ""}
+        fin si
+        
+        # Simular búsqueda
+        resultados = [
+            {id: 1, titulo: `Resultado para: ${termino}`, relevancia: 0.9},
+            {id: 2, titulo: `Otro resultado: ${termino}`, relevancia: 0.7}
+        ]
+        
+        respuesta plantilla "buscar.html" con {resultados: resultados, termino: termino}
+    fin ruta
+
+    # Middleware - antes de cada petición
+    antes peticion
+        consola log `${request.method} ${request.url} - ${new Date().toISOString()}`
+        # Verificar si el usuario está logueado para rutas protegidas
+        si request.path.startsWith("/admin") y no obtener sesion "usuario"
+            redirigir a "/login"
+        fin si
+    fin antes
+
+    # Después de cada petición
+    despues peticion
+        response.headers["X-Powered-By"] = "Vader + Flask"
+    fin despues
+
+    # Manejo de errores
+    manejar error 404
+        respuesta plantilla "error.html" con {
+            codigo: 404,
+            mensaje: "Página no encontrada",
+            descripcion: "La página que buscas no existe"
+        }
+    fin manejar
+
+    manejar error 500
+        respuesta plantilla "error.html" con {
+            codigo: 500,
+            mensaje: "Error interno del servidor",
+            descripcion: "Algo salió mal en el servidor"
+        }
+    fin manejar
+
+    # Área de administración
+    ruta GET /admin
+        usuario = obtener sesion "usuario"
+        si no usuario
+            redirigir a "/login"
+        fin si
+        
+        estadisticas = {
+            posts_total: 25,
+            comentarios: 150,
+            usuarios: 8,
+            visitas_hoy: 45
+        }
+        
+        respuesta plantilla "admin.html" con {estadisticas: estadisticas}
+    fin ruta
+
+    # Configuración adicional
+    configuracion UPLOAD_FOLDER = "./uploads"
+    configuracion MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max
+fin app

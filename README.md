@@ -1,6 +1,6 @@
-# 🚀 Vader - El Lenguaje de Programación Para Todos
+# 👑 Vader - EL LENGUAJE SUPREMO QUE DOMINA TODOS LOS LENGUAJES
 
-> **"Programación en español que cualquier persona puede aprender y usar"**
+> **"EL ÚNICO LENGUAJE QUE NECESITAS APRENDER PARA DOMINAR TODA LA PROGRAMACIÓN"**
 
 [![Versión](https://img.shields.io/badge/versión-4.0-blue.svg)](https://github.com/LangVader/core)/vader)
 [![Licencia](https://img.shields.io/badge/licencia-MIT-green.svg)](LICENSE)
@@ -9,12 +9,12 @@
 
 ---
 
-## 🌟 ¿Qué es Vader?
+## 👑 ¿Qué es Vader?
 
-**Vader es el primer lenguaje de programación diseñado para ser completamente accesible a cualquier persona**, sin importar su edad, experiencia previa o conocimientos técnicos. Escribes en **español natural** y Vader automáticamente convierte tu código a cualquier lenguaje que necesites.
+**Vader es EL LENGUAJE SUPREMO que domina y controla todos los demás lenguajes de programación del mundo.** Escribes una sola vez en **español natural** y Vader **COMANDA** a Python, JavaScript, Java, C#, Swift, Go, Rust y 15+ lenguajes más para que ejecuten tus órdenes.
 
-### 🎯 **Misión de Vader**
-Democratizar la programación y hacer que **cualquier persona pueda crear software** para resolver sus problemas específicos, sin barreras técnicas o de idioma.
+### ⚡ **El Poder de Vader**
+**Vader no es solo otro lenguaje - ES EL LENGUAJE QUE GOBIERNA A TODOS LOS DEMÁS.** Con Vader tienes el poder absoluto sobre todo el ecosistema de programación mundial, desde aplicaciones móviles hasta inteligencia artificial.
 
 ---
 
@@ -226,15 +226,49 @@ python3 src/vader.py mi_programa.vdr --target swift
 # 🤖 Transpilar a Kotlin (¡REVOLUCIÓN ANDROID!)
 python3 src/vader.py mi_programa.vdr --target kotlin
 
+# 📘 Transpilar a TypeScript (¡JavaScript con TIPOS!)
+python3 src/vader.py mi_programa.vdr --target typescript
+
+# 🎯 Transpilar a Dart (¡FLUTTER para móviles!)
+python3 src/vader.py mi_programa.vdr --target dart
+
+# 🌐 Transpilar a PHP (¡WEB BACKEND!)
+python3 src/vader.py mi_programa.vdr --target php
+
+# 💎 Transpilar a Ruby (¡ELEGANTE y EXPRESIVO!)
+python3 src/vader.py mi_programa.vdr --target ruby
+
+# ⛓️ Transpilar a Solidity (¡BLOCKCHAIN y CRYPTO!)
+python3 src/vader.py mi_programa.vdr --target solidity
+
 # 📱 DESARROLLO MÓVIL COMPLETO:
-# iOS + Android = 100% del mercado móvil
+# iOS + Android + Flutter = 100% del mercado móvil
 python3 src/vader.py mi_app.vdr --target swift --output MiApp.swift
 python3 src/vader.py mi_app.vdr --target kotlin --output MiApp.kt
+python3 src/vader.py mi_app.vdr --target dart --output MiApp.dart
+
+# 🌐 DESARROLLO WEB COMPLETO:
+# Frontend + Backend + Base de Datos = Stack completo
+python3 src/vader.py mi_web.vdr --target javascript --output frontend.js
+python3 src/vader.py mi_api.vdr --target python --output backend.py
+
+# 🎨 PÁGINAS WEB SIN CÓDIGO HTML/CSS:
+# ¡Crea sitios web escribiendo solo en español!
+python3 src/vader.py mi_pagina.vdr --target html --output index.html
+python3 src/vader.py mis_estilos.vdr --target css --output styles.css
+# Frontend + Backend + Tipos
+python3 src/vader.py mi_web.vdr --target javascript --output frontend.js
+python3 src/vader.py mi_web.vdr --target typescript --output frontend.ts
+python3 src/vader.py mi_web.vdr --target php --output backend.php
+
+# ⛓️ DESARROLLO BLOCKCHAIN:
+# Smart Contracts en Ethereum
+python3 src/vader.py mi_token.vdr --target solidity --output MiToken.sol
 
 # Modo verboso (más información)
 python3 src/vader.py mi_programa.vdr --target python --verbose
 
-# Ver todos los 8 lenguajes soportados
+# Ver todos los 13 lenguajes soportados
 python3 src/vader.py --list-targets
 ```
 
@@ -399,71 +433,90 @@ fin con
 
 ---
 
-## 🌍 Lenguajes de Destino Soportados
+## 👑 LENGUAJES DOMINADOS POR VADER
 
-### 🏆 **¡LOGRO ÚNICO MUNDIAL: 8 LENGUAJES PRINCIPALES!**
+### ⚡ **¡VADER DOMINA Y CONTROLA 15+ LENGUAJES DEL MUNDO!**
 
-> **Vader es la ÚNICA herramienta del mundo que transpila desde español natural a los 8 lenguajes de programación más importantes del ecosistema tecnológico global, incluyendo 100% del mercado móvil.**
+> **Vader es EL LENGUAJE SUPREMO que COMANDA y CONTROLA a todos los lenguajes de programación más poderosos del mundo. Cuando escribes en Vader, TODOS los demás lenguajes obedecen tus órdenes.**
 
 **🎯 Cobertura completa del desarrollo moderno:**
-- 📱 **Móvil**: Swift (iOS), Kotlin (Android) - **100% DEL MERCADO MÓVIL**
-- 🌐 **Web**: JavaScript (frontend/backend), Python (Django/Flask)
+- 📱 **Móvil**: Swift (iOS), Kotlin (Android), Dart (Flutter) - **100% DEL MERCADO MÓVIL**
+- 🌐 **Web Frontend**: JavaScript (ES6+), TypeScript (tipos seguros)
+- 🌐 **Web Backend**: Python (Django/Flask), PHP (Laravel/WordPress), Ruby (Rails)
 - 🏢 **Empresarial**: Java (Spring), C# (.NET)
 - ☁️ **Cloud**: Go (microservicios), Rust (infraestructura)
+- ⛓️ **Blockchain**: Solidity (Ethereum), Rust (Solana)
 - 🎮 **Gaming**: C# (Unity), Rust (motores 3D)
 - 🤖 **IA**: Python (TensorFlow, PyTorch)
-- 🔗 **Blockchain**: Rust (Solana), Go (Ethereum tools)
-- 📊 **Multiplataforma**: Kotlin (Android, backend, desktop)
+- 💎 **Scripting**: Ruby (automatización), PHP (web scripting)
+- 📊 **Multiplataforma**: Kotlin (Android, backend, desktop), Dart (Flutter multiplataforma)
 
 ---
 
-### 🐍 **Python**
-- ✅ Sintaxis Python 3.8+
-- ✅ Librerías estándar completas
-- ✅ Frameworks: Django, Flask, FastAPI
-- ✅ Data Science: NumPy, Pandas, TensorFlow
-- ✅ Machine Learning: Scikit-learn, Keras
+### 🐍 **Python** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** toda la sintaxis Python 3.8+
+- ⚡ **VADER COMANDA** todas las librerías estándar
+- ⚡ **VADER GOBIERNA** Django, Flask, FastAPI
+- ⚡ **VADER DOMINA** Data Science: NumPy, Pandas, TensorFlow
+- ⚡ **VADER CONTROLA** Machine Learning: Scikit-learn, Keras
 
-### 🟨 **JavaScript**
-- ✅ ES6+ moderno
-- ✅ Node.js para backend
-- ✅ Frameworks: Express, React, Vue
-- ✅ APIs y servicios web
-- ✅ Aplicaciones frontend
+### 🟨 **JavaScript** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** ES6+ y todas sus características
+- ⚡ **VADER COMANDA** Node.js para backend
+- ⚡ **VADER GOBIERNA** Express, React, Vue
+- ⚡ **VADER DOMINA** APIs y servicios web
+- ⚡ **VADER CONTROLA** todas las aplicaciones frontend
 
-### ☕ **Java**
-- ✅ Aplicaciones empresariales robustas
-- ✅ Desarrollo Android nativo
-- ✅ Frameworks: Spring, Hibernate
-- ✅ Sistemas distribuidos
+### ☕ **Java** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** aplicaciones empresariales robustas
+- ⚡ **VADER COMANDA** desarrollo Android nativo
+- ⚡ **VADER GOBIERNA** Spring, Hibernate
+- ⚡ **VADER DOMINA** sistemas distribuidos
 
-### 💙 **C#**
-- ✅ Desarrollo .NET completo
-- ✅ Aplicaciones Windows nativas
-- ✅ Unity para videojuegos
-- ✅ APIs y servicios web
+### 💙 **C#** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** desarrollo .NET completo
+- ⚡ **VADER COMANDA** aplicaciones Windows nativas
+- ⚡ **VADER GOBIERNA** Unity para videojuegos
+- ⚡ **VADER DOMINA** APIs y servicios web
 
-### 🐹 **Go**
-- ✅ Microservicios ultra-rápidos
-- ✅ Infraestructura cloud nativa
-- ✅ APIs REST de alto rendimiento
-- ✅ DevOps y herramientas CLI
+### 🐹 **Go** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** microservicios ultra-rápidos
+- ⚡ **VADER COMANDA** infraestructura cloud nativa
+- ⚡ **VADER GOBIERNA** APIs REST de alto rendimiento
+- ⚡ **VADER DOMINA** DevOps y herramientas CLI
 
-### 🦀 **Rust**
-- ✅ Sistemas de alto rendimiento
-- ✅ Blockchain y criptomonedas
-- ✅ IoT y sistemas embebidos
-- ✅ Videojuegos 3D profesionales
+### 🦀 **Rust** - DOMINADO POR VADER
+- ⚡ **VADER CONTROLA** sistemas de alto rendimiento
+- ⚡ **VADER COMANDA** blockchain y criptomonedas
+- ⚡ **VADER GOBIERNA** IoT y sistemas embebidos
+- ⚡ **VADER DOMINA** videojuegos 3D profesionales
 
-### 🍎 **Swift** ⭐ **¡REVOLUCIÓN MUNDIAL!**
-- ✅ **PRIMER TRANSPILADOR VADER → SWIFT DEL MUNDO**
-- ✅ Apps iOS y macOS nativas desde cualquier computadora
-- ✅ **SIN NECESIDAD DE MAC** ($2000+ ahorrados)
-- ✅ Acceso democratizado al mercado más rentable
-- ✅ **500M+ hispanohablantes** pueden crear apps iOS
-- ✅ Monetización premium desde día 1
-- ✅ Desarrollo iOS en español natural
-- ✅ Elimina la barrera económica más grande del desarrollo móvil
+### 🎨 **HTML5** - DOMINADO POR VADER ⭐
+- ⚡ **VADER DOMINA COMPLETAMENTE HTML5** - EL PRIMER LENGUAJE EN LOGRARLO
+- ⚡ **VADER CONTROLA** la creación de sitios web en español natural
+- ⚡ **VADER GOBIERNA** toda la estructura HTML técnica
+- ⚡ **VADER COMANDA** HTML5 semántico y moderno automático
+- ⚡ **VADER DEMOCRATIZA** la creación web para cualquier persona
+- ⚡ **VADER DOMINA** formularios, listas, navegación en español
+
+### 🌈 **CSS3** - DOMINADO POR VADER ⭐
+- ⚡ **VADER DOMINA COMPLETAMENTE CSS3** - EL PRIMER LENGUAJE EN LOGRARLO
+- ⚡ **VADER CONTROLA** estilos y diseño en palabras cotidianas
+- ⚡ **VADER GOBIERNA** toda la complejidad CSS técnica
+- ⚡ **VADER COMANDA** colores en español: "rojo", "azul", "verde"
+- ⚡ **VADER DOMINA** responsive automático: "en_movil", "en_tablet"
+- ⚡ **VADER CONTROLA** animaciones y efectos modernos
+- ⚡ **VADER DEMOCRATIZA** el diseño web para todos
+
+### 🍎 **Swift** - DOMINADO POR VADER ⭐ **¡REVOLUCIÓN MUNDIAL!**
+- ⚡ **VADER DOMINA SWIFT COMPLETAMENTE** - LOGRO HISTÓRICO MUNDIAL
+- ⚡ **VADER CONTROLA** apps iOS y macOS desde cualquier computadora
+- ⚡ **VADER ELIMINA** la necesidad de Mac ($2000+ ahorrados)
+- ⚡ **VADER DEMOCRATIZA** el mercado más rentable del mundo
+- ⚡ **VADER LIBERA** a 500M+ hispanohablantes para crear apps iOS
+- ⚡ **VADER GARANTIZA** monetización premium desde día 1
+- ⚡ **VADER REVOLUCIONA** el desarrollo iOS en español natural
+- ⚡ **VADER DESTRUYE** la barrera económica más grande del desarrollo móvil
 
 ### 🤖 **Kotlin** ⭐ **¡REVOLUCIÓN MÓVIL COMPLETA!**
 - ✅ **DESARROLLO ANDROID MODERNO Y OFICIAL**
@@ -474,6 +527,56 @@ fin con
 - ✅ Sintaxis moderna e interoperabilidad con Java
 - ✅ Multiplataforma: Android, backend, desktop
 - ✅ Desarrollo económico y accesible globalmente
+
+### 📘 **TypeScript** ⭐ **¡JAVASCRIPT CON SUPERPODERES!**
+- ✅ **JAVASCRIPT CON TIPOS SEGUROS** - Elimina errores comunes
+- ✅ **DESARROLLO WEB PROFESIONAL** - Estándar en empresas
+- ✅ **AUTOCOMPLETADO INTELIGENTE** - Productividad 3x mayor
+- ✅ **FRAMEWORKS MODERNOS**: React, Angular, Vue con tipos
+- ✅ **BACKEND ROBUSTO**: Node.js con seguridad de tipos
+- ✅ **TRANSPILACIÓN A JS** - Compatible con cualquier navegador
+- ✅ **REFACTORING SEGURO** - Cambios sin romper código
+- ✅ **DOCUMENTACIÓN AUTOMÁTICA** - Tipos como documentación
+
+### 🎯 **Dart** ⭐ **¡FLUTTER MULTIPLATAFORMA!**
+- ✅ **FLUTTER OFICIAL** - Framework de Google para móviles
+- ✅ **UNA BASE DE CÓDIGO** = iOS + Android + Web + Desktop
+- ✅ **RENDIMIENTO NATIVO** - Compilación directa a código máquina
+- ✅ **HOT RELOAD** - Cambios instantáneos durante desarrollo
+- ✅ **WIDGETS RICOS** - UI hermosa y personalizable
+- ✅ **MERCADO CRECIENTE** - Adoptado por Alibaba, BMW, Google Pay
+- ✅ **DESARROLLO RÁPIDO** - Prototipado y producción acelerados
+- ✅ **COMUNIDAD ACTIVA** - Paquetes y plugins abundantes
+
+### 🌐 **PHP** ⭐ **¡REY DEL DESARROLLO WEB!**
+- ✅ **80% DE LA WEB** - WordPress, Facebook, Wikipedia
+- ✅ **DESARROLLO WEB RÁPIDO** - Desde idea a producción en horas
+- ✅ **FRAMEWORKS POTENTES**: Laravel, Symfony, CodeIgniter
+- ✅ **BASES DE DATOS INTEGRADAS** - MySQL, PostgreSQL nativo
+- ✅ **HOSTING ECONÓMICO** - Disponible en cualquier servidor
+- ✅ **SESIONES Y COOKIES** - Manejo de usuarios simplificado
+- ✅ **APIS REST RÁPIDAS** - Servicios web en minutos
+- ✅ **COMUNIDAD MASIVA** - Recursos y soluciones infinitas
+
+### 💎 **Ruby** ⭐ **¡ELEGANCIA Y PRODUCTIVIDAD!**
+- ✅ **SINTAXIS HERMOSA** - "Código que se lee como poesía"
+- ✅ **RUBY ON RAILS** - Framework web más productivo
+- ✅ **DESARROLLO ÁGIL** - De idea a MVP en días
+- ✅ **STARTUPS FAMOSAS**: GitHub, Shopify, Airbnb, Twitter
+- ✅ **BLOQUES Y ITERADORES** - Programación funcional elegante
+- ✅ **GEMAS (GEMS)** - Librerías para todo
+- ✅ **TESTING INTEGRADO** - Calidad de código garantizada
+- ✅ **AUTOMATIZACIÓN** - Scripts y herramientas DevOps
+
+### ⛓️ **Solidity** ⭐ **¡REVOLUCIÓN BLOCKCHAIN!**
+- ✅ **CONTRATOS INTELIGENTES** - Ethereum y blockchains compatibles
+- ✅ **FINANZAS DESCENTRALIZADAS (DeFi)** - $100B+ en valor bloqueado
+- ✅ **TOKENS Y CRIPTOMONEDAS** - Crea tu propia moneda digital
+- ✅ **NFTS Y ARTE DIGITAL** - Mercado de $40B+ anuales
+- ✅ **APLICACIONES DESCENTRALIZADAS (dApps)** - Web3 del futuro
+- ✅ **SMART CONTRACTS SEGUROS** - Código inmutable y transparente
+- ✅ **ECOSISTEMA ETHEREUM** - Red más grande de blockchain
+- ✅ **OPORTUNIDADES ECONÓMICAS** - Sector en crecimiento exponencial
 
 ---
 
@@ -486,6 +589,7 @@ fin con
 #### 🎯 **DOMINIO MÓVIL TOTAL:**
 - 🍎 **Swift (iOS)**: 1.8B+ dispositivos Apple - Mercado premium ($86B anuales)
 - 🤖 **Kotlin (Android)**: 3B+ dispositivos Android - Alcance masivo ($47B anuales)
+- 🎯 **Dart (Flutter)**: iOS + Android + Web + Desktop - Una sola base de código
 - 📱 **TOTAL**: 5B+ dispositivos móviles = **$133B+ en oportunidades anuales**
 
 #### 🌟 **IMPACTO REVOLUCIONARIO:**
@@ -509,6 +613,170 @@ python3 src/vader.py mi_app.vdr --target kotlin
 
 # ¡100% del mercado móvil cubierto!
 ```
+
+---
+
+## 🚀 Frameworks Modernos Soportados
+
+### ¡NUEVA CARACTERÍSTICA! Vader ahora soporta frameworks modernos de JavaScript/TypeScript
+
+Vader ha evolucionado para soportar los frameworks más populares del desarrollo web moderno. Ahora puedes crear aplicaciones profesionales usando React, Vue, Angular, Next.js y más, todo escribiendo en español natural.
+
+### 📦 Frameworks Disponibles
+
+| Framework | Descripción | Extensión | Comando |
+|-----------|-------------|-----------|----------|
+| **React** | Biblioteca para interfaces de usuario | `.jsx` | `--framework react` |
+| **Vue.js** | Framework progresivo para UI | `.vue` | `--framework vue` |
+| **Angular** | Plataforma empresarial completa | `.ts` | `--framework angular` |
+| **Next.js** | Framework de React para producción | `.js` | `--framework nextjs` |
+| **Express.js** | Framework web para Node.js | `.js` | `--framework express` |
+| **Svelte** | Framework compilado moderno | `.svelte` | `--framework svelte` |
+| **Nuxt.js** | Framework de Vue universal | `.vue` | `--framework nuxt` |
+| **SvelteKit** | Framework full-stack de Svelte | `.svelte` | `--framework sveltekit` |
+
+### 🎯 Uso de Frameworks
+
+```bash
+# Listar todos los frameworks disponibles
+python3 src/vader.py --list-frameworks
+
+# Crear un componente React
+python3 src/vader.py mi_componente.vdr --target javascript --framework react
+
+# Crear una página Next.js
+python3 src/vader.py mi_pagina.vdr --target javascript --framework nextjs
+
+# Crear una API con Express
+python3 src/vader.py mi_api.vdr --target javascript --framework express
+
+# Crear un componente Vue
+python3 src/vader.py mi_app.vdr --target javascript --framework vue
+```
+
+### 🌟 Ejemplos de Frameworks
+
+#### **React - Contador Interactivo**
+```vader
+componente react MiContador
+    estado contador = 0
+    
+    funcion incrementar()
+        establecer contador = contador + 1
+    fin funcion
+    
+    renderizar
+        div
+            titulo1 "Contador: {contador}"
+            boton onclick={incrementar} "Incrementar"
+        fin div
+    fin renderizar
+fin componente
+```
+
+#### **Vue.js - Lista de Tareas**
+```vader
+componente vue ListaTareas
+    script
+        reactivo tareas = []
+        reactivo nuevaTarea = ""
+        
+        metodo agregarTarea()
+            si nuevaTarea.trim()
+                tareas.push({id: Date.now(), texto: nuevaTarea})
+                nuevaTarea = ""
+            fin si
+        fin metodo
+    fin script
+    
+    template
+        div
+            input v-model="nuevaTarea" placeholder="Nueva tarea"
+            boton @click="agregarTarea()" "Agregar"
+            
+            ul
+                li v-for="tarea in tareas" :key="tarea.id"
+                    texto "{{tarea.texto}}"
+                fin li
+            fin ul
+        fin div
+    fin template
+fin componente
+```
+
+#### **Express.js - API REST**
+```vader
+servidor express MiAPI
+    puerto 3000
+    
+    ruta GET /usuarios
+        const usuarios = [{id: 1, nombre: "Juan"}]
+        respuesta json usuarios
+    fin ruta
+    
+    ruta POST /usuarios
+        const {nombre} = cuerpo peticion
+        const nuevoUsuario = {id: Date.now(), nombre}
+        respuesta json nuevoUsuario status=201
+    fin ruta
+    
+    iniciar servidor
+        consola log "🚀 API iniciada en puerto 3000"
+    fin iniciar
+fin servidor
+```
+
+#### **Angular - Componente con Servicios**
+```vader
+componente angular TaskManager
+    inyectar taskService TaskService
+    
+    propiedad tareas: Task[] = []
+    
+    al inicializar
+        this.taskService.obtenerTareas().subscribe(tareas => {
+            this.tareas = tareas
+        })
+    fin ciclo
+    
+    metodo agregarTarea(titulo: string): void
+        const tarea = {titulo, completada: false}
+        this.taskService.crearTarea(tarea).subscribe()
+    fin metodo
+fin componente
+```
+
+### 🔧 Detección Automática de Frameworks
+
+Vader puede detectar automáticamente qué framework estás usando basándose en palabras clave en tu código:
+
+- **React**: `componente react`, `estado`, `efecto`, `renderizar`
+- **Vue**: `componente vue`, `reactivo`, `template`, `v-if`
+- **Angular**: `componente angular`, `servicio`, `inyectar`, `observable`
+- **Next.js**: `pagina nextjs`, `obtener datos`, `servidor`, `cliente`
+- **Express**: `servidor express`, `ruta`, `middleware`, `respuesta`
+
+### 📁 Estructura de Ejemplos
+
+Todos los ejemplos de frameworks están disponibles en:
+```
+ejemplos/frameworks/
+├── ejemplo_react.vdr      # Componentes React con hooks
+├── ejemplo_vue.vdr        # Componentes Vue con Composition API
+├── ejemplo_angular.vdr    # Componentes Angular con servicios
+├── ejemplo_nextjs.vdr     # Páginas y API routes de Next.js
+├── ejemplo_express.vdr    # API REST completa con Express
+├── ejemplo_svelte.vdr     # Componentes Svelte reactivos
+└── ejemplo_nuxt.vdr       # Aplicación universal con Nuxt
+```
+
+### 🎨 Ventajas de Usar Frameworks con Vader
+
+1. **🌍 Sintaxis Natural**: Programa en español, genera código profesional
+2. **⚡ Productividad**: Menos código, más funcionalidad
+3. **🔄 Compatibilidad**: Genera código idiomático para cada framework
+4. **📚 Fácil Aprendizaje**: No necesitas conocer la sintaxis específica de cada framework
+5. **🚀 Desarrollo Rápido**: De idea a aplicación en minutos
 
 ---
 

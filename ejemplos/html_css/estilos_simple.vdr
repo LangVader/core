@@ -1,0 +1,148 @@
+# Ejemplo simple de CSS usando Vader
+# Estilos básicos para el ejemplo simple de HTML
+
+estilos
+    # Estilos globales
+    cuerpo
+        fuente = "arial"
+        tamaño_fuente = "18px"
+        altura_linea = "1.6"
+        margen = "0"
+        relleno = "0"
+        fondo_color = "gris muy claro"
+        color = "gris oscuro"
+    fin cuerpo
+    
+    # Encabezado
+    encabezado
+        fondo_gradiente = "azul a verde"
+        color = "blanco"
+        relleno = "3rem 2rem"
+        alineacion_texto = "centro"
+        sombra = "0 4px 20px rgba(0,0,0,0.1)"
+        
+        titulo1
+            tamaño_fuente = "3rem"
+            margen_abajo = "1rem"
+            peso_fuente = "negrita"
+        fin titulo1
+        
+        parrafo
+            tamaño_fuente = "1.2rem"
+            opacidad = "0.9"
+        fin parrafo
+    fin encabezado
+    
+    # Contenido principal
+    contenido
+        ancho_maximo = "800px"
+        margen = "2rem auto"
+        relleno = "0 2rem"
+    fin contenido
+    
+    # Secciones
+    seccion
+        fondo_color = "blanco"
+        margen_abajo = "2rem"
+        relleno = "2rem"
+        borde_radio = "12px"
+        sombra = "0 2px 15px rgba(0,0,0,0.1)"
+        
+        titulo2
+            color = "azul"
+            margen_abajo = "1.5rem"
+            tamaño_fuente = "2rem"
+        fin titulo2
+        
+        parrafo
+            margen_abajo = "1rem"
+            tamaño_fuente = "1.1rem"
+        fin parrafo
+    fin seccion
+    
+    # Listas
+    lista
+        relleno_izquierda = "1.5rem"
+        
+        elemento
+            margen_abajo = "0.8rem"
+            tamaño_fuente = "1.1rem"
+        fin elemento
+    fin lista
+    
+    # Botones
+    boton
+        fondo_gradiente = "verde a azul"
+        color = "blanco"
+        sin_borde
+        relleno = "1rem 2rem"
+        borde_radio = "25px"
+        tamaño_fuente = "1.1rem"
+        peso_fuente = "negrita"
+        cursor = "pointer"
+        transicion = "all 0.3s ease"
+        
+        al_pasar_mouse
+            transformar = "translateY(-3px)"
+            sombra = "0 8px 25px rgba(0,0,0,0.2)"
+        fin hover
+    fin boton
+    
+    # Formularios
+    formulario
+        fondo_color = "gris claro"
+        relleno = "2rem"
+        borde_radio = "10px"
+        margen_arriba = "1.5rem"
+        
+        campo
+            ancho = "100%"
+            relleno = "1rem"
+            margen_abajo = "1.5rem"
+            borde = "2px solid gris"
+            borde_radio = "8px"
+            tamaño_fuente = "1rem"
+            transicion = "all 0.3s ease"
+            
+            al_enfocar
+                borde_color = "azul"
+                sombra = "0 0 8px rgba(52, 152, 219, 0.3)"
+            fin focus
+        fin campo
+    fin formulario
+    
+    # Pie de página
+    pie_pagina
+        fondo_color = "gris oscuro"
+        color = "blanco"
+        alineacion_texto = "centro"
+        relleno = "2rem"
+        margen_arriba = "3rem"
+        
+        parrafo
+            margen = "0"
+            tamaño_fuente = "1rem"
+        fin parrafo
+    fin pie_pagina
+    
+    # Responsive
+    responsive
+        en_movil
+            encabezado
+                relleno = "2rem 1rem"
+                
+                titulo1
+                    tamaño_fuente = "2rem"
+                fin titulo1
+            fin encabezado
+            
+            contenido
+                relleno = "0 1rem"
+            fin contenido
+            
+            seccion
+                relleno = "1.5rem"
+            fin seccion
+        fin movil
+    fin responsive
+fin estilos

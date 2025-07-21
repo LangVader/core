@@ -1,0 +1,237 @@
+# Ejemplo de estilos CSS modernos usando Vader
+# Este código genera CSS3 completo con diseño responsive y animaciones
+
+estilos
+    # Estilos globales
+    cuerpo
+        fuente = "arial"
+        tamaño_fuente = "16px"
+        altura_linea = "1.6"
+        margen = "0"
+        relleno = "0"
+        fondo_gradiente = "azul claro a blanco"
+        color = "gris oscuro"
+    fin cuerpo
+    
+    # Encabezado principal
+    encabezado
+        fondo_color = "azul"
+        color = "blanco"
+        relleno = "2rem 0"
+        alineacion_texto = "centro"
+        sombra = "0 2px 10px rgba(0,0,0,0.1)"
+        
+        al_pasar_mouse
+            transformar = "translateY(-2px)"
+            transicion = "all 0.3s ease"
+        fin hover
+    fin encabezado
+    
+    # Navegación
+    navegacion
+        fondo_color = "negro"
+        relleno = "1rem 0"
+        mostrar = "flex"
+        
+        enlace
+            color = "blanco"
+            sin_decoracion
+            margen = "0 1rem"
+            relleno = "0.5rem 1rem"
+            borde_radio = "5px"
+            transicion = "all 0.3s ease"
+            
+            al_pasar_mouse
+                fondo_color = "azul"
+                transformar = "scale(1.05)"
+            fin hover
+        fin enlace
+    fin navegacion
+    
+    # Contenido principal
+    contenido
+        ancho_maximo = "1200px"
+        margen = "0 auto"
+        relleno = "2rem"
+    fin contenido
+    
+    # Secciones
+    seccion
+        margen_abajo = "3rem"
+        relleno = "2rem"
+        fondo_color = "blanco"
+        borde_radio = "10px"
+        sombra = "0 4px 15px rgba(0,0,0,0.1)"
+        
+        titulo2
+            color = "azul"
+            margen_abajo = "1rem"
+            tamaño_fuente = "2rem"
+        fin titulo2
+    fin seccion
+    
+    # Tarjetas de proyectos
+    tarjeta
+        fondo_color = "blanco"
+        borde_radio = "15px"
+        sombra = "0 5px 20px rgba(0,0,0,0.1)"
+        relleno = "1.5rem"
+        margen_abajo = "2rem"
+        transicion = "all 0.3s ease"
+        
+        al_pasar_mouse
+            transformar = "translateY(-10px)"
+            sombra = "0 15px 40px rgba(0,0,0,0.2)"
+        fin hover
+        
+        titulo3
+            color = "morado"
+            margen_abajo = "1rem"
+        fin titulo3
+    fin tarjeta
+    
+    # Botones
+    boton
+        fondo_gradiente = "azul a morado"
+        color = "blanco"
+        sin_borde
+        relleno = "1rem 2rem"
+        borde_radio = "25px"
+        tamaño_fuente = "1.1rem"
+        peso_fuente = "negrita"
+        cursor = "pointer"
+        transicion = "all 0.3s ease"
+        
+        al_pasar_mouse
+            transformar = "scale(1.05)"
+            sombra = "0 5px 15px rgba(0,0,0,0.3)"
+        fin hover
+        
+        al_hacer_click
+            transformar = "scale(0.98)"
+        fin active
+    fin boton
+    
+    # Formularios
+    formulario
+        fondo_color = "gris muy claro"
+        relleno = "2rem"
+        borde_radio = "10px"
+        
+        campo
+            ancho = "100%"
+            relleno = "1rem"
+            margen_abajo = "1rem"
+            borde = "2px solid gris claro"
+            borde_radio = "5px"
+            tamaño_fuente = "1rem"
+            transicion = "border-color 0.3s ease"
+            
+            al_enfocar
+                borde_color = "azul"
+                sombra = "0 0 5px rgba(52, 152, 219, 0.3)"
+            fin focus
+        fin campo
+    fin formulario
+    
+    # Listas
+    lista
+        sin_viñetas
+        relleno = "0"
+        
+        elemento
+            relleno = "0.5rem 0"
+            borde_abajo = "1px solid gris claro"
+            
+            antes_contenido = "✓ "
+            antes_color = "verde"
+            antes_peso_fuente = "negrita"
+        fin elemento
+    fin lista
+    
+    # Pie de página
+    pie_pagina
+        fondo_color = "gris oscuro"
+        color = "blanco"
+        alineacion_texto = "centro"
+        relleno = "2rem 0"
+        margen_arriba = "3rem"
+    fin pie_pagina
+    
+    # Animaciones
+    animacion "fadeIn"
+        desde
+            opacidad = "0"
+            transformar = "translateY(30px)"
+        fin desde
+        
+        hasta
+            opacidad = "1"
+            transformar = "translateY(0)"
+        fin hasta
+    fin animacion
+    
+    animacion "pulse"
+        0%
+            transformar = "scale(1)"
+        fin paso
+        
+        50%
+            transformar = "scale(1.05)"
+        fin paso
+        
+        100%
+            transformar = "scale(1)"
+        fin paso
+    fin animacion
+    
+    # Diseño responsive
+    responsive
+        en_movil
+            cuerpo
+                tamaño_fuente = "14px"
+            fin cuerpo
+            
+            navegacion
+                mostrar = "bloque"
+                alineacion_texto = "centro"
+                
+                enlace
+                    mostrar = "bloque"
+                    margen = "0.5rem 0"
+                fin enlace
+            fin navegacion
+            
+            contenido
+                relleno = "1rem"
+            fin contenido
+            
+            tarjeta
+                margen = "1rem 0"
+            fin tarjeta
+        fin movil
+        
+        en_tablet
+            contenido
+                relleno = "1.5rem"
+            fin contenido
+            
+            seccion
+                relleno = "1.5rem"
+            fin seccion
+        fin tablet
+        
+        en_escritorio
+            navegacion
+                mostrar = "flex"
+                justificar_contenido = "centro"
+            fin navegacion
+            
+            .proyectos
+                mostrar = "grid"
+                columnas_grid = "repeat(2, 1fr)"
+                espacio_grid = "2rem"
+            fin .proyectos
+        fin escritorio
+    fin responsive
+fin estilos
