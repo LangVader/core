@@ -1,0 +1,151 @@
+# 📱 Mi Primera App Android con Vader
+# ¡Crear apps para Android nunca fue tan fácil!
+
+decir "📱 ¡Hola desde mi primera app Android!"
+decir "Bienvenido al desarrollo Android democratizado"
+
+# Preguntar información al usuario
+preguntar "¿Cómo te llamas?" guardar la respuesta en nombre_usuario
+decir "¡Hola " + nombre_usuario + "! Vamos a crear tu app Android"
+
+# Variables para la app
+titulo_app = "Mi App Android Increíble"
+version_app = "1.0.0"
+categoria_app = "Productividad"
+plataforma = "Android"
+
+decir "📋 Información de tu app:"
+decir "  Título: " + titulo_app
+decir "  Versión: " + version_app
+decir "  Categoría: " + categoria_app
+decir "  Plataforma: " + plataforma
+
+# Lista de características de la app
+caracteristicas = ["Material Design", "Modo oscuro", "Notificaciones push", "Google Play Services"]
+
+decir ""
+decir "✨ Características de tu app Android:"
+repetir con cada caracteristica en caracteristicas
+    decir "  • " + caracteristica
+terminar
+
+# Definir la estructura principal de la app
+tipo de cosa llamada MiAppAndroid
+    guardar nombre
+    guardar usuario_actual
+    guardar configuracion
+    guardar version_android
+terminar
+
+# Función para inicializar la app
+hacer inicializar_app_android con nombre_app
+    nueva_app = MiAppAndroid()
+    nueva_app.nombre = nombre_app
+    nueva_app.usuario_actual = nombre_usuario
+    nueva_app.configuracion = "predeterminada"
+    nueva_app.version_android = "API 30+"
+    
+    decir "🚀 App Android inicializada:"
+    decir "  Nombre: " + nueva_app.nombre
+    decir "  Usuario: " + nueva_app.usuario_actual
+    decir "  Android: " + nueva_app.version_android
+    
+    devolver nueva_app
+terminar
+
+# Función para mostrar funcionalidades Android
+hacer mostrar_funcionalidades_android
+    decir ""
+    decir "📱 Funcionalidades Android disponibles:"
+    decir "  🎨 Material Design nativo"
+    decir "  💾 Room Database para almacenamiento"
+    decir "  📍 Google Maps integrado"
+    decir "  📷 Cámara y galería nativas"
+    decir "  🔔 Notificaciones push con FCM"
+    decir "  ☁️ Google Drive y Cloud Storage"
+    decir "  💳 Google Pay integrado"
+    decir "  🔐 Biometric Authentication"
+    decir "  🌐 WebView y navegación"
+    decir "  📊 Google Analytics"
+terminar
+
+# Función para mostrar el potencial del mercado Android
+hacer mostrar_potencial_mercado_android
+    decir ""
+    decir "💰 Potencial económico de tu app Android:"
+    decir "  📈 Google Play Store: $47 mil millones anuales"
+    decir "  📱 3+ mil millones de dispositivos Android activos"
+    decir "  🌍 Dominante en países emergentes (85% market share)"
+    decir "  💵 Crecimiento del 15% anual en ingresos"
+    decir ""
+    decir "🎯 Ventajas del mercado Android:"
+    decir "  • Acceso global sin restricciones geográficas"
+    decir "  • Múltiples tiendas de apps (Play Store, Amazon, etc.)"
+    decir "  • Monetización flexible (ads, freemium, premium)"
+    decir "  • Desarrollo más accesible y económico"
+terminar
+
+# Función para mostrar comparación iOS vs Android
+hacer mostrar_comparacion_movil
+    decir ""
+    decir "📊 Vader: Desarrollo móvil completo"
+    decir "======================================="
+    decir ""
+    decir "🍎 iOS (Swift):"
+    decir "  • Mercado premium ($86B anuales)"
+    decir "  • 1.8B dispositivos Apple"
+    decir "  • Usuarios con mayor poder adquisitivo"
+    decir "  • Apps más caras y rentables"
+    decir ""
+    decir "🤖 Android (Kotlin):"
+    decir "  • Mercado masivo ($47B anuales)"
+    decir "  • 3B+ dispositivos Android"
+    decir "  • Alcance global y diverso"
+    decir "  • Múltiples canales de distribución"
+    decir ""
+    decir "🚀 CON VADER TIENES AMBOS:"
+    decir "  ✅ 100% del mercado móvil cubierto"
+    decir "  ✅ 5B+ dispositivos accesibles"
+    decir "  ✅ $133B+ en oportunidades anuales"
+    decir "  ✅ Desarrollo en español natural"
+terminar
+
+# Función principal
+hacer main
+    decir "🤖 Desarrollo Android Democratizado con Vader"
+    decir "============================================="
+    decir ""
+    
+    # Inicializar la app
+    mi_app = inicializar_app_android(titulo_app)
+    
+    # Mostrar funcionalidades
+    mostrar_funcionalidades_android()
+    mostrar_potencial_mercado_android()
+    mostrar_comparacion_movil()
+    
+    decir ""
+    decir "🎉 ¡Tu primera app Android está lista para desarrollar!"
+    decir "🌟 Con Vader + Kotlin puedes crear:"
+    decir "  • Apps de productividad personal"
+    decir "  • Juegos casuales y educativos"
+    decir "  • Apps de salud y fitness"
+    decir "  • Herramientas de negocio"
+    decir "  • Apps de e-commerce"
+    decir "  • Redes sociales y comunicación"
+    decir "  • Apps de entretenimiento"
+    
+    decir ""
+    decir "💡 Ventajas únicas de Android:"
+    decir "  ✅ Sin necesidad de Mac o hardware caro"
+    decir "  ✅ Android Studio gratuito y multiplataforma"
+    decir "  ✅ Publicación en Google Play más accesible"
+    decir "  ✅ Mercado global sin restricciones"
+    decir "  ✅ Múltiples formas de monetización"
+    
+    decir ""
+    decir "🚀 ¡El futuro del desarrollo Android es en español natural!"
+    decir "🌍 ¡500M+ hispanohablantes pueden crear apps Android!"
+terminar
+
+llamar main

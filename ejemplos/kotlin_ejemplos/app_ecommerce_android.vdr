@@ -1,0 +1,281 @@
+# 🛒 App de E-commerce Android con Vader
+# ¡Crear tiendas online para Android nunca fue tan fácil!
+
+decir "🛒 Creando app de e-commerce para Android"
+decir "Tienda online profesional en español natural"
+
+# Configuración de la tienda Android
+nombre_tienda = "Tienda Vader Android"
+moneda = "USD"
+comision_playstore = 0.30
+precio_app = 1.99
+plataforma = "Android"
+
+decir "🏪 Configurando " + nombre_tienda
+decir "💰 Precio de la app: $" + precio_app
+decir "📱 Plataforma: " + plataforma + " (3+ mil millones de dispositivos)"
+
+# Definir producto de la tienda
+tipo de cosa llamada ProductoAndroid
+    guardar id
+    guardar nombre
+    guardar precio
+    guardar categoria
+    guardar descripcion
+    guardar imagen
+    guardar stock
+    guardar calificacion
+    guardar compatible_android
+terminar
+
+# Definir usuario Android
+tipo de cosa llamada UsuarioAndroid
+    guardar id
+    guardar nombre
+    guardar email
+    guardar carrito
+    guardar historial_compras
+    guardar metodo_pago
+    guardar dispositivo_android
+terminar
+
+# Definir pedido Android
+tipo de cosa llamada PedidoAndroid
+    guardar id
+    guardar usuario_id
+    guardar productos
+    guardar total
+    guardar estado
+    guardar fecha
+    guardar metodo_entrega
+terminar
+
+# Función para crear producto Android
+hacer crear_producto_android con id y nombre y precio y categoria
+    nuevo_producto = ProductoAndroid()
+    nuevo_producto.id = id
+    nuevo_producto.nombre = nombre
+    nuevo_producto.precio = precio
+    nuevo_producto.categoria = categoria
+    nuevo_producto.descripcion = "Producto optimizado para Android"
+    nuevo_producto.imagen = "imagen_" + id + ".webp"
+    nuevo_producto.stock = 150
+    nuevo_producto.calificacion = 4.7
+    nuevo_producto.compatible_android = "API 21+"
+    
+    decir "📦 Producto Android creado:"
+    decir "  Nombre: " + nombre
+    decir "  Precio: $" + precio
+    decir "  Categoría: " + categoria
+    decir "  Compatible: " + nuevo_producto.compatible_android
+    decir "  Stock: " + nuevo_producto.stock
+    
+    devolver nuevo_producto
+terminar
+
+# Función para crear usuario Android
+hacer crear_usuario_android con nombre y email y dispositivo
+    nuevo_usuario = UsuarioAndroid()
+    nuevo_usuario.id = "ANDROID_" + nombre
+    nuevo_usuario.nombre = nombre
+    nuevo_usuario.email = email
+    nuevo_usuario.carrito = []
+    nuevo_usuario.historial_compras = []
+    nuevo_usuario.metodo_pago = "Google Pay"
+    nuevo_usuario.dispositivo_android = dispositivo
+    
+    decir "👤 Usuario Android registrado:"
+    decir "  Nombre: " + nombre
+    decir "  Email: " + email
+    decir "  Dispositivo: " + dispositivo
+    decir "  Método de pago: " + nuevo_usuario.metodo_pago
+    
+    devolver nuevo_usuario
+terminar
+
+# Función para agregar al carrito Android
+hacer agregar_al_carrito_android con usuario y producto
+    usuario.carrito.append(producto)
+    decir "🛒 Producto agregado al carrito Android:"
+    decir "  " + producto.nombre + " - $" + producto.precio
+    decir "  Items en carrito: " + usuario.carrito.length
+    decir "  Compatible con: " + producto.compatible_android
+terminar
+
+# Función para procesar pago Android
+hacer procesar_pago_android con usuario y total
+    decir "💳 Procesando pago con " + usuario.metodo_pago
+    decir "💰 Total a pagar: $" + total
+    decir "📱 Dispositivo: " + usuario.dispositivo_android
+    
+    # Simular procesamiento de pago Android
+    decir "⏳ Conectando con Google Pay..."
+    decir "🔐 Verificando biometría Android..."
+    decir "✅ Pago procesado exitosamente"
+    decir "📧 Recibo enviado a " + usuario.email
+    decir "📱 Notificación push enviada"
+    
+    # Calcular comisión de Google Play Store
+    comision = total * comision_playstore
+    ganancia_neta = total - comision
+    
+    decir ""
+    decir "📊 Desglose financiero Android:"
+    decir "  Venta bruta: $" + total
+    decir "  Comisión Google Play (30%): $" + comision
+    decir "  Ganancia neta: $" + ganancia_neta
+terminar
+
+# Función para mostrar estadísticas Android
+hacer mostrar_estadisticas_android con productos y usuarios
+    decir ""
+    decir "📈 Estadísticas de la tienda Android:"
+    decir "  📦 Productos disponibles: " + productos.length
+    decir "  👥 Usuarios Android registrados: " + usuarios.length
+    decir "  💰 Precio de la app: $" + precio_app
+    decir "  📱 Plataforma: Android (3B+ dispositivos)"
+    decir "  🌍 Alcance global: 190+ países"
+    
+    # Calcular ingresos potenciales Android
+    ingresos_app = usuarios.length * precio_app
+    ingresos_productos = productos.length * 75  # Promedio estimado Android
+    ingresos_totales = ingresos_app + ingresos_productos
+    
+    decir ""
+    decir "💵 Proyección de ingresos Android:"
+    decir "  Por venta de app: $" + ingresos_app
+    decir "  Por productos: $" + ingresos_productos
+    decir "  Total estimado: $" + ingresos_totales
+    decir "  Potencial de escala: 3B+ usuarios"
+terminar
+
+# Función para mostrar funcionalidades Android premium
+hacer mostrar_funcionalidades_android_premium
+    decir ""
+    decir "✨ Funcionalidades premium de Android:"
+    decir "  💳 Google Pay integrado nativo"
+    decir "  🔐 Biometric Authentication (huella, rostro)"
+    decir "  📱 Material Design 3 moderno"
+    decir "  🔔 Firebase Cloud Messaging (FCM)"
+    decir "  📊 Google Analytics for Firebase"
+    decir "  ☁️ Google Drive y Cloud Storage"
+    decir "  🎨 Modo oscuro automático"
+    decir "  📍 Google Maps integrado"
+    decir "  📷 CameraX para fotos profesionales"
+    decir "  🔄 Work Manager para tareas background"
+    decir "  🌐 WebView optimizado"
+    decir "  📱 App Bundles para distribución eficiente"
+terminar
+
+# Función para mostrar ventajas del mercado Android
+hacer mostrar_ventajas_mercado_android
+    decir ""
+    decir "🎯 Ventajas del mercado Android:"
+    decir "  📈 3+ mil millones de dispositivos activos"
+    decir "  🌍 Dominante en mercados emergentes (85%)"
+    decir "  💰 $47 mil millones anuales en Google Play"
+    decir "  🚀 Crecimiento del 15% anual"
+    decir "  🌐 Acceso global sin restricciones"
+    decir "  💵 Múltiples formas de monetización"
+    decir "  📱 Hardware diverso y accesible"
+    decir "  🔧 Desarrollo más económico que iOS"
+    decir ""
+    decir "🆚 Android vs iOS:"
+    decir "  ✅ Mayor alcance global"
+    decir "  ✅ Mercados emergentes dominantes"
+    decir "  ✅ Desarrollo más accesible"
+    decir "  ✅ Múltiples tiendas de apps"
+    decir "  ✅ Flexibilidad de distribución"
+terminar
+
+# Función principal de la tienda Android
+hacer inicializar_tienda_android
+    decir "🚀 Inicializando tienda Android premium"
+    decir ""
+    
+    # Crear productos Android de ejemplo
+    producto1 = crear_producto_android("A001", "Funda Android Premium", "24.99", "Accesorios")
+    producto2 = crear_producto_android("A002", "Cargador Inalámbrico", "34.99", "Electrónicos")
+    producto3 = crear_producto_android("A003", "Auriculares Bluetooth", "89.99", "Audio")
+    producto4 = crear_producto_android("A004", "Power Bank 20000mAh", "49.99", "Accesorios")
+    
+    productos = [producto1, producto2, producto3, producto4]
+    decir ""
+    
+    # Crear usuarios Android de ejemplo
+    usuario1 = crear_usuario_android("Carlos Android", "carlos@gmail.com", "Samsung Galaxy S23")
+    usuario2 = crear_usuario_android("María Mobile", "maria@gmail.com", "Google Pixel 7")
+    usuario3 = crear_usuario_android("Luis Tech", "luis@gmail.com", "OnePlus 11")
+    
+    usuarios = [usuario1, usuario2, usuario3]
+    decir ""
+    
+    # Simular compras Android
+    decir "🛒 Simulando experiencia de compra Android:"
+    agregar_al_carrito_android(usuario1, producto1)
+    agregar_al_carrito_android(usuario1, producto3)
+    
+    total_compra = 24.99 + 89.99
+    procesar_pago_android(usuario1, total_compra)
+    
+    # Mostrar estadísticas
+    mostrar_estadisticas_android(productos, usuarios)
+    mostrar_funcionalidades_android_premium()
+    mostrar_ventajas_mercado_android()
+    
+    devolver [productos, usuarios]
+terminar
+
+# Función para mostrar el poder de Vader móvil completo
+hacer mostrar_poder_vader_movil
+    decir ""
+    decir "🌟 VADER: Revolución móvil completa"
+    decir "=================================="
+    decir ""
+    decir "📱 CON VADER PUEDES CREAR:"
+    decir "  🍎 Apps iOS (Swift) - Mercado premium"
+    decir "  🤖 Apps Android (Kotlin) - Alcance masivo"
+    decir "  🌍 100% del mercado móvil cubierto"
+    decir "  💰 $133B+ en oportunidades anuales"
+    decir ""
+    decir "🚀 VENTAJAS ÚNICAS DE VADER:"
+    decir "  ✅ Sintaxis natural en español"
+    decir "  ✅ Sin necesidad de Mac para iOS"
+    decir "  ✅ Desarrollo Android accesible"
+    decir "  ✅ Una herramienta, dos plataformas"
+    decir "  ✅ 500M+ hispanohablantes empoderados"
+    decir ""
+    decir "🎯 IMPACTO MUNDIAL:"
+    decir "  • Democratización total del desarrollo móvil"
+    decir "  • Eliminación de barreras económicas y técnicas"
+    decir "  • Acceso universal a mercados premium"
+    decir "  • Revolución en educación tecnológica"
+terminar
+
+# Ejecutar la tienda completa
+decir "🛒 Tienda Android Premium - Vader + Kotlin"
+decir "=========================================="
+decir ""
+
+resultado_tienda = inicializar_tienda_android()
+mostrar_poder_vader_movil()
+
+decir ""
+decir "🎉 ¡Tienda Android premium creada exitosamente!"
+decir "🌟 Con Vader + Kotlin puedes crear:"
+decir "  • Tiendas online para Android"
+decir "  • Apps de marketplace masivo"
+decir "  • Plataformas de servicios globales"
+decir "  • Apps de suscripción escalables"
+decir "  • E-commerce para mercados emergentes"
+
+decir ""
+decir "💡 Ventajas competitivas Android:"
+decir "  ✅ Acceso a 3B+ dispositivos"
+decir "  ✅ Mercados emergentes dominantes"
+decir "  ✅ Desarrollo económico y accesible"
+decir "  ✅ Múltiples canales de distribución"
+decir "  ✅ Monetización flexible y diversa"
+
+decir ""
+decir "🚀 ¡La democratización del desarrollo Android completo!"

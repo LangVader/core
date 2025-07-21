@@ -9,7 +9,7 @@ from pathlib import Path
 # Agregar el directorio raíz al path para que encuentre el módulo transpilers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from transpilers import python, javascript, java, csharp, go, rust, swift
+from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin
 
 # Versión de Vader
 VADER_VERSION = "1.0.0"
@@ -65,6 +65,11 @@ SUPPORTED_LANGUAGES = {
         'transpiler': swift,
         'extension': '.swift',
         'description': 'Swift'
+    },
+    'kotlin': {
+        'transpiler': kotlin,
+        'extension': '.kt',
+        'description': 'Kotlin'
     }
 }
 

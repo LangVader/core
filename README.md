@@ -2,7 +2,7 @@
 
 > **"Programación en español que cualquier persona puede aprender y usar"**
 
-[![Versión](https://img.shields.io/badge/versión-3.0-blue.svg)](https://github.com/tu-usuario/vader)
+[![Versión](https://img.shields.io/badge/versión-4.0-blue.svg)](https://github.com/LangVader/core)/vader)
 [![Licencia](https://img.shields.io/badge/licencia-MIT-green.svg)](LICENSE)
 [![Español](https://img.shields.io/badge/idioma-español-red.svg)](README.md)
 [![Multiplataforma](https://img.shields.io/badge/plataforma-todas-orange.svg)](README.md)
@@ -164,6 +164,11 @@ python3 src/vader.py hola.vdr --target javascript
 - `app_tienda_premium.vdr` - E-commerce iOS profesional
 - **¡Crea apps iOS sin Mac!** - Revolución económica
 
+#### 🤖 **Kotlin (`ejemplos/kotlin_ejemplos/`)**
+- `mi_primera_app_android.vdr` - Tu primera app Android en español
+- `app_ecommerce_android.vdr` - E-commerce Android masivo
+- **¡100% del mercado móvil cubierto!** - Revolución completa
+
 #### 🦀 **Rust (`ejemplos/rust_ejemplos/`)**
 - `blockchain_simple.vdr` - Blockchain desde cero
 - `servidor_web_ultrarapido.vdr` - Servidor de alto rendimiento
@@ -218,13 +223,18 @@ python3 src/vader.py mi_programa.vdr --target rust
 # 🍎 Transpilar a Swift (¡REVOLUCIÓN iOS!)
 python3 src/vader.py mi_programa.vdr --target swift
 
-# Guardar resultado en archivo
-python3 src/vader.py mi_programa.vdr --target swift --output MiApp.swift
+# 🤖 Transpilar a Kotlin (¡REVOLUCIÓN ANDROID!)
+python3 src/vader.py mi_programa.vdr --target kotlin
+
+# 📱 DESARROLLO MÓVIL COMPLETO:
+# iOS + Android = 100% del mercado móvil
+python3 src/vader.py mi_app.vdr --target swift --output MiApp.swift
+python3 src/vader.py mi_app.vdr --target kotlin --output MiApp.kt
 
 # Modo verboso (más información)
 python3 src/vader.py mi_programa.vdr --target python --verbose
 
-# Ver todos los 7 lenguajes soportados
+# Ver todos los 8 lenguajes soportados
 python3 src/vader.py --list-targets
 ```
 
@@ -391,18 +401,19 @@ fin con
 
 ## 🌍 Lenguajes de Destino Soportados
 
-### 🏆 **¡LOGRO ÚNICO MUNDIAL: 7 LENGUAJES PRINCIPALES!**
+### 🏆 **¡LOGRO ÚNICO MUNDIAL: 8 LENGUAJES PRINCIPALES!**
 
-> **Vader es la ÚNICA herramienta del mundo que transpila desde español natural a los 7 lenguajes de programación más importantes del ecosistema tecnológico global.**
+> **Vader es la ÚNICA herramienta del mundo que transpila desde español natural a los 8 lenguajes de programación más importantes del ecosistema tecnológico global, incluyendo 100% del mercado móvil.**
 
 **🎯 Cobertura completa del desarrollo moderno:**
-- 📱 **Móvil**: Swift (iOS), Java (Android)
+- 📱 **Móvil**: Swift (iOS), Kotlin (Android) - **100% DEL MERCADO MÓVIL**
 - 🌐 **Web**: JavaScript (frontend/backend), Python (Django/Flask)
 - 🏢 **Empresarial**: Java (Spring), C# (.NET)
 - ☁️ **Cloud**: Go (microservicios), Rust (infraestructura)
 - 🎮 **Gaming**: C# (Unity), Rust (motores 3D)
 - 🤖 **IA**: Python (TensorFlow, PyTorch)
 - 🔗 **Blockchain**: Rust (Solana), Go (Ethereum tools)
+- 📊 **Multiplataforma**: Kotlin (Android, backend, desktop)
 
 ---
 
@@ -453,6 +464,51 @@ fin con
 - ✅ Monetización premium desde día 1
 - ✅ Desarrollo iOS en español natural
 - ✅ Elimina la barrera económica más grande del desarrollo móvil
+
+### 🤖 **Kotlin** ⭐ **¡REVOLUCIÓN MÓVIL COMPLETA!**
+- ✅ **DESARROLLO ANDROID MODERNO Y OFICIAL**
+- ✅ Apps Android nativas para 3B+ dispositivos
+- ✅ **MERCADO GLOBAL MASIVO** (85% en países emergentes)
+- ✅ Google Play Store - $47 mil millones anuales
+- ✅ **COMPLEMENTO PERFECTO DE SWIFT** = 100% móvil
+- ✅ Sintaxis moderna e interoperabilidad con Java
+- ✅ Multiplataforma: Android, backend, desktop
+- ✅ Desarrollo económico y accesible globalmente
+
+---
+
+## 📱 **¡REVOLUCIÓN MÓVIL COMPLETA LOGRADA!**
+
+### 🏆 **VADER = 100% DEL MERCADO MÓVIL CUBIERTO**
+
+> **¡Por primera vez en la historia, una sola herramienta permite crear apps para TODOS los dispositivos móviles del mundo escribiendo solo en español natural!**
+
+#### 🎯 **DOMINIO MÓVIL TOTAL:**
+- 🍎 **Swift (iOS)**: 1.8B+ dispositivos Apple - Mercado premium ($86B anuales)
+- 🤖 **Kotlin (Android)**: 3B+ dispositivos Android - Alcance masivo ($47B anuales)
+- 📱 **TOTAL**: 5B+ dispositivos móviles = **$133B+ en oportunidades anuales**
+
+#### 🌟 **IMPACTO REVOLUCIONARIO:**
+- ✅ **500M+ hispanohablantes** pueden crear apps para cualquier móvil
+- ✅ **Sin Mac necesario** para iOS ($2000+ ahorrados por persona)
+- ✅ **Sin Android Studio complejo** para Android
+- ✅ **Una herramienta** = Todo el ecosistema móvil mundial
+- ✅ **Español natural** = Acceso universal sin barreras
+
+#### 💰 **DEMOCRATIZACIÓN ECONÓMICA MASIVA:**
+```vader
+# ¡Crea la misma app para iOS Y Android!
+preguntar "¿Cómo te llamas?" guardar la respuesta en nombre
+decir "¡Hola " + nombre + "! Tu app funciona en iPhone Y Android"
+
+# Transpila a iOS:
+python3 src/vader.py mi_app.vdr --target swift
+
+# Transpila a Android:
+python3 src/vader.py mi_app.vdr --target kotlin
+
+# ¡100% del mercado móvil cubierto!
+```
 
 ---
 
@@ -639,10 +695,10 @@ python3 src/vader.py ejemplos/para_ninos/mi_primer_programa.vdr --target python
 - **LinkedIn**: [Tu Perfil](https://www.linkedin.com/in/adriano-giaquinto/)
 
 ### 🌐 **Enlaces Oficiales**
-- 🏠 **Sitio Web**: [https://vader-lang.org](https://vader-lang.org)
-- 📚 **Documentación**: [https://docs.vader-lang.org](https://docs.vader-lang.org)
-- 💬 **Discord**: [https://discord.gg/vader](https://discord.gg/vader)
-- 🐦 **Twitter**: [@VaderLang](https://twitter.com/VaderLang)
+- 🏠 **Sitio Web**: [https://langvader.com](https://langvader.com)
+- 📚 **Documentación**: [https://docs.langvader.com](https://docs.langvader.com)
+- 💬 **Discord**: [https://discord.gg/langvader.com](https://discord.gg/langvader.com)
+- 🐦 **Twitter**: [@langvader](https://twitter.com/langvader)
 
 ---
 
