@@ -1,0 +1,241 @@
+# 🎮 FORTNITE EN VADER - DEMO BÁSICO
+# Demostrando las capacidades gaming de Vader
+
+mostrar "🎮 CREANDO FORTNITE CON VADER..."
+mostrar "=================================="
+
+# 🌍 MUNDO DEL JUEGO
+mostrar "=== 🌍 CREANDO MUNDO DEL JUEGO ==="
+crear canvas id="fortnite-mundo" ancho=1200 alto=800
+establecer fondo canvas color="#87CEEB"  # Cielo azul
+mostrar "✅ Mundo base creado (1200x800)"
+
+# 🏗️ CONSTRUCCIÓN Y TERRENO
+mostrar "=== 🏗️ SISTEMA DE CONSTRUCCIÓN ==="
+crear sprite "terreno" x=0 y=700 ancho=1200 alto=100 color="#8B4513"
+crear sprite "edificio1" x=200 y=600 ancho=100 alto=100 color="#A0A0A0"
+crear sprite "edificio2" x=400 y=550 ancho=80 alto=150 color="#696969"
+crear sprite "arbol1" x=600 y=650 ancho=20 alto=50 color="#228B22"
+crear sprite "arbol2" x=800 y=650 ancho=25 alto=55 color="#228B22"
+mostrar "✅ Terreno y edificios creados"
+
+# 👤 JUGADORES
+mostrar "=== 👤 SISTEMA DE JUGADORES ==="
+crear sprite "jugador1" x=100 y=650 ancho=20 alto=30 color="#FF0000"
+crear sprite "jugador2" x=900 y=650 ancho=20 alto=30 color="#0000FF"
+crear sprite "jugador3" x=500 y=650 ancho=20 alto=30 color="#00FF00"
+crear sprite "jugador4" x=700 y=650 ancho=20 alto=30 color="#FFFF00"
+mostrar "✅ 4 jugadores creados"
+
+# 🎯 SISTEMA DE ARMAS
+mostrar "=== 🎯 SISTEMA DE ARMAS ==="
+arma_actual = "rifle_asalto"
+municion = 30
+daño_arma = 25
+alcance_arma = 300
+mostrar "✅ Arma equipada: " + arma_actual
+mostrar "   - Munición: 30 balas"
+mostrar "   - Daño: 25 por disparo"
+mostrar "   - Alcance: 300 píxeles"
+
+# 🛡️ SISTEMA DE VIDA Y ESCUDO
+mostrar "=== 🛡️ SISTEMA DE VIDA ==="
+vida_jugador1 = 100
+escudo_jugador1 = 50
+vida_jugador2 = 100
+escudo_jugador2 = 75
+mostrar "✅ Sistema de vida configurado"
+mostrar "   - Jugador 1: 100 vida + 50 escudo"
+mostrar "   - Jugador 2: 100 vida + 75 escudo"
+
+# ⚡ CONTROLES DE MOVIMIENTO
+mostrar "=== ⚡ CONTROLES DE MOVIMIENTO ==="
+velocidad_movimiento = 5
+velocidad_salto = 15
+en_el_aire = falso
+
+si tecla "W" presionada entonces
+    mover sprite "jugador1" x=0 y=-velocidad_movimiento
+    mostrar "Jugador 1 avanza"
+fin si
+
+si tecla "S" presionada entonces
+    mover sprite "jugador1" x=0 y=velocidad_movimiento
+    mostrar "Jugador 1 retrocede"
+fin si
+
+si tecla "A" presionada entonces
+    mover sprite "jugador1" x=-velocidad_movimiento y=0
+    mostrar "Jugador 1 va izquierda"
+fin si
+
+si tecla "D" presionada entonces
+    mover sprite "jugador1" x=velocidad_movimiento y=0
+    mostrar "Jugador 1 va derecha"
+fin si
+
+si tecla "Espacio" presionada y en_el_aire es falso entonces
+    saltar sprite "jugador1" fuerza=velocidad_salto
+    en_el_aire = verdadero
+    mostrar "¡Jugador 1 salta!"
+fin si
+
+mostrar "✅ Controles WASD + Espacio configurados"
+
+# 🔫 SISTEMA DE COMBATE
+mostrar "=== 🔫 SISTEMA DE COMBATE ==="
+si click_izquierdo entonces
+    si municion > 0 entonces
+        crear proyectil desde="jugador1" hacia=posicion_mouse
+        municion = municion - 1
+        reproducir sonido "disparo_rifle.mp3"
+        mostrar "¡DISPARO! Munición restante: " + municion
+        
+        # Detectar impacto
+        detectar colision proyectil con "jugador2"
+        si colision_detectada entonces
+            si escudo_jugador2 > 0 entonces
+                escudo_jugador2 = escudo_jugador2 - daño_arma
+                mostrar "¡Impacto en escudo! Escudo restante: " + escudo_jugador2
+            sino
+                vida_jugador2 = vida_jugador2 - daño_arma
+                mostrar "¡Impacto en vida! Vida restante: " + vida_jugador2
+                
+                si vida_jugador2 <= 0 entonces
+                    eliminar sprite "jugador2"
+                    mostrar "🏆 ¡JUGADOR 2 ELIMINADO!"
+                    reproducir sonido "eliminacion.mp3"
+                fin si
+            fin si
+        fin si
+    sino
+        mostrar "❌ Sin munición - Recarga necesaria"
+        reproducir sonido "click_vacio.mp3"
+    fin si
+fin si
+
+mostrar "✅ Sistema de combate configurado"
+
+# 🎒 SISTEMA DE INVENTARIO
+mostrar "=== 🎒 SISTEMA DE INVENTARIO ==="
+inventario = [
+    {"item": "rifle_asalto", "cantidad": 1},
+    {"item": "vendas", "cantidad": 5},
+    {"item": "escudo_pequeño", "cantidad": 3},
+    {"item": "granadas", "cantidad": 2}
+]
+mostrar "✅ Inventario configurado:"
+mostrar "   - Rifle de asalto x1"
+mostrar "   - Vendas x5"
+mostrar "   - Escudo pequeño x3"
+mostrar "   - Granadas x2"
+
+# 🌪️ ZONA DE TORMENTA
+mostrar "=== 🌪️ ZONA DE TORMENTA ==="
+radio_zona_segura = 400
+centro_zona_x = 600
+centro_zona_y = 400
+daño_tormenta = 1
+
+crear circulo "zona_segura" x=centro_zona_x y=centro_zona_y radio=radio_zona_segura color="transparente" borde="azul"
+mostrar "✅ Zona segura creada (radio: 400)"
+
+# Cada 30 segundos, reducir zona
+programar cada 30000 milisegundos
+    radio_zona_segura = radio_zona_segura - 50
+    actualizar circulo "zona_segura" radio=radio_zona_segura
+    mostrar "⚠️ ¡La tormenta se acerca! Nuevo radio: " + radio_zona_segura
+    
+    # Verificar si jugadores están en zona segura
+    distancia_jugador1 = calcular_distancia(jugador1.x, jugador1.y, centro_zona_x, centro_zona_y)
+    si distancia_jugador1 > radio_zona_segura entonces
+        vida_jugador1 = vida_jugador1 - daño_tormenta
+        mostrar "💀 Jugador 1 recibe daño de tormenta! Vida: " + vida_jugador1
+    fin si
+fin programar
+
+mostrar "✅ Sistema de tormenta configurado"
+
+# 🏆 SISTEMA DE VICTORIA
+mostrar "=== 🏆 CONDICIONES DE VICTORIA ==="
+jugadores_vivos = 4
+
+funcion verificar_victoria
+    jugadores_restantes = contar sprites tipo="jugador"
+    si jugadores_restantes <= 1 entonces
+        mostrar "🎉 ¡VICTORY ROYALE!"
+        mostrar "🏆 ¡Último jugador en pie!"
+        reproducir sonido "victoria.mp3"
+        mostrar pantalla_victoria
+        detener juego
+    fin si
+fin funcion
+
+mostrar "✅ Sistema de victoria configurado"
+
+# 🎵 AUDIO Y EFECTOS
+mostrar "=== 🎵 SISTEMA DE AUDIO ==="
+reproducir musica_fondo "fortnite_tema.mp3" volumen=0.3 loop=verdadero
+cargar sonido "pasos_hierba.mp3"
+cargar sonido "construccion.mp3"
+cargar sonido "recoleccion_item.mp3"
+mostrar "✅ Sistema de audio configurado"
+
+# 🌐 MULTIJUGADOR (SIMULADO)
+mostrar "=== 🌐 SISTEMA MULTIJUGADOR ==="
+conectar servidor "fortnite-vader.com" puerto=7777
+crear sala_juego capacidad=100 modo="battle_royale"
+sincronizar posiciones_jugadores cada 16 milisegundos
+enviar datos_jugador al servidor cada 100 milisegundos
+mostrar "✅ Multijugador configurado (100 jugadores)"
+
+# 🎨 INTERFAZ DE USUARIO
+mostrar "=== 🎨 INTERFAZ DE USUARIO ==="
+crear hud posicion="superior_izquierda"
+mostrar en hud "Vida: " + vida_jugador1
+mostrar en hud "Escudo: " + escudo_jugador1
+mostrar en hud "Munición: " + municion
+mostrar en hud "Jugadores restantes: " + jugadores_vivos
+
+crear minimapa posicion="superior_derecha" tamaño=150
+mostrar en minimapa posicion_jugadores
+mostrar en minimapa zona_segura
+
+crear inventario_ui posicion="inferior_centro"
+mostrar en inventario_ui items del inventario
+
+mostrar "✅ Interfaz de usuario creada"
+
+# 🚀 INICIALIZAR JUEGO
+mostrar "=================================="
+mostrar "🎮 ¡FORTNITE VADER INICIADO!"
+mostrar "=================================="
+mostrar "✅ Mundo creado con terreno y edificios"
+mostrar "✅ 4 jugadores spawneados"
+mostrar "✅ Sistema de armas funcionando"
+mostrar "✅ Controles WASD + ratón configurados"
+mostrar "✅ Zona de tormenta activa"
+mostrar "✅ Multijugador simulado (100 jugadores)"
+mostrar "✅ HUD e interfaz completa"
+mostrar "=================================="
+mostrar "🎯 CONTROLES:"
+mostrar "   WASD - Movimiento"
+mostrar "   Espacio - Saltar"
+mostrar "   Click izquierdo - Disparar"
+mostrar "   R - Recargar"
+mostrar "   Tab - Inventario"
+mostrar "=================================="
+mostrar "🏆 OBJETIVO: ¡Sé el último en pie!"
+mostrar "⚠️ ¡Cuidado con la tormenta!"
+mostrar "🎉 ¡BUENA SUERTE EN TU VICTORY ROYALE!"
+
+# 🔄 BUCLE PRINCIPAL DEL JUEGO
+repetir mientras juego_activo
+    actualizar posiciones_jugadores
+    verificar colisiones
+    procesar entrada_usuario
+    actualizar zona_tormenta
+    verificar_victoria
+    renderizar frame
+    esperar 16 milisegundos  # 60 FPS
+fin repetir

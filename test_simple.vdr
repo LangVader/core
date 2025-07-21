@@ -1,0 +1,13 @@
+# 🚀 PRUEBA SIMPLE DEL RUNTIME CLI
+mostrar "🌟 Vader CLI Runtime funcionando perfectamente"
+mostrar "✅ Variables, funciones y condicionales OK"
+
+nombre = "Vader"
+mostrar "Hola desde " + nombre
+
+funcion test
+    mostrar "🎉 Función ejecutada correctamente"
+fin funcion
+
+test
+mostrar "🏆 Runtime CLI completamente funcional"

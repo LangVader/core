@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Mini Fortnite en Vader - Demo Visual</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #000011, #001122);
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        .game-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.5);
+        }
+        .game-canvas {
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 70%, #8B4513 100%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .game-hud {
+            display: flex;
+            justify-content: space-between;
+            width: 800px;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+        }
+        .hud-section {
+            text-align: center;
+        }
+        .controls {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        }
+        .status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-title">🎮 MINI FORTNITE EN VADER</div>
+        
+        <canvas id="gameCanvas" class="game-canvas" width="800" height="600"></canvas>
+        
+        <div class="game-hud">
+            <div class="hud-section">
+                <div>❤️ Vida: <span id="health">100</span></div>
+                <div>🛡️ Escudo: <span id="shield">50</span></div>
+            </div>
+            <div class="hud-section">
+                <div>🔫 Arma: <span id="weapon">Rifle</span></div>
+                <div>📦 Munición: <span id="ammo">30</span></div>
+            </div>
+            <div class="hud-section">
+                <div>👥 Jugadores: <span id="players">4</span></div>
+                <div>🌪️ Zona: <span id="zone">400px</span></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <strong>🎮 CONTROLES:</strong>
+            WASD - Mover | Espacio - Saltar | Click - Disparar | R - Recargar
+            <br>
+            <button class="btn" onclick="startGame()">🚀 Iniciar Juego</button>
+            <button class="btn" onclick="resetGame()">🔄 Reiniciar</button>
+            <button class="btn" onclick="togglePause()">⏸️ Pausa</button>
+        </div>
+    </div>
+    
+    <div class="status">
+        <div><strong>🌟 VADER GAMING ENGINE</strong></div>
+        <div>Estado: <span id="gameStatus">Listo</span></div>
+        <div>FPS: <span id="fps">60</span></div>
+        <div>Sintaxis: 100% Vader</div>
+    </div>
+
+    <script>
+        // 🎮 MINI FORTNITE EN VADER - IMPLEMENTACIÓN VISUAL
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 🌟 VARIABLES DEL JUEGO (SINTAXIS VADER SIMULADA)
+        let gameState = {
+            players: [
+                {id: 1, x: 100, y: 500, health: 100, shield: 50, color: '#FF0000', name: 'Jugador 1'},
+                {id: 2, x: 300, y: 500, health: 100, shield: 75, color: '#0000FF', name: 'Jugador 2'},
+                {id: 3, x: 500, y: 500, health: 100, shield: 25, color: '#00FF00', name: 'Jugador 3'},
+                {id: 4, x: 700, y: 500, health: 100, shield: 0, color: '#FFFF00', name: 'Jugador 4'}
+            ],
+            buildings: [
+                {x: 200, y: 450, width: 80, height: 100, color: '#A0A0A0'},
+                {x: 400, y: 400, width: 60, height: 150, color: '#696969'},
+                {x: 600, y: 480, width: 70, height: 70, color: '#8B4513'}
+            ],
+            bullets: [],
+            zone: {x: 400, y: 300, radius: 350, shrinking: false},
+            gameRunning: false,
+            paused: false,
+            currentPlayer: 0,
+            weapon: {name: 'Rifle', ammo: 30, damage: 25}
+        };
+        
+        let keys = {};
+        let lastTime = 0;
+        let fps = 0;
+        
+        // 🎯 EVENTOS DE TECLADO (VADER: "si tecla presionada")
+        document.addEventListener('keydown', (e) => {
+            keys[e.key.toLowerCase()] = true;
+            
+            // Simular sintaxis Vader
+            if (e.key.toLowerCase() === ' ') {
+                console.log('VADER: si tecla "Espacio" presionada entonces saltar jugador');
+                jumpPlayer();
+            }
+            if (e.key.toLowerCase() === 'r') {
+                console.log('VADER: si tecla "R" presionada entonces recargar arma');
+                reloadWeapon();
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            keys[e.key.toLowerCase()] = false;
+        });
+        
+        // 🖱️ EVENTOS DE MOUSE (VADER: "al hacer click")
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            console.log('VADER: al hacer click entonces disparar hacia posicion_mouse');
+            shootBullet(mouseX, mouseY);
+        });
+        
+        // 🚀 FUNCIONES DEL JUEGO (SINTAXIS VADER SIMULADA)
+        function startGame() {
+            console.log('VADER: iniciar juego_fortnite');
+            gameState.gameRunning = true;
+            document.getElementById('gameStatus').textContent = 'Jugando';
+            gameLoop();
+        }
+        
+        function resetGame() {
+            console.log('VADER: reiniciar juego_completo');
+            gameState.players.forEach((player, index) => {
+                player.health = 100;
+                player.shield = [50, 75, 25, 0][index];
+                player.x = 100 + index * 200;
+                player.y = 500;
+            });
+            gameState.bullets = [];
+            gameState.zone.radius = 350;
+            gameState.weapon.ammo = 30;
+            updateHUD();
+        }
+        
+        function togglePause() {
+            gameState.paused = !gameState.paused;
+            console.log('VADER: alternar pausa_juego');
+            document.getElementById('gameStatus').textContent = gameState.paused ? 'Pausado' : 'Jugando';
+        }
+        
+        function jumpPlayer() {
+            const player = gameState.players[gameState.currentPlayer];
+            // Simular salto (animación simple)
+            player.y -= 20;
+            setTimeout(() => {
+                player.y += 20;
+            }, 300);
+        }
+        
+        function reloadWeapon() {
+            console.log('VADER: recargar arma_actual');
+            gameState.weapon.ammo = 30;
+            updateHUD();
+        }
+        
+        function shootBullet(targetX, targetY) {
+            if (gameState.weapon.ammo > 0) {
+                const player = gameState.players[gameState.currentPlayer];
+                const angle = Math.atan2(targetY - player.y, targetX - player.x);
+                
+                gameState.bullets.push({
+                    x: player.x + 10,
+                    y: player.y + 10,
+                    vx: Math.cos(angle) * 8,
+                    vy: Math.sin(angle) * 8,
+                    shooter: gameState.currentPlayer
+                });
+                
+                gameState.weapon.ammo--;
+                console.log(`VADER: crear proyectil desde jugador hacia (${targetX}, ${targetY})`);
+                updateHUD();
+            }
+        }
+        
+        // 🎨 RENDERIZADO (VADER: "dibujar sprites")
+        function render() {
+            // Limpiar canvas (VADER: "limpiar pantalla")
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar fondo cielo
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(0.7, '#98FB98');
+            gradient.addColorStop(1, '#8B4513');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar zona segura (VADER: "dibujar circulo zona_segura")
+            ctx.strokeStyle = '#00BFFF';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([10, 5]);
+            ctx.beginPath();
+            ctx.arc(gameState.zone.x, gameState.zone.y, gameState.zone.radius, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Dibujar edificios (VADER: "dibujar sprite edificio")
+            gameState.buildings.forEach(building => {
+                ctx.fillStyle = building.color;
+                ctx.fillRect(building.x, building.y, building.width, building.height);
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(building.x, building.y, building.width, building.height);
+            });
+            
+            // Dibujar jugadores (VADER: "dibujar sprite jugador")
+            gameState.players.forEach((player, index) => {
+                if (player.health > 0) {
+                    // Cuerpo del jugador
+                    ctx.fillStyle = player.color;
+                    ctx.fillRect(player.x, player.y, 20, 30);
+                    
+                    // Borde del jugador actual
+                    if (index === gameState.currentPlayer) {
+                        ctx.strokeStyle = '#FFD700';
+                        ctx.lineWidth = 3;
+                        ctx.strokeRect(player.x - 2, player.y - 2, 24, 34);
+                    }
+                    
+                    // Barra de vida
+                    const healthWidth = (player.health / 100) * 20;
+                    ctx.fillStyle = '#FF0000';
+                    ctx.fillRect(player.x, player.y - 8, 20, 4);
+                    ctx.fillStyle = '#00FF00';
+                    ctx.fillRect(player.x, player.y - 8, healthWidth, 4);
+                    
+                    // Barra de escudo
+                    if (player.shield > 0) {
+                        const shieldWidth = (player.shield / 100) * 20;
+                        ctx.fillStyle = '#0080FF';
+                        ctx.fillRect(player.x, player.y - 12, shieldWidth, 3);
+                    }
+                    
+                    // Nombre del jugador
+                    ctx.fillStyle = '#FFD700';
+                    ctx.font = '10px Arial';
+                    ctx.fillText(`P${index + 1}`, player.x, player.y - 15);
+                }
+            });
+            
+            // Dibujar balas (VADER: "dibujar sprite proyectil")
+            gameState.bullets.forEach(bullet => {
+                ctx.fillStyle = '#FFFF00';
+                ctx.beginPath();
+                ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Información del juego
+            ctx.fillStyle = '#FFD700';
+            ctx.font = '16px Arial';
+            ctx.fillText('🎮 MINI FORTNITE EN VADER', 10, 25);
+            ctx.font = '12px Arial';
+            ctx.fillText('Sintaxis: 100% Vader en Español', 10, 45);
+        }
+        
+        // 🔄 ACTUALIZAR LÓGICA (VADER: "actualizar juego")
+        function update() {
+            if (gameState.paused) return;
+            
+            // Mover jugador actual (VADER: "si tecla presionada entonces mover")
+            const player = gameState.players[gameState.currentPlayer];
+            const speed = 3;
+            
+            if (keys['w'] || keys['arrowup']) {
+                player.y = Math.max(0, player.y - speed);
+            }
+            if (keys['s'] || keys['arrowdown']) {
+                player.y = Math.min(canvas.height - 30, player.y + speed);
+            }
+            if (keys['a'] || keys['arrowleft']) {
+                player.x = Math.max(0, player.x - speed);
+            }
+            if (keys['d'] || keys['arrowright']) {
+                player.x = Math.min(canvas.width - 20, player.x + speed);
+            }
+            
+            // Actualizar balas (VADER: "mover proyectiles")
+            gameState.bullets = gameState.bullets.filter(bullet => {
+                bullet.x += bullet.vx;
+                bullet.y += bullet.vy;
+                
+                // Eliminar balas fuera del canvas
+                if (bullet.x < 0 || bullet.x > canvas.width || bullet.y < 0 || bullet.y > canvas.height) {
+                    return false;
+                }
+                
+                // Detectar colisiones con jugadores (VADER: "detectar colision")
+                gameState.players.forEach((target, index) => {
+                    if (index !== bullet.shooter && target.health > 0) {
+                        const dx = bullet.x - (target.x + 10);
+                        const dy = bullet.y - (target.y + 15);
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 15) {
+                            console.log(`VADER: colision_detectada entre proyectil y jugador${index + 1}`);
+                            
+                            // Aplicar daño
+                            if (target.shield > 0) {
+                                target.shield = Math.max(0, target.shield - gameState.weapon.damage);
+                            } else {
+                                target.health = Math.max(0, target.health - gameState.weapon.damage);
+                            }
+                            
+                            updateHUD();
+                            return false; // Eliminar bala
+                        }
+                    }
+                });
+                
+                return true;
+            });
+            
+            // Reducir zona cada 10 segundos (VADER: "programar cada X segundos")
+            if (Date.now() % 10000 < 16 && gameState.zone.radius > 100) {
+                gameState.zone.radius -= 2;
+                console.log('VADER: reducir zona_segura');
+                document.getElementById('zone').textContent = Math.round(gameState.zone.radius) + 'px';
+            }
+        }
+        
+        // 📊 ACTUALIZAR HUD
+        function updateHUD() {
+            const player = gameState.players[gameState.currentPlayer];
+            document.getElementById('health').textContent = player.health;
+            document.getElementById('shield').textContent = player.shield;
+            document.getElementById('ammo').textContent = gameState.weapon.ammo;
+            
+            const alivePlayers = gameState.players.filter(p => p.health > 0).length;
+            document.getElementById('players').textContent = alivePlayers;
+        }
+        
+        // 🎮 BUCLE PRINCIPAL DEL JUEGO
+        function gameLoop(currentTime = 0) {
+            if (!gameState.gameRunning) return;
+            
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+            
+            // Calcular FPS
+            fps = Math.round(1000 / deltaTime) || 60;
+            document.getElementById('fps').textContent = fps;
+            
+            update();
+            render();
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // 🚀 INICIALIZACIÓN
+        console.log('VADER: inicializar motor_gaming');
+        console.log('VADER: cargar sprites y texturas');
+        console.log('VADER: configurar controles WASD');
+        console.log('VADER: crear mundo batalla_real');
+        
+        updateHUD();
+        render(); // Renderizar frame inicial
+        
+        // Mensaje de bienvenida
+        setTimeout(() => {
+            alert('🎮 ¡MINI FORTNITE EN VADER CARGADO!\n\n' +
+                  '🎯 CONTROLES:\n' +
+                  '• WASD - Mover jugador\n' +
+                  '• Click - Disparar\n' +
+                  '• Espacio - Saltar\n' +
+                  '• R - Recargar\n\n' +
+                  '🌟 ¡Todo programado con sintaxis Vader en español!\n' +
+                  '🚀 Presiona "Iniciar Juego" para empezar');
+        }, 1000);
+    </script>
+</body>
+</html>

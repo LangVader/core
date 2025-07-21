@@ -1,0 +1,168 @@
+# 🌟 EJEMPLO UNIVERSAL VADER - TODO EN UN ARCHIVO
+# Este archivo demuestra cómo Vader puede hacer CUALQUIER COSA
+
+# 🌐 FRONTEND WEB
+mostrar "=== CREANDO FRONTEND WEB ==="
+crear pagina titulo="App Universal Vader"
+crear header texto="¡Bienvenido a Vader Universal!"
+crear boton id="btn-saludo" texto="Saludar" 
+crear input id="nombre" placeholder="Tu nombre aquí"
+crear div id="resultado"
+
+# 🎨 ESTILOS CSS
+aplicar estilo a "body" fondo="#000011" color="#FFD700"
+aplicar estilo a "header" tamaño="24px" peso="bold"
+aplicar estilo a "button" fondo="#FFD700" color="#000" padding="10px"
+
+# ⚡ LÓGICA JAVASCRIPT  
+al hacer click en "btn-saludo"
+    nombre = obtener valor de "nombre"
+    si nombre no es vacio
+        mostrar en "resultado" "¡Hola " + nombre + " desde Vader!"
+        reproducir sonido "saludo.mp3"
+    sino
+        mostrar en "resultado" "Por favor ingresa tu nombre"
+    fin si
+fin evento
+
+# 🖥️ BACKEND API
+mostrar "=== CREANDO BACKEND API ==="
+crear servidor puerto=8080
+
+# Ruta para obtener usuarios
+ruta GET "/api/usuarios"
+    usuarios = [
+        {"id": 1, "nombre": "Ana", "edad": 25},
+        {"id": 2, "nombre": "Carlos", "edad": 30}
+    ]
+    responder JSON usuarios
+fin ruta
+
+# Ruta para crear usuario
+ruta POST "/api/usuarios"
+    datos = obtener JSON del request
+    nuevo_usuario = {
+        "id": generar_id_unico,
+        "nombre": datos.nombre,
+        "edad": datos.edad,
+        "creado": fecha_actual
+    }
+    guardar nuevo_usuario en base_datos
+    responder JSON nuevo_usuario
+fin ruta
+
+# 📱 FUNCIONALIDAD MÓVIL
+mostrar "=== AGREGANDO FEATURES MÓVILES ==="
+si es_dispositivo_movil
+    crear boton "Tomar Foto" al hacer click
+        foto = tomar foto
+        mostrar foto en "resultado"
+        vibrar 200
+        notificar "¡Foto tomada con Vader!"
+    fin boton
+    
+    crear boton "Mi Ubicación" al hacer click
+        ubicacion = obtener ubicacion
+        mostrar "Estás en: " + ubicacion.latitud + ", " + ubicacion.longitud
+        mostrar mapa centrado en ubicacion
+    fin boton
+fin si
+
+# 🎮 MINI JUEGO INTEGRADO
+mostrar "=== CREANDO MINI JUEGO ==="
+crear canvas id="juego" ancho=400 alto=300
+crear sprite "pelota" x=200 y=150 radio=10 color="rojo"
+velocidad_x = 3
+velocidad_y = 2
+pelota_x = 200
+pelota_y = 150
+
+repetir cada 16 milisegundos
+    # Mover pelota
+    pelota_x = pelota_x + velocidad_x
+    pelota_y = pelota_y + velocidad_y
+    
+    # Rebotes en bordes
+    si pelota_x <= 0 o pelota_x >= 400
+        velocidad_x = velocidad_x * -1
+    fin si
+    
+    si pelota_y <= 0 o pelota_y >= 300
+        velocidad_y = velocidad_y * -1
+    fin si
+    
+    # Actualizar sprite
+    actualizar sprite "pelota" x=pelota_x y=pelota_y
+    
+    # Dibujar
+    limpiar canvas
+    dibujar sprite "pelota"
+fin repetir
+
+# 🤖 INTEGRACIÓN CON IA
+mostrar "=== CONECTANDO IA ==="
+crear boton "Pregunta a la IA" al hacer click
+    pregunta = obtener valor de input "pregunta-ia"
+    respuesta = preguntar_ia pregunta
+    mostrar en "respuesta-ia" respuesta
+    
+    # Generar código si se solicita
+    si pregunta contiene "generar código"
+        codigo_generado = ia_generar_codigo pregunta
+        mostrar codigo_generado en editor
+    fin si
+fin boton
+
+# 🌐 CONECTIVIDAD IoT (si está disponible)
+mostrar "=== CONFIGURANDO IoT ==="
+si sensor_temperatura_disponible
+    temperatura = leer sensor_temperatura
+    mostrar "Temperatura actual: " + temperatura + "°C"
+    
+    si temperatura > 25
+        encender ventilador
+        enviar notificacion "Ventilador encendido - Temp: " + temperatura
+    fin si
+    
+    # Enviar datos a la nube cada minuto
+    programar cada 60000 milisegundos
+        datos_sensor = {
+            "temperatura": leer sensor_temperatura,
+            "humedad": leer sensor_humedad,
+            "timestamp": fecha_actual
+        }
+        enviar_a_nube datos_sensor
+    fin programar
+fin si
+
+# 💾 BASE DE DATOS
+mostrar "=== CONFIGURANDO BASE DE DATOS ==="
+conectar base_datos tipo="sqlite" archivo="vader_app.db"
+
+crear tabla "usuarios" campos=[
+    "id INTEGER PRIMARY KEY",
+    "nombre TEXT NOT NULL", 
+    "email TEXT UNIQUE",
+    "creado DATETIME DEFAULT CURRENT_TIMESTAMP"
+]
+
+# Insertar usuario de prueba
+insertar en "usuarios" valores={
+    "nombre": "Usuario Vader",
+    "email": "usuario@vader.com"
+}
+
+# Consultar usuarios
+usuarios_db = consultar "SELECT * FROM usuarios"
+mostrar "Usuarios en DB: " + usuarios_db
+
+# 🚀 INICIALIZAR APLICACIÓN
+mostrar "=== INICIANDO APLICACIÓN UNIVERSAL ==="
+iniciar servidor
+abrir navegador en "http://localhost:8080"
+mostrar "🎉 ¡Aplicación Universal Vader funcionando!"
+mostrar "Frontend ✅ Backend ✅ Móvil ✅ Gaming ✅ IA ✅ IoT ✅ DB ✅"
+
+# 🎯 MENSAJE FINAL
+mostrar "¡TODO ESTO EN UN SOLO ARCHIVO .VDR!"
+mostrar "¡VADER ES REALMENTE UNIVERSAL!"

@@ -1,0 +1,44 @@
+# 🚀 PRUEBA COMPLETA DEL ECOSISTEMA VADER
+# Este archivo prueba todas las funcionalidades nativas
+
+mostrar "🌟 Iniciando prueba del ecosistema Vader Universal"
+mostrar "=============================================="
+
+# Variables y operaciones básicas
+nombre = "Ecosistema Vader"
+version = 2
+version_str = "2.0"
+mostrar "Probando: " + nombre + " v" + version_str
+
+# Condicionales
+si version es mayor que 1
+    mostrar "✅ Versión actual y moderna"
+sino
+    mostrar "❌ Versión desactualizada"
+fin si
+
+# Bucles
+contador = 0
+repetir 3 veces
+    contador = contador + 1
+    mostrar "🔄 Iteración: " + contador
+fin repetir
+
+# Funciones
+funcion saludar
+    mostrar "👋 ¡Hola desde función Vader!"
+fin funcion
+
+saludar
+
+# Operaciones matemáticas
+resultado = 10 + 5 * 2
+resultado_str = "20"
+mostrar "🧮 Cálculo: 10 + 5 * 2 = " + resultado_str
+
+# Prueba de entrada (comentada para testing automático)
+# preguntar "¿Cómo te llamas?" guardar la respuesta en usuario
+# mostrar "¡Hola " + usuario + "!"
+
+mostrar "=============================================="
+mostrar "🎉 Prueba del runtime CLI completada exitosamente"

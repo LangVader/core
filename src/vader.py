@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css
+from vader_interpreter import VaderNativeRuntime
 
 # Versión de Vader
 VADER_VERSION = "1.0.0"
@@ -152,6 +153,24 @@ def create_argument_parser():
         '--version', '-v',
         action='version',
         version=f'Vader v{VADER_VERSION}'
+    )
+    
+    parser.add_argument(
+        '--run', '-r',
+        action='store_true',
+        help='Ejecutar el archivo .vdr directamente (sin transpilar)'
+    )
+    
+    parser.add_argument(
+        '--interpret', '-i',
+        action='store_true',
+        help='Interpretar el archivo .vdr nativamente'
+    )
+    
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Activar modo debug para el intérprete nativo'
     )
     
     parser.add_argument(
@@ -721,6 +740,39 @@ def main():
     # Manejar comandos de IA
     if args.ai_generate:
         return handle_ai_generate(args)
+    
+    # NUEVO: Manejar intérprete nativo
+    if args.run or args.interpret:
+        if not args.archivo:
+            print("❌ Error: Se requiere especificar un archivo .vdr para ejecutar")
+            parser.print_help()
+            return 1
+            
+        print(f"🚀 Ejecutando {args.archivo} con Vader Native Runtime...")
+        
+        # Crear runtime nativo
+        runtime = VaderNativeRuntime()
+        runtime.debug_mode = args.debug
+        
+        if args.debug:
+            print(f"📁 Archivo: {args.archivo}")
+            print(f"🔧 Modo debug: Activado")
+            print("=" * 50)
+        
+        # Ejecutar archivo directamente
+        success = runtime.execute_file(args.archivo)
+        
+        if args.debug:
+            print("=" * 50)
+            if success:
+                print("✅ Ejecución completada exitosamente")
+            else:
+                print("❌ Ejecución terminada con errores")
+                
+            print(f"📊 Variables: {len(runtime.variables)}")
+            print(f"🔧 Funciones: {len(runtime.functions)}")
+        
+        return 0 if success else 1
     
     # Validar que se proporcionaron los argumentos necesarios
     if not args.archivo and not args.ai_generate:

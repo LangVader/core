@@ -1,0 +1,68 @@
+# ¡PRIMER PROGRAMA EJECUTABLE NATIVO DE VADER! 🚀
+# Este archivo .vdr se ejecuta DIRECTAMENTE sin transpilación
+
+mostrar "🎉 ¡Bienvenido al Vader Native Runtime!"
+mostrar "Este programa se ejecuta directamente desde .vdr"
+mostrar ""
+
+# Variables y operaciones
+nombre = "Vader"
+version = 2.0
+mostrar "Lenguaje: " + nombre
+mostrar "Versión: " + version
+
+# Input del usuario
+mostrar ""
+preguntar "¿Cómo te llamas?" guardar la respuesta en usuario
+mostrar "¡Hola " + usuario + "! Bienvenido al futuro de la programación"
+
+# Operaciones matemáticas
+mostrar ""
+mostrar "=== CALCULADORA NATIVA ==="
+preguntar "Primer número:" guardar la respuesta en num1
+preguntar "Segundo número:" guardar la respuesta en num2
+
+convertir num1 a numero
+convertir num2 a numero
+
+suma = num1 + num2
+resta = num1 - num2
+multiplicacion = num1 * num2
+division = num1 / num2
+
+mostrar "Resultados:"
+mostrar "Suma: " + suma
+mostrar "Resta: " + resta
+mostrar "Multiplicación: " + multiplicacion
+mostrar "División: " + division
+
+# Condicionales
+mostrar ""
+mostrar "=== PRUEBA DE CONDICIONALES ==="
+si suma es mayor que 10
+    mostrar "✅ La suma es mayor que 10"
+sino
+    mostrar "❌ La suma es menor o igual a 10"
+fin si
+
+# Bucle
+mostrar ""
+mostrar "=== CONTADOR NATIVO ==="
+repetir 5 veces
+    mostrar "🔄 Vader ejecutándose nativamente..."
+fin repetir
+
+# Función
+funcion despedida
+    mostrar ""
+    mostrar "🌟 ¡Gracias por probar Vader Native Runtime!"
+    mostrar "🚀 El primer lenguaje universal ejecutable en español"
+    mostrar "💫 Sin transpilación, sin dependencias, solo Vader puro"
+fin funcion
+
+# Llamar función
+despedida
+
+mostrar ""
+mostrar "✅ Programa completado exitosamente"
+mostrar "🎯 Vader ahora es un lenguaje de primera clase"

@@ -1,8 +1,22 @@
-# Archivos de Python
+# VADER UNIVERSAL - .gitignore
+# Solo mantenemos archivos nativos .vdr y runtimes esenciales
+
+# ===== ARCHIVOS TRANSPILADOS (NO DESEADOS) =====
+# Vader ahora es nativo - no necesitamos archivos transpilados
+*_transpilado.*
+*_generated.*
+*_output.*
+transpiled/
+generated/
+output/
+
+# ===== ARCHIVOS PYTHON COMPILADOS =====
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# ===== DISTRIBUCIÓN Y PACKAGING =====
 .Python
 build/
 develop-eggs/
@@ -16,12 +30,21 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# Entornos virtuales
+# ===== LOGS Y TEMPORALES =====
+*.log
+*.tmp
+*.temp
+*.cache
+.DS_Store
+Thumbs.db
+
+# ===== ENTORNOS VIRTUALES =====
 .env
 .venv
 env/
@@ -30,55 +53,85 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDEs
+# ===== TESTING Y COVERAGE =====
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# ===== IDEs Y EDITORES =====
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.spyderproject
+.spyproject
+.ropeproject
 
-# Sistema operativo
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# ===== NODE.JS (SI SE USA) =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Logs
-*.log
+# ===== BASES DE DATOS TEMPORALES =====
+*.sqlite
+*.sqlite3
+*.db
+db.sqlite3-journal
 
-# Archivos temporales
-*.tmp
-*.temp
-*.bak
-*.backup
+# ===== ARCHIVOS DE CONFIGURACIÓN SENSIBLES =====
+.env.local
+.env.production
+config/secrets.json
+api_keys.txt
 
-# Archivos de configuración local
-config.local.json
-settings.local.json
+# ===== ARCHIVOS DE SISTEMA =====
+*.pid
+*.seed
+*.pid.lock
 
-# Archivos de prueba
-test_output/
-*.test
-
-# Archivos compilados
-*.o
-*.a
-*.lib
-*.exe
-*.dll
-*.dylib
-
-# Archivos de documentación generados
+# ===== DOCUMENTACIÓN GENERADA =====
 docs/_build/
+.pybuilder/
+target/
 
-# Archivos de cobertura
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+# ===== JUPYTER NOTEBOOKS =====
+.ipynb_checkpoints
+
+# ===== MYPY Y TYPE CHECKING =====
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# ===== CYTHON =====
+cython_debug/
+
+# ===== VADER ESPECÍFICO =====
+# Mantener solo archivos .vdr nativos y runtimes esenciales
+# NO ignorar: *.vdr, vader-*.js, vader-*.py, demos *.html
+
+# Archivos temporales de Vader
+vader_temp/
+vader_cache/
+*.vdr.bak
+*.vdr.tmp
+
+# ===== COMENTARIOS IMPORTANTES =====
+# MANTENER: Todos los archivos .vdr (código fuente nativo)
+# MANTENER: vader-runtime.js, vader-mobile.js, etc. (runtimes)
+# MANTENER: src/vader.py, src/vader_interpreter.py (core)
+# MANTENER: *.html demos (interfaces visuales)
+# MANTENER: docs/ y *.md (documentación)
+# IGNORAR: Archivos transpilados y temporales

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Prueba IA Simulada de Vader</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #000011, #001122);
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chat-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chat-messages {
+            background: #000;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .message.user {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid #FFD700;
+        }
+        .message.ai {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00FF00;
+        }
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .chat-input {
+            flex: 1;
+            background: #000;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00FF00;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .code-output {
+            background: #000;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 VADER IA SIMULADA - PRUEBA FUNCIONAL</h1>
+            <p>Probando el sistema de IA integrado (versión simulada)</p>
+        </div>
+        
+        <div class="status">
+            <strong>✅ Estado:</strong> IA Simulada Funcionando | 
+            <strong>🔧 Backend:</strong> Simulado | 
+            <strong>🌐 Conexión:</strong> Local
+        </div>
+        
+        <div class="chat-container">
+            <h2>💬 Chat con IA de Vader</h2>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <strong>🤖 IA Vader:</strong> ¡Hola! Soy el asistente de IA de Vader (versión simulada pero funcional). 
+                    <br><br>Puedo ayudarte con:
+                    <br>• 🔧 Generar código Vader
+                    <br>• 📊 Analizar tu código
+                    <br>• ⚡ Optimizar programas
+                    <br>• 🎓 Explicar conceptos
+                    <br>• 🐛 Depurar errores
+                    <br><br>¿En qué te ayudo hoy?
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Pregunta algo sobre Vader..." onkeypress="handleEnter(event)">
+                <button class="btn" onclick="sendMessage()">📤 Enviar</button>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn" onclick="aiGenerate()">🔧 Generar Código</button>
+                <button class="btn" onclick="aiAnalyze()">📊 Analizar</button>
+                <button class="btn" onclick="aiOptimize()">⚡ Optimizar</button>
+                <button class="btn" onclick="aiExplain()">🎓 Explicar</button>
+                <button class="btn" onclick="aiDebug()">🐛 Debug</button>
+                <button class="btn" onclick="clearChat()">🧹 Limpiar</button>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <h2>📝 Código Generado</h2>
+            <div class="code-output" id="codeOutput">
+                <span style="color: #888;">El código generado por la IA aparecerá aquí...</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simulador de IA inteligente para Vader
+        class VaderAISimulator {
+            constructor() {
+                this.context = [];
+                this.responses = {
+                    generate: [
+                        `# 🔧 Código generado por IA Vader
+mostrar "¡Hola desde IA Vader!"
+nombre = "Usuario"
+mostrar "Bienvenido " + nombre
+
+funcion saludar
+    mostrar "👋 Saludo desde función IA"
+fin funcion
+
+saludar
+crear boton "IA Click" al hacer click mostrar "¡IA funcionando!"`,
+                        
+                        `# 🎮 Juego simple generado por IA
+limpiar pantalla
+crear sprite "jugador" en x=100 y=100 ancho=50 alto=50 color="azul"
+crear sprite "objetivo" en x=300 y=200 ancho=30 alto=30 color="verde"
+
+si tecla "ArrowLeft" presionada entonces mover sprite "jugador" x=-5 y=0
+si tecla "ArrowRight" presionada entonces mover sprite "jugador" x=5 y=0
+
+detectar colision entre "jugador" y "objetivo"
+si colision_detectada
+    mostrar "¡Objetivo alcanzado!"
+    aumentar puntaje 10
+fin si`,
+                        
+                        `# 📱 App móvil generada por IA
+mostrar "📱 App Vader IA"
+crear boton "Foto IA" al hacer click tomar foto
+crear boton "Ubicación IA" al hacer click obtener ubicacion
+crear boton "Vibrar IA" al hacer click vibrar 300
+
+si ultima_foto no es vacio
+    mostrar "✅ Foto tomada por IA"
+    notificar "IA: Foto guardada"
+fin si`
+                    ],
+                    
+                    analyze: [
+                        `📊 **Análisis de IA Vader:**
+✅ **Sintaxis:** Correcta y bien estructurada
+✅ **Lógica:** Flujo claro y funcional  
+✅ **Estilo:** Sigue convenciones de Vader
+💡 **Sugerencias:** 
+- Agregar validación de entrada
+- Considerar manejo de errores
+- Optimizar bucles si es necesario
+🎯 **Calificación:** 8.5/10`,
+                        
+                        `📊 **Análisis avanzado de IA:**
+🔍 **Complejidad:** Media-Baja (ideal para principiantes)
+🚀 **Performance:** Excelente para el propósito
+🎨 **Legibilidad:** Muy clara en español natural
+⚡ **Optimización:** Bien optimizado
+🛡️ **Seguridad:** Sin problemas detectados
+📈 **Escalabilidad:** Fácil de extender`
+                    ],
+                    
+                    optimize: [
+                        `⚡ **Optimización de IA Vader:**
+
+# Código original optimizado:
+# Versión más eficiente con mejores prácticas
+
+si entrada no es vacio y entrada es valido
+    procesar entrada
+    mostrar resultado
+sino
+    mostrar "❌ Entrada inválida"
+    solicitar nueva entrada
+fin si
+
+# ✅ Mejoras aplicadas:
+- Validación de entrada agregada
+- Manejo de errores mejorado  
+- Lógica más eficiente
+- Código más mantenible`,
+                        
+                        `⚡ **Optimización avanzada:**
+
+# Versión optimizada con cache
+cache_resultados = {}
+
+funcion calcular_optimizado valor
+    si valor en cache_resultados
+        retornar cache_resultados[valor]
+    sino
+        resultado = calcular valor
+        cache_resultados[valor] = resultado
+        retornar resultado
+    fin si
+fin funcion
+
+# 🚀 Mejoras: 50% más rápido con cache`
+                    ],
+                    
+                    explain: [
+                        `🎓 **Explicación de IA Vader:**
+
+**¿Qué hace este código?**
+1. **mostrar** - Imprime texto en pantalla
+2. **variables** - Almacenan datos (nombre = "valor")
+3. **funciones** - Bloques de código reutilizable
+4. **condicionales** - Toman decisiones (si...entonces...sino)
+5. **bucles** - Repiten acciones (repetir X veces)
+
+**¿Por qué es útil?**
+- Código en español natural
+- Fácil de entender y modificar
+- Ejecutable en múltiples plataformas
+
+**¿Cómo mejorarlo?**
+- Agregar más funciones
+- Usar variables descriptivas
+- Comentar código complejo`,
+                        
+                        `🎓 **Explicación detallada:**
+
+**Conceptos clave en este código:**
+📝 **Variables:** Contenedores de datos
+🔧 **Funciones:** Código reutilizable
+🎯 **Condicionales:** Lógica de decisión
+🔄 **Bucles:** Repetición controlada
+
+**Flujo de ejecución:**
+1. Se declaran variables
+2. Se ejecutan condicionales
+3. Se llaman funciones
+4. Se muestran resultados
+
+**Aplicaciones prácticas:**
+- Automatización de tareas
+- Creación de interfaces
+- Procesamiento de datos
+- Lógica de negocio`
+                    ],
+                    
+                    debug: [
+                        `🐛 **Debug de IA Vader:**
+
+**Errores encontrados:**
+❌ **Línea 5:** Variable 'resultado' no definida
+❌ **Línea 12:** Falta 'fin si' en condicional
+❌ **Línea 18:** Sintaxis incorrecta en función
+
+**Código corregido:**
+# Definir variable antes de usar
+resultado = 0
+
+# Cerrar condicional correctamente  
+si condicion
+    accion
+fin si
+
+# Sintaxis correcta de función
+funcion mi_funcion
+    mostrar "Función corregida"
+fin funcion
+
+✅ **Estado:** Errores corregidos, código funcional`,
+                        
+                        `🐛 **Debug avanzado:**
+
+**Análisis de errores:**
+🔍 **Tipo:** Error de sintaxis y lógica
+⚠️ **Severidad:** Media (no crítico)
+🎯 **Ubicación:** Líneas 3, 7, 15
+
+**Soluciones aplicadas:**
+1. Variables inicializadas correctamente
+2. Bloques de código cerrados
+3. Sintaxis corregida
+4. Validaciones agregadas
+
+**Recomendaciones:**
+- Usar modo debug de Vader
+- Probar código paso a paso
+- Validar entrada de usuario`
+                    ],
+                    
+                    chat: [
+                        "🤖 Interesante pregunta sobre Vader. Como IA especializada, te ayudo con eso...",
+                        "💡 Para eso en Vader puedes usar la sintaxis natural en español. ¿Te muestro un ejemplo?",
+                        "🔧 Vader hace eso muy fácil. Te sugiero probar con los comandos nativos del runtime actual.",
+                        "📚 ¡Excelente! Vader es muy intuitivo para eso. ¿Quieres que genere código específico?",
+                        "⚡ Perfecto, esa es una de las fortalezas de Vader. Te explico cómo hacerlo...",
+                        "🎯 Buena pregunta. En Vader eso se hace de manera muy natural en español.",
+                        "🌟 Vader está diseñado exactamente para eso. Te muestro la mejor manera..."
+                    ]
+                };
+            }
+            
+            getResponse(type, query = '') {
+                const responses = this.responses[type] || this.responses.chat;
+                const response = responses[Math.floor(Math.random() * responses.length)];
+                
+                // Agregar contexto si es necesario
+                if (query.toLowerCase().includes('juego') || query.toLowerCase().includes('gaming')) {
+                    return response.replace('IA Vader', 'IA Gaming Vader');
+                }
+                if (query.toLowerCase().includes('móvil') || query.toLowerCase().includes('mobile')) {
+                    return response.replace('IA Vader', 'IA Mobile Vader');
+                }
+                
+                return response;
+            }
+        }
+        
+        const aiSimulator = new VaderAISimulator();
+        
+        function addMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const senderIcon = sender === 'user' ? '👤' : '🤖';
+            const senderName = sender === 'user' ? 'Usuario' : 'IA Vader';
+            
+            messageDiv.innerHTML = `<strong>${senderIcon} ${senderName}:</strong> ${message}`;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Simular delay de IA
+            setTimeout(() => {
+                const response = aiSimulator.getResponse('chat', message);
+                addMessage(response, 'ai');
+            }, 800);
+        }
+        
+        function aiGenerate() {
+            addMessage('Generar código Vader para una aplicación básica', 'user');
+            setTimeout(() => {
+                const code = aiSimulator.getResponse('generate');
+                addMessage('🔧 Código generado exitosamente:', 'ai');
+                document.getElementById('codeOutput').textContent = code;
+            }, 1000);
+        }
+        
+        function aiAnalyze() {
+            addMessage('Analizar el código actual', 'user');
+            setTimeout(() => {
+                const analysis = aiSimulator.getResponse('analyze');
+                addMessage(analysis, 'ai');
+            }, 1200);
+        }
+        
+        function aiOptimize() {
+            addMessage('Optimizar el código para mejor rendimiento', 'user');
+            setTimeout(() => {
+                const optimization = aiSimulator.getResponse('optimize');
+                addMessage(optimization, 'ai');
+            }, 1000);
+        }
+        
+        function aiExplain() {
+            addMessage('Explicar cómo funciona el código Vader', 'user');
+            setTimeout(() => {
+                const explanation = aiSimulator.getResponse('explain');
+                addMessage(explanation, 'ai');
+            }, 1100);
+        }
+        
+        function aiDebug() {
+            addMessage('Depurar errores en el código', 'user');
+            setTimeout(() => {
+                const debug = aiSimulator.getResponse('debug');
+                addMessage(debug, 'ai');
+            }, 1300);
+        }
+        
+        function clearChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="message ai">
+                    <strong>🤖 IA Vader:</strong> Chat limpiado. ¿En qué más te puedo ayudar?
+                </div>
+            `;
+            document.getElementById('codeOutput').innerHTML = '<span style="color: #888;">El código generado por la IA aparecerá aquí...</span>';
+        }
+        
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Mensaje de bienvenida automático
+        setTimeout(() => {
+            addMessage('¡Bienvenido al sistema de IA de Vader! Esta versión simulada demuestra todas las funcionalidades que tendrá la IA real cuando configures las API keys.', 'ai');
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Prueba Vader Gaming Runtime</title>
+    <style>
+        body {
+            background: #000011;
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            border: 3px solid #FFD700;
+            background: #000;
+        }
+        .controls {
+            margin: 20px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .output {
+            background: #000;
+            border: 1px solid #FFD700;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 VADER GAMING RUNTIME - PRUEBA COMPLETA</h1>
+    <p>Usa las flechas para mover, mouse para interactuar</p>
+    
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div class="controls">
+        <button class="btn" onclick="startDemo()">🚀 Iniciar Demo</button>
+        <button class="btn" onclick="testCollision()">💥 Probar Colisión</button>
+        <button class="btn" onclick="testSound()">🔊 Probar Sonido</button>
+        <button class="btn" onclick="resetGame()">🔄 Reset</button>
+    </div>
+    
+    <div class="output" id="output">
+        <div style="color: #00FF00;">🎮 Vader Gaming Runtime listo para pruebas...</div>
+    </div>
+    
+    <script src="vader-gaming.js"></script>
+    <script>
+        let gamingRuntime;
+        
+        function initRuntime() {
+            try {
+                gamingRuntime = new VaderGamingRuntime('gameCanvas');
+                addOutput('✅ Gaming Runtime inicializado correctamente');
+            } catch (error) {
+                addOutput(`❌ Error inicializando runtime: ${error.message}`);
+            }
+        }
+        
+        function addOutput(message) {
+            const output = document.getElementById('output');
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            div.style.color = '#FFD700';
+            div.style.marginBottom = '5px';
+            output.appendChild(div);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        async function startDemo() {
+            addOutput('🚀 Iniciando demo completo...');
+            
+            const demoCode = `
+limpiar pantalla
+dibujar texto "VADER GAMING DEMO" en x=250 y=50 tamaño=32 color="dorado"
+
+crear sprite "jugador" en x=100 y=300 ancho=50 alto=50 color="azul"
+crear sprite "enemigo" en x=600 y=300 ancho=40 alto=40 color="rojo"
+crear sprite "moneda" en x=400 y=200 ancho=30 alto=30 color="amarillo"
+
+dibujar texto "Usa flechas para mover" en x=10 y=100 tamaño=16 color="blanco"
+dibujar texto "Puntaje: 0" en x=10 y=10 tamaño=20 color="blanco"
+
+iniciar juego
+            `;
+            
+            try {
+                await gamingRuntime.executeCode(demoCode);
+                addOutput('✅ Demo iniciado - Usa las flechas para mover');
+            } catch (error) {
+                addOutput(`❌ Error en demo: ${error.message}`);
+            }
+        }
+        
+        async function testCollision() {
+            addOutput('💥 Probando sistema de colisiones...');
+            
+            const collisionCode = `
+detectar colision entre "jugador" y "enemigo"
+si colision_detectada
+    mostrar "¡Colisión detectada!"
+    reproducir sonido "explosion"
+    aumentar puntaje 10
+sino
+    mostrar "Sin colisión"
+fin si
+            `;
+            
+            try {
+                await gamingRuntime.executeCode(collisionCode);
+                addOutput('✅ Sistema de colisiones probado');
+            } catch (error) {
+                addOutput(`❌ Error en colisiones: ${error.message}`);
+            }
+        }
+        
+        async function testSound() {
+            addOutput('🔊 Probando sistema de sonido...');
+            
+            const soundCode = `
+reproducir sonido "salto"
+reproducir sonido "moneda"
+mostrar "Sonidos reproducidos"
+            `;
+            
+            try {
+                await gamingRuntime.executeCode(soundCode);
+                addOutput('✅ Sistema de sonido probado');
+            } catch (error) {
+                addOutput(`❌ Error en sonido: ${error.message}`);
+            }
+        }
+        
+        function resetGame() {
+            addOutput('🔄 Reseteando juego...');
+            try {
+                gamingRuntime.pauseGame();
+                gamingRuntime.clearScreen();
+                addOutput('✅ Juego reseteado');
+            } catch (error) {
+                addOutput(`❌ Error reseteando: ${error.message}`);
+            }
+        }
+        
+        // Inicializar al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            initRuntime();
+        });
+        
+        // Controles de teclado para testing
+        document.addEventListener('keydown', function(e) {
+            if (gamingRuntime) {
+                const moveCode = `
+si tecla "${e.code}" presionada entonces mover sprite "jugador" x=${e.code === 'ArrowLeft' ? -10 : e.code === 'ArrowRight' ? 10 : 0} y=${e.code === 'ArrowUp' ? -10 : e.code === 'ArrowDown' ? 10 : 0}
+                `;
+                
+                if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.code)) {
+                    gamingRuntime.executeCode(moveCode);
+                    addOutput(`🎮 Movimiento: ${e.code}`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
