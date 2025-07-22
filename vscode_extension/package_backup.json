@@ -1,0 +1,177 @@
+{
+  "name": "vader-language-support",
+  "displayName": "Vader Language Support",
+  "description": "🚀 Programa en español natural - El primer lenguaje universal multiidioma del mundo. Syntax highlighting, snippets y temas incluidos.",
+  "version": "1.0.1",
+  "publisher": "vader-lang",
+  "author": {
+    "name": "Vader Team",
+    "email": "team@vader-lang.org"
+  },
+  "homepage": "https://github.com/LangVader/core",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LangVader/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LangVader/core/issues"
+  },
+  "icon": "../assets/logo.png",
+  "readme": "README.md",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes",
+    "Snippets"
+  ],
+  "keywords": [
+    "vader",
+    "español",
+    "spanish",
+    "programming",
+    "natural language",
+    "transpiler"
+  ],
+  "activationEvents": [
+    "onLanguage:vader"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "vader",
+        "aliases": [
+          "Vader",
+          "vader"
+        ],
+        "extensions": [
+          ".vdr"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "../assets/logo.png",
+          "dark": "../assets/logo.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "vader",
+        "scopeName": "source.vader",
+        "path": "./syntaxes/vader.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Vader Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/vader-dark-color-theme.json"
+      },
+      {
+        "label": "Vader Light",
+        "uiTheme": "vs",
+        "path": "./themes/vader-light-color-theme.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "vader",
+        "path": "./snippets/vader.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "vader.transpile.python",
+        "title": "Transpilar a Python",
+        "category": "Vader"
+      },
+      {
+        "command": "vader.transpile.javascript",
+        "title": "Transpilar a JavaScript",
+        "category": "Vader"
+      },
+      {
+        "command": "vader.transpile.java",
+        "title": "Transpilar a Java",
+        "category": "Vader"
+      },
+      {
+        "command": "vader.transpile.csharp",
+        "title": "Transpilar a C#",
+        "category": "Vader"
+      },
+      {
+        "command": "vader.transpile.go",
+        "title": "Transpilar a Go",
+        "category": "Vader"
+      },
+      {
+        "command": "vader.transpile.rust",
+        "title": "Transpilar a Rust",
+        "category": "Vader"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.python",
+          "group": "vader@1"
+        },
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.javascript",
+          "group": "vader@2"
+        },
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.java",
+          "group": "vader@3"
+        },
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.csharp",
+          "group": "vader@4"
+        },
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.go",
+          "group": "vader@5"
+        },
+        {
+          "when": "resourceExtname == .vdr",
+          "command": "vader.transpile.rust",
+          "group": "vader@6"
+        }
+      ]
+    },
+    "iconThemes": [
+      {
+        "id": "vader-icons",
+        "label": "Vader Icons",
+        "path": "./icons/vader-icon-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vader-lang/vader"
+  },
+  "homepage": "https://vader-lang.org",
+  "bugs": {
+    "url": "https://github.com/vader-lang/vader/issues"
+  },
+  "license": "MIT"
+}

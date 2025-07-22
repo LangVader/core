@@ -18,7 +18,6 @@
   },
   "license": "MIT",
   "readme": "README.md",
-  "icon": "logo.png",
   "engines": {
     "vscode": "^1.74.0"
   },

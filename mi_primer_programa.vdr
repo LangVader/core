@@ -1,0 +1,15 @@
+decir "¡Hola! Bienvenido a Vader 🚀"
+decir "Soy tu primer programa en español natural"
+
+preguntar "¿Cómo te llamas?" y guardar la respuesta en nombre
+decir "¡Hola " + nombre + "! Es un placer conocerte"
+
+preguntar "¿Cuál es tu edad?" y guardar la respuesta en edad
+convertir a número edad
+si edad es mayor que 18
+    decir "Eres mayor de edad, ¡genial!"
+sino
+    decir "Eres joven, ¡el futuro es tuyo!"
+fin si
+
+decir "¡Gracias por probar Vader, " + nombre + "! 🎉"

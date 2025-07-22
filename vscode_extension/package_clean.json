@@ -17,8 +17,8 @@
     "url": "https://github.com/LangVader/core/issues"
   },
   "license": "MIT",
+  "icon": "../assets/logo.png",
   "readme": "README.md",
-  "icon": "logo.png",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -37,6 +37,9 @@
     "multiidioma",
     "universal"
   ],
+  "activationEvents": [
+    "onLanguage:vader"
+  ],
   "contributes": {
     "languages": [
       {
@@ -48,7 +51,11 @@
         "extensions": [
           ".vdr"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "../assets/logo.png",
+          "dark": "../assets/logo.png"
+        }
       }
     ],
     "grammars": [
@@ -62,6 +69,18 @@
       {
         "language": "vader",
         "path": "./snippets/vader.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Vader Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/vader-dark.json"
+      },
+      {
+        "label": "Vader Light",
+        "uiTheme": "vs",
+        "path": "./themes/vader-light.json"
       }
     ]
   }
