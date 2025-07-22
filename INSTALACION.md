@@ -182,6 +182,20 @@ python3 src/vader.py ejemplos/hola_mundo.vdr
 - ✅ **GUI Moderna**: Interfaz gráfica incluida
 - ✅ **Multiplataforma**: Windows, macOS, Linux
 - ✅ **Sintaxis Natural**: Programa como hablas
+### 🎨 Extensión VS Code Incluida
+```bash
+# Instalar extensión de Vader para VS Code
+code --install-extension vscode_extension/vader-language-support-1.0.1.vsix
+```
+
+**Características de la extensión:**
+- ✅ Logo de Vader visible
+- ✅ Syntax highlighting completo
+- ✅ Snippets inteligentes
+- ✅ README con documentación
+
+### 🆘 ¿Problemas? 
+Consulta la **[Guía Completa de Instalación](INSTALACION.md)** con soluciones para todos los sistemas.
 
 ## 📖 Documentación
 
