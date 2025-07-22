@@ -1117,7 +1117,7 @@ Gracias a toda la comunidad que ha hecho posible que Vader sea una realidad:
 
 **Vader no es solo un lenguaje de programación, es una puerta de entrada a un mundo de posibilidades infinitas.**
 
-### 🚀 [Descargar Vader](https://github.com/tu-usuario/vader) | 📚 [Documentación](https://docs.vader-lang.org) | 💬 [Comunidad](https://discord.gg/vader)
+### 🚀 [Descargar Vader](https://langvader.org/instalacion) | 📚 [Documentación](https://langvader.org/documentacion) | 💬 [Comunidad](https://discord.gg/langvader)
 
 ---
 
