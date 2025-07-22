@@ -1083,12 +1083,12 @@ python3 src/vader.py ejemplos/para_ninos/mi_primer_programa.vdr --target python
 - **Nombre**: Adriano Giaquinto
 - **Email**: lenguajevader@gmail.com
 - **GitHub**: [@vader](https://github.com/LangVader)
-- **LinkedIn**: [Tu Perfil](https://www.linkedin.com/in/adriano-giaquinto/)
+- **LinkedIn**: [Adriano](https://www.linkedin.com/in/adriano-giaquinto/)
 
 ### 🌐 **Enlaces Oficiales**
 - 🏠 **Sitio Web**: [https://langvader.org](https://langvader.org)
-- 📚 **Documentación**: [https://docs.langvader.org](https://docs.langvader.org)
-- 💬 **Discord**: [https://discord.gg/langvader.org](https://discord.gg/langvader.org)
+- 📚 **Documentación**: [https://langvader.org/documentacion](https://langvader.org/documentacion)
+- 💬 **Discord**: [https://discord.gg/TeNMafZv6W](https://discord.gg/TeNMafZv6W)
 - 🐦 **Twitter**: [@langvader](https://twitter.com/langvader)
 
 ---
