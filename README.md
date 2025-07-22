@@ -129,20 +129,66 @@ python3 src/vader.py 我的中文代码.vdr --language zh --target java
 
 ---
 
-## 🚀 Instalación Súper Fácil
+## 🚀 Instalación Universal (¡NUEVO!)
 
-### Opción 1: Descarga Directa
+**¡Instaladores automáticos para cualquier sistema operativo!**
+
+### ⚡ Instalación Rápida (Recomendada)
+
+#### 1. Clonar repositorio
 ```bash
-git clone https://github.com/tu-usuario/vader.git
+# Clonar Vader desde GitHub
+git clone https://github.com/LangVader/core.git vader
 cd vader
 ```
 
-### Opción 2: Instalación con pip (próximamente)
-```bash
-pip install vader-lang
+#### 2. Ejecutar instalador automático
+
+**🖥️ Windows:**
+```cmd
+# Doble clic en install.bat o desde terminal:
+install.bat
 ```
 
-### ¡Listo! Ya puedes programar en Vader
+**🍎 macOS / 🐧 Linux:**
+```bash
+# Script automático con colores:
+./install.sh
+
+# O instalador Python universal:
+python3 install.py
+```
+
+### 🔧 Instalación Completa Automática
+
+**Para usuarios que NO tienen el repositorio clonado:**
+```bash
+# Descarga e instala todo automáticamente
+curl -O https://raw.githubusercontent.com/LangVader/core/main/install_completo.py
+python3 install_completo.py
+```
+
+### 📋 Requisitos del Sistema
+- **Python 3.6+** (se detecta automáticamente)
+- **Git** (para clonar el repositorio)
+- **Sistema**: Windows, macOS, Linux, ARM (M1/M2)
+
+### ✅ Verificar Instalación
+```bash
+# Probar Vader
+python3 src/vader.py test_simple.vdr
+
+# Ver idiomas soportados (11 idiomas)
+python3 src/vader.py --list-languages
+
+# Ver frameworks soportados (25+ frameworks)
+python3 src/vader.py --list-frameworks
+```
+
+### 🆘 ¿Problemas? 
+Consulta la **[Guía Completa de Instalación](INSTALACION.md)** con soluciones para todos los sistemas.
+
+### ¡Listo! Ya puedes programar en Vader 🎉
 
 ---
 
