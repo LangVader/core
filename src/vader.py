@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css
 from vader_interpreter import VaderNativeRuntime
+from multilingual_core import multilingual_system
 
 # Versión de Vader
 VADER_VERSION = "1.0.0"
@@ -236,6 +237,34 @@ def create_argument_parser():
         '--ai-detailed',
         action='store_true',
         help='Análisis detallado cuando se usa con opciones de IA'
+    )
+    
+    # Argumentos Multiidioma
+    parser.add_argument(
+        '--language', '--lang',
+        help='Especificar el idioma del código fuente (es, en, fr, pt, it, zh, ja, ru, de, ar, ko, etc.)'
+    )
+    
+    parser.add_argument(
+        '--detect-language',
+        action='store_true',
+        help='Detectar automáticamente el idioma del código fuente'
+    )
+    
+    parser.add_argument(
+        '--list-languages',
+        action='store_true',
+        help='Lista todos los idiomas soportados para programar'
+    )
+    
+    parser.add_argument(
+        '--translate-to',
+        help='Traducir el código de un idioma a otro (especificar idioma objetivo)'
+    )
+    
+    parser.add_argument(
+        '--multilingual-info',
+        help='Mostrar información detallada de un idioma específico'
     )
     
     return parser
@@ -578,6 +607,113 @@ def save_output(content, output_path, target_lang):
         print(f"Error al guardar el archivo: {e}")
         return False
 
+def list_supported_languages():
+    """Lista todos los idiomas soportados para programar"""
+    languages = multilingual_system.get_supported_languages()
+    if not languages:
+        print("❌ No se encontraron idiomas configurados")
+        return
+    
+    print("🌍 IDIOMAS SOPORTADOS PARA PROGRAMAR EN VADER:")
+    print("=" * 60)
+    for code, info in languages.items():
+        print(f"  {code:<4} - {info['native_name']:<15} ({info['name']:<10}) - {info['keywords_count']} palabras clave")
+    print(f"\n✨ Total: {len(languages)} idiomas disponibles")
+    print("\n💡 Usa --language <código> para especificar el idioma")
+    print("💡 Usa --detect-language para detección automática")
+
+def detect_code_language(code):
+    """Detecta automáticamente el idioma del código"""
+    detected = multilingual_system.detect_language(code)
+    languages = multilingual_system.get_supported_languages()
+    
+    if detected in languages:
+        lang_info = languages[detected]
+        print(f"🔍 IDIOMA DETECTADO: {lang_info['native_name']} ({lang_info['name']})")
+        print(f"📝 Código de idioma: {detected}")
+        return detected
+    else:
+        print(f"⚠️  Idioma detectado: {detected} (puede no estar completamente soportado)")
+        return detected
+
+def show_language_info(lang_code):
+    """Muestra información detallada de un idioma específico"""
+    lang_info = multilingual_system.get_language_info(lang_code)
+    
+    if not lang_info:
+        print(f"❌ Idioma '{lang_code}' no encontrado")
+        print("💡 Usa --list-languages para ver idiomas disponibles")
+        return False
+    
+    print(f"🌍 INFORMACIÓN DEL IDIOMA: {lang_info['native_name']}")
+    print("=" * 50)
+    print(f"📝 Nombre: {lang_info['name']}")
+    print(f"🏷️  Código: {lang_info['code']}")
+    print(f"📖 Dirección: {'Derecha a Izquierda' if lang_info.get('direction') == 'rtl' else 'Izquierda a Derecha'}")
+    print(f"🔤 Codificación: {lang_info.get('encoding', 'utf-8')}")
+    
+    keywords = lang_info.get('keywords', {})
+    print(f"\n🔑 PALABRAS CLAVE ({sum(len(words) for words in keywords.values())} total):")
+    
+    for category, words in keywords.items():
+        print(f"  📂 {category.replace('_', ' ').title()}: {', '.join(words[:5])}{'...' if len(words) > 5 else ''}")
+    
+    examples = lang_info.get('examples', {})
+    if examples:
+        print(f"\n📚 EJEMPLOS DE CÓDIGO:")
+        for example_name, code in examples.items():
+            print(f"  💻 {example_name.replace('_', ' ').title()}:")
+            print(f"     {code}")
+    
+    return True
+
+def translate_code_language(code, source_lang, target_lang):
+    """Traduce código de un idioma a otro"""
+    try:
+        if source_lang == target_lang:
+            print(f"ℹ️  El código ya está en {target_lang}")
+            return code
+        
+        languages = multilingual_system.get_supported_languages()
+        
+        if source_lang not in languages:
+            print(f"❌ Idioma fuente '{source_lang}' no soportado")
+            return None
+        
+        if target_lang not in languages:
+            print(f"❌ Idioma objetivo '{target_lang}' no soportado")
+            return None
+        
+        source_name = languages[source_lang]['native_name']
+        target_name = languages[target_lang]['native_name']
+        
+        print(f"🔄 Traduciendo código de {source_name} → {target_name}...")
+        
+        translated = multilingual_system.translate_code(code, source_lang, target_lang)
+        
+        print(f"✅ Traducción completada exitosamente")
+        return translated
+        
+    except Exception as e:
+        print(f"❌ Error durante la traducción: {e}")
+        return None
+
+def validate_vader_file(filepath):
+    """Valida si un archivo es un archivo Vader válido"""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Validar contenido del archivo
+        if not content.startswith('# Vader'):
+            print(f"❌ Archivo '{filepath}' no es un archivo Vader válido")
+            return False
+        
+        return True
+    except Exception as e:
+        print(f"❌ Error al validar archivo: {e}")
+        return False
+
 def handle_ai_generate(args):
     """Maneja la generación automática de código con IA"""
     try:
@@ -737,6 +873,17 @@ def main():
         list_supported_frameworks()
         return 0
     
+    # Manejar comandos multiidioma
+    if args.list_languages:
+        list_supported_languages()
+        return 0
+    
+    if args.multilingual_info:
+        if show_language_info(args.multilingual_info):
+            return 0
+        else:
+            return 1
+    
     # Manejar comandos de IA
     if args.ai_generate:
         return handle_ai_generate(args)
@@ -809,6 +956,52 @@ def main():
     if args.verbose:
         print(f"Archivo leído: {args.archivo}")
         print(f"Líneas de código: {len(codigo.splitlines())}")
+    
+    # Procesamiento multiidioma
+    source_language = None
+    
+    # Detectar idioma automáticamente si se solicita
+    if args.detect_language:
+        source_language = detect_code_language(codigo)
+    
+    # Usar idioma especificado por el usuario
+    if args.language:
+        source_language = args.language
+        if args.verbose:
+            languages = multilingual_system.get_supported_languages()
+            if source_language in languages:
+                lang_info = languages[source_language]
+                print(f"🌍 Idioma especificado: {lang_info['native_name']} ({lang_info['name']})")
+    
+    # Traducir código si se especifica idioma objetivo diferente
+    if args.translate_to:
+        if not source_language:
+            source_language = multilingual_system.detect_language(codigo)
+            print(f"🔍 Idioma detectado automáticamente: {source_language}")
+        
+        translated_code = translate_code_language(codigo, source_language, args.translate_to)
+        if translated_code:
+            codigo = translated_code
+            # Actualizar idioma fuente para el resto del procesamiento
+            source_language = args.translate_to
+            
+            # Guardar código traducido si se especifica output
+            if args.output:
+                translated_file = args.output.replace('.vdr', f'_{args.translate_to}.vdr') if args.output.endswith('.vdr') else args.output + f'_{args.translate_to}.vdr'
+                try:
+                    with open(translated_file, 'w', encoding='utf-8') as f:
+                        f.write(codigo)
+                    print(f"💾 Código traducido guardado en: {translated_file}")
+                except Exception as e:
+                    print(f"❌ Error al guardar código traducido: {e}")
+        else:
+            return 1
+    
+    # Normalizar código a español (idioma base) para transpilación
+    if source_language and source_language != 'es':
+        if args.verbose:
+            print(f"🔄 Normalizando código de {source_language} a español para transpilación...")
+        codigo = multilingual_system.normalize_to_spanish(codigo, source_language)
     
     # Manejar comandos de IA con archivo existente
     if args.ai_analyze:

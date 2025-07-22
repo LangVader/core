@@ -1,0 +1,56 @@
+{
+  "name": "Spanish",
+  "native_name": "Español",
+  "code": "es",
+  "direction": "ltr",
+  "encoding": "utf-8",
+  "keywords": {
+    "basic": [
+      "mostrar", "decir", "preguntar", "guardar", "imprimir", "escribir", "leer"
+    ],
+    "data_types": [
+      "numero", "texto", "booleano", "lista", "diccionario", "nulo", "verdadero", "falso"
+    ],
+    "control_flow": [
+      "si", "sino", "si no", "fin si", "repetir", "fin repetir", "salir", "continuar"
+    ],
+    "functions": [
+      "funcion", "hacer", "devolver", "retornar", "fin funcion", "con", "y"
+    ],
+    "classes": [
+      "clase", "tipo de cosa llamada", "fin clase", "atributo", "metodo", "guardar atributo", "hacer metodo"
+    ],
+    "operators": [
+      "y", "o", "no", "es igual a", "es mayor que", "es menor que", "y también", "o también"
+    ],
+    "loops": [
+      "repetir", "fin repetir", "para cada", "mientras", "repetir siempre", "repetir X veces", "repetir con cada"
+    ],
+    "file_operations": [
+      "leer archivo", "escribir archivo", "abrir", "cerrar", "archivo"
+    ],
+    "advanced": [
+      "intentar", "capturar", "finalmente", "lanzar", "terminar", "salir del repetir"
+    ],
+    "conversions": [
+      "convertir a numero", "convertir a texto", "convertir a booleano"
+    ],
+    "natural_syntax": [
+      "guardar la respuesta en", "convertir", "terminar"
+    ]
+  },
+  "examples": {
+    "hello_world": "decir \"¡Hola mundo!\"",
+    "variable": "guardar nombre = \"Usuario\"",
+    "input": "preguntar \"¿Cómo te llamas?\" y guardar la respuesta en nombre",
+    "function": "hacer saludar:\n    decir \"¡Hola!\"\nterminar",
+    "conditional": "si edad >= 18:\n    decir \"Eres mayor de edad\"\nterminar",
+    "loop": "repetir 5 veces:\n    decir \"Contando...\"\nterminar",
+    "class": "tipo de cosa llamada Persona:\n    guardar atributo nombre\n    hacer metodo saludar:\n        decir \"Hola, soy \" + nombre\n    terminar\nterminar"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Italian",
+  "native_name": "Italiano",
+  "code": "it",
+  "direction": "ltr",
+  "encoding": "utf-8",
+  "keywords": {
+    "basic": [
+      "mostrare", "dire", "visualizzare", "chiedere", "memorizzare", "salvare", "scrivere", "leggere"
+    ],
+    "data_types": [
+      "numero", "testo", "stringa", "booleano", "lista", "array", "dizionario", "nullo", "vero", "falso"
+    ],
+    "control_flow": [
+      "se", "altrimenti", "diversamente", "fine se", "ripetere", "fine ripetere", "uscire", "continuare"
+    ],
+    "functions": [
+      "funzione", "definire", "restituire", "ritornare", "fine funzione", "con", "e"
+    ],
+    "classes": [
+      "classe", "tipo di cosa chiamata", "fine classe", "attributo", "metodo", "memorizzare attributo", "definire metodo"
+    ],
+    "operators": [
+      "e", "o", "non", "uguale a", "è uguale a", "è maggiore di", "è minore di", "anche", "o anche"
+    ],
+    "loops": [
+      "ripetere", "fine ripetere", "per ogni", "mentre", "ripetere sempre", "ripetere X volte", "ripetere con ogni"
+    ],
+    "file_operations": [
+      "leggere file", "scrivere file", "aprire", "chiudere", "file"
+    ],
+    "advanced": [
+      "provare", "catturare", "finalmente", "lanciare", "fine", "uscire dal ripetere"
+    ],
+    "conversions": [
+      "convertire a numero", "convertire a testo", "convertire a booleano"
+    ],
+    "natural_syntax": [
+      "salvare la risposta in", "convertire", "fine"
+    ]
+  },
+  "examples": {
+    "hello_world": "dire \"Ciao mondo!\"",
+    "variable": "memorizzare nome = \"Utente\"",
+    "input": "chiedere \"Come ti chiami?\" e salvare la risposta in nome",
+    "function": "definire salutare:\n    dire \"Ciao!\"\nfine",
+    "conditional": "se età >= 18:\n    dire \"Sei maggiorenne\"\nfine",
+    "loop": "ripetere 5 volte:\n    dire \"Contando...\"\nfine",
+    "class": "tipo di cosa chiamata Persona:\n    memorizzare attributo nome\n    definire metodo salutare:\n        dire \"Ciao, sono \" + nome\n    fine\nfine"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

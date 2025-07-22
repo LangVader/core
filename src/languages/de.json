@@ -1,0 +1,56 @@
+{
+  "name": "German",
+  "native_name": "Deutsch",
+  "code": "de",
+  "direction": "ltr",
+  "encoding": "utf-8",
+  "keywords": {
+    "basic": [
+      "zeigen", "sagen", "drucken", "fragen", "speichern", "bewahren", "schreiben", "lesen"
+    ],
+    "data_types": [
+      "zahl", "text", "zeichenkette", "boolean", "liste", "array", "wörterbuch", "null", "wahr", "falsch"
+    ],
+    "control_flow": [
+      "wenn", "sonst", "anders", "ende wenn", "wiederholen", "ende wiederholen", "verlassen", "fortfahren"
+    ],
+    "functions": [
+      "funktion", "definieren", "zurückgeben", "geben", "ende funktion", "mit", "und"
+    ],
+    "classes": [
+      "klasse", "art von ding genannt", "ende klasse", "attribut", "methode", "attribut speichern", "methode definieren"
+    ],
+    "operators": [
+      "und", "oder", "nicht", "gleich", "ist gleich", "ist größer als", "ist kleiner als", "auch", "oder auch"
+    ],
+    "loops": [
+      "wiederholen", "ende wiederholen", "für jedes", "während", "immer wiederholen", "X mal wiederholen", "mit jedem wiederholen"
+    ],
+    "file_operations": [
+      "datei lesen", "datei schreiben", "öffnen", "schließen", "datei"
+    ],
+    "advanced": [
+      "versuchen", "fangen", "schließlich", "werfen", "ende", "aus wiederholen verlassen"
+    ],
+    "conversions": [
+      "zu zahl konvertieren", "zu text konvertieren", "zu boolean konvertieren"
+    ],
+    "natural_syntax": [
+      "antwort speichern in", "konvertieren", "ende"
+    ]
+  },
+  "examples": {
+    "hello_world": "sagen \"Hallo Welt!\"",
+    "variable": "speichern name = \"Benutzer\"",
+    "input": "fragen \"Wie heißen Sie?\" und antwort speichern in name",
+    "function": "definieren grüßen:\n    sagen \"Hallo!\"\nende",
+    "conditional": "wenn alter >= 18:\n    sagen \"Sie sind erwachsen\"\nende",
+    "loop": "wiederholen 5 mal:\n    sagen \"Zählen...\"\nende",
+    "class": "art von ding genannt Person:\n    attribut speichern name\n    methode definieren grüßen:\n        sagen \"Hallo, ich bin \" + name\n    ende\nende"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

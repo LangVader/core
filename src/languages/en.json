@@ -1,0 +1,56 @@
+{
+  "name": "English",
+  "native_name": "English",
+  "code": "en",
+  "direction": "ltr",
+  "encoding": "utf-8",
+  "keywords": {
+    "basic": [
+      "show", "say", "print", "ask", "store", "save", "display", "write", "read"
+    ],
+    "data_types": [
+      "number", "text", "string", "boolean", "list", "array", "dictionary", "null", "true", "false"
+    ],
+    "control_flow": [
+      "if", "else", "otherwise", "end if", "repeat", "end repeat", "break", "continue"
+    ],
+    "functions": [
+      "function", "def", "define", "return", "give back", "end function", "with", "and"
+    ],
+    "classes": [
+      "class", "type of thing called", "end class", "attribute", "method", "store attribute", "define method"
+    ],
+    "operators": [
+      "and", "or", "not", "equals", "is equal to", "is greater than", "is less than", "also", "or also"
+    ],
+    "loops": [
+      "repeat", "end repeat", "for each", "while", "repeat forever", "repeat X times", "repeat with each"
+    ],
+    "file_operations": [
+      "read file", "write file", "open", "close", "file"
+    ],
+    "advanced": [
+      "try", "catch", "finally", "throw", "end", "break from repeat"
+    ],
+    "conversions": [
+      "convert to number", "convert to text", "convert to boolean"
+    ],
+    "natural_syntax": [
+      "save the answer in", "convert", "end"
+    ]
+  },
+  "examples": {
+    "hello_world": "say \"Hello world!\"",
+    "variable": "store name = \"User\"",
+    "input": "ask \"What's your name?\" and save the answer in name",
+    "function": "define greet:\n    say \"Hello!\"\nend",
+    "conditional": "if age >= 18:\n    say \"You are an adult\"\nend",
+    "loop": "repeat 5 times:\n    say \"Counting...\"\nend",
+    "class": "type of thing called Person:\n    store attribute name\n    define method greet:\n        say \"Hello, I'm \" + name\n    end\nend"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

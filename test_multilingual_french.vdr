@@ -1,0 +1,41 @@
+# Test Multilingue Vader - Français
+# Ce fichier démontre la programmation en français avec Vader
+
+dire "Bonjour le monde depuis Vader français!"
+
+stocker nom = "Marie"
+stocker âge = 28
+
+demander "Quelle est votre couleur préférée?" et sauvegarder la réponse dans couleur
+
+si âge >= 18:
+    dire "Vous êtes majeur"
+    dire "Votre couleur préférée est " + couleur
+sinon:
+    dire "Vous êtes mineur"
+fin si
+
+définir saluer avec nom_personne:
+    dire "Bonjour " + nom_personne + "!"
+    dire "Bienvenue dans Vader multilingue!"
+fin
+
+répéter 3 fois:
+    dire "Comptage en français: " + texte(compteur)
+fin répéter
+
+type de chose appelée Personne:
+    stocker attribut nom
+    stocker attribut âge
+    
+    définir méthode se_présenter:
+        dire "Salut, je suis " + nom + " et j'ai " + texte(âge) + " ans"
+    fin
+fin
+
+stocker marie = Personne()
+marie.nom = "Marie Dubois"
+marie.âge = 25
+marie.se_présenter()
+
+dire "Test Vader français terminé avec succès!"

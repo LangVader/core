@@ -13,6 +13,7 @@
 ✅ **☁️ RUNTIME CLOUD** - Serverless AWS/Azure/GCP  
 ✅ **🌐 RUNTIME IoT** - Raspberry Pi y sensores  
 ✅ **🤖 IA INTEGRADA** - Chat y generación de código  
+✅ **🌍 MULTIIDIOMA UNIVERSAL** - 11 idiomas soportados  
 
 [![Versión](https://img.shields.io/badge/versión-1.0_Universal-gold.svg)](https://github.com/LangVader/core)
 [![Ecosistema](https://img.shields.io/badge/plataformas-6_runtimes-brightgreen.svg)](README.md)
@@ -30,6 +31,55 @@ python3 src/vader.py mi_programa.vdr --run
 # 🌐 EJECUTAR EN BROWSER (¡NATIVO!)
 # Abrir demo_web.html y escribir código Vader
 ```
+
+---
+
+## 🌍 **¡VADER MULTIIDIOMA UNIVERSAL! (¡NUEVO HITO HISTÓRICO!)**
+
+**¡REVOLUCIÓN MUNDIAL!** Vader se convierte en el **PRIMER LENGUAJE DE PROGRAMACIÓN VERDADERAMENTE UNIVERSAL MULTIIDIOMA** de la historia. ¡Ahora puedes programar en tu idioma nativo!
+
+### 🎯 **11 IDIOMAS SOPORTADOS**
+| Idioma | Código | Ejemplo |
+|--------|--------|---------|
+| 🇪🇸 Español | `es` | `decir "¡Hola mundo!"` |
+| 🇺🇸 English | `en` | `say "Hello world!"` |
+| 🇫🇷 Français | `fr` | `dire "Bonjour monde!"` |
+| 🇵🇹 Português | `pt` | `dizer "Olá mundo!"` |
+| 🇮🇹 Italiano | `it` | `dire "Ciao mondo!"` |
+| 🇨🇳 中文 | `zh` | `说 "你好世界!"` |
+| 🇯🇵 日本語 | `ja` | `言う "こんにちは世界!"` |
+| 🇷🇺 Русский | `ru` | `сказать "Привет мир!"` |
+| 🇩🇪 Deutsch | `de` | `sagen "Hallo Welt!"` |
+| 🇸🇦 العربية | `ar` | `قول "مرحبا بالعالم!"` |
+| 🇰🇷 한국어 | `ko` | `말하기 "안녕 세상!"` |
+
+### 🚀 **COMANDOS MULTIIDIOMA**
+```bash
+# 🔍 DETECTAR IDIOMA AUTOMÁTICAMENTE
+python3 src/vader.py mi_codigo.vdr --detect-language
+
+# 🌐 LISTAR TODOS LOS IDIOMAS
+python3 src/vader.py --list-languages
+
+# 🔄 TRADUCIR ENTRE IDIOMAS
+python3 src/vader.py codigo_español.vdr --translate-to en --output english_code.vdr
+
+# 📚 INFORMACIÓN DE IDIOMA
+python3 src/vader.py --multilingual-info zh
+
+# 💻 PROGRAMAR EN CUALQUIER IDIOMA
+python3 src/vader.py my_english_code.vdr --language en --target python
+python3 src/vader.py mon_code_francais.vdr --language fr --target javascript
+python3 src/vader.py 我的中文代码.vdr --language zh --target java
+```
+
+### 🎉 **IMPACTO MUNDIAL**
+- ✅ **Democratización Total**: Programa en tu idioma nativo
+- ✅ **Colaboración Global**: Equipos internacionales sin barreras
+- ✅ **Educación Universal**: Aprendizaje sin limitaciones idiomáticas
+- ✅ **Inclusión Cultural**: Respeto por la diversidad lingüística
+
+📖 **Documentación completa**: [VADER_MULTIIDIOMA_UNIVERSAL.md](docs/VADER_MULTIIDIOMA_UNIVERSAL.md)
 
 ---
 
