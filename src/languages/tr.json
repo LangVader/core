@@ -1,0 +1,32 @@
+{
+  "name": "Turkish",
+  "native_name": "Türkçe",
+  "code": "tr",
+  "family": "Turkic",
+  "keywords": {
+    "variables": ["sakla", "değişken", "değer", "veri", "bilgi"],
+    "functions": ["fonksiyon", "yap", "oluştur", "tanımla", "çağır"],
+    "conditionals": ["eğer", "ise", "o zaman", "değilse", "yoksa"],
+    "loops": ["tekrarla", "döngü", "süresince", "her", "için"],
+    "input_output": ["söyle", "göster", "sor", "girdi", "çıktı"],
+    "data_types": ["sayı", "metin", "liste", "doğru", "yanlış"],
+    "operators": ["topla", "çıkar", "çarp", "böl", "eşittir"],
+    "control": ["başla", "bitir", "dur", "devam", "geri"],
+    "objects": ["nesne", "sınıf", "obje", "özellik", "metod"],
+    "conversational": ["ne zaman", "o zaman", "soru", "cevap", "sakla", "hesapla", "göster"]
+  },
+  "examples": {
+    "hello_world": "söyle \"Merhaba dünya!\"",
+    "variable": "sakla isim = \"Kullanıcı\"",
+    "input": "sor \"Adınız nedir?\" ve cevabı isim'e sakla",
+    "function": "fonksiyon selamla:\n    söyle \"Merhaba!\"\nbitir",
+    "conditional": "eğer yaş >= 18:\n    söyle \"Yetişkinsiniz\"\nbitir",
+    "loop": "5 kez tekrarla:\n    söyle \"Sayıyor...\"\nbitir",
+    "conversational_demo": "ne zaman yaş 18'den büyük ise o zaman söyle \"Yetişkinsiniz\"\nsoru \"Adınız nedir?\" ve isim'e sakla\n10 ile 5'i topla ve sonuç'a sakla"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

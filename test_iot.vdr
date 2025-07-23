@@ -1,0 +1,34 @@
+# Ejemplo IoT con Vader
+mostrar "🤖 Sistema IoT con sensores y actuadores"
+
+# Configurar sensores
+sensor_temperatura = "DHT22"
+sensor_humedad = "DHT22" 
+sensor_luz = "LDR"
+
+# Configurar actuadores
+led_rojo = "PIN_13"
+motor_servo = "PIN_9"
+buzzer = "PIN_8"
+
+# Leer sensores
+temperatura = leer_sensor(sensor_temperatura)
+humedad = leer_sensor(sensor_humedad)
+luz = leer_sensor(sensor_luz)
+
+mostrar "Temperatura: " + texto(temperatura) + "°C"
+mostrar "Humedad: " + texto(humedad) + "%"
+mostrar "Luz: " + texto(luz) + " lux"
+
+# Control automático
+si temperatura > 25 entonces
+    encender(led_rojo)
+    mostrar "¡Temperatura alta! LED encendido"
+sino
+    apagar(led_rojo)
+fin si
+
+si luz < 100 entonces
+    mover_servo(motor_servo, 90)
+    mostrar "Poca luz, activando servo"
+fin si

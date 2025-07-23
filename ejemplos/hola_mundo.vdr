@@ -1,0 +1,25 @@
+# Mi primer programa en Vader
+mostrar "¡Hola Mundo desde Vader!"
+mostrar "Vader es LA PROGRAMACIÓN universal"
+
+# Variables básicas
+nombre = "Programador"
+edad = 25
+activo = verdadero
+
+mostrar "Hola " + nombre
+mostrar "Tienes " + texto(edad) + " años"
+
+# Condicional simple
+si edad >= 18 entonces
+    mostrar "Eres mayor de edad"
+sino
+    mostrar "Eres menor de edad"
+fin si
+
+# Lista simple
+lenguajes = ["Python", "JavaScript", "Vader"]
+mostrar "Lenguajes disponibles:"
+repetir con cada lenguaje en lenguajes
+    mostrar "- " + lenguaje
+fin repetir

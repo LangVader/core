@@ -1,0 +1,15 @@
+# Ejemplo de IA con Vader
+mostrar "🤖 Probando integración de IA con Vader"
+
+# Configurar modelo de IA
+modelo_ia = "GPT-4"
+prompt = "Explica qué es la programación en español simple"
+
+# Generar respuesta con IA
+respuesta = generar_con_ia(modelo_ia, prompt)
+mostrar "Respuesta de IA: " + respuesta
+
+# Análisis de código con IA
+codigo_ejemplo = "mostrar 'Hola Mundo'"
+analisis = analizar_codigo_con_ia(codigo_ejemplo)
+mostrar "Análisis: " + analisis

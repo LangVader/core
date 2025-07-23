@@ -1,0 +1,32 @@
+{
+  "name": "Indonesian",
+  "native_name": "Bahasa Indonesia",
+  "code": "id",
+  "family": "Austronesian",
+  "keywords": {
+    "variables": ["simpan", "variabel", "nilai", "data", "informasi"],
+    "functions": ["fungsi", "lakukan", "buat", "definisi", "panggil"],
+    "conditionals": ["jika", "kalau", "maka", "jika tidak", "selain itu"],
+    "loops": ["ulangi", "loop", "selama", "setiap", "untuk"],
+    "input_output": ["katakan", "tampilkan", "tanya", "masukan", "keluaran"],
+    "data_types": ["angka", "teks", "daftar", "benar", "salah"],
+    "operators": ["tambah", "kurang", "kali", "bagi", "sama dengan"],
+    "control": ["mulai", "selesai", "berhenti", "lanjut", "kembali"],
+    "objects": ["objek", "kelas", "benda", "properti", "metode"],
+    "conversational": ["ketika", "kemudian", "pertanyaan", "jawaban", "simpan", "hitung", "tampilkan"]
+  },
+  "examples": {
+    "hello_world": "katakan \"Halo dunia!\"",
+    "variable": "simpan nama = \"Pengguna\"",
+    "input": "tanya \"Siapa nama Anda?\" dan simpan jawabannya di nama",
+    "function": "fungsi sapa:\n    katakan \"Halo!\"\nselesai",
+    "conditional": "jika umur >= 18:\n    katakan \"Anda sudah dewasa\"\nselesai",
+    "loop": "ulangi 5 kali:\n    katakan \"Menghitung...\"\nselesai",
+    "conversational_demo": "ketika umur lebih dari 18 tahun maka katakan \"Anda sudah dewasa\"\npertanyaan \"Siapa nama Anda?\" dan simpan di nama\ntambah 10 dengan 5 dan simpan di hasil"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Swahili",
+  "native_name": "Kiswahili",
+  "code": "sw",
+  "family": "Niger-Congo",
+  "keywords": {
+    "variables": ["hifadhi", "kibadiliko", "thamani", "data", "habari"],
+    "functions": ["kazi", "fanya", "tengeneza", "ufafanue", "ita"],
+    "conditionals": ["kama", "ikiwa", "basi", "sivyo", "vinginevyo"],
+    "loops": ["rudia", "mzunguko", "wakati", "kila", "kwa kila"],
+    "input_output": ["sema", "onyesha", "uliza", "ingizo", "matokeo"],
+    "data_types": ["nambari", "maandishi", "orodha", "kweli", "uongo"],
+    "operators": ["ongeza", "toa", "zidisha", "gawanya", "sawa na"],
+    "control": ["anza", "mwisho", "simama", "endelea", "rudi"],
+    "objects": ["kitu", "darasa", "kipengee", "sifa", "njia"],
+    "conversational": ["wakati", "kisha", "swali", "jibu", "hifadhi", "hesabu", "onyesha"]
+  },
+  "examples": {
+    "hello_world": "sema \"Hujambo dunia!\"",
+    "variable": "hifadhi jina = \"Mtumiaji\"",
+    "input": "uliza \"Jina lako ni nani?\" na hifadhi jibu katika jina",
+    "function": "kazi salamu:\n    sema \"Hujambo!\"\nmwisho",
+    "conditional": "kama umri >= 18:\n    sema \"Wewe ni mtu mzima\"\nmwisho",
+    "loop": "rudia mara 5:\n    sema \"Kuhesabu...\"\nmwisho",
+    "conversational_demo": "wakati umri ni zaidi ya miaka 18 basi sema \"Wewe ni mtu mzima\"\nswali \"Jina lako ni nani?\" na hifadhi katika jina\nongeza 10 na 5 na hifadhi katika matokeo"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

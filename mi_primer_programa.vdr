@@ -1,0 +1,11 @@
+// Mi primer programa en Vader
+decir "¡Hola mundo desde Vader en Mac M1!"
+preguntar "¿Cómo te llamas?" y guardar la respuesta en nombre
+decir "¡Hola " + nombre + "! Bienvenido a la programación universal"
+
+// Crear una función simple
+funcion saludar con mensaje:
+    decir "🚀 " + mensaje + " 🚀"
+fin funcion
+
+saludar con "Vader funciona perfectamente en tu Mac M1"

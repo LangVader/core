@@ -1,0 +1,32 @@
+# 🤖 VADER CONVERSACIONAL ROBÓTICA - DEMO
+# Control de robots en lenguaje completamente natural
+
+# Movimientos básicos del robot
+mueve el robot hacia adelante 5 metros
+gira el robot 90 grados a la derecha
+detén el robot cuando detectes un obstáculo
+
+# Sensores conversacionales
+cuando el sensor de proximidad detecte algo cercano entonces para inmediatamente
+si la cámara ve una persona entonces saluda con "¡Hola humano!"
+cuando el micrófono escuche la palabra "ayuda" entonces acércate al usuario
+
+# Tareas complejas
+para limpiar la habitación necesito hacer lo siguiente
+    escanea toda la habitación buscando objetos en el suelo
+    para cada objeto encontrado
+        si el objeto es basura entonces recógelo
+        si el objeto es valioso entonces déjalo donde está
+    
+# Navegación inteligente
+ve a la cocina evitando obstáculos
+cuando llegues a la cocina entonces busca una taza
+si encuentras la taza entonces tómala con cuidado y tráela aquí
+
+# Interacción social
+cuando alguien te hable entonces responde educadamente
+si te preguntan tu nombre entonces di "Soy un robot programado con Vader Conversacional"
+para cada visitante nuevo
+    preséntate y pregunta "¿En qué puedo ayudarte?"
+
+decir "Robot conversacional activado - Programado por el primer lenguaje universal conversacional"

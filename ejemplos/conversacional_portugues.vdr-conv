@@ -1,0 +1,31 @@
+# 🌟 VADER CONVERSACIONAL - DEMO PORTUGUÊS
+# A primeira linguagem de programação universal e conversacional da história
+
+# Variáveis naturais
+o usuário se chama João e tem 25 anos
+a temperatura de hoje é 22 graus
+minha lista de cores inclui "vermelho", "azul", "verde"
+
+# Perguntas naturais
+pergunta "Qual é o seu nome?" e salve em nome_usuario
+pergunta "Quantos anos você tem?" e salve a resposta em idade_usuario
+
+# Matemática conversacional
+soma 10 mais 5 e salve em resultado
+calcule a média de [8, 9, 7, 10] e chame de media_notas
+
+# Condicionais conversacionais
+quando idade_usuario for maior que 18 anos
+    diga "Você é maior de idade, bem-vindo"
+
+quando a temperatura for maior que 25 graus
+    diga "Está calor hoje, use roupas leves"
+
+# Loops conversacionais
+para cada cor na minha lista de cores
+    mostre "Eu gosto da cor " + cor
+
+faça isso 3 vezes
+    diga "Vader é revolucionário"
+
+diga "Parabéns! Você usou a primeira linguagem conversacional universal da história"

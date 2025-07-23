@@ -1,0 +1,36 @@
+# 🌐 VADER CONVERSACIONAL WEB - DEMO
+# Creación de páginas web en lenguaje completamente natural
+
+# Estructura básica de la página
+crea una página web que diga "Bienvenido a mi sitio"
+añade un título que diga "Mi Primera Página Conversacional"
+
+# Elementos interactivos
+crea un botón que diga "Haz Click Aquí"
+cuando el usuario haga click en el botón entonces muestra una alerta con "¡Hola desde Vader Conversacional!"
+
+# Formulario conversacional
+crea un formulario para recoger información del usuario
+añade un campo para el nombre con etiqueta "Tu nombre"
+añade un campo para el email con etiqueta "Tu correo"
+crea un botón de envío que diga "Enviar Información"
+
+# Lógica del formulario
+cuando el usuario envíe el formulario entonces
+    si el nombre está vacío
+        muestra "Por favor ingresa tu nombre"
+    sino
+        decir "¡Gracias " + nombre + "! Tu información ha sido guardada"
+
+# Estilo conversacional
+haz que el fondo sea azul claro
+haz que los botones sean verdes
+cuando el usuario pase el mouse sobre un botón entonces hazlo más brillante
+
+# Lista dinámica
+crea una lista de mis hobbies favoritos
+añade "Programar en Vader" a la lista
+añade "Crear tecnología revolucionaria" a la lista
+muestra la lista en la página
+
+decir "¡Página web creada con sintaxis conversacional! Cualquier persona puede crear sitios web ahora"

@@ -1,0 +1,31 @@
+# 🌟 VADER CONVERSATIONAL - ENGLISH DEMO
+# The first universal and conversational programming language in history
+
+# Natural variables
+the user is called John and is 25 years old
+today's temperature is 22 degrees
+my list of colors includes "red", "blue", "green"
+
+# Natural questions
+ask "What is your name?" and save it in user_name
+ask "How old are you?" and save the answer in user_age
+
+# Conversational mathematics
+add 10 plus 5 and save it in result
+calculate the average of [8, 9, 7, 10] and call it grade_average
+
+# Conversational conditionals
+when user_age is greater than 18 years
+    say "You are an adult, welcome"
+
+when the temperature is greater than 25 degrees
+    say "It's hot today, wear light clothes"
+
+# Conversational loops
+for each color in my list of colors
+    show "I like the color " + color
+
+do it 3 times
+    say "Vader is revolutionary"
+
+say "Congratulations! You have used the first universal conversational language in history"

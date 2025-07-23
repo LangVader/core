@@ -1,0 +1,32 @@
+{
+  "name": "Swedish",
+  "native_name": "Svenska",
+  "code": "sv",
+  "family": "Germanic",
+  "keywords": {
+    "variables": ["spara", "variabel", "värde", "data", "information"],
+    "functions": ["funktion", "gör", "skapa", "definiera", "anropa"],
+    "conditionals": ["om", "ifall", "då", "annars", "eller"],
+    "loops": ["upprepa", "loop", "medan", "varje", "för"],
+    "input_output": ["säg", "visa", "fråga", "indata", "utdata"],
+    "data_types": ["nummer", "text", "lista", "sant", "falskt"],
+    "operators": ["plus", "minus", "gånger", "delat", "lika med"],
+    "control": ["börja", "slut", "stoppa", "fortsätt", "tillbaka"],
+    "objects": ["objekt", "klass", "sak", "egenskap", "metod"],
+    "conversational": ["när", "då", "fråga", "svar", "spara", "beräkna", "visa"]
+  },
+  "examples": {
+    "hello_world": "säg \"Hej världen!\"",
+    "variable": "spara namn = \"Användare\"",
+    "input": "fråga \"Vad heter du?\" och spara svaret i namn",
+    "function": "funktion hälsa:\n    säg \"Hej!\"\nslut",
+    "conditional": "om ålder >= 18:\n    säg \"Du är vuxen\"\nslut",
+    "loop": "upprepa 5 gånger:\n    säg \"Räknar...\"\nslut",
+    "conversational_demo": "när ålder är större än 18 år då säg \"Du är vuxen\"\nfråga \"Vad heter du?\" och spara i namn\nplus 10 och 5 och spara i resultat"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

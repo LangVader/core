@@ -1,0 +1,49 @@
+# 🧠 VADER CONVERSACIONAL IA - DEMO
+# Inteligencia artificial en lenguaje completamente natural
+
+# Entrenamiento conversacional
+entrena un modelo con los datos de "ventas_2024.csv"
+cuando el entrenamiento esté completo entonces muestra "Modelo listo para predecir"
+
+# Predicciones naturales
+para predecir las ventas del próximo mes necesito
+    toma los datos históricos de los últimos 12 meses
+    analiza las tendencias estacionales
+    considera los factores externos como promociones
+    genera una predicción con nivel de confianza
+
+# Procesamiento de lenguaje natural
+cuando recibas un texto del usuario entonces
+    analiza el sentimiento del texto
+    si el sentimiento es positivo entonces responde con entusiasmo
+    si el sentimiento es negativo entonces ofrece ayuda
+    extrae las palabras clave más importantes
+
+# Reconocimiento de imágenes conversacional
+cuando subas una imagen entonces
+    identifica todos los objetos en la imagen
+    para cada objeto detectado
+        muestra el nombre del objeto y su nivel de confianza
+        si la confianza es menor al 70% entonces marca como "incierto"
+
+# Chatbot inteligente
+para responder preguntas del usuario necesito
+    busca información relevante en la base de conocimientos
+    si encuentras información exacta entonces responde directamente
+    si la información es parcial entonces pide más detalles
+    si no encuentras información entonces di "No tengo esa información"
+
+# Aprendizaje automático
+cada vez que el usuario corrija una respuesta
+    guarda la corrección en la base de datos de aprendizaje
+    actualiza el modelo con la nueva información
+    mejora las respuestas futuras basándose en el feedback
+
+# Análisis de datos conversacional
+analiza el archivo "datos_clientes.csv" y dime
+    cuál es el cliente más valioso
+    qué productos se venden más
+    en qué época del año hay más ventas
+    qué patrones encuentras en los datos
+
+decir "IA conversacional activada - Cualquier persona puede crear sistemas inteligentes ahora"

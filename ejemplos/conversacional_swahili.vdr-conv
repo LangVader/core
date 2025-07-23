@@ -1,0 +1,31 @@
+# 🌟 VADER MAZUNGUMZO - DEMO YA KISWAHILI
+# Lugha ya kwanza ya ulimwenguni ya kuprogramu kwa mazungumzo
+
+# Vigeuzi vya asili
+mtumiaji anaitwa Juma na ana umri wa miaka 25
+joto la leo ni digrii 22
+orodha yangu ya rangi inajumuisha "nyekundu", "buluu", "kijani"
+
+# Maswali ya asili
+swali "Jina lako ni nani?" na hifadhi katika jina_mtumiaji
+swali "Una umri gani?" na hifadhi jibu katika umri_mtumiaji
+
+# Hisabati za mazungumzo
+ongeza 10 na 5 na hifadhi katika matokeo
+hesabu wastani wa [8, 9, 7, 10] na uite wastani_alama
+
+# Masharti ya mazungumzo
+wakati umri_mtumiaji ni zaidi ya miaka 18
+    sema "Wewe ni mtu mzima, karibu"
+
+wakati joto ni zaidi ya digrii 25
+    sema "Leo ni joto, vaa nguo nyepesi"
+
+# Mizunguko ya mazungumzo
+kwa kila rangi katika orodha yangu ya rangi
+    onyesha "Ninapenda rangi " + rangi
+
+fanya hii mara 3
+    sema "Vader ni ya mapinduzi"
+
+sema "Hongera! Umetumia lugha ya kwanza ya mazungumzo ya ulimwenguni katika historia"

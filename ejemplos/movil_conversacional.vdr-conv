@@ -1,0 +1,53 @@
+# 📱 VADER CONVERSACIONAL MÓVIL - DEMO
+# Aplicaciones móviles en lenguaje completamente natural
+
+# Pantalla principal de la app
+crea una pantalla que diga "Mi Primera App Conversacional"
+añade un botón que diga "Tomar Foto"
+añade otro botón que diga "Ver Galería"
+
+# Funcionalidad de cámara
+cuando el usuario toque "Tomar Foto" entonces
+    abre la cámara del dispositivo
+    cuando el usuario tome la foto entonces
+        guarda la foto en la galería
+        muestra "Foto guardada exitosamente"
+
+# Navegación conversacional
+cuando el usuario toque "Ver Galería" entonces
+    muestra todas las fotos guardadas en una lista
+    para cada foto en la galería
+        cuando el usuario toque la foto entonces amplíala en pantalla completa
+
+# Notificaciones inteligentes
+cada mañana a las 8:00 AM envía una notificación que diga "¡Buenos días! ¿Listo para un nuevo día?"
+cuando el usuario no use la app por 3 días entonces
+    envía una notificación que diga "Te extrañamos, ¡vuelve pronto!"
+
+# Geolocalización conversacional
+cuando el usuario llegue a casa entonces
+    muestra "¡Bienvenido a casa!"
+    enciende el modo nocturno de la app
+
+cuando el usuario esté cerca de una tienda entonces
+    pregunta "¿Quieres ver ofertas especiales de esta tienda?"
+
+# Configuración de usuario
+pregunta al usuario "¿Cuál es tu nombre?" y guárdalo en perfil_usuario
+pregunta "¿Cuál es tu color favorito?" y úsalo como tema de la app
+
+# Funciones avanzadas
+cuando el usuario agite el teléfono entonces
+    cambia a una pantalla aleatoria de la app
+    reproduce un sonido divertido
+
+cuando la batería esté baja entonces
+    activa el modo de ahorro de energía automáticamente
+    muestra "Batería baja - Modo ahorro activado"
+
+# Sincronización en la nube
+cada vez que el usuario tome una foto
+    súbela automáticamente a la nube
+    cuando la subida esté completa entonces muestra una marca verde
+
+decir "¡App móvil creada con sintaxis conversacional! Cualquier persona puede crear aplicaciones ahora"

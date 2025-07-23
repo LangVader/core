@@ -1,0 +1,31 @@
+# 🌟 VADER CONVERSATIE - NEDERLANDS DEMO
+# De eerste universele en conversationele programmeertaal in de geschiedenis
+
+# Natuurlijke variabelen
+de gebruiker heet Jan en is 25 jaar oud
+de temperatuur van vandaag is 22 graden
+mijn lijst van kleuren bevat "rood", "blauw", "groen"
+
+# Natuurlijke vragen
+vraag "Wat is je naam?" en bewaar het in gebruiker_naam
+vraag "Hoe oud ben je?" en bewaar het antwoord in gebruiker_leeftijd
+
+# Conversationele wiskunde
+plus 10 en 5 en bewaar het in resultaat
+bereken het gemiddelde van [8, 9, 7, 10] en noem het gemiddelde_cijfers
+
+# Conversationele voorwaarden
+wanneer gebruiker_leeftijd groter is dan 18 jaar
+    zeg "Je bent volwassen, welkom"
+
+wanneer de temperatuur groter is dan 25 graden
+    zeg "Het is warm vandaag, draag lichte kleding"
+
+# Conversationele lussen
+voor elke kleur in mijn lijst van kleuren
+    toon "Ik hou van de kleur " + kleur
+
+doe dit 3 keer
+    zeg "Vader is revolutionair"
+
+zeg "Gefeliciteerd! Je hebt de eerste conversationele universele taal in de geschiedenis gebruikt"

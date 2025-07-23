@@ -1,0 +1,31 @@
+# 🌟 VADER PERCAKAPAN - DEMO BAHASA INDONESIA
+# Bahasa pemrograman universal dan percakapan pertama dalam sejarah
+
+# Variabel alami
+pengguna bernama Budi dan berumur 25 tahun
+suhu hari ini adalah 22 derajat
+daftar warna saya termasuk "merah", "biru", "hijau"
+
+# Pertanyaan alami
+pertanyaan "Siapa nama Anda?" dan simpan di nama_pengguna
+pertanyaan "Berapa umur Anda?" dan simpan jawabannya di umur_pengguna
+
+# Matematika percakapan
+tambah 10 dengan 5 dan simpan di hasil
+hitung rata-rata dari [8, 9, 7, 10] dan sebut rata_rata_nilai
+
+# Kondisi percakapan
+ketika umur_pengguna lebih dari 18 tahun
+    katakan "Anda sudah dewasa, selamat datang"
+
+ketika suhu lebih dari 25 derajat
+    katakan "Hari ini panas, pakai pakaian ringan"
+
+# Loop percakapan
+untuk setiap warna dalam daftar warna saya
+    tampilkan "Saya suka warna " + warna
+
+lakukan ini 3 kali
+    katakan "Vader sangat revolusioner"
+
+katakan "Selamat! Anda telah menggunakan bahasa percakapan universal pertama dalam sejarah"

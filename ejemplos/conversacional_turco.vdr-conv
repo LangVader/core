@@ -1,0 +1,31 @@
+# 🌟 VADER KONUŞMALI - TÜRKÇE DEMO
+# Tarihin ilk evrensel ve konuşmalı programlama dili
+
+# Doğal değişkenler
+kullanıcının adı Mehmet ve yaşı 25
+bugünün sıcaklığı 22 derece
+renk listem "kırmızı", "mavi", "yeşil" içeriyor
+
+# Doğal sorular
+soru "Adınız nedir?" ve kullanıcı_adı'na sakla
+soru "Kaç yaşındasınız?" ve cevabı kullanıcı_yaşı'na sakla
+
+# Konuşmalı matematik
+10 ile 5'i topla ve sonuç'a sakla
+[8, 9, 7, 10]'un ortalamasını hesapla ve ortalama_not olarak adlandır
+
+# Konuşmalı koşullar
+ne zaman kullanıcı_yaşı 18'den büyük ise
+    söyle "Yetişkinsiniz, hoş geldiniz"
+
+ne zaman sıcaklık 25 dereceden fazla ise
+    söyle "Bugün sıcak, hafif giysiler giyin"
+
+# Konuşmalı döngüler
+renk listemde her renk için
+    göster "Ben rengini seviyorum " + renk
+
+bunu 3 kez yap
+    söyle "Vader devrimci"
+
+söyle "Tebrikler! Tarihin ilk konuşmalı evrensel dilini kullandınız"

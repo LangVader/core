@@ -1,0 +1,63 @@
+# 🔗 VADER CONVERSACIONAL BLOCKCHAIN - DEMO
+# Contratos inteligentes y blockchain en lenguaje natural
+
+# Contrato inteligente básico
+crea un contrato inteligente llamado "MiPrimerContrato"
+el contrato tiene un propietario que soy yo
+el contrato puede recibir pagos en criptomonedas
+
+# Funciones del contrato
+para transferir dinero necesito verificar que
+    el remitente tenga suficiente saldo
+    la dirección de destino sea válida
+    la cantidad sea mayor a cero
+
+cuando alguien envíe dinero al contrato entonces
+    registra la transacción en el blockchain
+    actualiza el saldo del remitente
+    actualiza el saldo del destinatario
+    emite un evento de "TransferenciaCompletada"
+
+# Sistema de votación descentralizado
+crea una votación sobre "¿Cuál es tu color favorito?"
+las opciones son "Rojo", "Azul", "Verde"
+cada dirección puede votar solo una vez
+
+cuando alguien vote entonces
+    verifica que no haya votado antes
+    registra su voto en el blockchain
+    incrementa el contador de la opción elegida
+    emite un evento de "VotoRegistrado"
+
+# Token conversacional
+crea un token llamado "VaderCoin" con símbolo "VDR"
+la cantidad total de tokens es 1,000,000
+cada token tiene 18 decimales
+
+para crear nuevos tokens necesito ser el propietario
+para quemar tokens necesito tener suficiente saldo
+cuando transfiera tokens entonces actualiza los balances automáticamente
+
+# NFT conversacional
+crea una colección de NFTs llamada "Arte Conversacional"
+cada NFT tiene un nombre único y una imagen
+solo el propietario puede crear nuevos NFTs
+
+cuando alguien compre un NFT entonces
+    transfiere la propiedad al comprador
+    paga las regalías al creador original
+    registra la venta en el historial
+
+# DeFi conversacional
+crea un pool de liquidez para intercambiar VaderCoin por Ethereum
+cuando alguien agregue liquidez entonces
+    calcula su participación en el pool
+    emite tokens LP como recibo
+    actualiza las reservas del pool
+
+cuando alguien haga un intercambio entonces
+    calcula el precio basado en la fórmula x*y=k
+    cobra una comisión del 0.3%
+    actualiza las reservas automáticamente
+
+decir "¡Blockchain conversacional activado! Cualquier persona puede crear contratos inteligentes ahora"

@@ -1,0 +1,32 @@
+{
+  "name": "Dutch",
+  "native_name": "Nederlands",
+  "code": "nl",
+  "family": "Germanic",
+  "keywords": {
+    "variables": ["bewaar", "variabele", "waarde", "data", "informatie"],
+    "functions": ["functie", "doe", "maak", "definieer", "roep"],
+    "conditionals": ["als", "indien", "dan", "anders", "zoniet"],
+    "loops": ["herhaal", "lus", "terwijl", "elke", "voor"],
+    "input_output": ["zeg", "toon", "vraag", "invoer", "uitvoer"],
+    "data_types": ["getal", "tekst", "lijst", "waar", "onwaar"],
+    "operators": ["plus", "min", "keer", "gedeeld", "gelijk"],
+    "control": ["begin", "einde", "stop", "ga door", "terug"],
+    "objects": ["object", "klasse", "ding", "eigenschap", "methode"],
+    "conversational": ["wanneer", "dan", "vraag", "antwoord", "bewaar", "bereken", "toon"]
+  },
+  "examples": {
+    "hello_world": "zeg \"Hallo wereld!\"",
+    "variable": "bewaar naam = \"Gebruiker\"",
+    "input": "vraag \"Wat is je naam?\" en bewaar het antwoord in naam",
+    "function": "functie groet:\n    zeg \"Hallo!\"\neinde",
+    "conditional": "als leeftijd >= 18:\n    zeg \"Je bent volwassen\"\neinde",
+    "loop": "herhaal 5 keer:\n    zeg \"Tellen...\"\neinde",
+    "conversational_demo": "wanneer leeftijd groter is dan 18 jaar dan zeg \"Je bent volwassen\"\nvraag \"Wat is je naam?\" en bewaar in naam\nplus 10 en 5 en bewaar in resultaat"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

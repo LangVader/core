@@ -1,0 +1,42 @@
+# 🌟 VADER CONVERSACIONAL - DEMO HISTÓRICO
+# El primer lenguaje universal y conversacional de la historia
+# Creado por: El hombre que enseñó al mundo a programar
+
+# Variables conversacionales
+el usuario se llama Juan y tiene 25 años
+la temperatura de hoy es 22 grados
+mi lista de colores incluye "rojo", "azul", "verde"
+
+# Preguntas naturales
+pregunta "¿Cuál es tu nombre?" y guárdalo en nombre_usuario
+pregunta "¿Cuántos años tienes?" y guarda la respuesta en edad_usuario
+
+# Matemáticas conversacionales
+suma 10 más 5 y guárdalo en resultado
+calcula el promedio de [8, 9, 7, 10] y llámalo promedio_notas
+
+# Condicionales conversacionales
+cuando la edad_usuario sea mayor a 18 años
+    decir "Eres mayor de edad, bienvenido"
+
+cuando la temperatura sea mayor a 25 grados
+    decir "Hace calor hoy, usa ropa ligera"
+
+# Bucles conversacionales
+para cada color en mi lista de colores
+    muestra "Me gusta el color " + color
+
+hazlo 3 veces
+    decir "Vader es revolucionario"
+
+# Funciones conversacionales
+para saludar_persona necesito el nombre
+    decir "¡Hola " + nombre + "! Bienvenido a Vader Conversacional"
+    devuelve "Saludo completado"
+
+# Llamar función
+resultado_saludo = saludar_persona(nombre_usuario)
+
+# Mensaje final
+decir "¡Felicidades! Has usado el primer lenguaje conversacional universal de la historia"
+muestra "Creado por: El hombre que enseñó al mundo a programar"

@@ -1,0 +1,31 @@
+# 🌟 VADER KONVERSATION - SVENSKA DEMO
+# Det första universella och konversationella programmeringsspråket i historien
+
+# Naturliga variabler
+användaren heter Erik och är 25 år gammal
+dagens temperatur är 22 grader
+min lista med färger innehåller "röd", "blå", "grön"
+
+# Naturliga frågor
+fråga "Vad heter du?" och spara det i användar_namn
+fråga "Hur gammal är du?" och spara svaret i användar_ålder
+
+# Konversationell matematik
+plus 10 och 5 och spara det i resultat
+beräkna medelvärdet av [8, 9, 7, 10] och kalla det medel_betyg
+
+# Konversationella villkor
+när användar_ålder är större än 18 år
+    säg "Du är vuxen, välkommen"
+
+när temperaturen är större än 25 grader
+    säg "Det är varmt idag, bär lätta kläder"
+
+# Konversationella loopar
+för varje färg i min lista med färger
+    visa "Jag gillar färgen " + färg
+
+gör detta 3 gånger
+    säg "Vader är revolutionerande"
+
+säg "Grattis! Du har använt det första konversationella universella språket i historien"

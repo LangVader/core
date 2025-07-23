@@ -1,0 +1,32 @@
+{
+  "name": "Vietnamese",
+  "native_name": "Tiếng Việt",
+  "code": "vi",
+  "family": "Austroasiatic",
+  "keywords": {
+    "variables": ["lưu", "biến", "giá trị", "dữ liệu", "thông tin"],
+    "functions": ["hàm", "làm", "tạo", "định nghĩa", "gọi"],
+    "conditionals": ["nếu", "nếu như", "thì", "không thì", "ngược lại"],
+    "loops": ["lặp lại", "vòng lặp", "trong khi", "mỗi", "cho"],
+    "input_output": ["nói", "hiển thị", "hỏi", "đầu vào", "đầu ra"],
+    "data_types": ["số", "văn bản", "danh sách", "đúng", "sai"],
+    "operators": ["cộng", "trừ", "nhân", "chia", "bằng"],
+    "control": ["bắt đầu", "kết thúc", "dừng", "tiếp tục", "quay lại"],
+    "objects": ["đối tượng", "lớp", "vật", "thuộc tính", "phương thức"],
+    "conversational": ["khi", "thì", "câu hỏi", "câu trả lời", "lưu", "tính", "hiển thị"]
+  },
+  "examples": {
+    "hello_world": "nói \"Xin chào thế giới!\"",
+    "variable": "lưu tên = \"Người dùng\"",
+    "input": "hỏi \"Tên bạn là gì?\" và lưu câu trả lời vào tên",
+    "function": "hàm chào:\n    nói \"Xin chào!\"\nkết thúc",
+    "conditional": "nếu tuổi >= 18:\n    nói \"Bạn đã trưởng thành\"\nkết thúc",
+    "loop": "lặp lại 5 lần:\n    nói \"Đang đếm...\"\nkết thúc",
+    "conversational_demo": "khi tuổi lớn hơn 18 năm thì nói \"Bạn đã trưởng thành\"\ncâu hỏi \"Tên bạn là gì?\" và lưu vào tên\ncộng 10 với 5 và lưu vào kết quả"
+  },
+  "comments": {
+    "single_line": "#",
+    "multi_line_start": "/*",
+    "multi_line_end": "*/"
+  }
+}

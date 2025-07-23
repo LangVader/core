@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
+"""
+🌟 VADER - EL PRIMER LENGUAJE UNIVERSAL Y CONVERSACIONAL DE LA HISTORIA
+Creado por: El hombre que enseñó al mundo a programar
 
+Vader no es un lenguaje de programación, Vader es LA PROGRAMACIÓN:
+libre, descentralizada y accesible a todos
+"""
+
+import argparse
 import sys
 import os
-import argparse
-import json
 from pathlib import Path
+from conversational_integration import integrate_conversational_with_vader, detect_conversational_file
 
 # Agregar el directorio raíz al path para que encuentre el módulo transpilers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -281,8 +288,28 @@ def list_supported_targets():
 def list_supported_frameworks():
     """Lista todos los frameworks disponibles para JavaScript/TypeScript"""
     try:
-        from transpilers.frameworks import list_frameworks
-        list_frameworks()
+        from transpilers.frameworks import list_frameworks, get_framework_info
+        
+        print("🚀 Frameworks soportados por Vader:")
+        print("=" * 40)
+        
+        frameworks = list_frameworks()
+        framework_info = get_framework_info()
+        
+        for framework in frameworks:
+            info = framework_info.get(framework, {})
+            name = info.get('name', framework.capitalize())
+            description = info.get('description', 'Framework disponible')
+            target = info.get('target_language', 'javascript')
+            
+            print(f"📦 {name} ({framework})")
+            print(f"   Descripción: {description}")
+            print(f"   Lenguaje: {target}")
+            print()
+        
+        print(f"Total: {len(frameworks)} frameworks disponibles")
+        print("\n💡 Uso: python3 src/vader.py archivo.vdr --target javascript --framework <nombre>")
+        
     except ImportError:
         print("Error: Sistema de frameworks no disponible")
         print("Asegúrate de que el módulo transpilers.frameworks esté instalado")
@@ -701,18 +728,25 @@ def translate_code_language(code, source_lang, target_lang):
 
 def validate_vader_file(filepath):
     """Valida si un archivo es un archivo Vader válido"""
+    if not filepath.endswith('.vdr'):
+        print(f"Advertencia: El archivo '{filepath}' no tiene extensión .vdr")
+    
+    if not os.path.exists(filepath):
+        print(f"Error: Archivo no encontrado: {filepath}")
+        return False
+    
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
-        
-        # Validar contenido del archivo
-        if not content.startswith('# Vader'):
-            print(f"❌ Archivo '{filepath}' no es un archivo Vader válido")
-            return False
-        
+            if not content.strip():
+                print("Error: El archivo está vacío")
+                return False
         return True
+    except UnicodeDecodeError:
+        print(f"Error: No se puede leer el archivo '{filepath}' - problemas de codificación")
+        return False
     except Exception as e:
-        print(f"❌ Error al validar archivo: {e}")
+        print(f"Error al leer el archivo '{filepath}': {e}")
         return False
 
 def handle_ai_generate(args):
@@ -953,6 +987,21 @@ def main():
     except Exception as e:
         print(f"Error al leer el archivo: {e}")
         return 1
+    
+    # 🌟 PROCESAMIENTO CONVERSACIONAL - HITO HISTÓRICO
+    # Detectar y procesar sintaxis conversacional automáticamente
+    is_conversational_file = detect_conversational_file(args.archivo)
+    
+    if is_conversational_file or args.archivo.endswith('.vdr-conv'):
+        if args.verbose:
+            print("🌟 VADER CONVERSACIONAL DETECTADO")
+            print("Procesando sintaxis conversacional...")
+        
+        # Procesar con el parser conversacional
+        codigo = integrate_conversational_with_vader(codigo, verbose=args.verbose)
+        
+        if args.verbose:
+            print("✅ Conversión conversacional completada")
     
     if args.verbose:
         print(f"Archivo leído: {args.archivo}")

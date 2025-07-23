@@ -1,0 +1,23 @@
+# Archivo de prueba para CLI Universal
+mostrar "¡Hola desde Vader Universal!"
+mostrar "Este es un archivo de prueba para el CLI"
+
+# Variables
+nombre = "Usuario de Vader"
+version = "7.0"
+
+mostrar "Bienvenido " + nombre
+mostrar "Usando Vader " + version
+
+# Lista de características
+caracteristicas = [
+    "Ejecución nativa",
+    "Sin transpilación", 
+    "Multiidioma",
+    "Universal"
+]
+
+mostrar "Características de Vader:"
+repetir con cada caracteristica en caracteristicas
+    mostrar "✅ " + caracteristica
+fin repetir

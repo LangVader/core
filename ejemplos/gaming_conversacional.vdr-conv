@@ -1,0 +1,44 @@
+# 🎮 VADER CONVERSACIONAL GAMING - DEMO
+# Creación de juegos en lenguaje completamente natural
+
+# Variables del juego
+el jugador tiene 100 puntos de vida
+el jugador está en la posición x=0, y=0
+el enemigo tiene 50 puntos de vida
+
+# Mecánicas básicas
+cuando el jugador presione la tecla W entonces mueve al jugador hacia arriba
+cuando el jugador presione la tecla S entonces mueve al jugador hacia abajo
+cuando el jugador presione la tecla A entonces mueve al jugador hacia la izquierda
+cuando el jugador presione la tecla D entonces mueve al jugador hacia la derecha
+
+# Sistema de combate conversacional
+cuando el jugador presione espacio entonces
+    si hay un enemigo cerca
+        ataca al enemigo con 20 puntos de daño
+        si la vida del enemigo llega a 0 entonces
+            el jugador gana 50 puntos de experiencia
+            aparece un nuevo enemigo en posición aleatoria
+
+# Sistema de recompensas
+para cada 100 puntos de experiencia ganados
+    sube el nivel del jugador en 1
+    aumenta la vida máxima del jugador en 25 puntos
+    muestra "¡Felicidades! Has subido al nivel " + nivel_jugador
+
+# Eventos del juego
+cada 30 segundos aparece un power-up en el mapa
+cuando el jugador toque un power-up entonces
+    si es power-up de vida entonces restaura toda la vida del jugador
+    si es power-up de velocidad entonces duplica la velocidad por 10 segundos
+
+# Condiciones de victoria/derrota
+cuando la vida del jugador llegue a 0 entonces
+    muestra "Game Over - ¡Inténtalo de nuevo!"
+    reinicia el juego
+
+cuando el jugador derrote 10 enemigos entonces
+    muestra "¡Victoria! Has completado el nivel"
+    avanza al siguiente nivel
+
+decir "¡Juego creado con sintaxis conversacional! Cualquier persona puede crear videojuegos ahora"

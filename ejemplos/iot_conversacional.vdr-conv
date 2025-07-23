@@ -1,0 +1,25 @@
+# 🤖 VADER CONVERSACIONAL IoT - DEMO
+# Programación de dispositivos IoT en lenguaje natural
+
+# Configuración de sensores
+cuando la temperatura sea mayor a 25 grados entonces enciende el ventilador
+cuando la humedad sea menor a 30 entonces enciende el humidificador
+
+# Control de luces inteligente
+si detectas movimiento entonces enciende la luz del pasillo
+cuando no detectes movimiento por 5 minutos entonces apaga todas las luces
+
+# Sistema de seguridad conversacional
+si detectas una puerta abierta entonces envía alerta al teléfono
+cuando alguien toque el timbre entonces enciende la cámara de entrada
+
+# Automatización del hogar
+para cada dispositivo en lista_dispositivos_inteligentes
+    si el dispositivo está encendido y no hay nadie en casa
+        apaga el dispositivo y guarda energía
+
+# Monitoreo ambiental
+lee el sensor de calidad del aire cada 30 minutos
+si la calidad del aire es mala entonces enciende el purificador
+
+decir "Sistema IoT conversacional activado - Cualquier persona puede programar dispositivos inteligentes"

@@ -1,0 +1,31 @@
+# 🌟 VADER CONVERSATIONNEL - DÉMO FRANÇAIS
+# Le premier langage de programmation universel et conversationnel de l'histoire
+
+# Variables naturelles
+l'utilisateur s'appelle Pierre et a 25 ans
+la température d'aujourd'hui est de 22 degrés
+ma liste de couleurs inclut "rouge", "bleu", "vert"
+
+# Questions naturelles
+demande "Quel est votre nom?" et sauvegarde-le dans nom_utilisateur
+demande "Quel âge avez-vous?" et sauvegarde la réponse dans age_utilisateur
+
+# Mathématiques conversationnelles
+additionne 10 plus 5 et sauvegarde-le dans résultat
+calcule la moyenne de [8, 9, 7, 10] et appelle-la moyenne_notes
+
+# Conditionnelles conversationnelles
+quand age_utilisateur est supérieur à 18 ans
+    dis "Vous êtes majeur, bienvenue"
+
+quand la température est supérieure à 25 degrés
+    dis "Il fait chaud aujourd'hui, portez des vêtements légers"
+
+# Boucles conversationnelles
+pour chaque couleur dans ma liste de couleurs
+    montre "J'aime la couleur " + couleur
+
+fais-le 3 fois
+    dis "Vader est révolutionnaire"
+
+dis "Félicitations! Vous avez utilisé le premier langage conversationnel universel de l'histoire"
