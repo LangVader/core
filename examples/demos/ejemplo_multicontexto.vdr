@@ -1,0 +1,118 @@
+// VADER 7.0 - EJEMPLO MULTICONTEXTO UNIVERSAL
+// Este archivo demuestra cómo Vader funciona en TODOS los contextos
+
+// === CONTEXTO WEB ===
+pagina "Vader 7.0 Universal"
+titulo "La Programación para Todos"
+parrafo "Bienvenido a la revolución de la programación"
+boton "Comenzar" al_hacer_clic mostrar_mensaje
+imagen "vader-logo.png"
+
+// === CONTEXTO BLOCKCHAIN ===
+contrato "VaderUniversal"
+token "VADER" simbolo "VDR"
+suministro_total 21000000
+funcion transferir(destinatario, cantidad)
+    requerir cantidad > 0
+    requerir saldo[remitente] >= cantidad
+    saldo[remitente] -= cantidad
+    saldo[destinatario] += cantidad
+    emitir Transferencia(remitente, destinatario, cantidad)
+
+// === CONTEXTO IoT ===
+sensor temperatura pin_A0
+sensor humedad pin_A1
+led_rojo pin_12
+led_verde pin_13
+
+si temperatura > 30
+    encender led_rojo
+    enviar_alerta "Temperatura alta: " + temperatura
+sino
+    encender led_verde
+
+cada 5_segundos
+    leer temperatura
+    leer humedad
+    mostrar "T:" + temperatura + "°C H:" + humedad + "%"
+
+// === CONTEXTO IA/ML ===
+modelo "VaderIA"
+tipo "clasificacion"
+entrada [784] // Imagen 28x28
+capas [
+    densa(128, activacion="relu"),
+    densa(64, activacion="relu"),
+    densa(10, activacion="softmax")
+]
+
+entrenar con datos_mnist
+    epocas 100
+    batch_size 32
+    optimizador "adam"
+    perdida "categorical_crossentropy"
+
+evaluar modelo con datos_prueba
+guardar modelo como "vader_ia.model"
+
+// === CONTEXTO BASE DE DATOS ===
+base_datos "vader_db"
+tabla "usuarios" [
+    id entero clave_primaria auto_incremento,
+    nombre texto(100) no_nulo,
+    email texto(100) unico,
+    fecha_creacion timestamp por_defecto ahora()
+]
+
+insertar en usuarios (nombre, email) valores ("Vader User", "user@vader.org")
+consultar * de usuarios donde nombre contiene "Vader"
+
+// === CONTEXTO MÓVIL ===
+app_movil "VaderApp"
+pantalla "inicio"
+    titulo "Vader 7.0"
+    texto "La Programación Universal"
+    boton "Explorar" navegar_a "explorar"
+    
+pantalla "explorar"
+    lista contextos [
+        "Web", "Blockchain", "IoT", "IA", "Database", "Cloud"
+    ]
+
+// === CONTEXTO CLOUD ===
+funcion_cloud "vader_api"
+endpoint "/api/vader"
+metodo GET
+    responder {
+        "mensaje": "Vader 7.0 - La Programación Universal",
+        "version": "7.0.0",
+        "contextos": ["web", "blockchain", "iot", "ai", "database", "mobile", "cloud"],
+        "filosofia": "Libre, Descentralizada, Accesible a Todos"
+    }
+
+// === CONTEXTO ELECTRÓNICOS ===
+microcontrolador "ESP32"
+configurar wifi "VaderNet" contraseña "universal123"
+configurar servidor_web puerto 80
+
+ruta "/status"
+    responder_json {
+        "dispositivo": "Vader IoT",
+        "estado": "activo",
+        "sensores": {
+            "temperatura": leer_temperatura(),
+            "humedad": leer_humedad()
+        }
+    }
+
+// === FUNCIÓN UNIVERSAL ===
+funcion mostrar_mensaje()
+    mostrar "¡Vader 7.0 ejecutándose en múltiples contextos!"
+    log "Vader Universal - Contexto detectado automáticamente"
+
+// === COMENTARIOS MULTIIDIOMA ===
+// Español: Este es el futuro de la programación
+// English: This is the future of programming
+// Français: C'est l'avenir de la programmation
+// 日本語: これがプログラミングの未来です
+// 中文: 这是编程的未来

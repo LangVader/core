@@ -1,0 +1,19 @@
+{
+  "platform": "AWS Lambda",
+  "runtime": "python3.9",
+  "handler": "lambda_function.lambda_handler",
+  "timeout": 30,
+  "memory": 256,
+  "environment": {
+    "VADER_VERSION": "7.0.0",
+    "VADER_PLATFORM": "AWS_LAMBDA"
+  },
+  "permissions": [
+    "dynamodb:GetItem",
+    "dynamodb:PutItem",
+    "ses:SendEmail",
+    "logs:CreateLogGroup",
+    "logs:CreateLogStream",
+    "logs:PutLogEvents"
+  ]
+}

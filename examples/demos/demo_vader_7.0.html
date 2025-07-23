@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VADER 7.0 - LA PROGRAMACIÓN UNIVERSAL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #00ff41;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 65, 0.1);
+            border-bottom: 2px solid #00ff41;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px #00ff41;
+            margin-bottom: 0.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .header .version {
+            font-size: 1rem;
+            background: #00ff41;
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff41; }
+            to { text-shadow: 0 0 30px #00ff41, 0 0 40px #00ff41; }
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .demo-section {
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid #00ff41;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .demo-section h3 {
+            color: #00ff41;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .code-editor {
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            color: #00ff41;
+            font-size: 0.9rem;
+            min-height: 200px;
+            resize: vertical;
+            width: 100%;
+        }
+        
+        .output {
+            background: #001100;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+        
+        .execute-btn {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .execute-btn:hover {
+            background: #00cc33;
+            transform: scale(1.05);
+        }
+        
+        .context-selector {
+            margin-bottom: 1rem;
+        }
+        
+        .context-selector select {
+            background: #000;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 0.5rem;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .features {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-card {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .feature-card h4 {
+            color: #00ff41;
+            margin-bottom: 0.5rem;
+        }
+        
+        .philosophy {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>VADER 7.0</h1>
+        <div class="subtitle">LA PROGRAMACIÓN UNIVERSAL</div>
+        <div class="version">UNIVERSAL RUNTIME</div>
+    </div>
+    
+    <div class="demo-container">
+        <!-- Demo Web -->
+        <div class="demo-section">
+            <h3>🌐 CONTEXTO WEB</h3>
+            <div class="context-selector">
+                <label>Idioma: </label>
+                <select id="web-lang">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+            <textarea class="code-editor" id="web-code">pagina "Mi App Vader"
+titulo "¡Bienvenido a Vader 7.0!"
+parrafo "La programación universal ha llegado"
+boton "Hacer clic"
+imagen "https://via.placeholder.com/200x100/000/00ff41?text=VADER"</textarea>
+            <button class="execute-btn" onclick="executeDemo('web')">⚡ Ejecutar Web</button>
+            <div class="output" id="web-output"></div>
+        </div>
+        
+        <!-- Demo Blockchain -->
+        <div class="demo-section">
+            <h3>⛓️ CONTEXTO BLOCKCHAIN</h3>
+            <div class="context-selector">
+                <label>Blockchain: </label>
+                <select id="blockchain-type">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="solana">Solana</option>
+                    <option value="polygon">Polygon</option>
+                </select>
+            </div>
+            <textarea class="code-editor" id="blockchain-code">contrato "VaderToken"
+token "VADER" simbolo "VDR"
+suministro_total 1000000
+funcion transferir(destinatario, cantidad)
+evento Transferencia(de, para, cantidad)</textarea>
+            <button class="execute-btn" onclick="executeDemo('blockchain')">⚡ Ejecutar Blockchain</button>
+            <div class="output" id="blockchain-output"></div>
+        </div>
+        
+        <!-- Demo IoT -->
+        <div class="demo-section">
+            <h3>🔌 CONTEXTO IoT</h3>
+            <div class="context-selector">
+                <label>Dispositivo: </label>
+                <select id="iot-device">
+                    <option value="arduino">Arduino</option>
+                    <option value="raspberry">Raspberry Pi</option>
+                    <option value="esp32">ESP32</option>
+                </select>
+            </div>
+            <textarea class="code-editor" id="iot-code">sensor temperatura pin_A0
+led_verde pin_13
+si temperatura > 25
+    encender led_verde
+sino
+    apagar led_verde
+mostrar "Temperatura: " + temperatura</textarea>
+            <button class="execute-btn" onclick="executeDemo('iot')">⚡ Ejecutar IoT</button>
+            <div class="output" id="iot-output"></div>
+        </div>
+        
+        <!-- Demo IA -->
+        <div class="demo-section">
+            <h3>🤖 CONTEXTO IA/ML</h3>
+            <div class="context-selector">
+                <label>Framework: </label>
+                <select id="ai-framework">
+                    <option value="tensorflow">TensorFlow</option>
+                    <option value="pytorch">PyTorch</option>
+                    <option value="keras">Keras</option>
+                </select>
+            </div>
+            <textarea class="code-editor" id="ai-code">modelo "ClasificadorVader"
+capa_entrada 784 neuronas
+capa_oculta 128 neuronas activacion "relu"
+capa_salida 10 neuronas activacion "softmax"
+entrenar con datos_entrenamiento
+evaluar con datos_prueba</textarea>
+            <button class="execute-btn" onclick="executeDemo('ai')">⚡ Ejecutar IA</button>
+            <div class="output" id="ai-output"></div>
+        </div>
+        
+        <!-- Características -->
+        <div class="demo-section features">
+            <h3>✨ CARACTERÍSTICAS REVOLUCIONARIAS</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🌍 MULTIIDIOMA</h4>
+                    <p>Programa en español, inglés, francés, japonés, chino y más</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 MULTICONTEXTO</h4>
+                    <p>Web, Blockchain, IoT, IA, Móvil, Cloud en un solo archivo</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ NATIVO</h4>
+                    <p>Archivos .vdr ejecutan directamente sin transpilación</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔓 LIBRE</h4>
+                    <p>Sin licencias restrictivas ni dependencias propietarias</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌐 DESCENTRALIZADO</h4>
+                    <p>No controlado por ninguna corporación</p>
+                </div>
+                <div class="feature-card">
+                    <h4>♿ ACCESIBLE</h4>
+                    <p>Para cualquier persona, cultura y nivel educativo</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filosofía -->
+        <div class="philosophy">
+            "Vader no es un lenguaje de programación,<br>
+            Vader es la Programación,<br>
+            libre, descentralizada y accesible a todos"
+        </div>
+    </div>
+    
+    <!-- Cargar Vader 7.0 Runtime -->
+    <script src="vader-7.0-universal.js"></script>
+    
+    <script>
+        async function executeDemo(context) {
+            const codeElement = document.getElementById(`${context}-code`);
+            const outputElement = document.getElementById(`${context}-output`);
+            
+            const code = codeElement.value;
+            
+            try {
+                outputElement.textContent = '⚡ Ejecutando Vader 7.0...\n';
+                
+                const result = await vader.execute(code, context);
+                
+                let output = `🎯 Contexto: ${result.context}\n`;
+                output += `📝 Tipo: ${result.type}\n\n`;
+                
+                if (result.html) {
+                    output += `📄 HTML generado:\n${result.html}\n\n`;
+                }
+                if (result.contract_code) {
+                    output += `⛓️ Smart Contract:\n${result.contract_code}\n\n`;
+                }
+                if (result.device_code) {
+                    output += `🔌 Código dispositivo:\n${result.device_code}\n\n`;
+                }
+                if (result.ai_code) {
+                    output += `🤖 Código IA:\n${result.ai_code}\n\n`;
+                }
+                
+                output += `✅ Vader 7.0 ejecutado exitosamente!`;
+                
+                outputElement.textContent = output;
+                
+                // Si es web, mostrar resultado visual
+                if (context === 'web' && result.html) {
+                    const preview = document.createElement('div');
+                    preview.innerHTML = result.html;
+                    preview.style.marginTop = '1rem';
+                    preview.style.padding = '1rem';
+                    preview.style.border = '1px solid #00ff41';
+                    preview.style.borderRadius = '5px';
+                    preview.style.background = 'rgba(0, 255, 65, 0.05)';
+                    
+                    outputElement.appendChild(preview);
+                }
+                
+            } catch (error) {
+                outputElement.textContent = `❌ Error: ${error.message}`;
+            }
+        }
+        
+        // Mostrar información del runtime al cargar
+        window.addEventListener('load', () => {
+            console.log('🚀 VADER 7.0 UNIVERSAL DEMO CARGADO');
+            console.log(vader.getRuntimeInfo());
+            
+            // Mensaje de bienvenida
+            setTimeout(() => {
+                alert('🚀 ¡Bienvenido a VADER 7.0!\n\n⚡ LA PROGRAMACIÓN UNIVERSAL\n\n✨ Prueba los diferentes contextos:\n• Web - Crea páginas HTML\n• Blockchain - Smart contracts\n• IoT - Código para Arduino\n• IA - Modelos de machine learning\n\n🌍 Todo en tu idioma nativo!');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

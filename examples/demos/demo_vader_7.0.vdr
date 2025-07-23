@@ -1,0 +1,172 @@
+// VADER 7.0 - DEMO NATIVO .VDR
+// Este archivo se ejecuta DIRECTAMENTE en el browser como .vdr
+// ¡Sin transpilación! ¡Vader permanece como Vader!
+
+pagina "VADER 7.0 - LA PROGRAMACIÓN UNIVERSAL"
+
+// Estilos nativos Vader
+estilo cuerpo
+    fondo_color negro
+    color verde_neon
+    fuente "Courier New"
+    margen 0
+    relleno 20px
+
+estilo titulo_principal
+    tamaño_fuente 3rem
+    alineacion centro
+    sombra_texto "0 0 20px verde_neon"
+    animacion "brillar 2s infinito"
+
+estilo seccion_demo
+    fondo_color "rgba(0, 255, 65, 0.1)"
+    borde "1px solid verde_neon"
+    borde_redondeado 10px
+    relleno 20px
+    margen_inferior 20px
+
+// Estructura de la página
+encabezado
+    titulo1 "VADER 7.0" clase "titulo_principal"
+    parrafo "LA PROGRAMACIÓN UNIVERSAL" clase "subtitulo"
+    parrafo "RUNTIME NATIVO - ARCHIVO .VDR EJECUTÁNDOSE DIRECTAMENTE" clase "version"
+
+contenido_principal
+    seccion "demo-web" clase "seccion_demo"
+        titulo2 "🌐 CONTEXTO WEB NATIVO"
+        parrafo "Este texto se genera desde código Vader puro"
+        boton "Ejecutar Web" al_hacer_clic ejecutar_web_demo
+        area_resultado id "web-result"
+    
+    seccion "demo-blockchain" clase "seccion_demo"
+        titulo2 "⛓️ CONTEXTO BLOCKCHAIN"
+        parrafo "Smart contracts generados desde Vader nativo"
+        boton "Crear Contrato" al_hacer_clic ejecutar_blockchain_demo
+        area_resultado id "blockchain-result"
+    
+    seccion "demo-iot" clase "seccion_demo"
+        titulo2 "🔌 CONTEXTO IoT"
+        parrafo "Código Arduino desde sintaxis Vader"
+        boton "Generar IoT" al_hacer_clic ejecutar_iot_demo
+        area_resultado id "iot-result"
+    
+    seccion "demo-ia" clase "seccion_demo"
+        titulo2 "🤖 CONTEXTO IA/ML"
+        parrafo "Modelos de IA en español natural"
+        boton "Crear IA" al_hacer_clic ejecutar_ia_demo
+        area_resultado id "ia-result"
+
+    seccion "filosofia" clase "seccion_demo"
+        titulo2 "💭 FILOSOFÍA VADER"
+        parrafo_destacado "Vader no es un lenguaje de programación"
+        parrafo_destacado "Vader es la Programación"
+        parrafo_destacado "libre, descentralizada y accesible a todos"
+
+pie_pagina
+    parrafo "Powered by Vader 7.0 Universal Runtime"
+    parrafo "Archivo: demo_vader_7.0.vdr (¡Ejecutándose nativamente!)"
+
+// Funciones nativas Vader
+funcion ejecutar_web_demo()
+    resultado = generar_html_desde_vader()
+    mostrar_en "web-result" resultado
+    log "Demo Web ejecutado desde .vdr nativo"
+
+funcion ejecutar_blockchain_demo()
+    contrato = crear_smart_contract_vader()
+    mostrar_en "blockchain-result" contrato
+    log "Smart contract generado desde .vdr nativo"
+
+funcion ejecutar_iot_demo()
+    codigo_arduino = generar_arduino_desde_vader()
+    mostrar_en "iot-result" codigo_arduino
+    log "Código IoT generado desde .vdr nativo"
+
+funcion ejecutar_ia_demo()
+    modelo_ia = crear_modelo_ia_vader()
+    mostrar_en "ia-result" modelo_ia
+    log "Modelo IA creado desde .vdr nativo"
+
+funcion generar_html_desde_vader()
+    retornar "
+    <div style='color: #00ff41; padding: 10px; border: 1px solid #00ff41;'>
+        <h3>✅ HTML generado desde Vader nativo</h3>
+        <p>Este HTML fue creado por código .vdr ejecutándose directamente</p>
+        <p>¡Sin transpilación! ¡Vader sigue siendo Vader!</p>
+    </div>"
+
+funcion crear_smart_contract_vader()
+    retornar "
+    pragma solidity ^0.8.0;
+    
+    contract VaderNativo {
+        string public mensaje = 'Generado desde archivo .vdr nativo';
+        address public creador;
+        
+        constructor() {
+            creador = msg.sender;
+        }
+        
+        function actualizar(string memory nuevoMensaje) public {
+            require(msg.sender == creador);
+            mensaje = nuevoMensaje;
+        }
+    }"
+
+funcion generar_arduino_desde_vader()
+    retornar "
+    // Código Arduino generado desde Vader .vdr nativo
+    void setup() {
+        Serial.begin(9600);
+        pinMode(13, OUTPUT);
+        Serial.println('Vader 7.0 IoT - Desde archivo .vdr');
+    }
+    
+    void loop() {
+        digitalWrite(13, HIGH);
+        Serial.println('LED ON - Vader nativo');
+        delay(1000);
+        digitalWrite(13, LOW);
+        Serial.println('LED OFF - Vader nativo');
+        delay(1000);
+    }"
+
+funcion crear_modelo_ia_vader()
+    retornar "
+    import tensorflow as tf
+    
+    # Modelo IA generado desde Vader .vdr nativo
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(128, activation='relu', input_shape=(784,)),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(10, activation='softmax')
+    ])
+    
+    model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
+    )
+    
+    print('Modelo Vader IA creado desde archivo .vdr nativo')"
+
+// Inicialización automática
+al_cargar_pagina
+    mostrar_mensaje "¡Bienvenido a Vader 7.0!"
+    mostrar_mensaje "Este archivo .vdr se está ejecutando NATIVAMENTE"
+    mostrar_mensaje "¡Vader nunca deja de ser Vader!"
+    
+    // Detectar contexto automáticamente
+    contexto_detectado = detectar_contexto()
+    mostrar_mensaje "Contexto detectado: " + contexto_detectado
+    
+    // Mostrar información del runtime
+    info_runtime = obtener_info_runtime()
+    log info_runtime
+
+// Comentarios multiidioma nativos
+// Español: Este es el futuro - archivos .vdr nativos
+// English: This is the future - native .vdr files  
+// Français: C'est l'avenir - fichiers .vdr natifs
+// 日本語: これが未来です - ネイティブ.vdrファイル
+// 中文: 这是未来 - 原生.vdr文件

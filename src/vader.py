@@ -14,7 +14,8 @@ from vader_interpreter import VaderNativeRuntime
 from multilingual_core import multilingual_system
 
 # Versión de Vader
-VADER_VERSION = "1.0.0"
+VADER_VERSION = "7.0.0"
+VADER_CODENAME = "UNIVERSAL"
 
 # Lenguajes soportados
 SUPPORTED_LANGUAGES = {

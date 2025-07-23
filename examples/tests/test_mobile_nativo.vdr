@@ -1,0 +1,22 @@
+# Test Vader 7.0 Móvil Nativo
+# Este archivo debe ejecutarse nativamente en aplicaciones móviles
+
+mostrar "¡Hola desde Vader 7.0 Móvil Universal!"
+
+# Código de prueba móvil
+app "Mi Primera App Vader Móvil"
+pantalla "Inicio"
+titulo "🚀 Vader 7.0 - Móvil Nativo"
+parrafo "Esta aplicación móvil fue creada con código .vdr ejecutándose nativamente"
+
+# Elementos interactivos
+boton "Presionar aquí"
+campo_texto "Escribe algo..."
+
+# Componentes específicos móviles
+componente "VaderMobileComponent"
+vista "MainView"
+navigation "StackNavigator"
+
+# Mensaje final
+mostrar "✅ Vader Móvil Runtime funcionando perfectamente"

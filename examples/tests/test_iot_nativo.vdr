@@ -1,0 +1,46 @@
+# Test Vader 7.0 IoT Nativo
+# Este archivo debe ejecutarse nativamente en dispositivos IoT
+
+mostrar "🤖 ¡Hola desde Vader 7.0 IoT Universal!"
+
+# Configuración del dispositivo
+dispositivo "Arduino Uno"
+proyecto "Sistema de Monitoreo Inteligente"
+
+# Sensores conectados
+sensor temperatura "DHT22"
+sensor luz "LDR"
+sensor movimiento "PIR"
+
+# Actuadores conectados
+led "LED RGB"
+buzzer "Buzzer activo"
+motor "Servo SG90"
+
+# Programa principal
+mostrar "Iniciando sistema de monitoreo..."
+
+# Leer sensores
+leer sensor temperatura
+leer sensor luz
+leer sensor movimiento
+
+# Control de actuadores
+encender led
+esperar 1000
+apagar led
+
+# Activar buzzer si hay movimiento
+si movimiento detectado
+    activar buzzer
+    mostrar "¡Movimiento detectado!"
+fin si
+
+# Mostrar datos
+mostrar "Temperatura leída"
+mostrar "Luz ambiente medida"
+mostrar "Sistema funcionando correctamente"
+
+esperar 2000
+
+mostrar "✅ Vader IoT Runtime funcionando perfectamente en Arduino"

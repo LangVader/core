@@ -1,0 +1,20 @@
+service: vader-cloud-enhanced
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+  
+functions:
+  vaderHandler:
+    handler: handler.lambda_handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-python-requirements

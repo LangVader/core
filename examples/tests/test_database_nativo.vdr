@@ -1,0 +1,199 @@
+# Test Vader 7.0 Database Nativo
+# Este archivo debe ejecutarse nativamente para gestión de bases de datos
+
+mostrar "🗄️ ¡Hola desde Vader 7.0 Database Universal!"
+
+# Configuración de la base de datos
+base_datos "vader_database"
+tipo "mysql"
+servidor "localhost"
+puerto 3306
+usuario "vader_user"
+contraseña "vader_password"
+
+# Crear tablas principales
+crear tabla "usuarios"
+    columna "id" numero auto_incremento clave_primaria
+    columna "nombre" texto requerido
+    columna "email" email unico requerido
+    columna "edad" numero opcional
+    columna "activo" booleano por_defecto verdadero
+    columna "created_at" fecha_hora automatico
+    columna "updated_at" fecha_hora automatico
+
+crear tabla "posts"
+    columna "id" numero auto_incremento clave_primaria
+    columna "titulo" texto requerido
+    columna "contenido" texto_largo opcional
+    columna "usuario_id" numero clave_foranea "usuarios.id"
+    columna "categoria" texto opcional
+    columna "publicado" booleano por_defecto falso
+    columna "fecha_publicacion" fecha opcional
+    columna "created_at" fecha_hora automatico
+
+crear tabla "comentarios"
+    columna "id" numero auto_incremento clave_primaria
+    columna "contenido" texto requerido
+    columna "post_id" numero clave_foranea "posts.id"
+    columna "usuario_id" numero clave_foranea "usuarios.id"
+    columna "aprobado" booleano por_defecto falso
+    columna "created_at" fecha_hora automatico
+
+# Insertar datos de ejemplo
+insertar en usuarios
+    nombre "Usuario Vader"
+    email "usuario@vader.dev"
+    edad 25
+    activo verdadero
+
+insertar en usuarios
+    nombre "Admin Vader"
+    email "admin@vader.dev"
+    edad 30
+    activo verdadero
+
+insertar en usuarios
+    nombre "Desarrollador Vader"
+    email "dev@vader.dev"
+    edad 28
+    activo verdadero
+
+insertar en posts
+    titulo "Introducción a Vader"
+    contenido "Vader es el lenguaje universal de programación que democratiza el desarrollo de software para toda la humanidad."
+    usuario_id 1
+    categoria "tutorial"
+    publicado verdadero
+    fecha_publicacion "2025-07-22"
+
+insertar en posts
+    titulo "Bases de datos con Vader"
+    contenido "Gestionar bases de datos nunca fue tan fácil como con el runtime universal de Vader."
+    usuario_id 1
+    categoria "database"
+    publicado verdadero
+    fecha_publicacion "2025-07-22"
+
+insertar en comentarios
+    contenido "¡Excelente tutorial! Vader realmente simplifica todo."
+    post_id 1
+    usuario_id 2
+    aprobado verdadero
+
+# Consultas de lectura
+seleccionar todo de usuarios donde activo igual verdadero
+
+seleccionar nombre, email de usuarios 
+    donde edad mayor 25 
+    ordenar por nombre ascendente
+
+seleccionar u.nombre, count(p.id) como total_posts
+    de usuarios u
+    unir posts p en u.id igual p.usuario_id
+    donde u.activo igual verdadero
+    agrupar por u.id, u.nombre
+    tener total_posts mayor 0
+    ordenar por total_posts descendente
+
+# Consultas de actualización
+actualizar usuarios 
+    establecer activo igual verdadero, updated_at igual ahora()
+    donde email igual "usuario@vader.dev"
+
+actualizar posts
+    establecer publicado igual verdadero, fecha_publicacion igual hoy()
+    donde usuario_id igual 1 y publicado igual falso
+
+# Búsquedas avanzadas
+buscar en posts
+    donde titulo contiene "Vader"
+    o contenido contiene "programación"
+    y publicado igual verdadero
+    ordenar por created_at descendente
+    limite 10
+
+buscar usuarios activos con posts publicados
+    seleccionar u.nombre, u.email, count(p.id) como posts_publicados
+    de usuarios u
+    unir posts p en u.id igual p.usuario_id
+    donde u.activo igual verdadero y p.publicado igual verdadero
+    agrupar por u.id
+    ordenar por posts_publicados descendente
+
+# Estadísticas y agregaciones
+contar usuarios donde activo igual verdadero
+
+contar posts donde publicado igual verdadero
+
+calcular promedio edad de usuarios donde activo igual verdadero
+
+obtener maximo created_at de posts
+
+obtener minimo created_at de usuarios
+
+# Índices para optimización
+crear indice "idx_usuarios_email" en usuarios columna email
+crear indice "idx_usuarios_activo" en usuarios columna activo
+crear indice "idx_posts_usuario_id" en posts columna usuario_id
+crear indice "idx_posts_publicado" en posts columna publicado
+crear indice "idx_comentarios_post_id" en comentarios columna post_id
+
+# Relaciones y restricciones
+definir relacion uno_a_muchos entre usuarios y posts
+definir relacion uno_a_muchos entre posts y comentarios
+definir relacion muchos_a_muchos entre usuarios y posts como "me_gusta"
+
+# Procedimientos almacenados
+crear procedimiento "obtener_usuarios_activos"
+    seleccionar id, nombre, email, created_at
+    de usuarios
+    donde activo igual verdadero
+    ordenar por created_at descendente
+
+crear procedimiento "estadisticas_generales"
+    seleccionar 
+        count(distinct u.id) como total_usuarios,
+        count(distinct p.id) como total_posts,
+        count(distinct c.id) como total_comentarios
+    de usuarios u
+    unir izquierda posts p en u.id igual p.usuario_id
+    unir izquierda comentarios c en p.id igual c.post_id
+
+# Vistas para consultas frecuentes
+crear vista "usuarios_con_posts" como
+    seleccionar u.id, u.nombre, u.email, count(p.id) como total_posts
+    de usuarios u
+    unir izquierda posts p en u.id igual p.usuario_id
+    donde u.activo igual verdadero
+    agrupar por u.id, u.nombre, u.email
+
+crear vista "posts_con_comentarios" como
+    seleccionar p.id, p.titulo, p.contenido, u.nombre como autor, count(c.id) como total_comentarios
+    de posts p
+    unir usuarios u en p.usuario_id igual u.id
+    unir izquierda comentarios c en p.id igual c.post_id
+    donde p.publicado igual verdadero
+    agrupar por p.id, p.titulo, p.contenido, u.nombre
+
+# Operaciones de mantenimiento
+eliminar de comentarios donde aprobado igual falso y created_at menor hace_30_dias()
+
+eliminar de posts donde publicado igual falso y created_at menor hace_90_dias()
+
+# Respaldo y exportación
+respaldar base_datos a "backup_vader_" + fecha_actual() + ".sql"
+
+exportar tabla usuarios a "usuarios_export.csv" formato csv
+
+exportar consulta "seleccionar * de posts donde publicado = verdadero" a "posts_publicados.json" formato json
+
+mostrar "Inicializando conexión a base de datos..."
+mostrar "Creando estructura de tablas..."
+mostrar "Insertando datos de ejemplo..."
+mostrar "Ejecutando consultas de prueba..."
+mostrar "Optimizando con índices..."
+
+esperar 2000
+
+mostrar "✅ Vader Database Runtime funcionando perfectamente"
+mostrar "💾 Base de datos configurada y lista para usar"

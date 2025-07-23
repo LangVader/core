@@ -1,0 +1,13 @@
+{
+  "platform": "Vercel Functions",
+  "runtime": "nodejs18.x",
+  "regions": [
+    "iad1"
+  ],
+  "maxDuration": 30,
+  "memory": 256,
+  "environment": {
+    "VADER_VERSION": "7.0.0",
+    "VADER_PLATFORM": "VERCEL"
+  }
+}

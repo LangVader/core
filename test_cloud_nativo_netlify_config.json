@@ -1,0 +1,10 @@
+{
+  "platform": "Netlify Functions",
+  "runtime": "nodejs18.x",
+  "timeout": 30,
+  "memory": 256,
+  "environment": {
+    "VADER_VERSION": "7.0.0",
+    "VADER_PLATFORM": "NETLIFY"
+  }
+}

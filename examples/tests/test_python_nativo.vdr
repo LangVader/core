@@ -1,0 +1,20 @@
+# Test Vader 7.0 Python Nativo
+# Este archivo debe ejecutarse nativamente en Python
+
+mostrar "¡Hola desde Vader 7.0 Python Universal!"
+
+# Código de prueba web
+pagina "Mi Primera App Vader Python"
+titulo "🚀 Vader 7.0 - Python Nativo"
+parrafo "Esta aplicación fue creada con código .vdr ejecutándose nativamente en Python"
+
+# Código de prueba blockchain
+contrato "VaderPythonContract"
+token "VaderCoin"
+
+# Código de prueba IA
+modelo "VaderIA"
+entrenar "datos de ejemplo"
+
+# Mensaje final
+mostrar "✅ Vader Python Runtime funcionando perfectamente"

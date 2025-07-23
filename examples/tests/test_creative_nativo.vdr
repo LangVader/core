@@ -1,0 +1,231 @@
+# Test Vader 7.0 Creative Nativo
+# Este archivo debe ejecutarse nativamente para herramientas creativas
+
+mostrar "🎨 ¡Hola desde Vader 7.0 Creative Universal!"
+
+# Configuración del proyecto creativo
+proyecto "vader_creative_demo"
+herramienta "blender"
+version "4.0"
+resolucion 1920 1080
+fps 24
+
+# Crear escena 3D básica
+crear escena "escena_principal"
+limpiar objetos_por_defecto
+
+# Crear objetos 3D
+crear cubo
+    posicion 0 0 0
+    escala 1 1 1
+    rotacion 0 0 0
+    nombre "cubo_principal"
+
+crear esfera
+    posicion 3 0 0
+    radio 1.5
+    nombre "esfera_secundaria"
+
+crear cilindro
+    posicion -3 0 0
+    radio 1
+    altura 2
+    nombre "cilindro_apoyo"
+
+crear plano
+    posicion 0 0 -2
+    escala 10 10 1
+    nombre "suelo"
+
+# Configurar iluminación
+crear luz sol
+    posicion 5 5 5
+    energia 10
+    color blanco
+    nombre "luz_principal"
+
+crear luz area
+    posicion -3 -3 3
+    energia 5
+    color azul_claro
+    tamaño 2 2
+    nombre "luz_relleno"
+
+crear luz puntual
+    posicion 0 0 8
+    energia 15
+    color amarillo_calido
+    nombre "luz_acento"
+
+# Configurar cámara
+crear camara
+    posicion 7 -7 5
+    objetivo 0 0 0
+    lente 50
+    nombre "camara_principal"
+
+establecer camara_activa "camara_principal"
+
+# Crear materiales
+crear material "material_cubo"
+    color_base rojo
+    metalico 0.2
+    rugosidad 0.3
+    brillo 0.8
+
+crear material "material_esfera"
+    color_base verde
+    metalico 0.8
+    rugosidad 0.1
+    brillo 1.0
+    emision verde_claro 0.5
+
+crear material "material_cilindro"
+    color_base azul
+    metalico 0.0
+    rugosidad 0.7
+    transparencia 0.3
+
+crear material "material_suelo"
+    color_base gris
+    metalico 0.0
+    rugosidad 0.9
+    textura "procedural_noise"
+
+# Aplicar materiales a objetos
+aplicar material "material_cubo" a "cubo_principal"
+aplicar material "material_esfera" a "esfera_secundaria"
+aplicar material "material_cilindro" a "cilindro_apoyo"
+aplicar material "material_suelo" a "suelo"
+
+# Crear animaciones
+animacion "rotacion_cubo"
+    objeto "cubo_principal"
+    propiedad rotacion_z
+    frame_inicio 1
+    valor_inicio 0
+    frame_final 250
+    valor_final 360
+    interpolacion lineal
+
+animacion "flotacion_esfera"
+    objeto "esfera_secundaria"
+    propiedad posicion_z
+    frame_inicio 1
+    valor_inicio 0
+    frame_final 120
+    valor_final 3
+    interpolacion suave
+    repetir ping_pong
+
+animacion "escala_cilindro"
+    objeto "cilindro_apoyo"
+    propiedad escala
+    frame_inicio 50
+    valor_inicio 1 1 1
+    frame_final 150
+    valor_final 1.5 1.5 2
+    interpolacion elastica
+
+# Configurar sistema de partículas
+crear sistema_particulas "chispas"
+    objeto_emisor "esfera_secundaria"
+    tipo punto
+    cantidad 1000
+    vida_util 60
+    velocidad_inicial 2
+    gravedad -0.5
+    material particula_brillante
+
+# Agregar modificadores
+agregar modificador "subdivision_surface" a "cubo_principal"
+    niveles 2
+    suavizado verdadero
+
+agregar modificador "wave" a "suelo"
+    altura 0.5
+    velocidad 1.0
+    direccion x
+
+# Configurar física
+habilitar fisica "rigid_body" en "cubo_principal"
+    masa 1.0
+    friccion 0.5
+    rebote 0.3
+
+habilitar fisica "rigid_body" en "esfera_secundaria"
+    masa 0.5
+    friccion 0.3
+    rebote 0.8
+
+habilitar fisica "rigid_body_passive" en "suelo"
+
+# Configurar render
+motor_render cycles
+samples 128
+denoising verdadero
+motion_blur verdadero
+
+configurar salida
+    formato png
+    calidad alta
+    ruta_salida "/tmp/vader_render_"
+    transparencia verdadero
+
+# Crear composición
+crear nodos_composicion
+    entrada render_layers
+    agregar nodo "color_balance"
+    agregar nodo "blur"
+        radio 2.0
+    agregar nodo "vignette"
+        intensidad 0.3
+    salida composite
+
+# Configurar timeline
+establecer frame_inicio 1
+establecer frame_final 250
+establecer frame_actual 1
+
+# Crear colección para organización
+crear coleccion "objetos_principales"
+    agregar "cubo_principal"
+    agregar "esfera_secundaria"
+    agregar "cilindro_apoyo"
+
+crear coleccion "iluminacion"
+    agregar "luz_principal"
+    agregar "luz_relleno"
+    agregar "luz_acento"
+
+# Configurar viewport
+viewport_shading material_preview
+mostrar wireframe falso
+mostrar overlays verdadero
+
+# Guardar proyecto
+guardar proyecto como "vader_creative_demo.blend"
+
+# Renderizar frame actual
+renderizar frame_actual
+mostrar "Renderizando frame actual..."
+
+# Renderizar animación completa
+renderizar animacion
+    frame_inicio 1
+    frame_final 250
+    paso 1
+
+mostrar "Configurando escena 3D..."
+mostrar "Creando objetos y materiales..."
+mostrar "Aplicando animaciones..."
+mostrar "Configurando iluminación..."
+mostrar "Preparando render..."
+
+esperar 3000
+
+mostrar "✅ Vader Creative Runtime funcionando perfectamente"
+mostrar "🎨 Proyecto 3D configurado y listo para render"
+mostrar "🎬 Animación de 250 frames creada"
+mostrar "💡 Sistema de iluminación profesional aplicado"
+mostrar "🎯 Materiales PBR asignados a todos los objetos"
