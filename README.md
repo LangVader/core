@@ -1,86 +1,89 @@
-# 🌟 VADER - EL LENGUAJE UNIVERSAL DE LA HUMANIDAD
+# 🌟 VADER - LENGUAJE DE PROGRAMACIÓN EN ESPAÑOL
 
-> **"EL PRIMER LENGUAJE UNIVERSAL Y CONVERSACIONAL DE LA HISTORIA MUNDIAL"** 👑
+> **"Programa en español natural - Transpila a múltiples lenguajes"** 🚀
 
-## 🎉 **¡REVOLUCIÓN COMPLETADA - JULIO 2025!** 
-**Vader** se convierte en el **PRIMER LENGUAJE UNIVERSAL** de la historia mundial, democratizando la programación para toda la humanidad con soporte completo para **JavaScript, AI/ML, y 25+ frameworks modernos**.
+## 🎯 **¿QUÉ ES VADER?**
 
-### 🏆 **HITO HISTÓRICO SIN PRECEDENTES:**
-✅ **🌟 SINTAXIS CONVERSACIONAL** - Programa en lenguaje natural español  
-✅ **🚀 UNIVERSAL TOTAL** - JavaScript, Python, AI/ML, Web, Móvil, IoT, Blockchain  
-✅ **🤖 RUNTIME AI/ML** - TensorFlow, PyTorch, OpenAI, Anthropic integrados  
-✅ **⚡ JAVASCRIPT COMPLETO** - React, Vue, Angular, Node.js, Express nativo  
-✅ **🎯 25+ FRAMEWORKS** - Frontend, Backend, Full-Stack, AI, Gaming  
-✅ **🔧 TRANSPILACIÓN INTELIGENTE** - Convierte a cualquier lenguaje/plataforma  
-✅ **💯 COMPATIBILIDAD TOTAL** - Preserva toda la funcionalidad Vader existente  
+**Vader** es un lenguaje de programación que permite escribir código en **español natural** y transpilarlo automáticamente a otros lenguajes como Python, JavaScript, Java, C++, y más.
 
-## 🌍 **DEMOCRATIZACIÓN MUNDIAL DE LA PROGRAMACIÓN**
+### ✅ **LO QUE VADER PUEDE HACER REALMENTE:**
 
-**Por primera vez en la historia de la computación**, cualquier persona puede programar usando lenguaje natural:
+- 🌟 **SINTAXIS EN ESPAÑOL** - Escribe código usando palabras en español
+- 🔧 **TRANSPILACIÓN MÚLTIPLE** - Convierte a 8+ lenguajes objetivo
+- ⚡ **FRAMEWORKS JAVASCRIPT** - Soporte para React, Vue, Angular (8 frameworks)
+- 🤖 **RUNTIME AI/ML BÁSICO** - Genera proyectos TensorFlow y OpenAI
+- 📱 **GENERACIÓN DE APPS** - Crea aplicaciones web, móviles e IoT básicas
+- 🎮 **PROYECTOS SIMPLES** - Gaming, blockchain y desktop básicos
 
-- 🌟 **CONVERSACIONAL** - Escribe como hablas, programa como piensas
-- 🚀 **UNIVERSAL** - Web, IoT, Móvil, IA, Robótica, Gaming, Blockchain
-- 🤖 **AI/ML NATIVO** - TensorFlow, PyTorch, OpenAI sin barreras técnicas
-- ⚡ **JAVASCRIPT TOTAL** - React, Vue, Angular, Node.js, Express completo
-- 🎯 **AUTOMÁTICO** - Detección y conversión transparente
-- 💫 **ACCESIBLE** - Sin barreras técnicas ni sintácticas
-- 👑 **REVOLUCIONARIO** - Cambia la programación para siempre
+### 🎯 **ESTADO ACTUAL - VERSIÓN BETA**
+
+**Vader está en desarrollo activo**. Funciona para casos de uso básicos pero aún no es una solución completa de producción.
+
+**CAPACIDADES ACTUALES:**
+- ✅ Transpilación básica funcional
+- ✅ 8 frameworks JavaScript implementados
+- ✅ Runtime AI/ML para TensorFlow y OpenAI
+- ✅ Generación de código básico para múltiples plataformas
+- ⚠️ Funcionalidades limitadas (no todas las características avanzadas)
+- ⚠️ Documentación y ejemplos en desarrollo
 
 > **"El hombre que enseñó al mundo a programar"** - Creador de la democratización tecnológica universal
 
 ---
 
-## 🚀 **COMANDOS REVOLUCIONARIOS - ECOSISTEMA COMPLETO**
+## 🚀 **CÓMO USAR VADER**
 
-### 🤖 **AI/ML NATIVO - ¡NUEVO!**
+### 🔧 **TRANSPILACIÓN BÁSICA**
 ```bash
-# 🧠 TENSORFLOW NATIVO
-python3 runtimes/ai_ml_runtime.py ejemplos/clasificacion.vdr tensorflow
+# Transpilar a Python
+python3 src/vader.py mi_programa.vdr --target python
 
-# 🔥 PYTORCH AVANZADO
-python3 runtimes/ai_ml_runtime.py ejemplos/deep_learning.vdr pytorch
+# Transpilar a JavaScript
+python3 src/vader.py mi_programa.vdr --target javascript
 
-# 🌟 OPENAI INTEGRATION
-python3 runtimes/ai_ml_runtime.py ejemplos/gpt_app.vdr openai
+# Transpilar a Java
+python3 src/vader.py mi_programa.vdr --target java
 
-# 🎯 SCIKIT-LEARN ML
-python3 runtimes/ai_ml_runtime.py ejemplos/ml_clasico.vdr sklearn
+# Ver lenguajes disponibles
+python3 src/vader.py --help
 ```
 
-### ⚡ **JAVASCRIPT COMPLETO - TODOS LOS FRAMEWORKS**
+### ⚡ **FRAMEWORKS JAVASCRIPT (8 Disponibles)**
 ```bash
-# ⚛️ REACT NATIVO
+# React
 python3 src/vader.py mi_app.vdr --framework react --target javascript
 
-# 🟢 VUE.JS MODERNO
+# Vue.js
 python3 src/vader.py mi_app.vdr --framework vue --target javascript
 
-# 🅰️ ANGULAR EMPRESARIAL
+# Angular
 python3 src/vader.py mi_app.vdr --framework angular --target javascript
 
-# 🚀 NODE.JS BACKEND
+# Express (Node.js)
 python3 src/vader.py mi_api.vdr --framework express --target javascript
 
-# 🌐 NEXT.JS FULL-STACK
-python3 src/vader.py mi_web.vdr --framework nextjs --target javascript
+# Ver frameworks disponibles
+python3 src/vader.py --list-frameworks
 ```
 
-### 🌟 **ECOSISTEMA UNIVERSAL**
+### 🤖 **RUNTIME AI/ML (BÁSICO)**
 ```bash
-# 🎮 GAMING (Unity, Godot, Pygame)
-python3 runtimes/game_runtime.py mi_juego.vdr unity
+# Generar proyecto TensorFlow
+python3 runtimes/ai_ml_runtime.py
+# (Ejecuta ejemplo predefinido)
 
-# 📱 MÓVIL (React Native, Flutter)
+# Nota: Requiere configuración manual para casos específicos
+```
+
+### 📱 **GENERADORES BÁSICOS**
+```bash
+# Generar app móvil básica
 python3 runtimes/mobile_runtime.py mi_app.vdr react_native
 
-# 🔗 BLOCKCHAIN (Ethereum, Solana)
-python3 runtimes/blockchain_runtime.py mi_token.vdr ethereum
-
-# 🌐 WEB CONVERSACIONAL
-python3 src/vader.py ejemplos/web_conversacional.vdr --target html
-
-# 🤖 IoT (Arduino, Raspberry Pi)
+# Generar código IoT básico
 python3 runtimes/iot_runtime.py mi_sensor.vdr arduino
+
+# Nota: Generan código de ejemplo, no aplicaciones completas
 ```
 
 ---
@@ -296,43 +299,51 @@ python3 src/vader.py archivo.vdr-conv --detect-language --verbose
 
 ---
 
-## 🌟 ECOSISTEMA UNIVERSAL COMPLETO - 15+ RUNTIMES NATIVOS
+## 🔧 **COMPONENTES ACTUALES DE VADER**
 
-### 🔥 **RUNTIMES ENHANCED (Auditados y Mejorados)**
+### ✅ **TRANSPILADORES FUNCIONALES**
 
-| Runtime | Estado | Descripción | Plataformas Soportadas |
-|---------|--------|-------------|------------------------|
-| **🐍 Python Enhanced** | ✅ **FUNCIONAL** | Aplicaciones web y análisis | Flask, Django, FastAPI, Pandas, NumPy |
-| **⚡ JavaScript Enhanced** | ✅ **FUNCIONAL** | Desarrollo web moderno | React, Vue, Angular, Node.js, Express |
-| **🤖 IoT Enhanced** | ✅ **FUNCIONAL** | Internet de las cosas | Arduino, ESP32, Raspberry Pi, MicroPython |
-| **☁️ Cloud Enhanced** | ✅ **FUNCIONAL** | Computación en la nube | AWS Lambda, Vercel, Netlify, Serverless |
+| Lenguaje | Estado | Descripción | Nivel de Soporte |
+|----------|--------|-------------|------------------|
+| **🐍 Python** | ✅ **COMPLETO** | Transpilación robusta y probada | Sintaxis completa |
+| **⚡ JavaScript** | ✅ **COMPLETO** | Incluye frameworks modernos | 8 frameworks |
+| **☕ Java** | 🟡 **BÁSICO** | Sintaxis fundamental | Limitado |
+| **🔧 C++** | 🟡 **BÁSICO** | Estructuras básicas | Limitado |
+| **🦀 Rust** | 🟡 **BÁSICO** | Sintaxis fundamental | Limitado |
+| **🐹 Go** | 🟡 **BÁSICO** | Estructuras básicas | Limitado |
+| **🌐 HTML/CSS** | ✅ **FUNCIONAL** | Páginas web básicas | Completo |
+| **🔗 Solidity** | 🟡 **BÁSICO** | Contratos simples | Limitado |
 
-### 🧠 **AI/ML RUNTIME - ¡RECIÉN COMPLETADO!**
+### ⚡ **FRAMEWORKS JAVASCRIPT (8 Reales)**
 
-| Framework | Estado | Descripción | Casos de Uso |
+| Framework | Estado | Descripción | Funcionalidad |
 |-----------|--------|-------------|---------------|
-| **🔥 TensorFlow** | ✅ **NATIVO** | Deep Learning profesional | Clasificación, CNN, RNN, Transfer Learning |
-| **⚡ PyTorch** | ✅ **NATIVO** | Investigación ML avanzada | Investigación, Prototipos, GANs |
-| **🎯 scikit-learn** | ✅ **NATIVO** | Machine Learning clásico | Regresión, Clustering, SVM |
-| **🌟 OpenAI** | ✅ **NATIVO** | IA Generativa | GPT, ChatGPT, DALL-E |
-| **🤖 Anthropic** | ✅ **NATIVO** | Claude AI | Análisis, Conversación |
-| **🔍 Hugging Face** | ✅ **NATIVO** | Modelos pre-entrenados | NLP, Transformers, BERT |
-| **👁️ OpenCV** | ✅ **NATIVO** | Visión por computadora | Detección, Reconocimiento |
-| **📝 spaCy** | ✅ **NATIVO** | Procesamiento de lenguaje | NLP, Análisis de texto |
+| **React** | ✅ **FUNCIONAL** | Componentes y estado | Básico |
+| **Vue.js** | ✅ **FUNCIONAL** | Reactividad y templates | Básico |
+| **Angular** | ✅ **FUNCIONAL** | Componentes empresariales | Básico |
+| **Express** | ✅ **FUNCIONAL** | APIs Node.js | Básico |
+| **Next.js** | ✅ **FUNCIONAL** | SSR con React | Básico |
+| **Nuxt.js** | ✅ **FUNCIONAL** | SSR con Vue | Básico |
+| **Svelte** | ✅ **FUNCIONAL** | Compilador reactivo | Básico |
+| **SvelteKit** | ✅ **FUNCIONAL** | Full-stack Svelte | Básico |
 
-### 📦 **RUNTIMES UNIVERSALES (Todos Funcionales)**
+### 🤖 **RUNTIME AI/ML (BÁSICO)**
 
-| Runtime | Estado | Descripción | Plataformas Soportadas |
-|---------|--------|-------------|------------------------|
-| **📱 Mobile Universal** | ✅ **FUNCIONAL** | Aplicaciones móviles | React Native, Flutter iOS/Android |
-| **🎮 Gaming Universal** | ✅ **FUNCIONAL** | Videojuegos | Unity, Godot, Pygame, Phaser |
-| **🔗 Blockchain Universal** | ✅ **FUNCIONAL** | Web3 y criptomonedas | Ethereum, Polygon, Solana, BSC |
-| **🖥️ Desktop Universal** | ✅ **FUNCIONAL** | Aplicaciones de escritorio | Electron, Tauri, Flutter Desktop |
-| **🗄️ Database Universal** | ✅ **FUNCIONAL** | Bases de datos | MySQL, MongoDB, PostgreSQL, Redis |
-| **🎨 Creative Universal** | ✅ **FUNCIONAL** | Herramientas creativas | Blender, GIMP, Audacity, Maya |
-| **🤖 Robotics Universal** | ✅ **FUNCIONAL** | Sistemas robóticos | ROS, Arduino IDE, Raspberry Pi |
-| **📊 Data Science Universal** | ✅ **FUNCIONAL** | Análisis de datos | Jupyter, R, MATLAB, Pandas |
-| **⚡ Edge Computing Universal** | ✅ **FUNCIONAL** | Computación distribuida | WebAssembly, CDN, Edge Functions |
+| Componente | Estado | Descripción | Limitaciones |
+|------------|--------|-------------|---------------|
+| **TensorFlow** | ✅ **FUNCIONAL** | Genera proyectos básicos | Ejemplos predefinidos |
+| **OpenAI** | ✅ **FUNCIONAL** | Integración API | Requiere API key |
+| **PyTorch** | 🟡 **LIMITADO** | Código de ejemplo | No completamente funcional |
+| **scikit-learn** | 🟡 **LIMITADO** | Código de ejemplo | No completamente funcional |
+
+### 📱 **GENERADORES BÁSICOS**
+
+| Tipo | Estado | Descripción | Funcionalidad |
+|------|--------|-------------|---------------|
+| **Móvil** | 🟡 **BÁSICO** | React Native/Flutter | Código de ejemplo |
+| **IoT** | 🟡 **BÁSICO** | Arduino/Raspberry Pi | Código de ejemplo |
+| **Gaming** | 🟡 **BÁSICO** | Unity/Godot/Pygame | Código de ejemplo |
+| **Blockchain** | 🟡 **BÁSICO** | Contratos Solidity | Código de ejemplo |
 
 ---
 
@@ -401,228 +412,126 @@ vader mi_app.vdr --list      # Ver todas las plataformas
 
 ---
 
-## 🌟 EJEMPLOS REVOLUCIONARIOS - ECOSISTEMA COMPLETO
+## 🎯 **EJEMPLOS REALES**
 
-### 🧠 **AI/ML Runtime - ¡NUEVO! Inteligencia Artificial Nativa**
-
+### 🐍 **PYTHON (TRANSPILACIÓN COMPLETA)**
 ```vader
-// clasificacion_ia.vdr
-crear modelo tensorflow clasificacion
-cargar dataset imagenes "./fotos/"
-entrenar modelo 50 epocas
-evaluar precision modelo
-guardar modelo "mi_clasificador.h5"
-predecir nueva imagen "test.jpg"
-```
-
-```bash
-python3 runtimes/ai_ml_runtime.py clasificacion_ia.vdr tensorflow
-# → Genera: proyecto TensorFlow completo con main.py, requirements.txt
-```
-
-### 🤖 **OpenAI Integration - IA Generativa**
-
-```vader
-// gpt_app.vdr
-configurar openai api key
-crear prompt analisis texto
-procesar respuesta gpt-4
-generar resumen automatico
-traducir multiples idiomas
-guardar resultado json
-```
-
-```bash
-python3 runtimes/ai_ml_runtime.py gpt_app.vdr openai
-# → Integración directa con APIs de OpenAI
-```
-
-### ⚡ **JavaScript Completo - React Nativo**
-
-```vader
-// app_react.vdr
-crear componente react "Dashboard"
-estado "usuarios" = []
-estado "loading" = verdadero
-
-efecto "componentDidMount"
-    fetch datos api "/usuarios"
-    actualizar estado usuarios
-    cambiar loading a falso
-fin efecto
-
-mostrar header navegacion
-si loading entonces
-    mostrar "Cargando..."
+# ejemplo_basico.vdr
+mostrar "Hola mundo desde Vader"
+crear variable numero con valor 42
+si numero es mayor que 10 entonces
+    mostrar "El número es grande"
 sino
-    renderizar tabla usuarios
-    manejar eventos click
-fin si
+    mostrar "El número es pequeño"
+terminar
+
+repetir 5 veces
+    mostrar "Iteración: " + contador
+terminar
 ```
 
+**Comando y resultado:**
 ```bash
-python3 src/vader.py app_react.vdr --framework react --target javascript
-# → Genera: App.js, components/, package.json completo
+python3 src/vader.py ejemplo_basico.vdr --target python
+# → Genera código Python válido y ejecutable
 ```
 
-### 🚀 **Node.js Backend - Express Nativo**
-
+### ⚡ **JAVASCRIPT CON REACT (BÁSICO)**
 ```vader
-// api_backend.vdr
-servidor express puerto 3000
-
-ruta get "/usuarios"
-    usuarios = consultar base_datos "SELECT * FROM usuarios"
-    responder json usuarios
-fin ruta
-
-ruta post "/usuarios"
-    nuevo_usuario = req.body
-    insertar base_datos nuevo_usuario
-    responder "Usuario creado exitosamente"
-fin ruta
-
-middleware "cors"
-middleware "json"
+# app_simple.vdr
+crear componente App
+mostrar "Mi primera app React"
+crear botón con texto "Hacer clic"
+al hacer clic mostrar alerta "¡Funciona!"
 ```
 
+**Comando y resultado:**
 ```bash
-python3 src/vader.py api_backend.vdr --framework express --target javascript
-# → Genera: servidor Node.js completo con Express
+python3 src/vader.py app_simple.vdr --framework react --target javascript
+# → Genera estructura React básica con componentes
 ```
 
-### 🐍 **Python Enhanced - Aplicación Web**
-
+### 🤖 **AI/ML BÁSICO (LIMITADO)**
 ```vader
-// app_python.vdr
-configurar servidor web flask puerto 5000
-crear api rest "/datos" método get
-conectar base datos sqlite "usuarios.db"
-procesar datos pandas csv "ventas.csv"
-generar gráfico matplotlib
-mostrar dashboard html
+# Nota: El runtime AI/ML ejecuta ejemplos predefinidos
+# No procesa archivos .vdr personalizados aún
 ```
 
+**Comando:**
 ```bash
-vader app_python.vdr python
-# → Genera: app_python.py con Flask completo
-```
-
-### 🤖 IoT Enhanced - Sistema Arduino
-
-```vader
-// sensor_iot.vdr
-configurar arduino uno
-leer sensor temperatura dht22 pin 2
-controlar led rgb pin 9
-enviar datos wifi
-mostrar serial monitor
-```
-
-```bash
-vader sensor_iot.vdr arduino
-# → Genera: sensor_iot.ino para Arduino IDE
-```
-
-### ☁️ Cloud Enhanced - API Serverless
-
-```vader
-// api_cloud.vdr
-crear función lambda handler
-configurar api gateway
-conectar dynamodb tabla "usuarios"
-implementar autenticación jwt
-responder json formato
-```
-
-```bash
-vader api_cloud.vdr aws_lambda
-# → Genera: lambda_function.py, template.yaml
-```
-
-### 🧠 AI Universal - Integración IA
-
-```vader
-// ai_app.vdr
-configurar modelo openai gpt-4
-crear prompt análisis texto
-procesar respuesta ia
-generar resumen automático
-traducir múltiples idiomas
-```
-
-```bash
-vader ai_app.vdr openai
-# → Integración directa con APIs de IA
+python3 runtimes/ai_ml_runtime.py
+# → Ejecuta ejemplo TensorFlow predefinido
+# → Requiere configuración manual para casos específicos
 ```
 
 ---
 
-## 🎮 DEMO INTERACTIVO
+## 📥 **INSTALACIÓN**
 
-### 🚀 Probar Todos los Runtimes
+### ⚠️ **REQUISITOS**
+- Python 3.7 o superior
+- Git (para clonar el repositorio)
+- Dependencias opcionales según el lenguaje objetivo
 
+### 🔧 **INSTALACIÓN MANUAL**
 ```bash
-python3 tools/demo-vader-universal.py
+# Clonar el repositorio
+git clone https://github.com/LangVader/core.git
+cd core
+
+# Instalar dependencias básicas (opcional)
+pip install -r requirements.txt  # Si existe
+
+# Probar la instalación
+python3 src/vader.py --help
 ```
 
-**Características del Demo:**
-- ✅ **Interfaz Interactiva** - Menú en terminal
-- ✅ **Ejemplos Predefinidos** - Código `.vdr` para cada runtime
-- ✅ **Ejecución en Tiempo Real** - Ver resultados inmediatos
-- ✅ **Métricas de Rendimiento** - Estadísticas detalladas
-- ✅ **Benchmark Completo** - Probar todos los runtimes automáticamente
+### ✅ **VERIFICAR INSTALACIÓN**
+```bash
+# Crear archivo de prueba
+echo 'mostrar "Hola Vader"' > prueba.vdr
 
-### 📋 Opciones del Demo
+# Transpilar a Python
+python3 src/vader.py prueba.vdr --target python
 
-1. **🌟 Python Enhanced** - Aplicaciones web y análisis
-2. **⚛️ JavaScript Enhanced** - React con componentes
-3. **🤖 IoT Enhanced** - Arduino con sensores
-4. **☁️ Cloud Enhanced** - AWS Lambda serverless
-5. **🧠 AI Universal** - Integración con modelos IA
-6. **📱 Mobile Universal** - Apps móviles multiplataforma
-7. **🎮 Gaming Universal** - Juegos Unity/Godot
-8. **⛓️ Blockchain Universal** - Smart contracts
-9. **📊 Métricas** - Estadísticas de rendimiento
-10. **🔄 Benchmark** - Probar todos automáticamente
+# Verificar que se generó el archivo
+ls prueba.py
+```
 
 ---
 
-## 🛠️ HERRAMIENTAS UNIVERSALES
+## ⚠️ **LIMITACIONES ACTUALES**
 
-### 🎯 CLI Universal
+### 🚧 **EN DESARROLLO**
+- **CLI Global**: No hay comando `vader` global, usar `python3 src/vader.py`
+- **Documentación**: Ejemplos y guías aún en desarrollo
+- **Testing**: No todos los casos están cubiertos
+- **Frameworks**: Soporte básico, no todas las características avanzadas
 
-```bash
-# Ver ayuda completa
-vader --help
+### 🔄 **PRÓXIMAS MEJORAS**
+- Instalador automático multiplataforma
+- CLI unificado global
+- Más ejemplos y documentación
+- Soporte avanzado para frameworks
+- Testing automático completo
 
-# Listar todas las plataformas (50+)
-vader --list
+---
 
-# Información de versión
-vader --version
+## 🤝 **CONTRIBUIR**
 
-# Modo verbose para debugging
-vader archivo.vdr --verbose
+**Vader está en desarrollo activo y acepta contribuciones:**
 
-# Detección automática inteligente
-vader archivo.vdr --auto
-```
+1. **Fork** el repositorio
+2. **Crea** una branch para tu feature
+3. **Implementa** mejoras o correcciones
+4. **Envía** un Pull Request
 
-### 📦 Instalador Universal
-
-- ✅ **Multiplataforma** - Windows, macOS, Linux
-- ✅ **Verificación Automática** - Dependencias y requisitos
-- ✅ **Instalación Completa** - Todos los runtimes y herramientas
-- ✅ **Configuración Global** - CLI disponible globalmente
-- ✅ **Validación** - Pruebas automáticas post-instalación
-
-### 🎮 Demo Interactivo
-
-- ✅ **Ejemplos Predefinidos** - Para todos los runtimes
-- ✅ **Ejecución en Vivo** - Ver código generado en tiempo real
-- ✅ **Métricas Detalladas** - Rendimiento y estadísticas
-- ✅ **Benchmark Automático** - Probar todo el ecosistema
+### 📋 **ÁREAS DE CONTRIBUCIÓN**
+- Mejoras en transpiladores existentes
+- Nuevos lenguajes objetivo
+- Documentación y ejemplos
+- Testing y validación
+- Optimización de rendimiento
 
 ---
 
