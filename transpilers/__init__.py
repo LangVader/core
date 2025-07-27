@@ -20,6 +20,8 @@ from . import ruby
 from . import solidity
 from . import html
 from . import css
+from . import gui_advanced
+from . import electron
 
 # Available transpilers
 AVAILABLE_TRANSPILERS = {
@@ -41,7 +43,9 @@ AVAILABLE_TRANSPILERS = {
     'solidity': solidity,
     'sol': solidity,
     'html': html,
-    'css': css
+    'css': css,
+    'gui': gui_advanced,
+    'electron': electron
 }
 
 def get_transpiler(target_language):

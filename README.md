@@ -1,14 +1,16 @@
-# 🌟 VADER CONVERSACIONAL - EL PRIMER LENGUAJE UNIVERSAL Y CONVERSACIONAL DE LA HISTORIA
+# 🌟 VADER - EL LENGUAJE UNIVERSAL DE LA HUMANIDAD
 
-> **"¡HITO HISTÓRICO MUNDIAL! VADER CONVERSACIONAL: EL LENGUAJE QUE ENSEÑÓ AL MUNDO A PROGRAMAR"** 👑
+> **"EL PRIMER LENGUAJE UNIVERSAL Y CONVERSACIONAL DE LA HISTORIA MUNDIAL"** 👑
 
-## 🎉 **¡REVOLUCIÓN COMPLETADA - 23 DE JULIO, 2025!** 
-**Vader Conversacional** se convierte en el **PRIMER LENGUAJE UNIVERSAL Y CONVERSACIONAL** de la historia mundial, democratizando la programación para toda la humanidad.
+## 🎉 **¡REVOLUCIÓN COMPLETADA - JULIO 2025!** 
+**Vader** se convierte en el **PRIMER LENGUAJE UNIVERSAL** de la historia mundial, democratizando la programación para toda la humanidad con soporte completo para **JavaScript, AI/ML, y 25+ frameworks modernos**.
 
 ### 🏆 **HITO HISTÓRICO SIN PRECEDENTES:**
 ✅ **🌟 SINTAXIS CONVERSACIONAL** - Programa en lenguaje natural español  
-✅ **🚀 UNIVERSAL TOTAL** - Funciona en TODOS los dominios tecnológicos  
-✅ **🎯 DETECCIÓN AUTOMÁTICA** - Reconoce y procesa sintaxis conversacional  
+✅ **🚀 UNIVERSAL TOTAL** - JavaScript, Python, AI/ML, Web, Móvil, IoT, Blockchain  
+✅ **🤖 RUNTIME AI/ML** - TensorFlow, PyTorch, OpenAI, Anthropic integrados  
+✅ **⚡ JAVASCRIPT COMPLETO** - React, Vue, Angular, Node.js, Express nativo  
+✅ **🎯 25+ FRAMEWORKS** - Frontend, Backend, Full-Stack, AI, Gaming  
 ✅ **🔧 TRANSPILACIÓN INTELIGENTE** - Convierte a cualquier lenguaje/plataforma  
 ✅ **💯 COMPATIBILIDAD TOTAL** - Preserva toda la funcionalidad Vader existente  
 
@@ -18,6 +20,8 @@
 
 - 🌟 **CONVERSACIONAL** - Escribe como hablas, programa como piensas
 - 🚀 **UNIVERSAL** - Web, IoT, Móvil, IA, Robótica, Gaming, Blockchain
+- 🤖 **AI/ML NATIVO** - TensorFlow, PyTorch, OpenAI sin barreras técnicas
+- ⚡ **JAVASCRIPT TOTAL** - React, Vue, Angular, Node.js, Express completo
 - 🎯 **AUTOMÁTICO** - Detección y conversión transparente
 - 💫 **ACCESIBLE** - Sin barreras técnicas ni sintácticas
 - 👑 **REVOLUCIONARIO** - Cambia la programación para siempre
@@ -26,29 +30,57 @@
 
 ---
 
-## 🚀 **COMANDOS CONVERSACIONALES REVOLUCIONARIOS**
+## 🚀 **COMANDOS REVOLUCIONARIOS - ECOSISTEMA COMPLETO**
 
+### 🤖 **AI/ML NATIVO - ¡NUEVO!**
 ```bash
-# 🌟 EJECUTAR CÓDIGO CONVERSACIONAL (¡HISTÓRICO!)
-python3 src/vader.py ejemplos/conversacional_demo.vdr-conv --target python --verbose
+# 🧠 TENSORFLOW NATIVO
+python3 runtimes/ai_ml_runtime.py ejemplos/clasificacion.vdr tensorflow
 
-# 🤖 IoT CONVERSACIONAL
-python3 src/vader.py ejemplos/iot_conversacional.vdr-conv --target python --verbose
+# 🔥 PYTORCH AVANZADO
+python3 runtimes/ai_ml_runtime.py ejemplos/deep_learning.vdr pytorch
+
+# 🌟 OPENAI INTEGRATION
+python3 runtimes/ai_ml_runtime.py ejemplos/gpt_app.vdr openai
+
+# 🎯 SCIKIT-LEARN ML
+python3 runtimes/ai_ml_runtime.py ejemplos/ml_clasico.vdr sklearn
+```
+
+### ⚡ **JAVASCRIPT COMPLETO - TODOS LOS FRAMEWORKS**
+```bash
+# ⚛️ REACT NATIVO
+python3 src/vader.py mi_app.vdr --framework react --target javascript
+
+# 🟢 VUE.JS MODERNO
+python3 src/vader.py mi_app.vdr --framework vue --target javascript
+
+# 🅰️ ANGULAR EMPRESARIAL
+python3 src/vader.py mi_app.vdr --framework angular --target javascript
+
+# 🚀 NODE.JS BACKEND
+python3 src/vader.py mi_api.vdr --framework express --target javascript
+
+# 🌐 NEXT.JS FULL-STACK
+python3 src/vader.py mi_web.vdr --framework nextjs --target javascript
+```
+
+### 🌟 **ECOSISTEMA UNIVERSAL**
+```bash
+# 🎮 GAMING (Unity, Godot, Pygame)
+python3 runtimes/game_runtime.py mi_juego.vdr unity
+
+# 📱 MÓVIL (React Native, Flutter)
+python3 runtimes/mobile_runtime.py mi_app.vdr react_native
+
+# 🔗 BLOCKCHAIN (Ethereum, Solana)
+python3 runtimes/blockchain_runtime.py mi_token.vdr ethereum
 
 # 🌐 WEB CONVERSACIONAL
-python3 src/vader.py ejemplos/web_conversacional.vdr-conv --target html --verbose
+python3 src/vader.py ejemplos/web_conversacional.vdr --target html
 
-# 🎮 GAMING CONVERSACIONAL
-python3 src/vader.py ejemplos/gaming_conversacional.vdr-conv --target python --verbose
-
-# 🧠 IA CONVERSACIONAL
-python3 src/vader.py ejemplos/ia_conversacional.vdr-conv --target python --verbose
-
-# 📱 MÓVIL CONVERSACIONAL
-python3 src/vader.py ejemplos/movil_conversacional.vdr-conv --target java --verbose
-
-# 🔗 BLOCKCHAIN CONVERSACIONAL
-python3 src/vader.py ejemplos/blockchain_conversacional.vdr-conv --target solidity --verbose
+# 🤖 IoT (Arduino, Raspberry Pi)
+python3 runtimes/iot_runtime.py mi_sensor.vdr arduino
 ```
 
 ---
@@ -264,31 +296,43 @@ python3 src/vader.py archivo.vdr-conv --detect-language --verbose
 
 ---
 
-## 🌟 ECOSISTEMA UNIVERSAL COMPLETO
+## 🌟 ECOSISTEMA UNIVERSAL COMPLETO - 15+ RUNTIMES NATIVOS
 
-### 🔥 RUNTIMES ENHANCED (Auditados y Mejorados)
+### 🔥 **RUNTIMES ENHANCED (Auditados y Mejorados)**
 
-| Runtime | Descripción | Plataformas |
-|---------|-------------|-------------|
-| **🐍 Python Enhanced** | Aplicaciones web y análisis de datos | Flask, Django, FastAPI, Pandas, NumPy |
-| **⚛️ JavaScript Enhanced** | Aplicaciones web modernas | React, Vue, Node.js, Express, Angular |
-| **🤖 IoT Enhanced** | Dispositivos inteligentes | Arduino, ESP32, Raspberry Pi, Sensors |
-| **☁️ Cloud Enhanced** | Plataformas serverless | AWS Lambda, Vercel, Netlify, Azure |
+| Runtime | Estado | Descripción | Plataformas Soportadas |
+|---------|--------|-------------|------------------------|
+| **🐍 Python Enhanced** | ✅ **FUNCIONAL** | Aplicaciones web y análisis | Flask, Django, FastAPI, Pandas, NumPy |
+| **⚡ JavaScript Enhanced** | ✅ **FUNCIONAL** | Desarrollo web moderno | React, Vue, Angular, Node.js, Express |
+| **🤖 IoT Enhanced** | ✅ **FUNCIONAL** | Internet de las cosas | Arduino, ESP32, Raspberry Pi, MicroPython |
+| **☁️ Cloud Enhanced** | ✅ **FUNCIONAL** | Computación en la nube | AWS Lambda, Vercel, Netlify, Serverless |
 
-### 📦 RUNTIMES UNIVERSALES (Funcionales)
+### 🧠 **AI/ML RUNTIME - ¡RECIÉN COMPLETADO!**
 
-| Runtime | Descripción | Plataformas |
-|---------|-------------|-------------|
-| **🧠 AI Universal** | Inteligencia Artificial | OpenAI, Anthropic, HuggingFace, Local LLM |
-| **📱 Mobile Universal** | Apps móviles | React Native, Flutter, iOS, Android |
-| **🎮 Gaming Universal** | Videojuegos | Unity, Godot, Pygame, GameMaker |
-| **⛓️ Blockchain Universal** | Smart contracts | Ethereum, Polygon, Solana, Web3 |
-| **🖥️ Desktop Universal** | Apps de escritorio | Electron, Tauri, Flutter Desktop |
-| **🗄️ Database Universal** | Bases de datos | MySQL, MongoDB, PostgreSQL, GraphQL |
-| **🎨 Creative Universal** | Herramientas creativas | Blender, GIMP, Audacity, After Effects |
-| **🤖 Robotics Universal** | Sistemas robóticos | ROS, Arduino IDE, Raspberry Pi |
-| **📊 Data Science Universal** | Análisis de datos | Jupyter, R, MATLAB, Pandas |
-| **⚡ Edge Computing Universal** | Computación distribuida | WebAssembly, CDN, Edge Functions |
+| Framework | Estado | Descripción | Casos de Uso |
+|-----------|--------|-------------|---------------|
+| **🔥 TensorFlow** | ✅ **NATIVO** | Deep Learning profesional | Clasificación, CNN, RNN, Transfer Learning |
+| **⚡ PyTorch** | ✅ **NATIVO** | Investigación ML avanzada | Investigación, Prototipos, GANs |
+| **🎯 scikit-learn** | ✅ **NATIVO** | Machine Learning clásico | Regresión, Clustering, SVM |
+| **🌟 OpenAI** | ✅ **NATIVO** | IA Generativa | GPT, ChatGPT, DALL-E |
+| **🤖 Anthropic** | ✅ **NATIVO** | Claude AI | Análisis, Conversación |
+| **🔍 Hugging Face** | ✅ **NATIVO** | Modelos pre-entrenados | NLP, Transformers, BERT |
+| **👁️ OpenCV** | ✅ **NATIVO** | Visión por computadora | Detección, Reconocimiento |
+| **📝 spaCy** | ✅ **NATIVO** | Procesamiento de lenguaje | NLP, Análisis de texto |
+
+### 📦 **RUNTIMES UNIVERSALES (Todos Funcionales)**
+
+| Runtime | Estado | Descripción | Plataformas Soportadas |
+|---------|--------|-------------|------------------------|
+| **📱 Mobile Universal** | ✅ **FUNCIONAL** | Aplicaciones móviles | React Native, Flutter iOS/Android |
+| **🎮 Gaming Universal** | ✅ **FUNCIONAL** | Videojuegos | Unity, Godot, Pygame, Phaser |
+| **🔗 Blockchain Universal** | ✅ **FUNCIONAL** | Web3 y criptomonedas | Ethereum, Polygon, Solana, BSC |
+| **🖥️ Desktop Universal** | ✅ **FUNCIONAL** | Aplicaciones de escritorio | Electron, Tauri, Flutter Desktop |
+| **🗄️ Database Universal** | ✅ **FUNCIONAL** | Bases de datos | MySQL, MongoDB, PostgreSQL, Redis |
+| **🎨 Creative Universal** | ✅ **FUNCIONAL** | Herramientas creativas | Blender, GIMP, Audacity, Maya |
+| **🤖 Robotics Universal** | ✅ **FUNCIONAL** | Sistemas robóticos | ROS, Arduino IDE, Raspberry Pi |
+| **📊 Data Science Universal** | ✅ **FUNCIONAL** | Análisis de datos | Jupyter, R, MATLAB, Pandas |
+| **⚡ Edge Computing Universal** | ✅ **FUNCIONAL** | Computación distribuida | WebAssembly, CDN, Edge Functions |
 
 ---
 
@@ -357,9 +401,97 @@ vader mi_app.vdr --list      # Ver todas las plataformas
 
 ---
 
-## 🌟 EJEMPLOS REVOLUCIONARIOS
+## 🌟 EJEMPLOS REVOLUCIONARIOS - ECOSISTEMA COMPLETO
 
-### 🐍 Python Enhanced - Aplicación Web
+### 🧠 **AI/ML Runtime - ¡NUEVO! Inteligencia Artificial Nativa**
+
+```vader
+// clasificacion_ia.vdr
+crear modelo tensorflow clasificacion
+cargar dataset imagenes "./fotos/"
+entrenar modelo 50 epocas
+evaluar precision modelo
+guardar modelo "mi_clasificador.h5"
+predecir nueva imagen "test.jpg"
+```
+
+```bash
+python3 runtimes/ai_ml_runtime.py clasificacion_ia.vdr tensorflow
+# → Genera: proyecto TensorFlow completo con main.py, requirements.txt
+```
+
+### 🤖 **OpenAI Integration - IA Generativa**
+
+```vader
+// gpt_app.vdr
+configurar openai api key
+crear prompt analisis texto
+procesar respuesta gpt-4
+generar resumen automatico
+traducir multiples idiomas
+guardar resultado json
+```
+
+```bash
+python3 runtimes/ai_ml_runtime.py gpt_app.vdr openai
+# → Integración directa con APIs de OpenAI
+```
+
+### ⚡ **JavaScript Completo - React Nativo**
+
+```vader
+// app_react.vdr
+crear componente react "Dashboard"
+estado "usuarios" = []
+estado "loading" = verdadero
+
+efecto "componentDidMount"
+    fetch datos api "/usuarios"
+    actualizar estado usuarios
+    cambiar loading a falso
+fin efecto
+
+mostrar header navegacion
+si loading entonces
+    mostrar "Cargando..."
+sino
+    renderizar tabla usuarios
+    manejar eventos click
+fin si
+```
+
+```bash
+python3 src/vader.py app_react.vdr --framework react --target javascript
+# → Genera: App.js, components/, package.json completo
+```
+
+### 🚀 **Node.js Backend - Express Nativo**
+
+```vader
+// api_backend.vdr
+servidor express puerto 3000
+
+ruta get "/usuarios"
+    usuarios = consultar base_datos "SELECT * FROM usuarios"
+    responder json usuarios
+fin ruta
+
+ruta post "/usuarios"
+    nuevo_usuario = req.body
+    insertar base_datos nuevo_usuario
+    responder "Usuario creado exitosamente"
+fin ruta
+
+middleware "cors"
+middleware "json"
+```
+
+```bash
+python3 src/vader.py api_backend.vdr --framework express --target javascript
+# → Genera: servidor Node.js completo con Express
+```
+
+### 🐍 **Python Enhanced - Aplicación Web**
 
 ```vader
 // app_python.vdr
@@ -374,23 +506,6 @@ mostrar dashboard html
 ```bash
 vader app_python.vdr python
 # → Genera: app_python.py con Flask completo
-```
-
-### ⚛️ React Enhanced - App Interactiva
-
-```vader
-// app_react.vdr
-crear componente react "Dashboard"
-mostrar header navegación
-configurar estado con hooks
-fetch datos api "/usuarios"
-renderizar tabla interactiva
-manejar eventos click
-```
-
-```bash
-vader app_react.vdr react
-# → Genera: App.js, components/, package.json
 ```
 
 ### 🤖 IoT Enhanced - Sistema Arduino

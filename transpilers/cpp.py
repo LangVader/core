@@ -1,72 +1,74 @@
 #!/usr/bin/env python3
 """
-Transpilador de Vader a Go
-Convierte código Vader en español natural a Go válido y funcional
+Transpilador de Vader a C++
+Convierte código Vader en español natural a C++ válido y funcional
 """
 
 import re
 
-class GoTranspiler:
+class CppTranspiler:
     def __init__(self):
         self.indent_level = 0
         self.in_function = False
+        self.in_class = False
         self.declared_vars = set()
+        self.includes = set(['<iostream>', '<string>', '<vector>', '<map>'])
         
     def indent(self):
         return '    ' * self.indent_level
     
-    def infer_go_type(self, value):
-        """Infiere el tipo de Go basado en el valor"""
+    def infer_cpp_type(self, value):
+        """Infiere el tipo de C++ basado en el valor"""
         if value.strip() in ['true', 'false', 'verdadero', 'falso']:
             return 'bool'
         elif value.strip().startswith('"') and value.strip().endswith('"'):
-            return 'string'
+            return 'std::string'
         elif '.' in value and value.replace('.', '').replace('-', '').isdigit():
-            return 'float64'
+            return 'double'
         elif value.replace('-', '').isdigit():
             return 'int'
         else:
-            return ''
+            # Podría ser una variable o expresión
+            return 'auto'
     
     def transpile(self, vader_code):
-        """Transpila código Vader completo a Go"""
+        """Transpila código Vader completo a C++"""
         lines = vader_code.split('\n')
-        go_lines = [
-            'package main',
-            '',
-            'import (',
-            '    "fmt"',
-            '    "bufio"',
-            '    "os"',
-            '    "strings"',
-            '    "strconv"',
-            ')',
-            '',
-            'func main() {'
-        ]
+        cpp_lines = []
+        
+        # Headers y namespace
+        for include in sorted(self.includes):
+            cpp_lines.append(f'#include {include}')
+        cpp_lines.append('')
+        cpp_lines.append('using namespace std;')
+        cpp_lines.append('')
+        cpp_lines.append('int main() {')
         
         self.indent_level = 1
         self.declared_vars = set()
-        go_lines.append(self.indent() + 'reader := bufio.NewReader(os.Stdin)')
         
         for line in lines:
             original_line = line
             line = line.strip()
             
             if not line:
-                go_lines.append('')
+                cpp_lines.append('')
                 continue
                 
             if line.startswith('#'):
-                go_lines.append(self.indent() + '//' + line[1:])
+                cpp_lines.append(self.indent() + '//' + line[1:])
                 continue
                 
-            go_line = self.transpile_line(line)
-            if go_line is not None:
-                go_lines.append(go_line)
+            cpp_line = self.transpile_line(line)
+            if cpp_line is not None:
+                cpp_lines.append(cpp_line)
         
-        go_lines.append('}')
-        return '\n'.join(go_lines)
+        cpp_lines.extend([
+            '    return 0;',
+            '}'
+        ])
+        
+        return '\n'.join(cpp_lines)
     
     def transpile_line(self, line):
         """Transpila una línea individual"""
@@ -93,36 +95,17 @@ class GoTranspiler:
         # Variables booleanas
         line = line.replace('verdadero', 'true')
         line = line.replace('falso', 'false')
-        line = line.replace('nulo', 'nil')
+        line = line.replace('nulo', 'nullptr')
         
         # Función texto() para conversión a string
-        line = re.sub(r'texto\(([^)]+)\)', r'strconv.Itoa(\1)', line)
+        line = re.sub(r'texto\(([^)]+)\)', r'to_string(\1)', line)
         
         # Print statements
         if line.startswith('mostrar ') or line.startswith('decir '):
             content = line.split(' ', 1)[1]
-            # Convertir concatenación con + a fmt.Sprintf
-            if ' + ' in content:
-                parts = [p.strip() for p in content.split(' + ')]
-                format_str = ''
-                args = []
-                for part in parts:
-                    if part.startswith('"') and part.endswith('"'):
-                        format_str += part[1:-1]
-                    else:
-                        format_str += '%v'
-                        args.append(part)
-                
-                if args:
-                    args_str = ', '.join(args)
-                    return current_indent + f'fmt.Printf("{format_str}\\n", {args_str})'
-                else:
-                    return current_indent + f'fmt.Println("{format_str}")'
-            else:
-                if content.startswith('"') and content.endswith('"'):
-                    return current_indent + f'fmt.Println({content})'
-                else:
-                    return current_indent + f'fmt.Println({content})'
+            # Convertir concatenación con + a << para cout
+            content = content.replace(' + ', ' << ')
+            return current_indent + f'cout << {content} << endl;'
         
         # Input statements
         if 'preguntar ' in line and ('guardar' in line or 'guárdalo' in line):
@@ -137,9 +120,9 @@ class GoTranspiler:
             else:
                 return current_indent + '// ' + line
             
-            result = current_indent + f'fmt.Print({question})\n'
-            result += current_indent + f'{var_name}, _ := reader.ReadString(\'\\n\')\n'
-            result += current_indent + f'{var_name} = strings.TrimSpace({var_name})'
+            result = current_indent + f'cout << {question} << endl;\n'
+            result += current_indent + f'string {var_name};\n'
+            result += current_indent + f'getline(cin, {var_name});'
             self.declared_vars.add(var_name)
             return result
         
@@ -150,21 +133,18 @@ class GoTranspiler:
             value = parts[1].strip()
             
             if var_name not in self.declared_vars:
-                go_type = self.infer_go_type(value)
+                cpp_type = self.infer_cpp_type(value)
                 self.declared_vars.add(var_name)
-                if go_type:
-                    return current_indent + f'var {var_name} {go_type} = {value}'
-                else:
-                    return current_indent + f'{var_name} := {value}'
+                return current_indent + f'{cpp_type} {var_name} = {value};'
             else:
-                return current_indent + f'{var_name} = {value}'
+                return current_indent + f'{var_name} = {value};'
         
         # Condicionales
         if line.startswith('si ') and ('entonces' in line or line.endswith(':')):
             condition = line.replace('si ', '').replace(' entonces', '').replace(':', '').strip()
             condition = self.convert_operators(condition)
             self.indent_level += 1
-            return current_indent + f'if {condition} {{'
+            return current_indent + f'if ({condition}) {{'
         
         # Else
         if line == 'sino' or line == 'si no':
@@ -178,7 +158,7 @@ class GoTranspiler:
         if line.startswith('repetir ') and ' veces' in line:
             times = line.replace('repetir ', '').replace(' veces', '').strip()
             self.indent_level += 1
-            return current_indent + f'for i := 0; i < {times}; i++ {{'
+            return current_indent + f'for (int i = 0; i < {times}; i++) {{'
         
         if 'repetir con cada' in line or 'para cada' in line:
             line_clean = line.replace('repetir con cada ', '').replace('para cada ', '')
@@ -187,14 +167,14 @@ class GoTranspiler:
                 var_name = parts[0].strip()
                 iterable = parts[1].strip()
                 self.indent_level += 1
-                return current_indent + f'for _, {var_name} := range {iterable} {{'
+                return current_indent + f'for (auto {var_name} : {iterable}) {{'
         
         # Bucles while
         if line.startswith('mientras '):
             condition = line.replace('mientras ', '').replace(':', '').strip()
             condition = self.convert_operators(condition)
             self.indent_level += 1
-            return current_indent + f'for {condition} {{'
+            return current_indent + f'while ({condition}) {{'
         
         # Definición de funciones
         if line.startswith('funcion ') or line.startswith('función '):
@@ -205,32 +185,33 @@ class GoTranspiler:
                 params = params.replace(':', '').replace(' y ', ', ').strip()
                 self.indent_level += 1
                 self.in_function = True
-                return current_indent + f'func {name}({params}) {{'
+                return current_indent + f'void {name}({params}) {{'
             else:
                 name = func_def.replace(':', '').strip()
                 self.indent_level += 1
                 self.in_function = True
-                return current_indent + f'func {name}() {{'
+                return current_indent + f'void {name}() {{'
         
         # Return statements
         if line.startswith('devolver ') or line.startswith('retornar '):
             value = line.split(' ', 1)[1]
-            return current_indent + f'return {value}'
+            return current_indent + f'return {value};'
         
-        # Definición de structs
+        # Definición de clases
         if line.startswith('clase '):
-            struct_name = line.replace('clase ', '').replace(':', '').strip()
+            class_name = line.replace('clase ', '').replace(':', '').strip()
+            self.in_class = True
             self.indent_level += 1
-            return current_indent + f'type {struct_name} struct {{'
+            return current_indent + f'class {class_name} {{'
         
-        # Línea de código general
+        # Línea de código general (expresión o asignación)
         if line.strip():
-            return current_indent + line
+            return current_indent + line + ';'
         
         return None
     
     def convert_operators(self, condition):
-        """Convierte operadores de Vader a Go"""
+        """Convierte operadores de Vader a C++"""
         condition = condition.replace(' es igual a ', ' == ')
         condition = condition.replace(' es mayor que ', ' > ')
         condition = condition.replace(' es menor que ', ' < ')
@@ -241,11 +222,3 @@ class GoTranspiler:
         condition = condition.replace(' o ', ' || ')
         condition = condition.replace(' no ', ' ! ')
         return condition
-
-def transpile_to_go(vader_code):
-    transpiler = GoTranspiler()
-    return transpiler.transpile(vader_code)
-
-def transpilar(vader_code):
-    """Alias for CLI compatibility"""
-    return transpile_to_go(vader_code)

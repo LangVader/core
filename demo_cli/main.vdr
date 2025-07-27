@@ -1,0 +1,10 @@
+# Aplicación web básica
+titulo = "Mi App Web"
+mensaje = "¡Bienvenido a mi aplicación!"
+
+mostrar titulo
+mostrar mensaje
+
+# Crear botón
+boton_texto = "Hacer clic aquí"
+mostrar "Botón: " + boton_texto

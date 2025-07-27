@@ -16,7 +16,7 @@ from conversational_integration import integrate_conversational_with_vader, dete
 # Agregar el directorio raíz al path para que encuentre el módulo transpilers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css
+from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css, gui_advanced, electron
 from vader_interpreter import VaderNativeRuntime
 from multilingual_core import multilingual_system
 
@@ -130,6 +130,16 @@ SUPPORTED_LANGUAGES = {
         'transpiler': css,
         'extension': '.css',
         'description': 'CSS3'
+    },
+    'gui': {
+        'transpiler': gui_advanced,
+        'extension': '.html',
+        'description': 'Advanced GUI Application'
+    },
+    'electron': {
+        'transpiler': electron,
+        'extension': '.js',
+        'description': 'Electron Desktop Application'
     }
 }
 
