@@ -293,7 +293,7 @@ python3 src/vader.py archivo.vdr-conv --detect-language --verbose
 ✅ **3.9+ BILLONES DE PERSONAS** pueden programar en su idioma nativo  
 ✅ **19 IDIOMAS HUMANOS** completamente funcionales  
 ✅ **SINTAXIS NATURAL** en todos los idiomas soportados  
-✅ **TRANSPILACIÓN UNIVERSAL** a 21+ lenguajes objetivo  
+✅ **TRANSPILACIÓN UNIVERSAL** a 8 lenguajes objetivo (100% funcionales)  
 ✅ **COMPATIBILIDAD TOTAL** con Vader existente  
 ✅ **DEMOCRATIZACIÓN COMPLETA** de la programación mundial  
 
@@ -307,12 +307,12 @@ python3 src/vader.py archivo.vdr-conv --detect-language --verbose
 |----------|--------|-------------|------------------|
 | **🐍 Python** | ✅ **COMPLETO** | Transpilación robusta y probada | Sintaxis completa |
 | **⚡ JavaScript** | ✅ **COMPLETO** | Incluye frameworks modernos | 8 frameworks |
-| **☕ Java** | 🟡 **BÁSICO** | Sintaxis fundamental | Limitado |
-| **🔧 C++** | 🟡 **BÁSICO** | Estructuras básicas | Limitado |
-| **🦀 Rust** | 🟡 **BÁSICO** | Sintaxis fundamental | Limitado |
-| **🐹 Go** | 🟡 **BÁSICO** | Estructuras básicas | Limitado |
-| **🌐 HTML/CSS** | ✅ **FUNCIONAL** | Páginas web básicas | Completo |
-| **🔗 Solidity** | 🟡 **BÁSICO** | Contratos simples | Limitado |
+| **☕ Java** | ✅ **COMPLETO** | Funciones, clases, constructores | Sintaxis completa |
+| **🔧 C++** | ✅ **COMPLETO** | Funciones, clases, manejo de errores | Sintaxis completa |
+| **🦀 Rust** | ✅ **COMPLETO** | Structs, impl, operaciones matemáticas | Sintaxis completa |
+| **🐹 Go** | ✅ **COMPLETO** | Structs, métodos, concurrencia | Sintaxis completa |
+| **🌐 HTML/CSS** | ✅ **COMPLETO** | Páginas web completas | Sintaxis completa |
+| **🔗 Solidity** | ✅ **COMPLETO** | Contratos, eventos, require/revert | Sintaxis completa |
 
 ### ⚡ **FRAMEWORKS JAVASCRIPT (8 Reales)**
 
