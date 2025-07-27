@@ -1,7 +1,7 @@
 {
   "project_name": "test_ai_project",
   "framework": "tensorflow",
-  "created": "2025-07-27T15:20:46.192127",
+  "created": "2025-07-27T15:45:02.322303",
   "model_settings": {
     "epochs": 50,
     "batch_size": 32,
