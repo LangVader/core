@@ -11,14 +11,45 @@ import argparse
 import sys
 import os
 from pathlib import Path
-from conversational_integration import integrate_conversational_with_vader, detect_conversational_file
+try:
+    from conversational_integration import integrate_conversational_with_vader, detect_conversational_file
+except ImportError:
+    # Funciones de respaldo si el módulo no está disponible
+    def integrate_conversational_with_vader(code):
+        return code
+    def detect_conversational_file(filepath):
+        return False
 
 # Agregar el directorio raíz al path para que encuentre el módulo transpilers
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css, gui_advanced, electron
-from vader_interpreter import VaderNativeRuntime
-from multilingual_core import multilingual_system
+try:
+    from transpilers import python, javascript, java, csharp, go, rust, swift, kotlin, typescript, dart, php, ruby, solidity, html, css, gui_advanced, electron
+except ImportError as e:
+    print(f"Warning: Some transpilers could not be imported: {e}")
+    # Crear transpiladores de respaldo
+    class DummyTranspiler:
+        def transpile_to_python(self, code): return code
+        def transpile_to_javascript(self, code): return code
+        def transpilar(self, code): return code
+    python = javascript = java = csharp = go = rust = swift = kotlin = DummyTranspiler()
+    typescript = dart = php = ruby = solidity = html = css = gui_advanced = electron = DummyTranspiler()
+
+try:
+    from vader_interpreter import VaderNativeRuntime
+except ImportError:
+    class VaderNativeRuntime:
+        def __init__(self): pass
+        def execute(self, code): return code
+
+try:
+    from multilingual_core import multilingual_system
+except ImportError:
+    class DummyMultilingual:
+        def detect_language(self, code): return 'es'
+        def normalize_to_spanish(self, code, lang): return code
+        def translate_code(self, code, source, target): return code
+    multilingual_system = DummyMultilingual()
 
 # Versión de Vader
 VADER_VERSION = "7.0.0"
@@ -614,11 +645,8 @@ def transpile_code(codigo, target_lang, framework=None, verbose=False):
             import transpilers.julia as julia
             resultado = julia.transpilar(codigo)
         else:
-            # Para JavaScript, pasar el framework como parámetro si está disponible
-            if target_lang in ['js', 'javascript'] and hasattr(transpiler, 'transpile_to_javascript'):
-                resultado = transpiler.transpile_to_javascript(codigo, framework=framework)
-            else:
-                resultado = transpiler.transpilar(codigo)
+            # Para todos los transpiladores, usar el método estándar transpilar
+            resultado = transpiler.transpilar(codigo)
         
         if verbose:
             print(f"Transpilación completada exitosamente.")

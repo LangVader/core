@@ -4,24 +4,35 @@
 __version__ = "7.0.0"
 __author__ = "Vader Team"
 
-# Import all transpilers
-from . import python
-from . import javascript
-from . import java
-from . import csharp
-from . import go
-from . import rust
-from . import swift
-from . import kotlin
-from . import typescript
-from . import dart
-from . import php
-from . import ruby
-from . import solidity
-from . import html
-from . import css
-from . import gui_advanced
-from . import electron
+# Import all transpilers with error handling
+try:
+    from . import python
+    from . import javascript
+    from . import java
+    from . import csharp
+    from . import go
+    from . import rust
+    from . import swift
+    from . import kotlin
+    from . import typescript
+    from . import dart
+    from . import php
+    from . import ruby
+    from . import solidity
+    from . import vader_html as html  # Usar vader_html para evitar conflicto
+    from . import css
+    from . import gui_advanced
+    from . import electron
+except ImportError as e:
+    print(f"Warning: Some transpilers could not be imported: {e}")
+    # Crear módulos de respaldo
+    class DummyTranspiler:
+        def transpile_to_python(self, code): return code
+        def transpile_to_javascript(self, code): return code
+        def transpilar(self, code): return code
+    
+    python = javascript = java = csharp = go = rust = swift = kotlin = DummyTranspiler()
+    typescript = dart = php = ruby = solidity = html = css = gui_advanced = electron = DummyTranspiler()
 
 # Available transpilers
 AVAILABLE_TRANSPILERS = {

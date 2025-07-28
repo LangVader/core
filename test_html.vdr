@@ -1,0 +1,12 @@
+importar desde VaderUI: LandingPageProfesional
+
+aplicacion MiApp:
+    estado:
+        titulo = "Mi Aplicación"
+    
+    funcion renderizar:
+        landing_page = LandingPageProfesional()
+        landing_page.renderizar()
+
+app = MiApp()
+app.renderizar()

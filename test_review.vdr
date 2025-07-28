@@ -1,0 +1,10 @@
+mostrar "Hola mundo desde Vader"
+si 5 mayor que 3 entonces
+    mostrar "La condición es verdadera"
+fin si
+
+funcion saludar con nombre:
+    mostrar "Hola " + nombre
+fin funcion
+
+saludar("Vader")
