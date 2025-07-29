@@ -552,8 +552,13 @@ python3 runtimes/ai_ml_runtime.py
 
 #### 🐍 **Instalador Principal (Recomendado)**
 ```bash
-# Descargar y ejecutar instalador Python
+# Método 1: Descargar desde GitHub
 wget https://raw.githubusercontent.com/LangVader/core/main/install.py
+python3 install.py
+
+# Método 2: Si hay error 429 (rate limiting), clonar repositorio
+git clone https://github.com/LangVader/core.git
+cd core
 python3 install.py
 ```
 
@@ -568,8 +573,13 @@ python3 install.py
 
 #### 🐚 **Instalador Unix/Linux/macOS**
 ```bash
-# Para sistemas Unix (Linux, macOS)
+# Método 1: Descarga directa
 curl -fsSL https://raw.githubusercontent.com/LangVader/core/main/install.sh | bash
+
+# Método 2: Si hay error 429, usar repositorio clonado
+git clone https://github.com/LangVader/core.git
+cd core
+bash install.sh
 ```
 
 **Características:**
