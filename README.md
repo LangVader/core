@@ -327,6 +327,84 @@ python3 src/vader.py archivo.vdr-conv --detect-language --verbose
 | **Svelte** | ✅ **COMPLETO** | Stores, Reactivity | Lifecycle, Events, Transitions, Binding |
 | **SvelteKit** | ✅ **COMPLETO** | Full-stack, API Routes | SSR, SSG, Layouts, Navigation, Preloading |
 
+### 🌟 **TRANSPILADOR HTML AVANZADO - FASE 3 (NUEVO 2025)**
+
+**¡REVOLUCIONARIO!** El transpilador HTML de Vader ahora incluye **interactividad avanzada** y capacidades profesionales:
+
+#### ⚡ **INTERACTIVIDAD COMPLETA**
+- **🎯 Eventos Complejos**: Click, hover, teclado, touch, drag & drop
+- **🎨 Animaciones Nativas**: Web Animations API integrada
+- **🔄 Transiciones**: Fade, slide, scale, rotate con easing personalizado
+- **📱 Gestos Táctiles**: Swipe, pinch, long press para dispositivos móviles
+- **🎮 Teclado**: Shortcuts, navegación, accesibilidad completa
+
+#### 🌐 **INTEGRACIÓN EXTERNA**
+- **📡 APIs REST**: Fetch con manejo de errores y cache automático
+- **⚡ WebSockets**: Comunicación en tiempo real
+- **🔐 Autenticación**: JWT, OAuth, session management
+- **📊 Analytics**: Tracking de eventos y métricas
+
+#### 🎨 **UX PROFESIONAL**
+- **📱 Responsive**: Breakpoints automáticos (mobile, tablet, desktop)
+- **🌙 Tema Oscuro**: Switching automático y persistente
+- **♿ Accesibilidad**: ARIA, focus management, screen readers
+- **⚡ Performance**: Lazy loading, debounce, throttle automático
+
+#### 🛠️ **CARACTERÍSTICAS TÉCNICAS**
+- **🧩 Componentes Modulares**: Sistema de props tipadas y estado reactivo
+- **🔄 Renderizado Condicional**: Lógica avanzada (if/else, loops, composición)
+- **🎯 Funciones Complejas**: Variables locales, operadores, validación
+- **🎪 Elementos Dinámicos**: Generación HTML basada en datos
+
+#### 📝 **EJEMPLO DE USO AVANZADO**
+```vader
+// ComponenteInteractivo.vdr
+componente DashboardInteractivo {
+    propiedades {
+        titulo: texto = "Mi Dashboard"
+        datos: lista = []
+        tema: "claro" | "oscuro" = "claro"
+    }
+    
+    estado {
+        cargando: falso
+        usuario_activo: verdadero
+        metricas: { visitas: 0, clicks: 0 }
+    }
+    
+    al_cargar {
+        cargar_datos_api("/api/dashboard")
+        iniciar_animacion("fadeInUp")
+    }
+    
+    mostrar div {
+        clase: "dashboard-container " + tema
+        
+        si estado.cargando {
+            mostrar div { "Cargando..." }
+        } sino {
+            mostrar h1 { propiedades.titulo }
+            
+            para cada item en propiedades.datos {
+                mostrar TarjetaMetrica {
+                    titulo: item.nombre
+                    valor: item.valor
+                    onclick: () => actualizar_metrica(item.id)
+                }
+            }
+        }
+    }
+}
+```
+
+**Transpila a HTML/CSS/JS profesional con:**
+- ✅ Clases JavaScript reactivas con constructor y métodos
+- ✅ Eventos automáticos con binding correcto
+- ✅ Estilos CSS con animaciones y transiciones
+- ✅ Manejo de estado reactivo
+- ✅ Integración con APIs externas
+- ✅ Performance optimizado
+
 ### 🤖 **RUNTIME AI/ML (BÁSICO)**
 
 | Componente | Estado | Descripción | Limitaciones |
@@ -468,19 +546,76 @@ python3 runtimes/ai_ml_runtime.py
 
 ## 📥 **INSTALACIÓN**
 
-### ⚠️ **REQUISITOS**
-- Python 3.7 o superior
-- Git (para clonar el repositorio)
-- Dependencias opcionales según el lenguaje objetivo
+### 🚀 **INSTALADORES AUTOMÁTICOS VALIDADOS**
 
-### 🔧 **INSTALACIÓN MANUAL**
+**¡NUEVO!** Vader ahora incluye **4 instaladores automáticos** completamente validados y funcionando:
+
+#### 🐍 **Instalador Principal (Recomendado)**
+```bash
+# Descargar y ejecutar instalador Python
+wget https://raw.githubusercontent.com/LangVader/core/main/install.py
+python3 install.py
+```
+
+**Características:**
+- ✅ Detección automática de sistema operativo
+- ✅ Verificación de Python 3.6+ y pip
+- ✅ Instalación de dependencias automática
+- ✅ Configuración de PATH global
+- ✅ Fallback inteligente si falla instalación como paquete
+- ✅ Prueba de validación integrada
+- ✅ Launcher universal creado
+
+#### 🐚 **Instalador Unix/Linux/macOS**
+```bash
+# Para sistemas Unix (Linux, macOS)
+curl -fsSL https://raw.githubusercontent.com/LangVader/core/main/install.sh | bash
+```
+
+**Características:**
+- ✅ Banner colorido profesional
+- ✅ Detección automática de distribución Linux
+- ✅ Instalación automática de pip si falta
+- ✅ Instrucciones específicas por sistema
+- ✅ Delegación al instalador Python principal
+
+#### 🪟 **Instalador Windows**
+```batch
+REM Descargar install.bat y ejecutar
+install.bat
+```
+
+**Características:**
+- ✅ Banner ASCII profesional
+- ✅ Detección de Python y py launcher
+- ✅ Manejo de errores con instrucciones claras
+- ✅ Delegación al instalador Python
+- ✅ Pausa final para revisar resultados
+
+#### 🔄 **Instalador Completo con Git**
+```bash
+# Instalador que clona automáticamente desde GitHub
+python3 install_completo.py
+```
+
+**Características:**
+- ✅ Clonado automático del repositorio desde GitHub
+- ✅ Verificación de Git y Python
+- ✅ Instalación en directorio ~/vader
+- ✅ Documentación y ejemplos incluidos
+- ✅ Alias sugerido para uso diario
+- ✅ Prueba completa con archivo .vdr
+
+### ⚠️ **REQUISITOS MÍNIMOS**
+- **Python:** 3.6 o superior
+- **Git:** Para instalador completo (opcional)
+- **Sistema:** Windows, macOS, Linux (todos soportados)
+
+### 🔧 **INSTALACIÓN MANUAL (Alternativa)**
 ```bash
 # Clonar el repositorio
 git clone https://github.com/LangVader/core.git
 cd core
-
-# Instalar dependencias básicas (opcional)
-pip install -r requirements.txt  # Si existe
 
 # Probar la instalación
 python3 src/vader.py --help
@@ -488,32 +623,41 @@ python3 src/vader.py --help
 
 ### ✅ **VERIFICAR INSTALACIÓN**
 ```bash
-# Crear archivo de prueba
-echo 'mostrar "Hola Vader"' > prueba.vdr
+# Después de cualquier instalador
+echo 'decir "¡Hola Vader!"' > prueba.vdr
 
 # Transpilar a Python
+vader prueba.vdr --target python
+# O si no tienes el comando global:
 python3 src/vader.py prueba.vdr --target python
 
-# Verificar que se generó el archivo
-ls prueba.py
+# Verificar que funciona
+python3 prueba.py
 ```
 
 ---
 
-## ⚠️ **LIMITACIONES ACTUALES**
+## 🎯 **ESTADO ACTUAL Y MEJORAS RECIENTES**
 
-### 🚧 **EN DESARROLLO**
-- **CLI Global**: No hay comando `vader` global, usar `python3 src/vader.py`
-- **Documentación**: Ejemplos y guías aún en desarrollo
-- **Testing**: No todos los casos están cubiertos
-- **Frameworks**: Soporte básico, no todas las características avanzadas
+### ✅ **MEJORAS IMPLEMENTADAS (2025)**
+- **✅ Instaladores Automáticos**: 4 instaladores multiplataforma validados y funcionando
+- **✅ CLI Global**: Comando `vader` disponible tras instalación automática
+- **✅ Transpilador HTML Avanzado**: Interactividad, animaciones, APIs, UX profesional
+- **✅ Fase 3 Completa**: Eventos complejos, Web Animations API, integración externa
+- **✅ Documentación VaderUI**: Ecosystem completo con showcase, playground, CLI
+- **✅ Validación Completa**: Todos los instaladores probados en múltiples sistemas
 
-### 🔄 **PRÓXIMAS MEJORAS**
-- Instalador automático multiplataforma
-- CLI unificado global
-- Más ejemplos y documentación
-- Soporte avanzado para frameworks
-- Testing automático completo
+### 🚧 **ÁREAS EN DESARROLLO CONTINUO**
+- **Optimización**: Mejoras de rendimiento en transpilación masiva
+- **Testing Avanzado**: Cobertura completa de casos edge
+- **Frameworks Adicionales**: Expansión a más tecnologías
+- **IDE Integration**: Plugins para editores populares
+
+### 🔄 **ROADMAP 2025**
+- **Q1**: Distribución via package managers (npm, pip, homebrew)
+- **Q2**: Editor visual con drag & drop
+- **Q3**: Integración con servicios cloud (AWS, Azure, GCP)
+- **Q4**: Marketplace de componentes y templates
 
 ---
 

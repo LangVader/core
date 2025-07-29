@@ -22,6 +22,16 @@ class HTMLTranspiler:
         self.component_definitions = {}
         self.application_state = {}
         
+        # Advanced parsing for VaderUI components
+        self.component_properties = {}
+        self.component_state = {}
+        self.component_variants = {}
+        self.component_functions = {}
+        self.parsing_context = None
+        self.current_property_block = None
+        self.current_state_block = None
+        self.current_variant_block = None
+        
     def transpile(self, vader_code):
         """Transpile advanced Vader code to modern HTML with component support"""
         lines = vader_code.split('\n')
@@ -30,10 +40,21 @@ class HTMLTranspiler:
         if self.has_professional_landing(lines):
             return self.generate_professional_landing_html()
         
+        # Detectar si contiene componentes VaderUI avanzados
+        if self.has_vaderui_components(lines):
+            return self.parse_vaderui_component(lines)
+        
         # Procesar estructura avanzada
         self.parse_advanced_structure(lines)
         self.process_components_and_applications(lines)
         return self.generate_complete_html()
+    
+    def has_vaderui_components(self, lines):
+        """Detect if code contains advanced VaderUI components"""
+        for line in lines:
+            if 'crear componente' in line or 'propiedades:' in line or 'estado:' in line:
+                return True
+        return False
     
     def has_professional_landing(self, lines):
         """Detectar si importa LandingPageProfesional"""
@@ -1485,31 +1506,1192 @@ class HTMLTranspiler:
             if '`' in line:
                 # Extract HTML between backticks
                 start = line.find('`')
-                end = line.rfind('`')
-                if start != -1 and end != -1 and start != end:
-                    html_content = line[start+1:end]
-                    self.html_buffer.append(html_content)
     
-    def generate_enhanced_html_structure(self):
-        """Generate enhanced HTML structure with modern features"""
-        return [
-            '<!DOCTYPE html>',
-            '<html lang="es">',
-            '<head>',
-            '    <meta charset="UTF-8">',
-            '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-            '    <title>VaderUI - Componentes UI en Sintaxis Conversacional</title>',
-            '    <style>',
-            '        ' + self.generate_professional_styles(),
-            '    </style>',
-            '</head>',
-            '<body class="tema-oscuro">',
-            '    <script>',
-            '        ' + self.generate_interactive_scripts(),
-            '    </script>',
-            '</body>',
-            '</html>'
-        ]
+    def parse_vaderui_component(self, lines):
+        """Parse advanced VaderUI component with typed properties, state, and variants"""
+        component_name = None
+        current_line_idx = 0
+        
+        while current_line_idx < len(lines):
+            line = lines[current_line_idx].strip()
+            
+            # Detect component definition
+            if line.startswith('crear componente '):
+                component_name = self.extract_component_name(line)
+                self.current_component = component_name
+                self.component_definitions[component_name] = {
+                    'properties': {},
+                    'state': {},
+                    'variants': {},
+                    'functions': {},
+                    'render': []
+                }
+                
+            # Parse property block
+            elif line.startswith('propiedades:') and component_name:
+                current_line_idx = self.parse_properties_block(lines, current_line_idx + 1, component_name)
+                continue
+                
+            # Parse state block
+            elif line.startswith('estado:') and component_name:
+                current_line_idx = self.parse_state_block(lines, current_line_idx + 1, component_name)
+                continue
+                
+            # Parse variants block
+            elif line.startswith('variantes_') and component_name:
+                current_line_idx = self.parse_variants_block(lines, current_line_idx, component_name)
+                continue
+                
+            # Parse function definition
+            elif line.startswith('funcion ') and component_name:
+                current_line_idx = self.parse_function_block(lines, current_line_idx, component_name)
+                continue
+                
+            # Parse render block
+            elif line.startswith('renderizar:') and component_name:
+                current_line_idx = self.parse_render_block(lines, current_line_idx + 1, component_name)
+                continue
+                
+            current_line_idx += 1
+            
+        return self.generate_component_html(component_name) if component_name else ""
+    
+    def extract_component_name(self, line):
+        """Extract component name from 'crear componente ComponentName {' line"""
+        match = re.search(r'crear componente (\w+)', line)
+        return match.group(1) if match else None
+    
+    def parse_properties_block(self, lines, start_idx, component_name):
+        """Parse typed properties block with union types and optional properties"""
+        current_idx = start_idx
+        indent_level = None
+        properties = {}
+        
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if not line or line.startswith('}'):
+                break
+                
+            # Detect end of properties block by indentation change
+            if indent_level is None:
+                indent_level = len(lines[current_idx]) - len(lines[current_idx].lstrip())
+            else:
+                current_indent = len(lines[current_idx]) - len(lines[current_idx].lstrip())
+                if current_indent <= indent_level and line and not line.startswith('//'):
+                    break
+            
+            # Parse property definition
+            prop_match = re.match(r'(\w+)(\?)?:\s*(.+)', line)
+            if prop_match:
+                prop_name = prop_match.group(1)
+                is_optional = prop_match.group(2) == '?'
+                prop_type = prop_match.group(3).strip()
+                
+                properties[prop_name] = {
+                    'type': self.parse_property_type(prop_type),
+                    'optional': is_optional,
+                    'raw_type': prop_type
+                }
+            
+            current_idx += 1
+        
+        self.component_definitions[component_name]['properties'] = properties
+        return current_idx
+    
+    def parse_property_type(self, type_str):
+        """Parse complex property types including union types"""
+        type_str = type_str.strip()
+        
+        # Handle union types like "text" | "email" | "password"
+        if '|' in type_str:
+            return {
+                'kind': 'union',
+                'types': [t.strip().strip('"') for t in type_str.split('|')]
+            }
+        
+        # Handle basic types
+        type_mapping = {
+            'texto': 'string',
+            'numero': 'number', 
+            'booleano': 'boolean',
+            'funcion': 'function',
+            'nodo': 'ReactNode',
+            'nodos': 'ReactNode[]'
+        }
+        
+        return {
+            'kind': 'basic',
+            'type': type_mapping.get(type_str, type_str)
+        }
+    
+    def parse_state_block(self, lines, start_idx, component_name):
+        """Parse reactive state block"""
+        current_idx = start_idx
+        indent_level = None
+        state = {}
+        
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if not line or line.startswith('}'):
+                break
+                
+            # Detect end of state block by indentation
+            if indent_level is None:
+                indent_level = len(lines[current_idx]) - len(lines[current_idx].lstrip())
+            else:
+                current_indent = len(lines[current_idx]) - len(lines[current_idx].lstrip())
+                if current_indent <= indent_level and line and not line.startswith('//'):
+                    break
+            
+            # Parse state property
+            state_match = re.match(r'(\w+):\s*(.+)', line)
+            if state_match:
+                state_name = state_match.group(1)
+                state_value = state_match.group(2).strip()
+                
+                state[state_name] = {
+                    'initial_value': self.parse_state_value(state_value),
+                    'type': self.infer_state_type(state_value)
+                }
+            
+            current_idx += 1
+        
+        self.component_definitions[component_name]['state'] = state
+        return current_idx
+    
+    def parse_state_value(self, value_str):
+        """Parse state initial values"""
+        value_str = value_str.strip()
+        
+        # Handle boolean values
+        if value_str in ['verdadero', 'true']:
+            return True
+        elif value_str in ['falso', 'false']:
+            return False
+        
+        # Handle string values
+        if value_str.startswith('"') and value_str.endswith('"'):
+            return value_str[1:-1]
+        
+        # Handle expressions like propiedades.valor || ""
+        if '||' in value_str:
+            return {'expression': value_str, 'fallback': True}
+        
+        # Handle numbers
+        try:
+            return int(value_str)
+        except ValueError:
+            try:
+                return float(value_str)
+            except ValueError:
+                return value_str
+    
+    def infer_state_type(self, value_str):
+        """Infer state type from initial value"""
+        if value_str in ['verdadero', 'falso', 'true', 'false']:
+            return 'boolean'
+        elif value_str.startswith('"') and value_str.endswith('"'):
+            return 'string'
+        elif value_str.isdigit():
+            return 'number'
+        else:
+            return 'any'
+    
+    def parse_variants_block(self, lines, start_idx, component_name):
+        """Parse configuration objects like variantes_input"""
+        current_idx = start_idx
+        line = lines[current_idx].strip()
+        
+        # Extract variant name
+        variant_match = re.match(r'(variantes_\w+):\s*{', line)
+        if not variant_match:
+            return current_idx + 1
+            
+        variant_name = variant_match.group(1)
+        variants = {}
+        current_idx += 1
+        
+        # Parse variant object
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if line.startswith('}'):
+                break
+                
+            # Parse variant property
+            if ':' in line and not line.startswith('//'):
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip().rstrip(',')
+                
+                # Handle nested objects
+                if value == '{':
+                    nested_obj, current_idx = self.parse_nested_object(lines, current_idx + 1)
+                    variants[key] = nested_obj
+                else:
+                    # Handle string values
+                    if value.startswith('"') and value.endswith('"'):
+                        variants[key] = value[1:-1]
+                    else:
+                        variants[key] = value
+            
+            current_idx += 1
+        
+        if 'variants' not in self.component_definitions[component_name]:
+            self.component_definitions[component_name]['variants'] = {}
+        self.component_definitions[component_name]['variants'][variant_name] = variants
+        
+        return current_idx + 1
+    
+    def parse_nested_object(self, lines, start_idx):
+        """Parse nested objects in variant definitions"""
+        current_idx = start_idx
+        nested_obj = {}
+        
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if line.startswith('}'):
+                break
+                
+            if ':' in line and not line.startswith('//'):
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip().rstrip(',')
+                
+                if value.startswith('"') and value.endswith('"'):
+                    nested_obj[key] = value[1:-1]
+                else:
+                    nested_obj[key] = value
+            
+            current_idx += 1
+        
+        return nested_obj, current_idx
+    
+    def parse_function_block(self, lines, start_idx, component_name):
+        """Parse component functions with complex logic"""
+        current_idx = start_idx
+        line = lines[current_idx].strip()
+        
+        # Extract function name
+        func_match = re.match(r'funcion (\w+)\(([^)]*)\)', line)
+        if not func_match:
+            return current_idx + 1
+            
+        func_name = func_match.group(1)
+        func_params = func_match.group(2).strip()
+        
+        # Parse function body
+        func_body = []
+        current_idx += 1
+        
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if line.startswith('}') or (line and not line.startswith(' ') and not line.startswith('\t') and 'funcion' in line):
+                break
+                
+            if line:
+                func_body.append(line)
+            
+            current_idx += 1
+        
+        if 'functions' not in self.component_definitions[component_name]:
+            self.component_definitions[component_name]['functions'] = {}
+            
+        self.component_definitions[component_name]['functions'][func_name] = {
+            'params': func_params,
+            'body': func_body
+        }
+        
+        return current_idx
+    
+    def parse_render_block(self, lines, start_idx, component_name):
+        """Parse render block with conditional rendering"""
+        current_idx = start_idx
+        render_content = []
+        
+        while current_idx < len(lines):
+            line = lines[current_idx].strip()
+            
+            if line.startswith('}') and len(line) == 1:
+                break
+                
+            if line:
+                render_content.append(line)
+            
+            current_idx += 1
+        
+        self.component_definitions[component_name]['render'] = render_content
+        return current_idx + 1
+    
+    def generate_component_html(self, component_name):
+        """Generate complete HTML document for a parsed VaderUI component"""
+        if component_name not in self.component_definitions:
+            return "<!-- Component not found -->"
+            
+        component_data = self.component_definitions[component_name]
+        
+        # Generate complete HTML document
+        html_parts = []
+        html_parts.append('<!DOCTYPE html>')
+        html_parts.append('<html lang="es">')
+        html_parts.append('<head>')
+        html_parts.append('    <meta charset="UTF-8">')
+        html_parts.append('    <meta name="viewport" content="width=device-width, initial-scale=1.0">')
+        html_parts.append(f'    <title>{component_name} - VaderUI Component</title>')
+        
+        # Add Tailwind CSS
+        html_parts.append('    <script src="https://cdn.tailwindcss.com"></script>')
+        
+        # Add component-specific styles
+        html_parts.append('    <style>')
+        html_parts.extend(self.generate_component_css(component_data))
+        html_parts.append('    </style>')
+        html_parts.append('</head>')
+        html_parts.append('<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50">')
+        
+        # Generate component HTML
+        html_parts.extend(self.generate_component_render_html(component_data, component_name))
+        
+        # Add JavaScript
+        html_parts.append('    <script>')
+        html_parts.extend(self.generate_component_javascript(component_data, component_name))
+        html_parts.append('    </script>')
+        html_parts.append('</body>')
+        html_parts.append('</html>')
+        
+        return '\n'.join(html_parts)
+    
+    def generate_component_css(self, component_data):
+        """Generate CSS for component variants and styles"""
+        css_parts = []
+        
+        # Add base component styles
+        css_parts.append('        /* VaderUI Component Styles */')
+        css_parts.append('        .vaderui-component {')
+        css_parts.append('            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;')
+        css_parts.append('        }')
+        
+        # Add variant-specific styles
+        for variant_name, variant_data in component_data.get('variants', {}).items():
+            css_parts.append(f'        /* {variant_name} styles */')
+            for key, value in variant_data.items():
+                if isinstance(value, str) and ('bg-' in value or 'text-' in value or 'border-' in value):
+                    css_parts.append(f'        .{key} {{ /* {value} */ }}')
+        
+        # Add responsive and interactive styles
+        css_parts.append('        .vaderui-interactive {')
+        css_parts.append('            transition: all 0.2s ease;')
+        css_parts.append('        }')
+        css_parts.append('        .vaderui-interactive:hover {')
+        css_parts.append('            transform: translateY(-1px);')
+        css_parts.append('        }')
+        
+        return css_parts
+    
+    def generate_component_render_html(self, component_data, component_name):
+        """Generate the actual HTML structure for the component"""
+        html_parts = []
+        
+        # Create component container
+        html_parts.append(f'    <div id="{component_name.lower()}-container" class="vaderui-component p-8">')
+        html_parts.append(f'        <h1 class="text-2xl font-bold mb-6">{component_name} - VaderUI Component</h1>')
+        
+        # Generate render content
+        render_content = component_data.get('render', [])
+        for render_line in render_content:
+            html_parts.extend(self.transpile_render_line(render_line, component_data))
+        
+        # Add component demo/preview
+        html_parts.append('        <div class="mt-8 p-4 border border-zinc-200 dark:border-zinc-800 rounded-lg">')
+        html_parts.append('            <h3 class="text-lg font-semibold mb-4">Component Preview</h3>')
+        html_parts.append(f'            <div id="{component_name.lower()}-preview">')
+        html_parts.append('                <!-- Component will be rendered here -->')
+        html_parts.append('            </div>')
+        html_parts.append('        </div>')
+        
+        html_parts.append('    </div>')
+        
+        return html_parts
+    
+    def transpile_render_line(self, line, component_data):
+        """Transpile individual render lines to HTML with advanced logic support"""
+        html_parts = []
+        line = line.strip()
+        
+        # Handle 'mostrar' elements
+        if line.startswith('mostrar '):
+            element_match = re.match(r'mostrar (\w+) {', line)
+            if element_match:
+                element_type = element_match.group(1)
+                html_parts.append(f'        <{element_type} class="vaderui-element">')
+                return html_parts
+        
+        # Handle loops and array mapping
+        if '.map(' in line or 'para cada' in line:
+            return self.transpile_loop_to_html(line)
+        
+        # Handle conditional rendering (enhanced)
+        if line.startswith('si '):
+            condition_match = re.match(r'si (.+) {', line)
+            if condition_match:
+                condition = condition_match.group(1)
+                js_condition = self.transpile_condition_to_js(condition)
+                html_parts.append(f'        <div data-condition="{js_condition}" class="conditional-render">')
+                return html_parts
+        
+        # Handle else if statements
+        if line.startswith('sino si '):
+            condition_match = re.match(r'sino si (.+) {', line)
+            if condition_match:
+                condition = condition_match.group(1)
+                js_condition = self.transpile_condition_to_js(condition)
+                html_parts.append(f'        </div><div data-condition="{js_condition}" class="conditional-render">')
+                return html_parts
+        
+        # Handle else statements
+        if line.startswith('sino {'):
+            html_parts.append('        </div><div class="else-render">')
+            return html_parts
+        
+        # Handle variable declarations (enhanced)
+        if line.startswith('variable '):
+            var_match = re.match(r'variable (\w+) = (.+)', line)
+            if var_match:
+                var_name = var_match.group(1)
+                var_value = var_match.group(2)
+                js_value = self.transpile_advanced_value_to_js(var_value)
+                html_parts.append(f'        <script>let {var_name} = {js_value};</script>')
+                return html_parts
+        
+        # Handle function calls (enhanced)
+        if '(' in line and ')' in line:
+            func_match = re.match(r'(\w+)\(([^)]*)\)', line)
+            if func_match:
+                func_name = func_match.group(1)
+                func_params = func_match.group(2)
+                js_params = self.transpile_function_params_to_js(func_params)
+                html_parts.append(f'        <script>{func_name}({js_params});</script>')
+                return html_parts
+        
+        # Handle array/object property access
+        if '[' in line and ']' in line:
+            return self.transpile_array_access_to_html(line)
+        
+        # Handle component instantiation
+        if line and line[0].isupper() and '{' in line:
+            return self.transpile_component_instantiation(line)
+        
+        # Handle closing braces
+        if line == '}':
+            html_parts.append('        </div>')
+            return html_parts
+        
+        # Handle text content
+        if line and not line.startswith('//') and not '{' in line:
+            html_parts.append(f'        <p class="text-content">{line}</p>')
+        
+        return html_parts
+    
+    def transpile_loop_to_html(self, line):
+        """Transpile loop constructs to HTML with JavaScript"""
+        html_parts = []
+        
+        # Handle .map() calls
+        map_match = re.search(r'(\w+)\.map\(\(([^)]+)\) => {', line)
+        if map_match:
+            array_name = map_match.group(1)
+            item_param = map_match.group(2)
+            
+            html_parts.append(f'        <div data-loop="{array_name}" data-item="{item_param}" class="loop-container">')
+            html_parts.append(f'        <script>')
+            html_parts.append(f'            {array_name}.forEach(({item_param}, index) => {{')
+            html_parts.append(f'                const loopContainer = document.querySelector(\'[data-loop="{array_name}"]\')')
+            html_parts.append(f'                const itemElement = document.createElement(\'div\')')
+            html_parts.append(f'                itemElement.className = \'loop-item\'')
+            html_parts.append(f'                itemElement.dataset.index = index')
+            html_parts.append(f'        </script>')
+            return html_parts
+        
+        # Handle 'para cada' syntax
+        foreach_match = re.match(r'para cada (\w+) en (\w+) {', line)
+        if foreach_match:
+            item_name = foreach_match.group(1)
+            array_name = foreach_match.group(2)
+            
+            html_parts.append(f'        <div data-foreach="{array_name}" data-item="{item_name}" class="foreach-container">')
+            html_parts.append(f'        <script>')
+            html_parts.append(f'            {array_name}.forEach(({item_name}, index) => {{')
+            html_parts.append(f'        </script>')
+            return html_parts
+        
+        return [f'        <!-- Unhandled loop: {line} -->']
+    
+    def transpile_advanced_value_to_js(self, value):
+        """Convert advanced Vader values to JavaScript including arrays and objects"""
+        value = value.strip()
+        
+        # Handle array literals
+        if value.startswith('[') and value.endswith(']'):
+            return self.transpile_array_literal_to_js(value)
+        
+        # Handle object literals
+        if value.startswith('{') and value.endswith('}'):
+            return self.transpile_object_literal_to_js(value)
+        
+        # Handle function expressions
+        if '=>' in value:
+            return self.transpile_arrow_function_to_js(value)
+        
+        # Handle complex expressions
+        if '||' in value or '&&' in value:
+            return self.transpile_complex_expression_to_js(value)
+        
+        # Fallback to basic transpilation
+        return self.transpile_value_to_js(value)
+    
+    def transpile_array_literal_to_js(self, array_str):
+        """Convert Vader array literals to JavaScript"""
+        # Remove brackets and split by commas
+        content = array_str[1:-1].strip()
+        if not content:
+            return '[]'
+        
+        items = []
+        for item in content.split(','):
+            item = item.strip()
+            if item.startswith('"') and item.endswith('"'):
+                items.append(item)
+            elif item in ['verdadero', 'true']:
+                items.append('true')
+            elif item in ['falso', 'false']:
+                items.append('false')
+            elif item.isdigit():
+                items.append(item)
+            else:
+                items.append(f'"{item}"')
+        
+        return '[' + ', '.join(items) + ']'
+    
+    def transpile_object_literal_to_js(self, obj_str):
+        """Convert Vader object literals to JavaScript"""
+        # Remove braces and parse key-value pairs
+        content = obj_str[1:-1].strip()
+        if not content:
+            return '{}'
+        
+        pairs = []
+        for pair in content.split(','):
+            if ':' in pair:
+                key, value = pair.split(':', 1)
+                key = key.strip()
+                value = value.strip()
+                
+                # Convert key
+                if not (key.startswith('"') and key.endswith('"')):
+                    key = f'"{key}"'
+                
+                # Convert value
+                js_value = self.transpile_advanced_value_to_js(value)
+                pairs.append(f'{key}: {js_value}')
+        
+        return '{' + ', '.join(pairs) + '}'
+    
+    def transpile_arrow_function_to_js(self, func_str):
+        """Convert Vader arrow functions to JavaScript"""
+        # Handle (param) => expression format
+        arrow_match = re.match(r'\(([^)]*)\)\s*=>\s*(.+)', func_str)
+        if arrow_match:
+            params = arrow_match.group(1)
+            body = arrow_match.group(2)
+            js_body = self.transpile_advanced_value_to_js(body)
+            return f'({params}) => {js_body}'
+        
+        return func_str
+    
+    def transpile_complex_expression_to_js(self, expr):
+        """Convert complex Vader expressions to JavaScript"""
+        # Replace Vader operators with JavaScript equivalents
+        js_expr = expr
+        js_expr = js_expr.replace('propiedades.', 'this.props.')
+        js_expr = js_expr.replace('estado.', 'this.state.')
+        js_expr = js_expr.replace('verdadero', 'true')
+        js_expr = js_expr.replace('falso', 'false')
+        js_expr = js_expr.replace(' y ', ' && ')
+        js_expr = js_expr.replace(' o ', ' || ')
+        js_expr = js_expr.replace(' no ', ' !')
+        
+        return js_expr
+    
+    def transpile_function_params_to_js(self, params):
+        """Convert Vader function parameters to JavaScript"""
+        if not params.strip():
+            return ''
+        
+        js_params = []
+        for param in params.split(','):
+            param = param.strip()
+            js_param = self.transpile_advanced_value_to_js(param)
+            js_params.append(js_param)
+        
+        return ', '.join(js_params)
+    
+    def transpile_array_access_to_html(self, line):
+        """Handle array/object property access in render"""
+        html_parts = []
+        
+        # Extract array access pattern
+        access_match = re.search(r'(\w+)\[([^\]]+)\]', line)
+        if access_match:
+            array_name = access_match.group(1)
+            index_expr = access_match.group(2)
+            js_index = self.transpile_advanced_value_to_js(index_expr)
+            
+            html_parts.append(f'        <span data-array-access="{array_name}[{js_index}]" class="dynamic-content"></span>')
+            html_parts.append(f'        <script>')
+            html_parts.append(f'            document.querySelector(\'[data-array-access="{array_name}[{js_index}]"]\')')
+            html_parts.append(f'                .textContent = {array_name}[{js_index}];')
+            html_parts.append(f'        </script>')
+        
+        return html_parts
+    
+    def transpile_component_instantiation(self, line):
+        """Handle component instantiation and composition"""
+        html_parts = []
+        
+        # Extract component name and props
+        comp_match = re.match(r'(\w+)\s*{', line)
+        if comp_match:
+            component_name = comp_match.group(1)
+            
+            html_parts.append(f'        <div class="component-{component_name.lower()}" data-component="{component_name}">')
+            html_parts.append(f'        <script>')
+            html_parts.append(f'            // Instantiate {component_name} component')
+            html_parts.append(f'            if (window.{component_name}Component) {{')
+            html_parts.append(f'                new window.{component_name}Component();')
+            html_parts.append(f'            }}')
+            html_parts.append(f'        </script>')
+        
+        return html_parts
+    
+    def transpile_condition_to_js(self, condition):
+        """Convert Vader conditions to JavaScript"""
+        # Replace Vader syntax with JavaScript
+        js_condition = condition.replace('propiedades.', 'props.')
+        js_condition = js_condition.replace('estado.', 'state.')
+        js_condition = js_condition.replace('verdadero', 'true')
+        js_condition = js_condition.replace('falso', 'false')
+        js_condition = js_condition.replace('&&', '&&')
+        js_condition = js_condition.replace('||', '||')
+        return js_condition
+    
+    def transpile_value_to_js(self, value):
+        """Convert Vader values to JavaScript"""
+        value = value.strip()
+        
+        # Handle string literals
+        if value.startswith('"') and value.endswith('"'):
+            return value
+        
+        # Handle boolean values
+        if value in ['verdadero', 'true']:
+            return 'true'
+        elif value in ['falso', 'false']:
+            return 'false'
+        
+        # Handle property access
+        if 'propiedades.' in value:
+            return value.replace('propiedades.', 'props.')
+        
+        # Handle state access
+        if 'estado.' in value:
+            return value.replace('estado.', 'state.')
+        
+        # Handle function calls
+        if '(' in value and ')' in value:
+            return value
+        
+        return value
+    
+    def generate_component_javascript(self, component_data, component_name):
+        """Generate reactive JavaScript for the component with advanced interactivity"""
+        js_parts = []
+        
+        js_parts.append('        // VaderUI Component JavaScript - Phase 3 Advanced')
+        js_parts.append(f'        class {component_name}Component {{')
+        
+        # Generate constructor with state and advanced features
+        js_parts.append('            constructor(props = {}) {')
+        js_parts.append('                this.props = props;')
+        js_parts.append('                this.eventListeners = new Map();')
+        js_parts.append('                this.animations = new Map();')
+        js_parts.append('                this.apiCache = new Map();')
+        js_parts.append('                this.state = {')
+        
+        for state_name, state_data in component_data.get('state', {}).items():
+            initial_value = state_data['initial_value']
+            if isinstance(initial_value, bool):
+                js_value = 'true' if initial_value else 'false'
+            elif isinstance(initial_value, str):
+                js_value = f'"{initial_value}"'
+            else:
+                js_value = str(initial_value)
+            js_parts.append(f'                    {state_name}: {js_value},')
+        
+        js_parts.append('                };')
+        js_parts.append('                this.initializeAdvancedFeatures();')
+        js_parts.append('                this.render();')
+        js_parts.append('            }')
+        
+        # Add advanced initialization
+        js_parts.append('            initializeAdvancedFeatures() {')
+        js_parts.append('                this.setupEventDelegation();')
+        js_parts.append('                this.setupAnimationSystem();')
+        js_parts.append('                this.setupAPIIntegration();')
+        js_parts.append('                this.setupResponsiveFeatures();')
+        js_parts.append('            }')
+        
+        # Generate component functions
+        for func_name, func_data in component_data.get('functions', {}).items():
+            js_parts.append(f'            {func_name}({func_data["params"]}) {{')
+            
+            for body_line in func_data['body']:
+                js_line = self.transpile_function_line_to_js(body_line)
+                js_parts.append(f'                {js_line}')
+            
+            js_parts.append('            }')
+        
+        # Generate render method
+        js_parts.append('            render() {')
+        js_parts.append(f'                const container = document.getElementById("{component_name.lower()}-preview");')
+        js_parts.append('                if (!container) return;')
+        js_parts.append('                ')
+        js_parts.append('                let html = "";')
+        
+        # Generate render logic based on render content
+        render_content = component_data.get('render', [])
+        for render_line in render_content:
+            js_render_line = self.transpile_render_to_js(render_line)
+            if js_render_line:
+                js_parts.append(f'                {js_render_line}')
+        
+        js_parts.append('                container.innerHTML = html;')
+        js_parts.append('                this.bindEvents();')
+        js_parts.append('            }')
+        
+        # Generate advanced event system
+        js_parts.append('            setupEventDelegation() {')
+        js_parts.append('                const container = document.getElementById(`${this.constructor.name.toLowerCase()}-container`);')
+        js_parts.append('                if (!container) return;')
+        js_parts.append('                ')
+        js_parts.append('                // Advanced event delegation')
+        js_parts.append('                container.addEventListener("click", this.handleClick.bind(this));')
+        js_parts.append('                container.addEventListener("mouseover", this.handleHover.bind(this));')
+        js_parts.append('                container.addEventListener("mouseout", this.handleHoverOut.bind(this));')
+        js_parts.append('                container.addEventListener("keydown", this.handleKeyboard.bind(this));')
+        js_parts.append('                container.addEventListener("touchstart", this.handleTouch.bind(this));')
+        js_parts.append('                container.addEventListener("dragstart", this.handleDragStart.bind(this));')
+        js_parts.append('                container.addEventListener("drop", this.handleDrop.bind(this));')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleClick(event) {')
+        js_parts.append('                const target = event.target;')
+        js_parts.append('                const action = target.dataset.action;')
+        js_parts.append('                const animation = target.dataset.animation;')
+        js_parts.append('                ')
+        js_parts.append('                // Trigger animations on click')
+        js_parts.append('                if (animation) {')
+        js_parts.append('                    this.triggerAnimation(target, animation);')
+        js_parts.append('                }')
+        js_parts.append('                ')
+        js_parts.append('                // Handle custom actions')
+        js_parts.append('                if (action) {')
+        js_parts.append('                    this.executeAction(action, target, event);')
+        js_parts.append('                }')
+        js_parts.append('                ')
+        js_parts.append('                // Emit custom event')
+        js_parts.append('                this.emitEvent("componentClick", { target, event });')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleHover(event) {')
+        js_parts.append('                const target = event.target;')
+        js_parts.append('                const hoverClass = target.dataset.hoverClass || "hover-effect";')
+        js_parts.append('                ')
+        js_parts.append('                target.classList.add(hoverClass);')
+        js_parts.append('                this.triggerAnimation(target, "hoverIn");')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleHoverOut(event) {')
+        js_parts.append('                const target = event.target;')
+        js_parts.append('                const hoverClass = target.dataset.hoverClass || "hover-effect";')
+        js_parts.append('                ')
+        js_parts.append('                target.classList.remove(hoverClass);')
+        js_parts.append('                this.triggerAnimation(target, "hoverOut");')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleKeyboard(event) {')
+        js_parts.append('                const key = event.key;')
+        js_parts.append('                const target = event.target;')
+        js_parts.append('                ')
+        js_parts.append('                // Handle keyboard shortcuts')
+        js_parts.append('                switch(key) {')
+        js_parts.append('                    case "Enter":')
+        js_parts.append('                        this.handleEnterKey(target, event);')
+        js_parts.append('                        break;')
+        js_parts.append('                    case "Escape":')
+        js_parts.append('                        this.handleEscapeKey(target, event);')
+        js_parts.append('                        break;')
+        js_parts.append('                    case "ArrowUp":')
+        js_parts.append('                    case "ArrowDown":')
+        js_parts.append('                        this.handleArrowKeys(key, target, event);')
+        js_parts.append('                        break;')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleTouch(event) {')
+        js_parts.append('                const target = event.target;')
+        js_parts.append('                const touch = event.touches[0];')
+        js_parts.append('                ')
+        js_parts.append('                // Store touch start position')
+        js_parts.append('                this.touchStart = { x: touch.clientX, y: touch.clientY };')
+        js_parts.append('                target.classList.add("touch-active");')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            setupAnimationSystem() {')
+        js_parts.append('                // Define animation presets')
+        js_parts.append('                this.animationPresets = {')
+        js_parts.append('                    fadeIn: { opacity: [0, 1], duration: 300 },')
+        js_parts.append('                    fadeOut: { opacity: [1, 0], duration: 300 },')
+        js_parts.append('                    slideIn: { transform: ["translateX(-100%)", "translateX(0)"], duration: 400 },')
+        js_parts.append('                    slideOut: { transform: ["translateX(0)", "translateX(100%)"], duration: 400 },')
+        js_parts.append('                    bounce: { transform: ["scale(1)", "scale(1.1)", "scale(1)"], duration: 200 },')
+        js_parts.append('                    shake: { transform: ["translateX(0)", "translateX(-10px)", "translateX(10px)", "translateX(0)"], duration: 300 },')
+        js_parts.append('                    pulse: { transform: ["scale(1)", "scale(1.05)", "scale(1)"], duration: 600 },')
+        js_parts.append('                    hoverIn: { transform: ["scale(1)", "scale(1.02)"], duration: 200 },')
+        js_parts.append('                    hoverOut: { transform: ["scale(1.02)", "scale(1)"], duration: 200 }')
+        js_parts.append('                };')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            triggerAnimation(element, animationName, customOptions = {}) {')
+        js_parts.append('                const preset = this.animationPresets[animationName];')
+        js_parts.append('                if (!preset) return;')
+        js_parts.append('                ')
+        js_parts.append('                const options = { ...preset, ...customOptions };')
+        js_parts.append('                ')
+        js_parts.append('                // Use Web Animations API')
+        js_parts.append('                const animation = element.animate(options, {')
+        js_parts.append('                    duration: options.duration,')
+        js_parts.append('                    easing: options.easing || "ease-out",')
+        js_parts.append('                    fill: "forwards"')
+        js_parts.append('                });')
+        js_parts.append('                ')
+        js_parts.append('                // Store animation reference')
+        js_parts.append('                this.animations.set(element, animation);')
+        js_parts.append('                ')
+        js_parts.append('                return animation;')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            setupAPIIntegration() {')
+        js_parts.append('                // API helper methods')
+        js_parts.append('                this.api = {')
+        js_parts.append('                    get: this.apiGet.bind(this),')
+        js_parts.append('                    post: this.apiPost.bind(this),')
+        js_parts.append('                    put: this.apiPut.bind(this),')
+        js_parts.append('                    delete: this.apiDelete.bind(this)')
+        js_parts.append('                };')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            async apiGet(url, options = {}) {')
+        js_parts.append('                const cacheKey = `GET:${url}`;')
+        js_parts.append('                ')
+        js_parts.append('                // Check cache first')
+        js_parts.append('                if (this.apiCache.has(cacheKey) && !options.skipCache) {')
+        js_parts.append('                    return this.apiCache.get(cacheKey);')
+        js_parts.append('                }')
+        js_parts.append('                ')
+        js_parts.append('                try {')
+        js_parts.append('                    const response = await fetch(url, {')
+        js_parts.append('                        method: "GET",')
+        js_parts.append('                        headers: { "Content-Type": "application/json", ...options.headers }')
+        js_parts.append('                    });')
+        js_parts.append('                    ')
+        js_parts.append('                    if (!response.ok) throw new Error(`HTTP ${response.status}`);')
+        js_parts.append('                    ')
+        js_parts.append('                    const data = await response.json();')
+        js_parts.append('                    this.apiCache.set(cacheKey, data);')
+        js_parts.append('                    ')
+        js_parts.append('                    return data;')
+        js_parts.append('                } catch (error) {')
+        js_parts.append('                    this.handleAPIError(error, "GET", url);')
+        js_parts.append('                    throw error;')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            async apiPost(url, data, options = {}) {')
+        js_parts.append('                try {')
+        js_parts.append('                    const response = await fetch(url, {')
+        js_parts.append('                        method: "POST",')
+        js_parts.append('                        headers: { "Content-Type": "application/json", ...options.headers },')
+        js_parts.append('                        body: JSON.stringify(data)')
+        js_parts.append('                    });')
+        js_parts.append('                    ')
+        js_parts.append('                    if (!response.ok) throw new Error(`HTTP ${response.status}`);')
+        js_parts.append('                    ')
+        js_parts.append('                    return await response.json();')
+        js_parts.append('                } catch (error) {')
+        js_parts.append('                    this.handleAPIError(error, "POST", url);')
+        js_parts.append('                    throw error;')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            setupResponsiveFeatures() {')
+        js_parts.append('                // Responsive breakpoints')
+        js_parts.append('                this.breakpoints = {')
+        js_parts.append('                    mobile: 768,')
+        js_parts.append('                    tablet: 1024,')
+        js_parts.append('                    desktop: 1200')
+        js_parts.append('                };')
+        js_parts.append('                ')
+        js_parts.append('                // Listen for resize events')
+        js_parts.append('                window.addEventListener("resize", this.handleResize.bind(this));')
+        js_parts.append('                this.handleResize(); // Initial check')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleResize() {')
+        js_parts.append('                const width = window.innerWidth;')
+        js_parts.append('                let currentBreakpoint = "desktop";')
+        js_parts.append('                ')
+        js_parts.append('                if (width < this.breakpoints.mobile) {')
+        js_parts.append('                    currentBreakpoint = "mobile";')
+        js_parts.append('                } else if (width < this.breakpoints.tablet) {')
+        js_parts.append('                    currentBreakpoint = "tablet";')
+        js_parts.append('                }')
+        js_parts.append('                ')
+        js_parts.append('                if (this.currentBreakpoint !== currentBreakpoint) {')
+        js_parts.append('                    this.currentBreakpoint = currentBreakpoint;')
+        js_parts.append('                    this.onBreakpointChange(currentBreakpoint);')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            onBreakpointChange(breakpoint) {')
+        js_parts.append('                // Override in components for responsive behavior')
+        js_parts.append('                this.emitEvent("breakpointChange", { breakpoint });')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            emitEvent(eventName, data = {}) {')
+        js_parts.append('                const event = new CustomEvent(`vaderui:${eventName}`, {')
+        js_parts.append('                    detail: { component: this, ...data }')
+        js_parts.append('                });')
+        js_parts.append('                document.dispatchEvent(event);')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            bindEvents() {')
+        js_parts.append('                // Legacy event binding for compatibility')
+        js_parts.append('                console.log("Advanced event system initialized");')
+        js_parts.append('            }')
+        
+        # Generate advanced state management
+        js_parts.append('            setState(newState, callback) {')
+        js_parts.append('                const prevState = { ...this.state };')
+        js_parts.append('                this.state = { ...this.state, ...newState };')
+        js_parts.append('                ')
+        js_parts.append('                // Emit state change event')
+        js_parts.append('                this.emitEvent("stateChange", { prevState, newState: this.state });')
+        js_parts.append('                ')
+        js_parts.append('                // Re-render with animation')
+        js_parts.append('                this.renderWithTransition();')
+        js_parts.append('                ')
+        js_parts.append('                // Execute callback if provided')
+        js_parts.append('                if (callback && typeof callback === "function") {')
+        js_parts.append('                    callback(this.state, prevState);')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            renderWithTransition() {')
+        js_parts.append('                const container = document.getElementById(`${this.constructor.name.toLowerCase()}-preview`);')
+        js_parts.append('                if (!container) return;')
+        js_parts.append('                ')
+        js_parts.append('                // Add transition class')
+        js_parts.append('                container.classList.add("vaderui-transitioning");')
+        js_parts.append('                ')
+        js_parts.append('                // Trigger fade out')
+        js_parts.append('                this.triggerAnimation(container, "fadeOut").then(() => {')
+        js_parts.append('                    // Re-render content')
+        js_parts.append('                    this.render();')
+        js_parts.append('                    ')
+        js_parts.append('                    // Trigger fade in')
+        js_parts.append('                    this.triggerAnimation(container, "fadeIn").then(() => {')
+        js_parts.append('                        container.classList.remove("vaderui-transitioning");')
+        js_parts.append('                    });')
+        js_parts.append('                });')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            // Advanced utility methods')
+        js_parts.append('            debounce(func, wait) {')
+        js_parts.append('                let timeout;')
+        js_parts.append('                return function executedFunction(...args) {')
+        js_parts.append('                    const later = () => {')
+        js_parts.append('                        clearTimeout(timeout);')
+        js_parts.append('                        func(...args);')
+        js_parts.append('                    };')
+        js_parts.append('                    clearTimeout(timeout);')
+        js_parts.append('                    timeout = setTimeout(later, wait);')
+        js_parts.append('                };')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            throttle(func, limit) {')
+        js_parts.append('                let inThrottle;')
+        js_parts.append('                return function() {')
+        js_parts.append('                    const args = arguments;')
+        js_parts.append('                    const context = this;')
+        js_parts.append('                    if (!inThrottle) {')
+        js_parts.append('                        func.apply(context, args);')
+        js_parts.append('                        inThrottle = true;')
+        js_parts.append('                        setTimeout(() => inThrottle = false, limit);')
+        js_parts.append('                    }')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            handleAPIError(error, method, url) {')
+        js_parts.append('                console.error(`API ${method} Error:`, error);')
+        js_parts.append('                this.emitEvent("apiError", { error, method, url });')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            destroy() {')
+        js_parts.append('                // Cleanup event listeners')
+        js_parts.append('                this.eventListeners.forEach((listener, element) => {')
+        js_parts.append('                    element.removeEventListener(listener.event, listener.handler);')
+        js_parts.append('                });')
+        js_parts.append('                ')
+        js_parts.append('                // Cancel animations')
+        js_parts.append('                this.animations.forEach(animation => animation.cancel());')
+        js_parts.append('                ')
+        js_parts.append('                // Clear caches')
+        js_parts.append('                this.apiCache.clear();')
+        js_parts.append('                ')
+        js_parts.append('                // Remove resize listener')
+        js_parts.append('                window.removeEventListener("resize", this.handleResize);')
+        js_parts.append('            }')
+        
+        js_parts.append('        }')
+        
+        # Add advanced CSS for animations and interactions
+        js_parts.append('        ')
+        js_parts.append('        // Advanced CSS for Phase 3 features')
+        js_parts.append('        const advancedStyles = document.createElement("style");')
+        js_parts.append('        advancedStyles.textContent = `')
+        js_parts.append('            .vaderui-transitioning {')
+        js_parts.append('                pointer-events: none;')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            .hover-effect {')
+        js_parts.append('                transform: translateY(-2px);')
+        js_parts.append('                box-shadow: 0 4px 12px rgba(0,0,0,0.15);')
+        js_parts.append('                transition: all 0.2s ease;')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            .touch-active {')
+        js_parts.append('                transform: scale(0.98);')
+        js_parts.append('                opacity: 0.8;')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            .vaderui-element {')
+        js_parts.append('                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            .vaderui-element:focus {')
+        js_parts.append('                outline: 2px solid #3b82f6;')
+        js_parts.append('                outline-offset: 2px;')
+        js_parts.append('            }')
+        js_parts.append('            ')
+        js_parts.append('            @media (prefers-reduced-motion: reduce) {')
+        js_parts.append('                .vaderui-element, .hover-effect {')
+        js_parts.append('                    transition: none !important;')
+        js_parts.append('                }')
+        js_parts.append('            }')
+        js_parts.append('        `;')
+        js_parts.append('        document.head.appendChild(advancedStyles);')
+        js_parts.append('        ')
+        js_parts.append('        // Initialize component with advanced features')
+        js_parts.append('        document.addEventListener("DOMContentLoaded", function() {')
+        js_parts.append(f'            window.{component_name.lower()}Component = new {component_name}Component();')
+        js_parts.append('            ')
+        js_parts.append('            // Global VaderUI event listeners')
+        js_parts.append('            document.addEventListener("vaderui:stateChange", function(event) {')
+        js_parts.append('                console.log("VaderUI State Change:", event.detail);')
+        js_parts.append('            });')
+        js_parts.append('            ')
+        js_parts.append('            document.addEventListener("vaderui:componentClick", function(event) {')
+        js_parts.append('                console.log("VaderUI Component Click:", event.detail);')
+        js_parts.append('            });')
+        js_parts.append('            ')
+        js_parts.append('            document.addEventListener("vaderui:apiError", function(event) {')
+        js_parts.append('                console.error("VaderUI API Error:", event.detail);')
+        js_parts.append('            });')
+        js_parts.append('        });')
+        
+        return js_parts
+    
+    def transpile_function_line_to_js(self, line):
+        """Convert Vader function lines to JavaScript"""
+        line = line.strip()
+        
+        # Handle variable declarations
+        if line.startswith('variable '):
+            var_match = re.match(r'variable (\w+) = (.+)', line)
+            if var_match:
+                var_name = var_match.group(1)
+                var_value = var_match.group(2)
+                return f'let {var_name} = {self.transpile_value_to_js(var_value)};'
+        
+        # Handle return statements
+        if line.startswith('devolver '):
+            return_value = line[9:].strip()
+            return f'return {self.transpile_value_to_js(return_value)};'
+        
+        # Handle if statements
+        if line.startswith('si '):
+            condition_match = re.match(r'si (.+) {', line)
+            if condition_match:
+                condition = condition_match.group(1)
+                return f'if ({self.transpile_condition_to_js(condition)}) {{'
+        
+        # Handle state updates
+        if 'estado.' in line and '=' in line:
+            return line.replace('estado.', 'this.state.').replace('verdadero', 'true').replace('falso', 'false') + ';'
+        
+        return line + ';'
+    
+    def transpile_render_to_js(self, line):
+        """Convert Vader render lines to JavaScript HTML generation"""
+        line = line.strip()
+        
+        # Handle 'mostrar' elements
+        if line.startswith('mostrar '):
+            element_match = re.match(r'mostrar (\w+) {', line)
+            if element_match:
+                element_type = element_match.group(1)
+                return f'html += "<{element_type} class=\'vaderui-element\'>"'
+        
+        # Handle conditional rendering
+        if line.startswith('si '):
+            condition_match = re.match(r'si (.+) {', line)
+            if condition_match:
+                condition = condition_match.group(1)
+                return f'if ({self.transpile_condition_to_js(condition)}) {{'
+        
+        # Handle closing braces
+        if line == '}':
+            return '}'
+        
+        # Handle text content
+        if line and not line.startswith('//'):
+            return f'html += "{line}";'
+        
+        return None
     
     def generate_professional_landing_page(self):
         """Generate a complete professional landing page HTML"""
