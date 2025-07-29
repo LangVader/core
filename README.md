@@ -556,7 +556,7 @@ python3 runtimes/ai_ml_runtime.py
 wget https://raw.githubusercontent.com/LangVader/core/main/install.py
 python3 install.py
 
-# Método 2: Si hay error 429 (rate limiting), clonar repositorio
+# Método 2: Clonar repositorio (siempre funciona)
 git clone https://github.com/LangVader/core.git
 cd core
 python3 install.py
@@ -576,10 +576,10 @@ python3 install.py
 # Método 1: Descarga directa
 curl -fsSL https://raw.githubusercontent.com/LangVader/core/main/install.sh | bash
 
-# Método 2: Si hay error 429, usar repositorio clonado
+# Método 2: Clonar repositorio (recomendado)
 git clone https://github.com/LangVader/core.git
 cd core
-bash install.sh
+bash install.sh  # ✅ Bug corregido - funciona desde cualquier directorio
 ```
 
 **Características:**
@@ -656,6 +656,7 @@ python3 prueba.py
 - **✅ Fase 3 Completa**: Eventos complejos, Web Animations API, integración externa
 - **✅ Documentación VaderUI**: Ecosystem completo con showcase, playground, CLI
 - **✅ Validación Completa**: Todos los instaladores probados en múltiples sistemas
+- **✅ Bugs Corregidos**: install.sh funciona desde cualquier directorio (Enero 2025)
 
 ### 🚧 **ÁREAS EN DESARROLLO CONTINUO**
 - **Optimización**: Mejoras de rendimiento en transpilación masiva
