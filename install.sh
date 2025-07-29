@@ -114,6 +114,9 @@ echo -e "${BLUE}🚀 Ejecutando instalador Python...${NC}"
 echo
 
 # Ejecutar el instalador Python
+# Cambiar al directorio del script para asegurar ruta correcta
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 $PYTHON_CMD install.py
 
 if [ $? -eq 0 ]; then
