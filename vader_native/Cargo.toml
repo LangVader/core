@@ -1,0 +1,49 @@
+[package]
+name = "vader"
+version = "1.0.0"
+edition = "2021"
+authors = ["Adriano <adriano@vader.dev>"]
+description = "Vader - The Ultra-Natural Programming Language"
+license = "MIT"
+repository = "https://github.com/vader-dev/vader"
+homepage = "https://vader.dev"
+keywords = ["programming-language", "natural-syntax", "universal", "compiler"]
+categories = ["development-tools", "compilers"]
+
+[dependencies]
+# Parsing y lexing
+nom = "7.1"
+logos = "0.13"
+chumsky = "0.9"
+
+# CLI y utilidades
+clap = { version = "4.4", features = ["derive"] }
+colored = "2.0"
+thiserror = "1.0"
+
+# Concurrencia y async
+tokio = { version = "1.0", features = ["full"] }
+rayon = "1.8"
+
+# Serialización
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Sistema de archivos y I/O
+uuid = { version = "1.0", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+walkdir = "2.4"
+anyhow = "1.0.98"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bin]]
+name = "vader"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

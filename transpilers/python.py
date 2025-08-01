@@ -169,6 +169,15 @@ class PythonTranspiler:
             self.indent_level += 1
             return current_indent + f'class {class_name}:'
         
+        # Llamadas a funciones con 'con'
+        if ' con ' in line and not line.startswith('funcion ') and not line.startswith('función '):
+            # Formato: "nombre_funcion con parametro1, parametro2"
+            parts = line.split(' con ', 1)
+            func_name = parts[0].strip()
+            params = parts[1].strip()
+            # Si los parámetros están entre comillas, mantenerlos
+            return current_indent + f'{func_name}({params})'
+        
         # Asignación de variables
         if ' = ' in line and not any(line.startswith(kw) for kw in ['if', 'while', 'for', 'def', 'class']):
             return current_indent + line
@@ -188,3 +197,28 @@ def transpile_to_python(vader_code):
 def transpilar(vader_code):
     """Alias for CLI compatibility"""
     return transpile_to_python(vader_code)
+
+if __name__ == '__main__':
+    import sys
+    
+    if len(sys.argv) != 2:
+        print("Uso: python3 transpilers/python.py archivo.vdr")
+        sys.exit(1)
+    
+    vader_file = sys.argv[1]
+    
+    try:
+        with open(vader_file, 'r', encoding='utf-8') as f:
+            vader_code = f.read()
+        
+        python_code = transpile_to_python(vader_code)
+        
+        # Ejecutar el código Python transpilado
+        exec(python_code)
+        
+    except FileNotFoundError:
+        print(f"Error: No se pudo encontrar el archivo '{vader_file}'")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error al transpilar/ejecutar: {e}")
+        sys.exit(1)

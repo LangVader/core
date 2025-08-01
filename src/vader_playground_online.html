@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Vader Playground Online</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e);
+            color: #fff; 
+            height: 100vh; 
+            overflow: hidden;
+        }
+        .container { display: flex; height: 100vh; }
+        .editor-panel { flex: 1; display: flex; flex-direction: column; }
+        .output-panel { flex: 1; background: #0a0a0a; border-left: 2px solid #ffd700; }
+        .header { 
+            background: #1a1a2e; 
+            padding: 15px; 
+            border-bottom: 2px solid #ffd700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title { color: #ffd700; font-size: 24px; font-weight: bold; }
+        .controls { display: flex; gap: 10px; }
+        .btn { 
+            background: #ffd700; 
+            color: #000; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover { background: #ffed4e; transform: scale(1.05); }
+        .editor { 
+            flex: 1; 
+            background: #1e1e1e; 
+            color: #fff; 
+            border: none; 
+            padding: 20px; 
+            font-family: 'Courier New', monospace; 
+            font-size: 14px; 
+            resize: none; 
+            outline: none;
+        }
+        .output { 
+            height: 100%; 
+            padding: 20px; 
+            overflow-y: auto; 
+            background: #0a0a0a;
+        }
+        .output-line { 
+            margin: 5px 0; 
+            padding: 5px; 
+            border-radius: 3px;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; background: rgba(248, 113, 113, 0.1); }
+        .info { color: #60a5fa; }
+        .warning { color: #fbbf24; }
+        .examples { 
+            position: absolute; 
+            top: 70px; 
+            right: 20px; 
+            background: rgba(0,0,0,0.8); 
+            padding: 15px; 
+            border-radius: 10px; 
+            border: 1px solid #ffd700;
+            display: none;
+        }
+        .example-btn { 
+            display: block; 
+            margin: 5px 0; 
+            background: #333; 
+            color: #fff; 
+            border: 1px solid #666; 
+            padding: 5px 10px; 
+            border-radius: 3px; 
+            cursor: pointer;
+        }
+        .example-btn:hover { background: #555; }
+        .stats { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            background: rgba(0,0,0,0.8); 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editor-panel">
+            <div class="header">
+                <div class="title">🚀 Vader Playground Online</div>
+                <div class="controls">
+                    <button class="btn" onclick="runCode()">▶️ Ejecutar</button>
+                    <button class="btn" onclick="clearEditor()">🗑️ Limpiar</button>
+                    <button class="btn" onclick="toggleExamples()">📚 Ejemplos</button>
+                    <button class="btn" onclick="shareCode()">🔗 Compartir</button>
+                </div>
+            </div>
+            <textarea class="editor" id="codeEditor" placeholder="// Escribe tu código Vader aquí...
+decir 'Hola mundo desde Vader!'
+
+nombre = 'Adriano'
+decir 'Bienvenido ' + nombre
+
+si nombre == 'Adriano':
+    decir '¡Eres el creador de Vader!'
+sino:
+    decir 'Hola usuario!'"></textarea>
+        </div>
+        
+        <div class="output-panel">
+            <div class="header">
+                <div class="title">📺 Salida</div>
+                <div class="controls">
+                    <button class="btn" onclick="clearOutput()">🧹 Limpiar Salida</button>
+                </div>
+            </div>
+            <div class="output" id="output"></div>
+        </div>
+    </div>
+    
+    <div class="examples" id="examples">
+        <h3 style="color: #ffd700; margin-bottom: 10px;">📚 Ejemplos de Código</h3>
+        <button class="example-btn" onclick="loadExample('hello')">👋 Hola Mundo</button>
+        <button class="example-btn" onclick="loadExample('variables')">📝 Variables</button>
+        <button class="example-btn" onclick="loadExample('functions')">🔧 Funciones</button>
+        <button class="example-btn" onclick="loadExample('loops')">🔄 Bucles</button>
+        <button class="example-btn" onclick="loadExample('classes')">🏗️ Clases</button>
+        <button class="example-btn" onclick="loadExample('iot')">🌐 IoT</button>
+        <button class="example-btn" onclick="loadExample('web')">🌍 Web App</button>
+        <button class="example-btn" onclick="loadExample('ai')">🧠 IA</button>
+    </div>
+    
+    <div class="stats" id="stats">
+        <div>⚡ Líneas: <span id="lineCount">0</span></div>
+        <div>🕒 Última ejecución: <span id="lastRun">-</span></div>
+        <div>✅ Estado: <span id="status">Listo</span></div>
+    </div>
+
+    <script>
+        // Vader Playground Engine
+        class VaderPlayground {
+            constructor() {
+                this.editor = document.getElementById('codeEditor');
+                this.output = document.getElementById('output');
+                this.examples = {
+                    hello: `decir "¡Hola mundo desde Vader!"
+decir "Vader es el futuro de la programación"`,
+                    
+                    variables: `// Variables en Vader
+nombre = "Adriano"
+edad = 25
+activo = verdadero
+
+decir "Nombre: " + nombre
+decir "Edad: " + str(edad)
+decir "Activo: " + str(activo)`,
+                    
+                    functions: `// Funciones en Vader
+funcion saludar(nombre):
+    decir "¡Hola " + nombre + "!"
+    retornar verdadero
+
+funcion calcular(a, b):
+    resultado = a + b
+    decir "Resultado: " + str(resultado)
+    retornar resultado
+
+saludar("Vader")
+calcular(10, 20)`,
+                    
+                    loops: `// Bucles en Vader
+decir "Contando del 1 al 5:"
+para i en rango(1, 6):
+    decir "Número: " + str(i)
+
+decir "\\nBucle mientras:"
+contador = 0
+mientras contador < 3:
+    decir "Contador: " + str(contador)
+    contador = contador + 1`,
+                    
+                    classes: `// Clases en Vader
+clase Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+    
+    def presentarse(self):
+        decir "Hola, soy " + self.nombre
+        decir "Tengo " + str(self.edad) + " años"
+
+persona = Persona("Vader", 1)
+persona.presentarse()`,
+                    
+                    iot: `// IoT con Vader
+decir "🌐 Iniciando dispositivo IoT..."
+
+clase SensorTemperatura:
+    def __init__(self):
+        self.temperatura = 25.5
+    
+    def leer(self):
+        decir "🌡️ Temperatura: " + str(self.temperatura) + "°C"
+        retornar self.temperatura
+
+sensor = SensorTemperatura()
+temp = sensor.leer()
+
+si temp > 30:
+    decir "⚠️ Temperatura alta!"
+sino:
+    decir "✅ Temperatura normal"`,
+                    
+                    web: `// App Web con Vader
+decir "🌍 Iniciando servidor web..."
+
+clase WebApp:
+    def __init__(self):
+        self.nombre = "Vader Web App"
+        self.puerto = 5000
+    
+    def iniciar(self):
+        decir "🚀 Servidor iniciado en puerto " + str(self.puerto)
+        decir "📡 Accede a http://localhost:" + str(self.puerto)
+    
+    def procesar_request(self, ruta):
+        si ruta == "/":
+            retornar "¡Bienvenido a Vader!"
+        sino:
+            retornar "Página no encontrada"
+
+app = WebApp()
+app.iniciar()
+respuesta = app.procesar_request("/")
+decir "📄 Respuesta: " + respuesta`,
+                    
+                    ai: `// IA con Vader
+decir "🧠 Iniciando modelo de IA..."
+
+clase ModeloIA:
+    def __init__(self):
+        self.nombre = "Vader AI"
+        self.precision = 0.95
+    
+    def entrenar(self, datos):
+        decir "📚 Entrenando con " + str(len(datos)) + " ejemplos"
+        decir "⚡ Entrenamiento completado"
+    
+    def predecir(self, entrada):
+        prediccion = "Resultado IA para: " + entrada
+        decir "🎯 Predicción: " + prediccion
+        retornar prediccion
+
+modelo = ModeloIA()
+modelo.entrenar(["dato1", "dato2", "dato3"])
+resultado = modelo.predecir("nueva entrada")
+decir "✅ Modelo funcionando con " + str(modelo.precision * 100) + "% precisión"`
+                };
+                
+                this.setupEventListeners();
+                this.updateStats();
+            }
+            
+            setupEventListeners() {
+                this.editor.addEventListener('input', () => this.updateStats());
+                this.editor.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey && e.key === 'Enter') {
+                        this.runCode();
+                    }
+                });
+            }
+            
+            updateStats() {
+                const lines = this.editor.value.split('\n').length;
+                document.getElementById('lineCount').textContent = lines;
+            }
+            
+            runCode() {
+                const code = this.editor.value;
+                if (!code.trim()) {
+                    this.addOutput('⚠️ No hay código para ejecutar', 'warning');
+                    return;
+                }
+                
+                this.addOutput('🚀 Ejecutando código Vader...', 'info');
+                document.getElementById('status').textContent = 'Ejecutando';
+                
+                // Simular ejecución de código Vader
+                setTimeout(() => {
+                    try {
+                        this.executeVaderCode(code);
+                        document.getElementById('status').textContent = 'Completado';
+                        document.getElementById('lastRun').textContent = new Date().toLocaleTimeString();
+                    } catch (error) {
+                        this.addOutput('❌ Error: ' + error.message, 'error');
+                        document.getElementById('status').textContent = 'Error';
+                    }
+                }, 500);
+            }
+            
+            executeVaderCode(code) {
+                // Intérprete básico de Vader
+                const lines = code.split('\n');
+                let variables = {};
+                
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line || line.startsWith('//')) continue;
+                    
+                    // Comando decir
+                    if (line.startsWith('decir ')) {
+                        let message = line.substring(6).trim();
+                        message = this.processString(message, variables);
+                        this.addOutput('📢 ' + message, 'success');
+                    }
+                    
+                    // Asignación de variables
+                    else if (line.includes(' = ')) {
+                        const [varName, varValue] = line.split(' = ');
+                        variables[varName.trim()] = this.evaluateValue(varValue.trim(), variables);
+                        this.addOutput('📝 Variable ' + varName.trim() + ' = ' + variables[varName.trim()], 'info');
+                    }
+                    
+                    // Condicionales
+                    else if (line.startsWith('si ')) {
+                        this.addOutput('🔍 Evaluando condición...', 'info');
+                    }
+                    
+                    // Bucles
+                    else if (line.startsWith('para ') || line.startsWith('mientras ')) {
+                        this.addOutput('🔄 Ejecutando bucle...', 'info');
+                    }
+                    
+                    // Funciones y clases
+                    else if (line.startsWith('funcion ') || line.startsWith('clase ')) {
+                        this.addOutput('🏗️ Definiendo ' + (line.startsWith('funcion') ? 'función' : 'clase') + '...', 'info');
+                    }
+                }
+                
+                this.addOutput('✅ Ejecución completada exitosamente', 'success');
+            }
+            
+            processString(str, variables) {
+                // Remover comillas
+                str = str.replace(/^["']|["']$/g, '');
+                
+                // Reemplazar variables
+                for (let [key, value] of Object.entries(variables)) {
+                    str = str.replace(new RegExp('\\b' + key + '\\b', 'g'), value);
+                }
+                
+                return str;
+            }
+            
+            evaluateValue(value, variables) {
+                // Remover comillas para strings
+                if (value.startsWith('"') || value.startsWith("'")) {
+                    return value.slice(1, -1);
+                }
+                
+                // Números
+                if (!isNaN(value)) {
+                    return parseFloat(value);
+                }
+                
+                // Booleanos
+                if (value === 'verdadero') return true;
+                if (value === 'falso') return false;
+                
+                // Variables existentes
+                if (variables[value]) {
+                    return variables[value];
+                }
+                
+                return value;
+            }
+            
+            addOutput(message, type = 'info') {
+                const outputDiv = document.createElement('div');
+                outputDiv.className = `output-line ${type}`;
+                outputDiv.textContent = message;
+                this.output.appendChild(outputDiv);
+                this.output.scrollTop = this.output.scrollHeight;
+            }
+            
+            clearOutput() {
+                this.output.innerHTML = '';
+            }
+            
+            clearEditor() {
+                this.editor.value = '';
+                this.updateStats();
+            }
+            
+            loadExample(exampleName) {
+                if (this.examples[exampleName]) {
+                    this.editor.value = this.examples[exampleName];
+                    this.updateStats();
+                    this.toggleExamples();
+                }
+            }
+            
+            toggleExamples() {
+                const examples = document.getElementById('examples');
+                examples.style.display = examples.style.display === 'block' ? 'none' : 'block';
+            }
+            
+            shareCode() {
+                const code = this.editor.value;
+                if (code.trim()) {
+                    // Simular compartir código
+                    const url = 'https://vader-playground.com/share/' + btoa(code).substring(0, 10);
+                    navigator.clipboard.writeText(url).then(() => {
+                        this.addOutput('🔗 Enlace copiado al portapapeles: ' + url, 'success');
+                    }).catch(() => {
+                        this.addOutput('🔗 Enlace generado: ' + url, 'info');
+                    });
+                } else {
+                    this.addOutput('⚠️ No hay código para compartir', 'warning');
+                }
+            }
+        }
+        
+        // Funciones globales
+        let playground;
+        
+        window.onload = function() {
+            playground = new VaderPlayground();
+        };
+        
+        function runCode() { playground.runCode(); }
+        function clearEditor() { playground.clearEditor(); }
+        function clearOutput() { playground.clearOutput(); }
+        function toggleExamples() { playground.toggleExamples(); }
+        function shareCode() { playground.shareCode(); }
+        function loadExample(name) { playground.loadExample(name); }
+        
+        // Cerrar ejemplos al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            const examples = document.getElementById('examples');
+            if (!examples.contains(e.target) && !e.target.textContent.includes('Ejemplos')) {
+                examples.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
